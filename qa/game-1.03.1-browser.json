@@ -1,0 +1,73 @@
+{
+  "version": "1.03.1",
+  "date_local": "2026-10-26",
+  "timezone": "Asia/Kuala_Lumpur",
+  "site_source_commit": "0d7a2002b0904ec06a466294137c6d6a4a5e3d0e",
+  "pages_code_commit": "8687b55a85ff4a1d4eab3d62b4900ab04429a7a4",
+  "pages_code_workflow": "https://github.com/unDead41/xylo-studio/actions/runs/40258423009",
+  "url": "https://undead41.github.io/xylo-studio/",
+  "http": {
+    "status": 200,
+    "bytes": 131909,
+    "sha256": "e469eb9fd2e39a9f4c18737d941295e48fc7e5a2e264377736aa091f06829c95",
+    "exact_source_match": true
+  },
+  "automated_tests": {
+    "passed": 62,
+    "failed": 0,
+    "game_charts_checked": 60
+  },
+  "browser": {
+    "badge": "V1.03.1",
+    "song_options": 10,
+    "variants": [
+      "long",
+      "short"
+    ],
+    "difficulty_bpm_for_80": [
+      60,
+      80,
+      108
+    ],
+    "happy_birthday_long_easy": {
+      "bpm": 54,
+      "duration_seconds_display": 56.7,
+      "tiles": 50
+    },
+    "mary_short_easy": {
+      "bpm": 60,
+      "duration_seconds_display": 16,
+      "tiles": 13
+    },
+    "unattended_initial_candidate_result": {
+      "candidate": "V1.03.0",
+      "miss": 7,
+      "life": 0,
+      "hits": 0,
+      "settings_unlocked": true
+    },
+    "final_mobile": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "document_width": 380,
+      "arena_width": 352,
+      "arena_top": 393.078125,
+      "arena_bottom": 840.390625,
+      "arena_pause_used": true,
+      "paused_life": 100
+    },
+    "pause_long_hold_life": 100,
+    "resume_countdown_beats": 2,
+    "desktop_viewport_restored": true,
+    "physical_touchscreen_tested": false,
+    "live_perfect_timing_tested": false
+  },
+  "screenshots": [
+    "qa/game-1.03.1-desktop.png",
+    "qa/game-1.03.1-mobile.png"
+  ],
+  "hardware_verified": false,
+  "acoustic_verified": false,
+  "video_transcription_verified": false,
+  "firmware_repository_modified_by_this_work": false
+}
