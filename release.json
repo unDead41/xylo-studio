@@ -1,0 +1,21 @@
+{
+  "version": "1.02.0",
+  "source_commit": "af625e4af124bafda4645aac070f5bfc49a158cb",
+  "index_sha256": "274e00d357f2a6f17678917a885a32140ffdd6c311814d1c16dc9683e2868e70",
+  "software_tests": {
+    "command": "node --test tests/*.test.cjs",
+    "passed": 44,
+    "failed": 0,
+    "source": "canonical Xylo Studio source checkout"
+  },
+  "hardware_verified": false,
+  "acoustic_verified": false,
+  "video_transcription_verified": false,
+  "publishing": {
+    "repository": "unDead41/xylo-studio",
+    "branch": "xylo/music",
+    "directory": "/",
+    "intended_url": "https://undead41.github.io/xylo-studio/"
+  },
+  "firmware_repository_modified": false
+}
