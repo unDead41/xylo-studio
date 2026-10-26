@@ -1,0 +1,36 @@
+{
+  "version": "1.02.0",
+  "date_local": "2026-10-26",
+  "timezone": "Asia/Kuala_Lumpur",
+  "source_commit": "9ada89b2abe6d60bfb555355fc13fc4abf82505d",
+  "deployment_run": "https://github.com/unDead41/xylo-studio/actions/runs/40251184855",
+  "deployment_conclusion": "success",
+  "url": "https://undead41.github.io/xylo-studio/",
+  "http_status": 200,
+  "bytes": 99879,
+  "sha256": "274e00d357f2a6f17678917a885a32140ffdd6c311814d1c16dc9683e2868e70",
+  "source_byte_identical": true,
+  "automated_tests": {
+    "passed": 44,
+    "failed": 0
+  },
+  "browser_checks": {
+    "version_badge": "V1.02.0",
+    "song_cards": 10,
+    "initial_variant": "long",
+    "timeline_note_2_table_row": "▶ 02 D4",
+    "note_2_time_at_80_bpm_s": 0.75,
+    "note_2_time_at_200_bpm_s": 0.3,
+    "reset_bpm": 80,
+    "reset_selected_rows": 0,
+    "export_gate_visible": true,
+    "demo41_unlocked_export": true,
+    "app_console_errors": 0
+  },
+  "screenshot": "qa/github-pages.png",
+  "hardware_verified": false,
+  "acoustic_verified": false,
+  "video_transcription_verified": false,
+  "firmware_main_before": "abc5d0e8242fb842eb93c183bea28f2b806ccf10",
+  "firmware_main_after": "abc5d0e8242fb842eb93c183bea28f2b806ccf10"
+}
