@@ -1,12 +1,32 @@
 {
-  "version": "1.02.0",
-  "source_commit": "af625e4af124bafda4645aac070f5bfc49a158cb",
-  "index_sha256": "274e00d357f2a6f17678917a885a32140ffdd6c311814d1c16dc9683e2868e70",
+  "version": "1.03.0",
+  "source_commit": "c54f866891a64a1b67f58d58683b023b1aa1b455",
+  "source_base": "af625e4af124bafda4645aac070f5bfc49a158cb",
+  "pages_base": "1c409afc83bc53bedac8118d476dc3d6fdde084b",
+  "index_sha256": "fbeebb1004805e12156e454f004b22113040ae981140f8cd932ed56c8b104b51",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
-    "passed": 44,
-    "failed": 0,
-    "source": "canonical Xylo Studio source checkout"
+    "passed": 61,
+    "failed": 0
+  },
+  "game": {
+    "song_count": 10,
+    "variants": [
+      "short",
+      "long"
+    ],
+    "difficulty_bpm_factors": {
+      "easy": 0.75,
+      "medium": 1,
+      "hard": 1.35
+    },
+    "lanes": 4,
+    "excellent_window_ms": 70,
+    "good_window_ms": 150,
+    "initial_life": 100,
+    "excellent_life": 3,
+    "miss_life": -15,
+    "wrong_life": -8
   },
   "hardware_verified": false,
   "acoustic_verified": false,
@@ -15,7 +35,7 @@
     "repository": "unDead41/xylo-studio",
     "branch": "xylo/music",
     "directory": "/",
-    "intended_url": "https://undead41.github.io/xylo-studio/"
+    "url": "https://undead41.github.io/xylo-studio/"
   },
   "firmware_repository_modified": false
 }
