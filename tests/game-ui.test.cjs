@@ -23,6 +23,7 @@ test('countdown ignores input, key repeat/hold awards once and Studio does not s
  await s.dispatch('keydown',{key:'D',repeat:false});assert.equal(el(s,'gameScore').textContent,'100');assert.equal(s.oscillators.length,2);
  await s.dispatch('keydown',{key:'D',repeat:true});await s.dispatch('keydown',{key:'D',repeat:false});assert.equal(el(s,'gameScore').textContent,'100');assert.equal(el(s,'gameHealthValue').textContent,'100 / 100');assert.equal(s.oscillators.length,2);
  await s.dispatch('keyup',{key:'D'});await hit(s,2);assert.equal(el(s,'gameHealthValue').textContent,'92 / 100');assert.equal(el(s,'gameScore').textContent,'100');
+ s.advance(725);await hit(s,1);assert.equal(el(s,'gameHealthValue').textContent,'95 / 100');assert.equal(el(s,'gameScore').textContent,'200');
 });
 test('misses end at zero life, unlock settings and show actual judgments',async()=>{
  const s=make();await start(s);s.advance(9500);assert.equal(el(s,'gameHealthValue').textContent,'0 / 100');assert.equal(el(s,'gameResult').hidden,false);assert.equal(el(s,'gameMiss').textContent,'7');assert.equal(el(s,'gameDifficulty').disabled,false);assert.equal(el(s,'gamePauseBtn').disabled,true);assert.equal(s.oscillators.length,0);
@@ -30,7 +31,7 @@ test('misses end at zero life, unlock settings and show actual judgments',async(
 test('perfect long game sounds exact extended MIDI once per tile and persists its separate best',async()=>{
  const s=make(),chart=await perfect(s,131,'long','hard');assert.equal(el(s,'gameExcellent').textContent,'50');assert.equal(el(s,'gameMiss').textContent,'0');assert.equal(el(s,'gameAccuracy').textContent,'100%');assert.equal(el(s,'gameResult').hidden,false);assert.equal(el(s,'gameHealthValue').textContent,'100 / 100');
  const voices=s.oscillators.filter((_,i)=>i%2===0);assert.equal(voices.length,chart.notes.length);for(const [i,n]of chart.notes.entries())assert.ok(Math.abs(voices[i].frequency.value-s.C.freq(n.midi))<.001);
- const record=JSON.parse(s.saved.get('xylo-game-best-v1'));assert.ok(record['131:long:hard:97:v1']>0);assert.equal(el(s,'statNotes').textContent,'52');
+ assert.equal(el(s,'gameProgress').value,100);assert.equal(el(s,'gameProgress').textContent,'100%');const record=JSON.parse(s.saved.get('xylo-game-best-v1'));assert.ok(record['131:long:hard:97:v1']>0);assert.equal(el(s,'statNotes').textContent,'52');
  const reloaded=studio({game:true,variant:null,storage:Object.fromEntries(s.saved)});assert.equal(el(reloaded,'gameBest').textContent,el(s,'gameScore').textContent);
 });
 test('pause and hidden-tab hold preserve progress, then two-beat resume prevents phantom misses',async()=>{
@@ -53,4 +54,7 @@ test('pointer input deduplicates a held pointer and exact note audio is awarded 
 test('suspended audio pauses safely, and restored invalid settings/records cannot break Studio',async()=>{
  const s=make();await start(s);s.contexts[0].state='suspended';s.advance(100);assert.equal(el(s,'gamePauseBtn').textContent,'Sambung');assert.equal(el(s,'gameHealthValue').textContent,'100 / 100');await click(s,'gamePauseBtn');s.advance(100);assert.equal(el(s,'gamePauseBtn').textContent,'Jeda');
  const bad=studio({game:true,storage:{'xylo-game-settings-v1':'{"song":999,"variant":"long","level":"__proto__"}','xylo-game-best-v1':'{"2:short:medium:80:v1":-50}'}});assert.equal(el(bad,'gameBpm').textContent,'80');assert.equal(el(bad,'gameBest').textContent,'0');
+});
+test('arena pause control supports mobile pause/resume and disappears after Reset',async()=>{
+ const s=make();await start(s);assert.equal(el(s,'gameArenaPauseBtn').hidden,false);await click(s,'gameArenaPauseBtn');assert.equal(el(s,'gameArenaPauseBtn').textContent,'Sambung');s.advance(30000);assert.equal(el(s,'gameHealthValue').textContent,'100 / 100');await click(s,'gameArenaPauseBtn');assert.equal(el(s,'gamePauseBtn').textContent,'Jeda');await click(s,'gameResetBtn');assert.equal(el(s,'gameArenaPauseBtn').hidden,true);
 });

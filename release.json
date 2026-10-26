@@ -1,12 +1,12 @@
 {
-  "version": "1.03.0",
-  "source_commit": "c54f866891a64a1b67f58d58683b023b1aa1b455",
+  "version": "1.03.1",
+  "source_commit": "0d7a2002b0904ec06a466294137c6d6a4a5e3d0e",
   "source_base": "af625e4af124bafda4645aac070f5bfc49a158cb",
   "pages_base": "1c409afc83bc53bedac8118d476dc3d6fdde084b",
-  "index_sha256": "fbeebb1004805e12156e454f004b22113040ae981140f8cd932ed56c8b104b51",
+  "index_sha256": "e469eb9fd2e39a9f4c18737d941295e48fc7e5a2e264377736aa091f06829c95",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
-    "passed": 61,
+    "passed": 62,
     "failed": 0
   },
   "game": {

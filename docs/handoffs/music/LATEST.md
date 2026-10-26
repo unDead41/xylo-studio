@@ -1,4 +1,4 @@
-# Music HTML handoff — Xylo Tiles V1.03.0
+# Music HTML handoff — Xylo Tiles V1.03.1
 
 Date:26 October2026 (Asia/Kuala_Lumpur).
 
@@ -8,6 +8,6 @@ The existing20 score variants (10long,10short), pitches, tick positions and rest
 
 The game adds onset judgments, score/combo/life, local best records, countdown, pause/resume, reset/restart and mouse/touch/ASDF controls. Studio takes remain separate. The small audio startup/resume promise fix prevents a stale promise from blocking suspended audio. Pure game rules and browser integration are separate inline modules; all remain in one downloadable HTML.
 
-61 automated checks pass. See qa/game-verification.md for actual browser observations and limits. Mapping/calibration: unchanged and physically unverified. The shared synthesizer and simulated clocks are not hardware/acoustic evidence; video note/timestamp transcription remains unverified.
+62 automated checks pass. See qa/game-verification.md for actual browser observations and limits. Mapping/calibration: unchanged and physically unverified. The shared synthesizer and simulated clocks are not hardware/acoustic evidence; video note/timestamp transcription remains unverified.
 
 For Master: integrate no game code into Arduino Uno. Keep this as the external HTML companion. Review the score/export contract separately from gameplay scoring. For future releases, update canonical dist/index.html plus VERSION, run tests, copy the tested HTML to Pages index.html and update release.json/source commit. Keep Sites and GitHub Pages bytes aligned. Preserve the private Site audience and never publish firmware main from this worker.

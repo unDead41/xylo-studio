@@ -1,6 +1,6 @@
 # Xylo Studio
 
-Versi semasa **V1.03.0** dipaparkan di sebelah logo pada semua saiz paparan. `VERSION` ialah rujukan nombor keluaran. Untuk setiap keluaran HTML seterusnya, naikkan versi dan selaraskan label serta metadata HTML menggunakan format `Vx.xx.x`.
+Versi semasa **V1.03.1** dipaparkan di sebelah logo pada semua saiz paparan. `VERSION` ialah rujukan nombor keluaran. Untuk setiap keluaran HTML seterusnya, naikkan versi dan selaraskan label serta metadata HTML menggunakan format `Vx.xx.x`.
 
 Alat BM dalam satu HTML, berasingan daripada firmware Uno. Buka dist/index.html (atau index.html dalam repo GitHub Pages) dalam Chrome/Edge untuk main8not dan rekod input; versi HTTPS menyediakan permintaan mikrofon.
 
