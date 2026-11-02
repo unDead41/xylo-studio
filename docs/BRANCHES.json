@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "chat_prefix": "xylo studio",
+  "branches": {
+    "main": "Sumber pembangunan lengkap milik Ijamm; penerbitan laman daripada main.",
+    "share": "HTML kendiri dan panduan ringkas untuk agihan; kemas kini apabila diminta.",
+    "audit": "Audit branch, regression, integrasi ke main dan versioning.",
+    "architecture": "Struktur kod dan SOR projek digital.",
+    "tutorial": "Panduan setup dan bermain; kemas kini hanya apabila diminta.",
+    "music": "Katalog lagu, pitch, tick, tempo dan eksport JSON/CSV.",
+    "gameplay": "Peraturan permainan, kesukaran, skor, kombo, nyawa dan penilaian.",
+    "ui": "Susun atur, akses papan kekunci, sentuhan dan paparan responsif."
+  },
+  "manual_update": [
+    "share",
+    "tutorial"
+  ],
+  "integration_branch": "audit",
+  "development_branch": null
+}
