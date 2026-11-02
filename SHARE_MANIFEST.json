@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "version": "v1.03.2",
+  "files_sha256": {
+    ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "README.md": "ee8b6bdba2ea8acd67185fd79640f8345a22a4b56a81340e3ac27de41abba2d9",
+    "SETUP.md": "b02d9b64d4ed114863fa281bd825b9338a15935ec5c90863dc04bc4cad6ac4a7",
+    "VERSION": "49b6fb978ce7cd8af86f4161cb6d6c25d2c251c99af31455496e6fe288c8f8d4",
+    "index.html": "4dfffe75b0cd71794e46f8535a29781c7c7db0c6f8667e788183cf0a4c12274d"
+  }
+}
