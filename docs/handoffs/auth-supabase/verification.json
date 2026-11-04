@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-04",
+  "branch": "auth-supabase",
+  "base_sha": "c0ba48bb9c35244354779cc227ecb7c999bff5dd",
+  "index_sha256": "0f559ac5739f5de9a53c8efee03cbf8fb1af99e74833d916d7819eef85c52ad7",
+  "sdk": { "version": "2.118.0", "sha256": "ee3be8de192b97cb1d73d1e95d6b82bb1f6b658c0f97c4ef757fc331996ed3d3", "runtime_cdn": false },
+  "subagents": { "concurrent_requested": 6, "total_used": 6 },
+  "tests": { "command": "node --test tests/*.test.cjs tests/auth/*.test.cjs", "passed": 255, "failed": 0, "auth_integration": 75, "existing": 180 },
+  "inline_scripts_compiled": 16,
+  "supabase": {
+    "project_ref": "ahvyieyojqciohdogsqc", "new_dedicated_project": true, "region": "ap-southeast-1",
+    "migration": "20261104052615_studio_profiles.sql", "rls_rollback_test": "passed",
+    "profiles_after_rollback": 0, "users_after_rollback": 0, "security_advisor_lints": 0,
+    "rls_enabled": true, "policies": 3, "anon_select": false, "authenticated_update_id": false, "authenticated_update_created_at": false,
+    "email_provider": true, "confirm_email": true, "secure_email_change": true, "secure_password_change": true, "require_current_password": true, "minimum_password_length": 8,
+    "security_notifications_enabled": 7, "custom_smtp": false, "custom_email_templates_applied": false,
+    "site_url": "https://undead41.github.io/xylo-studio/",
+    "redirect_urls": ["https://undead41.github.io/xylo-studio/", "https://undead41.github.io/xylo-studio/index.html", "https://undead41.github.io/xylo-studio/?auth_flow=signup", "https://undead41.github.io/xylo-studio/?auth_flow=recovery", "https://undead41.github.io/xylo-studio/?auth_flow=magiclink", "https://undead41.github.io/xylo-studio/?auth_flow=email_change"]
+  },
+  "email_sources": { "templates": 13, "fields": 33, "notification_flags": 7, "static_validation": "passed", "real_emails_sent": 0, "delivery_verified": false },
+  "browser": { "method": "Cloud Chromium native modal and framed viewport checks", "desktop": "passed", "keyboard_and_empty_validation": "passed", "frame_widths": [320,390], "document_widths": [310,380], "scroll_widths": [310,380], "dialog_widths": [290,360], "page_horizontal_overflow": false, "credentials_entered": false, "real_auth_round_trip": false },
+  "limitations": ["SMTP provider/sender/secrets still required", "Hosted custom templates blocked until SMTP", "Email-client rendering and inbox delivery unverified", "Native browser checks do not replace physical audio tests", "Candidate is not promoted to main/Pages"]
+}

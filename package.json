@@ -1,0 +1,14 @@
+{
+  "name": "e-instru-studio",
+  "private": true,
+  "engines": { "node": ">=22" },
+  "description": "Self-contained music studio; development dependencies are optional for the shipped HTML.",
+  "scripts": {
+    "build:auth": "node scripts/build-auth.mjs",
+    "check:auth": "node scripts/build-auth.mjs --check && node supabase/templates/build-config.mjs --check",
+    "test": "node --test tests/*.test.cjs tests/auth/*.test.cjs"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "2.118.0"
+  }
+}

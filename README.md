@@ -2,7 +2,19 @@
 
 Versi **v1.04.0**. Alat muzik digital dan permainan rentak BM dalam satu HTML kendiri.
 
-Buka [laman](https://undead41.github.io/xylo-studio/) atau muat turun ZIP branch [share](https://github.com/unDead41/xylo-studio/tree/share), extract dan buka index.html dalam Chrome/Edge. Tiada pemasangan, akaun atau backend diperlukan. Mikrofon pilihan memerlukan HTTPS/localhost serta kebenaran pengguna.
+Buka [laman](https://undead41.github.io/xylo-studio/) atau muat turun ZIP branch [share](https://github.com/unDead41/xylo-studio/tree/share), extract dan buka index.html dalam Chrome/Edge. Studio dan Permainan boleh digunakan sebagai tetamu tanpa akaun atau sambungan rangkaian. Mikrofon pilihan memerlukan HTTPS/localhost serta kebenaran pengguna. Snapshot share dikemas kini secara manual dan tidak menerima perubahan akaun ini secara automatik.
+
+## Akaun Supabase — cabang auth-supabase
+
+Cabang `auth-supabase`, berasaskan main `c0ba48bb9c35244354779cc227ecb7c999bff5dd`, menambah pendaftaran e-mel/kata laluan, log masuk, log keluar, pengesahan e-mel, lupa kata laluan dan pertukaran kata laluan. Akaun ialah pilihan; lapan instrumen, sepuluh lagu, Permainan dan rakaman pelayar terus berfungsi sebagai tetamu. Log masuk atau keluar tidak memindahkan, memadam atau menyegerakkan rakaman setempat ke pangkalan data.
+
+Projek Supabase khusus `ahvyieyojqciohdogsqc` diwujudkan di Singapore dalam organisasi Norhizam. Skop pangkalan data ialah profil pengguna dalam `profiles`, dengan Row Level Security (RLS) bagi akses profil milik pengguna. Rakaman, score, sejarah permainan dan audio mentah tidak disimpan dalam jadual baharu. Kata laluan akaun diurus oleh Supabase Auth; kata laluan UI eksport setempat kekal berasingan.
+
+Fungsi akaun memerlukan rangkaian dan laman HTTPS. URL callback hos ialah `https://undead41.github.io/xylo-studio/`; buka pautan pengesahan/pemulihan di hos yang dibenarkan, bukan fail `file://`. `index.html` membundel SDK `supabase-js` versi tetap `2.118.0` secara inline daripada salinan vendor; tiada CDN atau fail SDK luar dimuatkan ketika aplikasi dibuka. Konfigurasi pelayar hanya menggunakan URL projek dan kunci awam; kunci `service_role`, kata laluan SMTP dan token pengurusan tidak boleh dimasukkan dalam HTML atau Git.
+
+Semua 13 templat e-mel BM tersedia sebagai sumber dalam [manifest templat](supabase/templates/manifest.json): enam aliran pengesahan dan tujuh pemberitahuan keselamatan. Semak sumber dengan `node supabase/templates/build-config.mjs --check`. Penyediaan sumber tidak bermaksud templat telah aktif pada hos atau e-mel telah sampai. Custom SMTP belum disediakan untuk projek ini; pengaktifan templat tersuai dan penghantaran e-mel kepada pengguna awam masih memerlukan konfigurasi tersebut. Templat telefon, identiti dan MFA melengkapkan konfigurasi e-mel; ia tidak menambah aliran UI tersebut ke aplikasi.
+
+Perubahan ini belum dipromosikan ke `main` melalui tugasan ini. GitHub Pages terus menerbitkan sumber `main`; ujian hos dan penghantaran e-mel sebenar perlu dilaporkan berasingan daripada ujian simulasi. Versi diterima kekal **v1.04.0**.
 
 ## Instrumen
 
@@ -26,7 +38,7 @@ Semua bunyi ialah sintesis digital. Mikrofon dianalisis secara tempatan; raw aud
 
 ## Pembangunan
 
-Pasang Node.js 20+ kemudian jalankan `node --test tests/*.test.cjs`. Source utama ialah index.html; tiada dist atau checkout luar diperlukan. Host tests menggunakan boundary DOM/audio simulasi. Bukti keluaran dan semakan gabungan dalam [audit main](docs/audits/main/LATEST.md); sejarah implementasi dalam [handoff ui](docs/handoffs/ui/LATEST.md). Ujian pelayar tambahan: `node tests/browser-recorder.cjs` dengan Playwright/Chromium tersedia.
+Pasang Node.js 22+ kemudian jalankan `npm test` (atau `node --test tests/*.test.cjs tests/auth/*.test.cjs`). Source utama ialah index.html; tiada dist atau checkout luar diperlukan. Host tests menggunakan boundary DOM/audio simulasi. Untuk perubahan akaun, sunting `assets/auth`, kemudian jalankan `node scripts/build-auth.mjs`; `node scripts/build-auth.mjs --check` memastikan HTML sepadan dengan sumbernya. Bukti calon akaun dalam [handoff auth](docs/handoffs/auth-supabase/LATEST.md); bukti keluaran diterima dalam [audit main](docs/audits/main/LATEST.md). Ujian pelayar tambahan: `node tests/browser-recorder.cjs` dengan Playwright/Chromium tersedia.
 
 Branch dan nama chat: docs/BRANCH_POLICY.md. SOR: docs/SOR.md. Tutorial/share hanya diperbaharui apabila diminta. GitHub Pages menggunakan main, folder root.
 
@@ -40,7 +52,7 @@ Susun atur Tamborin dan Kompang diselaraskan dengan Xylophone/Rekoder: instrumen
 
 Tempo dikunci semasa rakaman. Perubahan tempo retime masa main sahaja dan menghentikan playback; masa input asal tidak berubah. Reset menghentikan sesi dan memulihkan tempo tangkapan tanpa membuang tindakan atau suntingan. Jika retime ke tempo asal akan melebihi had 180 saat, Reset memulihkan BPM sambil mengekalkan masa suntingan yang sah dan memaklumkannya pada status.
 
-Kompang menggunakan model, pengawal rakaman, jejak dan penjadual Tamborin yang sama dengan konfigurasi tindakan serta sintesisnya sendiri. Data kedua-duanya disimpan berasingan; bertukar instrumen menghentikan bunyi/penjadual tanpa membuang rakaman. Bukti gabungan dan screenshot desktop/telefon: [handoff Kompang](docs/handoffs/instrument-kompang/LATEST.md). Ujian pelayar tambahan: `node tests/browser-kompang.cjs` dan `node tests/browser-tamborin.cjs` (Playwright/Chromium untuk ujian sahaja). Nombor keluaran diterima kekal v1.04.0; tiada kebergantungan runtime ditambah.
+Kompang menggunakan model, pengawal rakaman, jejak dan penjadual Tamborin yang sama dengan konfigurasi tindakan serta sintesisnya sendiri. Data kedua-duanya disimpan berasingan; bertukar instrumen menghentikan bunyi/penjadual tanpa membuang rakaman. Bukti gabungan dan screenshot desktop/telefon: [handoff Kompang](docs/handoffs/instrument-kompang/LATEST.md). Ujian pelayar tambahan: `node tests/browser-kompang.cjs` dan `node tests/browser-tamborin.cjs` (Playwright/Chromium untuk ujian sahaja). Nombor keluaran diterima kekal v1.04.0; penambahan Kompang asal tidak menambah kebergantungan runtime.
 
 ## Perkusi sekolah & pancaragam
 

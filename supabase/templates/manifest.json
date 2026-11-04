@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "locale": "ms",
+  "templates": [
+    {
+      "id": "confirmation",
+      "category": "authentication",
+      "file": "confirmation.html",
+      "subject": "Sahkan e-mel anda | e-Instru Studio",
+      "subject_key": "mailer_subjects_confirmation",
+      "content_key": "mailer_templates_confirmation_content",
+      "variables": [
+        "ConfirmationURL"
+      ]
+    },
+    {
+      "id": "invite",
+      "category": "authentication",
+      "file": "invite.html",
+      "subject": "Jemputan ke e-Instru Studio",
+      "subject_key": "mailer_subjects_invite",
+      "content_key": "mailer_templates_invite_content",
+      "variables": [
+        "ConfirmationURL"
+      ]
+    },
+    {
+      "id": "magic_link",
+      "category": "authentication",
+      "file": "magic_link.html",
+      "subject": "Pautan log masuk anda | e-Instru Studio",
+      "subject_key": "mailer_subjects_magic_link",
+      "content_key": "mailer_templates_magic_link_content",
+      "variables": [
+        "ConfirmationURL"
+      ]
+    },
+    {
+      "id": "email_change",
+      "category": "authentication",
+      "file": "email_change.html",
+      "subject": "Sahkan pertukaran e-mel | e-Instru Studio",
+      "subject_key": "mailer_subjects_email_change",
+      "content_key": "mailer_templates_email_change_content",
+      "variables": [
+        "ConfirmationURL",
+        "NewEmail"
+      ]
+    },
+    {
+      "id": "recovery",
+      "category": "authentication",
+      "file": "recovery.html",
+      "subject": "Tetapkan semula kata laluan | e-Instru Studio",
+      "subject_key": "mailer_subjects_recovery",
+      "content_key": "mailer_templates_recovery_content",
+      "variables": [
+        "ConfirmationURL"
+      ]
+    },
+    {
+      "id": "reauthentication",
+      "category": "authentication",
+      "file": "reauthentication.html",
+      "subject": "Kod pengesahan anda | e-Instru Studio",
+      "subject_key": "mailer_subjects_reauthentication",
+      "content_key": "mailer_templates_reauthentication_content",
+      "variables": [
+        "Token"
+      ]
+    },
+    {
+      "id": "password_changed_notification",
+      "category": "security",
+      "file": "password_changed_notification.html",
+      "subject": "Kata laluan telah ditukar | e-Instru Studio",
+      "subject_key": "mailer_subjects_password_changed_notification",
+      "content_key": "mailer_templates_password_changed_notification_content",
+      "variables": [
+        "SiteURL"
+      ],
+      "enabled_key": "mailer_notifications_password_changed_enabled"
+    },
+    {
+      "id": "email_changed_notification",
+      "category": "security",
+      "file": "email_changed_notification.html",
+      "subject": "Alamat e-mel telah ditukar | e-Instru Studio",
+      "subject_key": "mailer_subjects_email_changed_notification",
+      "content_key": "mailer_templates_email_changed_notification_content",
+      "variables": [
+        "OldEmail",
+        "Email",
+        "SiteURL"
+      ],
+      "enabled_key": "mailer_notifications_email_changed_enabled"
+    },
+    {
+      "id": "phone_changed_notification",
+      "category": "security",
+      "file": "phone_changed_notification.html",
+      "subject": "Nombor telefon telah ditukar | e-Instru Studio",
+      "subject_key": "mailer_subjects_phone_changed_notification",
+      "content_key": "mailer_templates_phone_changed_notification_content",
+      "variables": [
+        "OldPhone",
+        "Phone",
+        "SiteURL"
+      ],
+      "enabled_key": "mailer_notifications_phone_changed_enabled"
+    },
+    {
+      "id": "identity_linked_notification",
+      "category": "security",
+      "file": "identity_linked_notification.html",
+      "subject": "Kaedah log masuk telah dipautkan | e-Instru Studio",
+      "subject_key": "mailer_subjects_identity_linked_notification",
+      "content_key": "mailer_templates_identity_linked_notification_content",
+      "variables": [
+        "Provider",
+        "SiteURL"
+      ],
+      "enabled_key": "mailer_notifications_identity_linked_enabled"
+    },
+    {
+      "id": "identity_unlinked_notification",
+      "category": "security",
+      "file": "identity_unlinked_notification.html",
+      "subject": "Kaedah log masuk telah dibuang | e-Instru Studio",
+      "subject_key": "mailer_subjects_identity_unlinked_notification",
+      "content_key": "mailer_templates_identity_unlinked_notification_content",
+      "variables": [
+        "Provider",
+        "SiteURL"
+      ],
+      "enabled_key": "mailer_notifications_identity_unlinked_enabled"
+    },
+    {
+      "id": "mfa_factor_enrolled_notification",
+      "category": "security",
+      "file": "mfa_factor_enrolled_notification.html",
+      "subject": "Kaedah pengesahan telah ditambah | e-Instru Studio",
+      "subject_key": "mailer_subjects_mfa_factor_enrolled_notification",
+      "content_key": "mailer_templates_mfa_factor_enrolled_notification_content",
+      "variables": [
+        "FactorType",
+        "SiteURL"
+      ],
+      "enabled_key": "mailer_notifications_mfa_factor_enrolled_enabled"
+    },
+    {
+      "id": "mfa_factor_unenrolled_notification",
+      "category": "security",
+      "file": "mfa_factor_unenrolled_notification.html",
+      "subject": "Kaedah pengesahan telah dibuang | e-Instru Studio",
+      "subject_key": "mailer_subjects_mfa_factor_unenrolled_notification",
+      "content_key": "mailer_templates_mfa_factor_unenrolled_notification_content",
+      "variables": [
+        "FactorType",
+        "SiteURL"
+      ],
+      "enabled_key": "mailer_notifications_mfa_factor_unenrolled_enabled"
+    }
+  ]
+}

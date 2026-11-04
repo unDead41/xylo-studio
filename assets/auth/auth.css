@@ -1,0 +1,62 @@
+/* Optional account controls share the Studio palette and native dialog owner. */
+.auth-mount{display:flex;align-items:center;flex:none}
+.auth-account-button{min-height:38px;padding:7px 12px;font-size:12px;white-space:nowrap}
+.auth-account-button[data-signed-in=true]{color:var(--primary,#126b66);background:var(--soft,#e6f2f0);border-color:#b6d7d2}
+.auth-account-icon{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+dialog.auth-dialog{width:460px;max-width:calc(100% - 28px);max-height:calc(100dvh - 32px);padding:0;border:1px solid var(--border,#d7e2e9);border-radius:20px;background:var(--surface,#fff);color:var(--ink,#172f41);box-shadow:0 24px 90px #172f4133;overflow:auto;overscroll-behavior:contain}
+.auth-dialog[open]{display:block}
+.auth-dialog::backdrop{background:#172f4177;backdrop-filter:blur(3px)}
+.auth-dialog [hidden]{display:none!important}
+.auth-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:21px 24px 18px;border-bottom:1px solid var(--border,#d7e2e9)}
+.auth-dialog-head h2{font-family:var(--display,'Trebuchet MS',sans-serif);font-size:24px;line-height:1.2;letter-spacing:-.7px;margin:5px 0 0}
+.auth-dialog-head .eyebrow{font-size:10px;color:var(--primary,#126b66);letter-spacing:1.6px;font-weight:750}
+.auth-dialog .auth-close{font-size:12px;min-height:36px;flex:none;background:transparent;padding:6px 10px}
+.auth-dialog-body{padding:20px 24px 24px}
+.auth-description{font-size:13px;line-height:1.65;color:var(--muted,#526879);margin:0}
+.auth-guest-note{font-size:11px;line-height:1.65;color:var(--muted,#526879);margin:8px 0 0}
+.auth-tabs{display:flex;gap:4px;background:var(--background,#edf3f7);padding:4px;border-radius:12px;margin:18px 0}
+.auth-tabs button{flex:1;min-height:36px;padding:6px 12px;font-size:12px;border-color:transparent;background:transparent}
+.auth-tabs button[aria-pressed=true]{color:var(--primary,#126b66);background:var(--surface,#fff);box-shadow:0 1px 5px #172f4115}
+.auth-message{font-size:12px;line-height:1.65;padding:11px 13px;border:1px solid var(--border,#d7e2e9);border-radius:10px;margin:16px 0;background:var(--background,#edf3f7);color:var(--ink,#172f41);overflow-wrap:anywhere}
+.auth-message[data-kind=error]{color:#8f2737;background:#fff1f3;border-color:#e6bac3}
+.auth-message[data-kind=success]{color:#0d5e54;background:var(--soft,#e6f2f0);border-color:#b6d7d2}
+.auth-form{margin:18px 0 0}
+.auth-fields{display:grid;gap:15px}
+.auth-field{min-width:0}
+.auth-field label{display:block;font-size:12px;font-weight:650;margin:0 0 6px}
+.auth-field input{width:100%;min-width:0;min-height:44px;border:1px solid var(--border,#d7e2e9);border-radius:9px;padding:10px 11px;background:var(--surface,#fff);color:var(--ink,#172f41);font:inherit;font-size:14px}
+.auth-field input[aria-invalid=true]{border-color:var(--danger,#b23845)}
+.auth-password-wrap{display:flex;align-items:stretch;position:relative}
+.auth-password-wrap input{padding-right:72px}
+.auth-dialog .auth-password-toggle{position:absolute;right:3px;top:3px;bottom:3px;min-height:36px;min-width:62px;font-size:11px;padding:5px 8px;background:transparent;border-color:transparent;color:var(--primary,#126b66);border-radius:6px}
+.auth-dialog .auth-password-toggle:hover{background:var(--soft,#e6f2f0)}
+.auth-field-hint,.auth-field-error{display:block;font-size:11px;line-height:1.6;margin-top:6px;color:var(--muted,#526879)}
+.auth-field-error{color:var(--danger,#b23845)}
+.auth-submit{width:100%;min-height:44px;margin-top:21px}
+.auth-dialog .auth-link{display:block;min-height:36px;padding:6px 1px;background:transparent;border-color:transparent;color:var(--primary,#126b66);font-size:12px;text-align:left;text-decoration:underline;text-decoration-color:#b6d7d2;text-underline-offset:3px;justify-content:flex-start}
+.auth-dialog .auth-link:hover{background:transparent;text-decoration-color:currentColor}
+.auth-forgot{margin-top:5px;margin-left:auto}
+.auth-alternatives{display:grid;gap:2px;margin-top:13px;padding-top:12px;border-top:1px solid var(--border,#d7e2e9)}
+.auth-back{margin:12px auto 0}
+.auth-account{margin-top:18px}
+.auth-identity{display:grid;gap:5px;padding:17px;border:1px solid var(--border,#d7e2e9);border-radius:12px;background:#f8fbfc}
+.auth-identity strong{font-family:var(--display,'Trebuchet MS',sans-serif);font-size:19px;overflow-wrap:anywhere}
+.auth-user-email{font-size:13px;color:var(--muted,#526879);overflow-wrap:anywhere}
+.auth-verified{font-size:10px;font-weight:650;color:var(--primary,#126b66);margin-top:4px}
+.auth-account-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}
+.auth-account-actions button{font-size:12px;padding:9px 10px}
+.auth-local-note,.auth-form-note{font-size:11px;line-height:1.7;color:var(--muted,#526879);margin:14px 0 0}
+.auth-dialog .auth-sign-out{width:100%;margin-top:17px;color:var(--danger,#b23845);background:transparent}
+.auth-reauth{display:grid;gap:12px;border:1px solid var(--border,#d7e2e9);border-radius:12px;background:#f8fbfc;padding:14px}
+.auth-reauth-copy{font-size:12px;line-height:1.65;color:var(--muted,#526879);margin:0}
+.auth-send-code{justify-self:start;font-size:12px}
+.auth-dialog-footer{padding:13px 24px;border-top:1px solid var(--border,#d7e2e9);background:#f8fbfc}
+.auth-dialog .auth-continue{width:100%;min-height:38px;color:var(--muted,#526879);font-size:12px;background:transparent;border-color:transparent}
+.auth-dialog .auth-continue:hover{color:var(--primary,#126b66);background:var(--soft,#e6f2f0)}
+.auth-dialog button:focus-visible,.auth-dialog input:focus-visible,.auth-account-button:focus-visible{outline:3px solid var(--focus,#156cc4);outline-offset:3px}
+.auth-dialog button:disabled,.auth-dialog input:disabled{cursor:not-allowed}
+@media(max-width:680px){.header.auth-enabled{height:auto;min-height:74px}.header.auth-enabled .header-inner{flex-wrap:wrap;padding-top:11px;padding-bottom:11px;gap:8px 10px}.header.auth-enabled .brand{margin-right:auto}.header.auth-enabled .mode-switch{order:3;justify-content:center;width:100%}.auth-mount{order:2}.auth-account-button{min-height:36px;font-size:11px;padding:6px 9px}}
+@media(max-width:540px){dialog.auth-dialog{max-width:calc(100% - 20px);max-height:calc(100dvh - 20px);border-radius:17px}.auth-dialog-head{padding:17px 18px 15px}.auth-dialog-head h2{font-size:22px}.auth-dialog-body{padding:17px 18px 20px}.auth-dialog-footer{padding:11px 18px}.auth-field input{font-size:16px}.auth-account-icon{width:15px;height:15px}.auth-account-button{gap:6px}.auth-tabs{margin-top:16px}.auth-dialog .auth-close{padding:6px 8px}}
+@media(max-width:360px){.auth-account-actions{grid-template-columns:1fr}.header.auth-enabled .header-inner{column-gap:7px}.auth-account-button{padding:6px 8px}.auth-account-icon{display:none}}
+@media(prefers-reduced-motion:reduce){.auth-dialog *,.auth-account-button{transition:none!important;animation:none!important}}
+@media(forced-colors:active){.auth-dialog .auth-message,.auth-identity,.auth-reauth,.auth-field input{border-color:CanvasText}.auth-tabs button[aria-pressed=true]{outline:2px solid Highlight;outline-offset:-2px}.auth-field input[aria-invalid=true]{border:2px solid LinkText}}
