@@ -1,0 +1,244 @@
+{
+  "method": "Supported CUA cloud Chromium actions and read-only rendered DOM measurements",
+  "source_sha256": "91ad5adacd358703d8024efc79104f253fa35eb44c98308ce5e931a9229ae5c5",
+  "source": "Exact current self-contained HTML in the maintained responsive fixture via iframe srcdoc",
+  "viewport_checks": [
+    {
+      "language": "ms",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Arrangement",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Mixer",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Projects",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Arrangement",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Mixer",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Projects",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Arrangement",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Mixer",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Projects",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Arrangement",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Mixer",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Projects",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Arrangement",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Mixer",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Projects",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Arrangement",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Mixer",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Projects",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Arrangement",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Mixer",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Projects",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Arrangement",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Mixer",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Projects",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    }
+  ],
+  "actions": [
+    {
+      "flow": "Empty workspace \u2192 Try a starter project",
+      "observed": "Projects opens; example disclosure expands; native select receives focus; project remains empty until Open example."
+    },
+    {
+      "flow": "Melody and rhythm example",
+      "observed": "Two tracks, four bars, 100 BPM; xylophone and kompang each contain 16 composed notes/actions."
+    },
+    {
+      "flow": "Copy bar 1, merge into bar 2",
+      "observed": "Xylophone count 16 \u2192 20; copied pitches appear at ticks 96,120,144,168 alongside existing notes; copy metadata remains visible."
+    },
+    {
+      "flow": "Replace bar 2, clear, Undo",
+      "observed": "Replace gives 16 notes; native confirmation initially focuses Cancel; clear gives 12 notes; Undo restores 16."
+    },
+    {
+      "flow": "Select Kompang with a Xylophone clipboard",
+      "observed": "Paste disabled with instrument mismatch explanation; BM/English controls and copied metadata translate."
+    },
+    {
+      "flow": "School rhythm example transport",
+      "observed": "92 BPM, two tracks; Play enters Playing and enables Pause; Pause enters Paused; Stop returns Ready."
+    },
+    {
+      "flow": "Marching rhythm example and Mixer",
+      "observed": "108 BPM, three tracks; native Left changes Snare level .53 \u2192 .52; one Undo restores .53; slider remains focused during playback and subsequent output-meter updates; real output level observed above zero."
+    },
+    {
+      "flow": "Autosave after edits and Undo",
+      "observed": "Projects panel reports current project saved. Created English project and track names remain literal when switching to BM."
+    }
+  ],
+  "screenshots_observed": [
+    "320px narrow editor with Bar tools open and incompatible paste disabled",
+    "850px workbench with three marching tracks and shared transport"
+  ],
+  "limits": [
+    "No physical speaker listening, acoustic latency, microphone, touch hardware or participant accessibility study.",
+    "Native browser key hold produced one step; held-key repeat grouping is verified by the actual-module host regressions.",
+    "Quota/corruption/conflict and export/import bytes are covered by host tests, not genuine simultaneous browser races or browser downloads.",
+    "No theme controls or theme source were changed in this continuation.",
+    "Screenshots were visually inspected in the supported browser tool; no new screenshot file is included."
+  ]
+}

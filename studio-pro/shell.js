@@ -28,10 +28,11 @@ function normalizeSelection(){
 }
 function canEdit(){return !document.querySelector('dialog[open]');}
 function renderControls(){
- const hasEvents=project.tracks.some(track=>track.events.length);
- $('proPlay').disabled=!hasEvents||playbackState==='playing'||playbackState==='pending';
+ const hasEvents=project.tracks.some(track=>track.events.length),audioAvailable=!!engine&&playbackState!=='disposed';
+ $('proPlay').disabled=!audioAvailable||!hasEvents||playbackState==='playing'||playbackState==='pending';
  $('proPlay').textContent=playbackState==='paused'?'▶ Sambung':'▶ Main';
- $('proPause').disabled=playbackState!=='playing'&&playbackState!=='pending';
+ $('proPause').disabled=!audioAvailable||playbackState!=='playing'&&playbackState!=='pending';
+ $('proStop').disabled=!audioAvailable;$('proMetronome').disabled=!audioAvailable;
  $('proUndo').disabled=!history.canUndo();$('proRedo').disabled=!history.canRedo();
  $('proTransportState').textContent=({idle:'Sedia',pending:'Membuka audio…',playing:'Sedang main',paused:'Dijeda',disposed:'Audio ditutup'})[playbackState]||'Sedia';
  $('proAddTrack').disabled=project.tracks.length>=8;
@@ -76,10 +77,20 @@ function flushSave(){
   storageStatus('Disimpan dalam pelayar.');
   return true;
  }catch(error){storageStatus('Projek belum disimpan. Eksport JSON melalui tab Projek.',{level:'error'});return false;}
+ finally{projectPanel?.render?.();}
+}
+function updateEngine(){
+ if(!engine)return;
+ engine.update(project);
+ const tick=engine.getPosition(),end=project.lengthBars*BAR;
+ if(!Number.isFinite(tick))return;
+ if(playbackState==='idle'&&tick>=end)position=0;
+ else if(playbackState==='paused'&&tick>=end)position=engine.seek(end-1);
+ else position=tick;
 }
 function changed(label){
  normalizeSelection();
- engine?.update(project);
+ updateEngine();
  renderShell();queueSave();
  dispatch('change',{project:currentProject(),label:String(label||'Projek dikemas kini')});
 }
@@ -88,10 +99,10 @@ function mutate(transform,label,options={}){
   const draft=currentProject(),result=transform(draft),next=result===undefined?draft:result,errors=C.validate(next);
   if(errors.length)throw Error(errors[0]);
   if(JSON.stringify(next)===JSON.stringify(project))return true;
-  const now=Date.now(),key=options.historyGroup||null;
-  const replaceLast=!!(options.merge&&key&&group?.key===key&&now-group.at<=600);
+  const key=options.historyGroup||null;
+  const replaceLast=!!(options.merge&&key&&group?.key===key);
   project=history.commit(C.clone(next),{replaceLast});
-  group=options.merge&&key?{key,at:now}:null;
+  group=options.merge&&key?{key}:null;
   changed(label);
   return true;
  }catch(error){announce(error.message||'Perubahan tidak dapat digunakan.',true);return false;}
@@ -147,9 +158,9 @@ function lifecyclePause(){
 
 window.ProStudioApp={
  enter(){
-  active=true;root.hidden=false;engine?.update(project);renderShell();
+  active=true;root.hidden=false;updateEngine();renderShell();
   arranger?.render?.();mixer?.render?.();projectPanel?.render?.();
-  if(!store?.load(project.id)&&!dirty)queueSave();
+  if(dirty||!store?.load(project.id))queueSave();
   return true;
  },
  leave(){
@@ -215,6 +226,12 @@ $('proAddTrack').addEventListener('click',()=>{
   const added=project.tracks.find(track=>!before.has(track.id));if(added){selectTrack(added.id);announce('Trek '+added.name+' ditambah. Isi langkah untuk mula.');}
  }
 });
+$('proTryStarter').addEventListener('click',()=>{
+ if(!active||!canEdit())return;
+ setTab(2);
+ if(typeof projectPanel?.focusStarter==='function')projectPanel.focusStarter();
+ else($('pro-projects-1-starter')||$('proTabProjects')).focus();
+});
 for(let index=0;index<tabs.length;index++){
  const tab=$(tabs[index][0]);tab.addEventListener('click',()=>setTab(index));
  tab.addEventListener('keydown',event=>{
@@ -238,7 +255,7 @@ document.addEventListener('keydown',event=>{
   event.preventDefault();if(playbackState==='playing'||playbackState==='pending')pause('Main semula dijeda.');else play();
  }
 });
-document.addEventListener('visibilitychange',()=>{if(document.hidden){lifecyclePause();flushSave();}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){lifecyclePause();flushSave();}else if(active&&dirty)queueSave();});
 window.addEventListener('blur',lifecyclePause);
 window.addEventListener('pagehide',()=>{lifecyclePause();flushSave();});
 renderShell();

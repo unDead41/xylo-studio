@@ -4,6 +4,7 @@
   const BAR_TICKS = 96;
   const STEP_TICKS = 6;
   const STEPS = 16;
+  let mountCount = 0;
   const COLORS = ['#126B66', '#5273A6', '#96663C', '#835D91', '#397B85', '#8F5D65', '#667D3B', '#79684C'];
   const FALLBACKS = {
     xylophone: { label: 'Xylophone', pitched: true, minMidi: 1, maxMidi: 127, defaultMidi: 60, actions: [] },
@@ -36,6 +37,7 @@
     const C = global.ProStudioCore;
     if (!C) throw new Error('Model Studio Pro belum tersedia.');
     const doc = container.ownerDocument || global.document;
+    const barHelpId = 'pa-bar-help-' + (++mountCount);
     const root = el(doc, 'section', 'pro-arranger');
     root.setAttribute('aria-label', 'Susunan berbilang trek');
     container.append(root);
@@ -58,6 +60,11 @@
     let gridButtons = [];
     let playheadNodes = [];
     let totalTicks = BAR_TICKS;
+    let barClipboard = null;
+    let copiedBar = null;
+    let replaceBar = false;
+    let barToolsOpen = false;
+    let barTools = null;
 
     const descriptors = () => C.INSTRUMENTS || FALLBACKS;
     const descriptor = track => descriptors()[track.instrumentId] || FALLBACKS[track.instrumentId] || FALLBACKS.xylophone;
@@ -291,6 +298,86 @@
       root.append(tools);
     }
 
+    function clipboardStatus() {
+      const desc = descriptors()[barClipboard.instrumentId] || FALLBACKS[barClipboard.instrumentId];
+      return 'Salinan: ' + desc.label + ' · bar ' + (copiedBar + 1) + ' · ' + barClipboard.events.length + ' not.';
+    }
+
+    function renderBarTools(project, track) {
+      const targetBar = bar;
+      barTools = el(doc, 'details', 'pa-bar-tools');
+      barTools.open = barToolsOpen;
+      const details = barTools;
+      details.addEventListener('toggle', () => { if (root.contains(details)) barToolsOpen = details.open; });
+      const summary = key(el(doc, 'summary', 'pa-bar-tools-summary', 'Alat bar'), 'bar-tools');
+      details.append(summary);
+      const body = el(doc, 'div', 'pa-bar-tools-body');
+      const status = el(doc, 'p', 'pa-clipboard-status', barClipboard ? clipboardStatus() : 'Salin bar untuk digunakan semula di bar lain.');
+      body.append(status);
+      const buttons = el(doc, 'div', 'pa-bar-buttons');
+      const copy = button('Salin bar', 'pa-button', () => {
+        try {
+          barClipboard = C.copyBar(app.getProject(), track.id, targetBar);
+          copiedBar = targetBar;
+          pendingFocus = 'copy-bar';
+          render();
+          announce(clipboardStatus());
+        } catch (error) { fail(error); }
+      }, 'copy-bar');
+      const compatible = !!barClipboard && barClipboard.instrumentId === track.instrumentId;
+      const paste = button('Tampal bar', 'pa-button', () => {
+        if (!barClipboard || !compatible) return;
+        pendingFocus = 'paste-bar';
+        commit(current => C.pasteBar(current, track.id, targetBar, barClipboard, { replace: replaceBar }),
+          'Bar ' + (targetBar + 1) + (replaceBar ? ' digantikan' : ' ditampal'));
+      }, 'paste-bar');
+      paste.disabled = !compatible || (!replaceBar && barClipboard.events.length === 0);
+      paste.setAttribute('aria-describedby', barHelpId);
+      const clear = button('Kosongkan bar', 'pa-button pa-destructive pa-clear-bar', () => {
+        const apply = () => {
+          if (disposed) return;
+          pendingFocus = 'bar-tools';
+          commit(current => {
+            if (current.id !== project.id) throw new Error('Projek telah berubah. Pilih bar semula sebelum mengosongkan.');
+            return C.clearBar(current, track.id, targetBar);
+          }, 'Bar ' + (targetBar + 1) + ' dikosongkan');
+        };
+        if (typeof app.confirm === 'function') {
+          app.confirm({
+            title: 'Kosongkan bar ' + (targetBar + 1) + '?',
+            message: 'Not yang bermula dalam bar ' + (targetBar + 1) + ' pada trek terpilih akan dibuang. Not dari bar sebelumnya dikekalkan. Anda boleh menekan Undur selepas ini.',
+            confirmLabel: 'Kosongkan bar',
+            onConfirm: apply
+          });
+        } else apply();
+      }, 'clear-bar');
+      clear.disabled = !track.events.some(inBar);
+      buttons.append(copy, paste, clear);
+      body.append(buttons);
+      const replace = key(el(doc, 'input'), 'replace-bar');
+      replace.type = 'checkbox';
+      replace.checked = replaceBar;
+      replace.disabled = !compatible;
+      replace.addEventListener('change', () => { replaceBar = replace.checked; render(); });
+      const replaceLabel = el(doc, 'label', 'pa-replace-bar');
+      replaceLabel.append(replace, el(doc, 'span', '', 'Gantikan not yang bermula dalam bar sasaran'));
+      body.append(replaceLabel);
+      let message = 'Salin bar dahulu untuk mengaktifkan Tampal.';
+      if (barClipboard && !compatible) {
+        const desc = descriptors()[barClipboard.instrumentId] || FALLBACKS[barClipboard.instrumentId];
+        message = 'Instrumen tidak sepadan. Pilih trek ' + desc.label + ' untuk menampal.';
+      } else if (compatible) {
+        message = replaceBar ? 'Tampal akan menggantikan not yang bermula dalam bar sasaran. Anda boleh menekan Undur selepas ini.' : !barClipboard.events.length ?
+          'Bar salinan kosong. Pilih Gantikan untuk mengosongkan bar sasaran.' :
+          'Tampal menambah not. Pilih Gantikan untuk membuang not asal yang bermula dalam bar sasaran.';
+      }
+      const help = el(doc, 'p', 'pa-bar-help', message);
+      help.id = barHelpId;
+      body.append(help);
+      details.append(body);
+      return details;
+    }
+
     function renderEditor(project, track) {
       const desc = descriptor(track);
       const pitched = isPitched(desc);
@@ -312,6 +399,7 @@
       navigation.append(previous, barSelect, next);
       heading.append(navigation);
       editor.append(heading);
+      editor.append(renderBarTools(project, track));
       const settings = el(doc, 'div', 'pa-grid-settings');
       settings.append(el(doc, 'p', 'pa-small-text', '16 langkah / bar · 6 tick / langkah'));
       if (pitched) {
@@ -495,6 +583,7 @@
       if (!project || !Array.isArray(project.tracks)) return;
       totalTicks = projectTicks(project);
       const savedFocus = captureFocus();
+      if (barTools) barToolsOpen = barTools.open;
       const oldOverviewScroll = overviewScroll ? overviewScroll.scrollLeft : 0;
       const oldEditorScroll = editorScroll ? editorScroll.scrollLeft : 0;
       const wantedTrackId = typeof app.getSelectedTrackId === 'function' ? app.getSelectedTrackId() : null;
@@ -523,6 +612,7 @@
       root.hidden = !track;
       root.replaceChildren();
       overviewScroll = editorScroll = matrix = null;
+      barTools = null;
       gridButtons = [];
       playheadNodes = [];
       errorNode = el(doc, 'p', 'pa-error');
@@ -575,6 +665,9 @@
         root.remove();
         gridButtons = [];
         playheadNodes = [];
+        barClipboard = null;
+        copiedBar = null;
+        barTools = null;
       }
     };
   }

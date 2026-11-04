@@ -52,6 +52,10 @@ Global display preferences add system/light/dark themes and independent protanop
 
 Six simultaneous workers implemented bounded model/audio/arranger/mixer/project/shell modules; coordinator owned legacy integration and display preferences. Subsequent independent reviews fixed route visibility, primary-text contrast, hidden import feedback and sustained recorder mute/solo carries. The candidate remains ui only with accepted VERSION v1.04.0. See docs/handoffs/ui/STUDIO_PRO.md for actual verification and source identity.
 
+## Studio Pro continuation — ui, 4 November 2026
+
+The core owns onset-based bar copy/paste/clear with instrument validation and atomic bounds checks. Arranger owns the closed bar-tools disclosure and in-memory clipboard. Projects owns three original four-bar starter factories and safe replacement; shell only opens/focuses that selector from its empty state. Audio/mixer/shell fixes retain existing scheduling, gesture and persistence owners. The maintained core source is explicitly tracked despite the core-dump ignore pattern; embedding and the full suite are verified from a clean staged-tree archive. Theme sources are excluded by the current request. See `docs/handoffs/ui/STUDIO_PRO_RESUME.md` for 375-test evidence and limits.
+
 ## BM/BI presentation — 4 November 2026
 
 The inline `studio-i18n` owner precedes the instrument controllers. Its exact phrase pairs and anchored parameter templates cover the chooser, eight studios, Game, dialogs, help, validation and accessible attributes. A bounded cache and changed-subtree observer avoid whole-document work on each clock update. Language refresh changes text nodes and display attributes only; it calls no transport/navigation/render action. The separate `e-instru-language` preference defaults to `ms` and accepts `ms`/`en`, with storage-denial and cross-tab fallback handling.

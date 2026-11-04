@@ -34,3 +34,13 @@ test('mixer and destructive-dialog templates preserve dictionary-matching user t
   ['Salinan “Rakam” dalam pelayar akan dipadam. Eksport JSON dahulu jika diperlukan.','The copy “Rakam” will be deleted from this browser. Export JSON first if needed.']
  ]){assert.equal(api.t(ms,'en'),en);assert.equal(api.t(en,'ms'),ms);}
 });
+test('continued bar and starter workflows translate controls and dynamic feedback',()=>{
+ const api=translator();
+ for(const [ms,en]of [
+  ['Alat bar','Bar tools'],['Salin bar','Copy bar'],['Tampal bar','Paste bar'],['Kosongkan bar','Clear bar'],
+  ['Cuba contoh projek','Try a starter project'],['Mulakan dengan contoh','Start from an example'],['Buka contoh','Open example'],
+  ['Melodi dan rentak','Melody and rhythm'],['Rentak sekolah','School rhythm'],['Rentak perarakan','Marching rhythm'],
+  ['Bar 3 ditampal.','Bar 3 pasted.'],
+  ['Salinan: Rekoder Soprano · bar 2 · 3 not.','Copied: Soprano Recorder · bar 2 · 3 notes.']
+ ]){assert.equal(api.t(ms,'en'),en);assert.equal(api.t(en,'ms'),ms);}
+});

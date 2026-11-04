@@ -10,12 +10,14 @@ Pilihan **BM / BI** pada header menukar bahasa antara Bahasa Melayu dan English 
 
 - Gabungkan sehingga lapan trek daripada lapan instrumen. Gunakan **Tambah ke Studio Pro** di studio instrumen untuk membawa masuk rakaman atau lagu semasa; rakaman asal dikekalkan.
 - Sunting satu bar pada satu masa melalui grid 16 langkah, not/ketukan, masa, tempoh dan kekuatan. Kemas masa, transpose, gandakan trek serta Undur/Ulang tersedia.
+- Buka **Alat bar** untuk Salin, Tampal atau Kosongkan bar terpilih. Tampal menambah not secara lalai; pilihan Gantikan menggantikan not dalam bar sasaran. Instrumen perlu sepadan dan Undur tersedia.
 - Main trek bersama dengan Jeda/Sambung/Henti, metronom dan ulangan bahagian. Laras tahap, pan, Bisu/Solo, Reverb/Delay dan output utama melalui Mixer.
 - Namakan, autosimpan, buka, gandakan dan padam salinan projek setempat. Eksport/import projek JSON atau eksport seluruh susunan CSV. Had projek: 4–32 bar, 512 not/ketukan bagi setiap trek dan 20 projek dalam pelayar.
+- Mulakan melalui **Cuba contoh projek** atau **Projek → Mulakan dengan contoh**: Melodi dan rentak, Rentak sekolah atau Rentak perarakan. Setiap contoh ialah susunan asal empat bar yang boleh dimainkan dan disunting.
 
 BM/BI turut tersedia untuk Studio Pro dan tetapan paparan; nama projek dan rakaman tersuai kekal literal. Butang **Paparan** sentiasa tersedia. Tema **Ikut peranti / Cerah / Gelap** berasingan daripada **Warna asal / Protanopia / Deuteranopia / Tritanopia / Kontras tinggi**. Mod warna menambah palet alternatif, corak bar, tanda keadaan dan label; pilihan disimpan pada peranti. Bentuk dan penjarian sebenar alat tidak ditukar.
 
-Sumber modular berada dalam `studio-pro/`; jalankan `node scripts/embed-studio-pro.cjs` selepas menyuntingnya. `index.html` yang disimpan kekal HTML kendiri tanpa muatan modul luar. Semak dengan `node scripts/embed-studio-pro.cjs --check` dan `node --test tests/*.test.cjs`. Calon ini berada di `ui`; penerbitan main/Pages tidak diubah. [Handoff Studio Pro](docs/handoffs/ui/STUDIO_PRO.md).
+Sumber modular berada dalam `studio-pro/`; jalankan `node scripts/embed-studio-pro.cjs` selepas menyuntingnya. `index.html` yang disimpan kekal HTML kendiri tanpa muatan modul luar. Semak dengan `node scripts/embed-studio-pro.cjs --check` dan `node --test tests/*.test.cjs`. Calon ini berada di `ui`; penerbitan main/Pages tidak diubah. [Handoff Studio Pro terkini](docs/handoffs/ui/STUDIO_PRO_RESUME.md).
 
 Buka [laman](https://undead41.github.io/xylo-studio/) atau muat turun ZIP branch [share](https://github.com/unDead41/xylo-studio/tree/share), extract dan buka index.html dalam Chrome/Edge. Tiada pemasangan, akaun atau backend diperlukan. Mikrofon pilihan memerlukan HTTPS/localhost serta kebenaran pengguna.
 

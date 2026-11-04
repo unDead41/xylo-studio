@@ -387,6 +387,16 @@ dialog{width:min(640px,calc(100vw - 28px));max-width:640px;max-height:calc(100dv
 .pro-arranger .pa-editor-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 20px 10px}
 .pro-arranger .pa-bar-navigation{gap:5px}
 .pro-arranger .pa-bar-select{max-width:135px}
+.pro-arranger .pa-bar-tools{min-width:0;margin:0 20px 12px;border:1px solid var(--border,#D7E2E9);border-radius:9px;background:var(--surface-subtle,#F7FAFC)}
+.pro-arranger .pa-bar-tools-summary{min-height:34px;padding:8px 11px;font-size:12px;font-weight:650;color:var(--ink,#172F41);cursor:pointer}
+.pro-arranger .pa-bar-tools-summary:focus-visible{outline:3px solid var(--focus,#156CC4);outline-offset:2px;border-radius:8px}
+.pro-arranger .pa-bar-tools-body{display:grid;gap:10px;min-width:0;padding:0 11px 12px}
+.pro-arranger .pa-clipboard-status,.pro-arranger .pa-bar-help{margin:0;font-size:11px;line-height:1.6;color:var(--muted,#526879);overflow-wrap:anywhere}
+.pro-arranger .pa-clipboard-status{color:var(--ink,#172F41);font-weight:600}
+.pro-arranger .pa-bar-buttons{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.pro-arranger .pa-clear-bar{margin-left:auto}
+.pro-arranger .pa-replace-bar{display:flex;align-items:flex-start;gap:8px;min-width:0;max-width:100%;width:fit-content;font-size:11px;font-weight:500;line-height:1.6;color:var(--ink,#172F41);cursor:pointer}
+.pro-arranger .pa-replace-bar input[type=checkbox]{flex:none;width:16px;height:16px;min-height:0;margin:1px 0 0;padding:0;accent-color:var(--primary,#126B66)}
 .pro-arranger .pa-grid-settings{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:0 20px 8px}
 .pro-arranger .pa-field{display:flex;flex-direction:column;gap:5px;min-width:0;font-size:11px;color:var(--muted,#526879);font-weight:600}
 .pro-arranger .pa-field-label{font-size:11px;line-height:1.4}
@@ -423,6 +433,7 @@ dialog{width:min(640px,calc(100vw - 28px));max-width:640px;max-height:calc(100dv
 @media(max-width:700px){.pro-arranger .pa-event-form{grid-template-columns:repeat(2,minmax(0,1fr))}.pro-arranger .pa-transpose{margin-left:0}.pro-arranger .pa-heading{align-items:flex-start}.pro-arranger .pa-add-track{width:100%}.pro-arranger .pa-add-track select{flex:1;max-width:none}.pro-arranger .pa-track-tools{align-items:flex-start}.pro-arranger input.pa-name-input{width:100%}}
 @media(max-width:420px){.pro-arranger .pa-heading,.pro-arranger .pa-track-tools,.pro-arranger .pa-event-inspector,.pro-arranger .pa-timing-tools{padding-left:12px;padding-right:12px}.pro-arranger .pa-editor-heading,.pro-arranger .pa-grid-settings{padding-left:12px;padding-right:12px}.pro-arranger .pa-grid-hint{padding-left:12px;padding-right:12px}.pro-arranger .pa-editor-heading{gap:10px}.pro-arranger .pa-bar-navigation{width:100%;flex-wrap:nowrap}.pro-arranger .pa-bar-select{flex:1;min-width:0;max-width:none}.pro-arranger .pa-event-actions .pa-button{flex:1;padding-inline:7px}.pro-arranger .pa-error{margin-inline:12px}.pro-arranger .pa-button{font-size:11px}.pro-arranger .pa-add-track select{width:120px}.pro-arranger .pa-timing-tools{gap:12px}.pro-arranger .pa-grid-settings{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.pro-arranger *{transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:420px){.pro-arranger .pa-bar-tools{margin-inline:12px}.pro-arranger .pa-bar-buttons{gap:6px}.pro-arranger .pa-clear-bar{margin-left:0}}
 html[data-theme=dark] .pro-arranger .pa-event-marker,html:not([data-vision=standard]) .pro-arranger .pa-event-marker{background:var(--primary,#126B66);border-color:var(--primary,#126B66)}
 @media(forced-colors:active){.pro-arranger .pa-cell.is-filled{background:Highlight;color:HighlightText;border:2px solid HighlightText}.pro-arranger .pa-cell.is-selected{outline:2px solid CanvasText}.pro-arranger .pa-event-marker{background:Highlight;border:1px solid CanvasText}.pro-arranger .pa-playhead{background:CanvasText}}
 </style>
@@ -487,6 +498,11 @@ html[data-theme=dark] .pro-arranger .pa-event-marker,html:not([data-vision=stand
 .pro-projects h3{font-size:16px;line-height:1.4}
 .pro-projects-intro,.pro-projects-help,.pro-projects-privacy{color:var(--muted);font-size:12px;line-height:1.65;overflow-wrap:anywhere}
 .pro-projects-intro{margin-top:-8px}
+.pro-projects-starters{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+.pro-projects-starters>summary{min-height:44px;padding:11px 12px;font-size:13px;font-weight:650;cursor:pointer;color:var(--ink)}
+.pro-projects-starters>summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:var(--radius)}
+.pro-projects-starters-body{display:grid;gap:9px;padding:0 12px 12px;min-width:0}
+.pro-projects-starters-body>button{justify-self:start;min-height:44px;font-size:13px}
 .pro-projects-field,.pro-projects-library,.pro-projects-files{display:grid;gap:8px;min-width:0}
 .pro-projects label{font-size:13px;line-height:1.5}
 .pro-projects input,.pro-projects select{width:100%;max-width:100%;min-width:0;min-height:44px;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:9px 10px;font:inherit}
@@ -554,6 +570,7 @@ html[data-theme=dark] .pro-arranger .pa-event-marker,html:not([data-vision=stand
 #proView .pro-empty-mark{display:grid;place-items:center;flex:none;width:57px;height:57px;border:1px solid var(--border);border-radius:15px;background:var(--surface);font-size:30px;color:var(--primary)}
 #proView .pro-empty h3{font-size:17px}
 #proView .pro-empty p{max-width:650px;margin-top:7px;font-size:13px;line-height:1.65;color:var(--muted)}
+#proView .pro-empty-actions{margin-top:12px}
 #proView .pro-shortcuts{margin-top:16px;border:1px solid var(--border);border-radius:13px;padding:14px 18px;background:var(--surface-subtle,var(--background));color:var(--muted);font-size:12px}
 #proView .pro-shortcuts summary{min-height:24px;width:fit-content;font-weight:650;color:var(--ink);cursor:pointer}
 #proView .pro-shortcuts summary:focus-visible{outline:3px solid var(--focus);outline-offset:4px;border-radius:4px}
@@ -974,7 +991,7 @@ html[data-theme=dark] .bar:hover{color:#182E3B}
       </div>
       <div id="proEmpty" class="pro-empty">
         <span class="pro-empty-mark" aria-hidden="true">♫</span>
-        <div><h3>Mulakan dengan satu instrumen</h3><p>Pilih instrumen dan tekan <strong>Tambah trek</strong>. Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.</p></div>
+        <div><h3>Mulakan dengan satu instrumen</h3><p>Pilih instrumen dan tekan <strong>Tambah trek</strong>. Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.</p><div class="pro-empty-actions"><button id="proTryStarter" type="button" class="ghost">Cuba contoh projek</button></div></div>
       </div>
       <div id="proArrangement" class="pro-arrangement"></div>
     </section>
@@ -6611,6 +6628,154 @@ html[data-theme=dark] .bar:hover{color:#182E3B}
   [
     "Rakam sekurang-kurangnya satu not atau ketukan sebelum menambah trek.",
     "Record at least one note or hit before adding a track."
+  ],
+  [
+    "Cuba contoh projek",
+    "Try a starter project"
+  ],
+  [
+    "Mulakan dengan contoh",
+    "Start from an example"
+  ],
+  [
+    "Contoh projek",
+    "Project example"
+  ],
+  [
+    "Buka contoh",
+    "Open example"
+  ],
+  [
+    "Corak asal empat bar. Anda boleh menyunting setiap trek selepas dibuka.",
+    "Original four-bar patterns. You can edit each track after opening the project."
+  ],
+  [
+    "Melodi dan rentak",
+    "Melody and rhythm"
+  ],
+  [
+    "Rentak sekolah",
+    "School rhythm"
+  ],
+  [
+    "Rentak perarakan",
+    "Marching rhythm"
+  ],
+  [
+    "Xylophone dan Kompang · 2 trek · 100 BPM · 4 bar",
+    "Xylophone and Kompang · 2 tracks · 100 BPM · 4 bars"
+  ],
+  [
+    "Tamborin dan Segi Tiga · 2 trek · 92 BPM · 4 bar",
+    "Tambourine and Triangle · 2 tracks · 92 BPM · 4 bars"
+  ],
+  [
+    "Dram Sisi, Dram Bes dan Simbal · 3 trek · 108 BPM · 4 bar",
+    "Snare Drum, Bass Drum and Cymbals · 3 tracks · 108 BPM · 4 bars"
+  ],
+  [
+    "Contoh projek dibuka",
+    "Example project opened"
+  ],
+  [
+    "Alat bar",
+    "Bar tools"
+  ],
+  [
+    "Salin bar",
+    "Copy bar"
+  ],
+  [
+    "Tampal bar",
+    "Paste bar"
+  ],
+  [
+    "Kosongkan bar",
+    "Clear bar"
+  ],
+  [
+    "Salin bar untuk digunakan semula di bar lain.",
+    "Copy this bar to reuse it in another bar."
+  ],
+  [
+    "Gantikan not yang bermula dalam bar sasaran",
+    "Replace notes that start in the target bar"
+  ],
+  [
+    "Salin bar dahulu untuk mengaktifkan Tampal.",
+    "Copy a bar first to enable Paste."
+  ],
+  [
+    "Bar salinan kosong. Pilih Gantikan untuk mengosongkan bar sasaran.",
+    "The copied bar is empty. Select Replace to clear the target bar."
+  ],
+  [
+    "Tampal menambah not. Pilih Gantikan untuk membuang not asal yang bermula dalam bar sasaran.",
+    "Paste adds notes. Select Replace to remove existing notes that start in the target bar."
+  ],
+  [
+    "Tampal akan menggantikan not yang bermula dalam bar sasaran. Anda boleh menekan Undur selepas ini.",
+    "Paste will replace notes that start in the target bar. You can use Undo afterwards."
+  ],
+  [
+    "Projek telah berubah. Pilih bar semula sebelum mengosongkan.",
+    "The project has changed. Select the bar again before clearing it."
+  ],
+  [
+    "Bar mesti dalam julat projek.",
+    "The bar must be within the project range."
+  ],
+  [
+    "Medan papan klip bar tidak sah.",
+    "Invalid bar clipboard field."
+  ],
+  [
+    "Format papan klip bar tidak dikenali.",
+    "Unrecognized bar clipboard format."
+  ],
+  [
+    "Data papan klip bar tidak sah.",
+    "Invalid bar clipboard data."
+  ],
+  [
+    "Medan sumber papan klip bar tidak sah.",
+    "Invalid bar clipboard source field."
+  ],
+  [
+    "Sumber papan klip bar tidak sah.",
+    "Invalid bar clipboard source."
+  ],
+  [
+    "Medan event papan klip bar tidak sah.",
+    "Invalid bar clipboard event field."
+  ],
+  [
+    "Masa event papan klip bar tidak sah.",
+    "Invalid bar clipboard event timing."
+  ],
+  [
+    "Medan tampalan bar tidak sah.",
+    "Invalid bar paste field."
+  ],
+  [
+    "Pilihan tampalan bar tidak sah.",
+    "Invalid bar paste options."
+  ],
+  [
+    "Instrumen papan klip bar tidak serasi dengan trek.",
+    "The bar clipboard instrument does not match the track."
+  ],
+  [
+    "Tempoh tampalan melebihi akhir projek. Panjangkan projek atau pilih bar lebih awal.",
+    "The pasted notes extend beyond the project end. Lengthen the project or choose an earlier bar."
+  ],
+  [
+    "Contoh projek dibuka.",
+    "Example project opened."
+  ],
+  [
+    "Pilih contoh projek yang sah.",
+    "Choose a valid project example."
   ]
 ];
   const templates = [
@@ -7273,9 +7438,43 @@ html[data-theme=dark] .bar:hover{color:#182E3B}
     "translate": [
       "action"
     ]
+  },
+  {
+    "ms": "Salinan: {instrument} · bar {index} · {count} not.",
+    "en": "Copied: {instrument} · bar {index} · {count} notes.",
+    "translate": [
+      "instrument"
+    ]
+  },
+  {
+    "ms": "Instrumen tidak sepadan. Pilih trek {instrument} untuk menampal.",
+    "en": "The instrument does not match. Select a {instrument} track to paste.",
+    "translate": [
+      "instrument"
+    ]
+  },
+  {
+    "ms": "Bar {index} digantikan.",
+    "en": "Bar {index} replaced."
+  },
+  {
+    "ms": "Bar {index} ditampal.",
+    "en": "Bar {index} pasted."
+  },
+  {
+    "ms": "Bar {index} dikosongkan.",
+    "en": "Bar {index} cleared."
+  },
+  {
+    "ms": "Kosongkan bar {index}?",
+    "en": "Clear bar {index}?"
+  },
+  {
+    "ms": "Not yang bermula dalam bar {index} pada trek terpilih akan dibuang. Not dari bar sebelumnya dikekalkan. Anda boleh menekan Undur selepas ini.",
+    "en": "Notes that start in bar {index} on the selected track will be removed. Notes from the previous bar are kept. You can use Undo afterwards."
   }
 ];
-  /* studio-pro:i18n-owned {"entries":["Studio Pro","Paparan","Buka Studio Pro","Tambah ke Studio Pro","Gabungkan rakaman, susun rentak dan laras bunyi setiap trek.","Ruang susunan","Satukan instrumen, susun corak dan dengar semuanya bersama.","← Pilih instrumen","Nama projek","Belum disimpan.","Main semula projek","▶ Main","▶ Sambung","Ⅱ Jeda","■ Henti","Metrum empat per empat","Metrum","Sejarah suntingan","↶ Undur","↷ Ulang","Panjang & ulangan","Panjang, ulangan dan kursor","Panjang bar","Ulang bahagian","Mula bar","Akhir bar","Kursor","Ulangan dimatikan","Tambah trek untuk mula menyusun.","Paparan Studio Pro","Susunan","Mixer","Projek","Susunan trek","Satu projek, sehingga 8 instrumen.","Instrumen untuk trek baharu","Xylophone","Rekoder soprano","＋ Tambah trek","Tambah trek","Mulakan dengan satu instrumen","Pilih instrumen dan tekan",". Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.","Pilih instrumen dan tekan Tambah trek. Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.","Pintasan dan cara guna","main atau jeda ·","undur · tambah","untuk ulang. Pintasan tidak mengambil alih medan suntingan atau dialog.","Gunakan anak panah pada tab untuk bertukar paparan. Kursor menggunakan bar:beat:tick; 24 tick bersamaan satu beat. Semua bunyi ialah sintesis digital. Simpan sandaran projek sebagai JSON melalui tab Projek.","Sahkan perubahan","Paparan yang selesa","Tutup tetapan paparan","Tema dan warna boleh dilaras berasingan. Label, corak dan bentuk membantu membezakan not dan keadaan.","Tema","Ikut peranti","Cerah","Gelap","Warna dan kontras","Warna asal","Merah–hijau · protanopia","Hijau–merah · deuteranopia","Biru–kuning · tritanopia","Kontras tinggi","Pilih palet yang paling mudah dibezakan oleh anda. Setiap mod turut menambah corak pada bar dan tanda keadaan.","Pratonton not dan keadaan","Empat not dengan label dan corak berbeza","✓ Sedia","■ Merakam","! Semak","Pilihan disimpan pada peranti ini.","Pilihan digunakan untuk sesi ini. Simpanan peranti tidak tersedia.","Tetapan asal","Redam","Data projek tidak dapat disalin.","Data projek tidak dapat disalin sebagai JSON.","Data projek terlalu besar.","Struktur projek terlalu dalam.","Nombor projek mesti terhingga.","Projek hanya menerima data JSON.","Data projek tidak boleh merujuk dirinya sendiri.","Audio mentah tidak disimpan dalam projek digital.","Data projek tidak sah.","Format projek tidak dikenali.","Identiti projek mesti 1–100 aksara.","Tajuk projek mesti 1–100 aksara.","Panjang projek mesti 4–32 bar.","Gelung mesti mempunyai mula dan akhir yang sah dalam projek.","Kelantangan induk mesti dalam julat 0–1.","Senarai trek diperlukan.","Maksimum 8 trek bagi satu projek.","Data trek tidak sah.","Identiti trek mesti sah dan unik.","Nama trek mesti 1–60 aksara.","Instrumen trek tidak dikenali.","Tetapan mixer trek berada di luar julat.","Keadaan senyap dan solo mesti sah.","Senarai event trek diperlukan.","Maksimum 512 event bagi satu trek.","Data event tidak sah.","Identiti event mesti sah dan unik dalam projek.","Event mesti berada sepenuhnya dalam panjang projek.","Kekuatan event mesti dalam julat 0–1.","Not rekoder mesti MIDI 72–98 tanpa tindakan perkusi.","Not melodi mesti MIDI 1–127 tanpa tindakan perkusi.","Event perkusi mesti menggunakan tindakan instrumen tanpa pitch MIDI.","Medan projek baharu tidak sah.","Medan gelung tidak sah.","Medan induk tidak sah.","Medan projek tidak sah.","Medan trek tidak sah.","Medan event tidak sah.","Medan sejarah tidak sah.","Trek tidak ditemui.","Event tidak ditemui.","Projek baharu","Pilih instrumen yang sah.","Grid dan kekuatan kuantisasi tidak sah.","Transposisi hanya untuk trek melodi.","Transposisi mesti bilangan semiton bulat dalam julat −127 hingga 127.","Saiz fail projek tidak sah.","Saiz fail rakaman tidak sah.","Fail JSON projek tidak sah.","Fail JSON rakaman tidak sah.","Data rakaman sumber tidak sah.","Tempo rakaman sumber mesti integer 40–200 BPM.","Bukti input asal tidak sah.","Tempo tangkapan sumber tidak sah.","Instrumen atau PPQ rakaman melodi tidak disokong.","Akhir rakaman melodi tidak sah.","Masa not sumber tidak sah.","Masa input asal tidak sah.","Tempoh tahan not sumber tidak sah.","Tempoh input asal tidak sah.","Semak not sumber yang belum diketahui sebelum mengimport.","Pitch not sumber tidak sah.","Not sumber di luar julat instrumen.","Semak dan sahkan not anggaran mikrofon sebelum mengimport.","Akhir rakaman sumber tidak meliputi semua not.","Rakaman sumber melebihi 180 saat.","Rakaman perkusi sumber tidak disokong.","Bukti input perkusi asal tidak sah.","Ketukan perkusi sumber tidak sah.","Format rakaman sumber tidak dikenali.","Rakaman sumber melebihi panjang maksimum 32 bar.","Fail projek melebihi had 4 MiB.","Had sejarah mesti integer 1–1000.","Pilihan sejarah tidak sah.","Projek studio tidak sah.","Web Audio tidak tersedia dalam pelayar ini.","Had bunyi serentak dicapai; kurangkan not yang bertindih.","Playback selesai.","Audio tidak dapat dimainkan.","Benarkan audio kemudian tekan Main semula.","Audio tidak tersedia.","Projek berubah; tekan Main untuk menyambung.","Projek terakhir dimuatkan dari pelayar.","Simpanan pelayar tidak tersedia. Eksport JSON untuk menyimpan projek.","Membuka audio…","Sedang main","Audio ditutup","Had 8 trek telah dicapai.","Tambah instrumen yang dipilih","Menyimpan…","Projek belum disimpan. Eksport JSON melalui tab Projek.","Projek aktif belum disimpan. Eksport JSON melalui tab Projek.","Disimpan dalam pelayar.","Perubahan tidak dapat digunakan.","Projek tidak sah.","Isi beberapa langkah dalam Susunan dahulu.","Main semula dijeda. Tekan Sambung apabila bersedia.","Rakaman ditambah ke Studio Pro. Masa input asal dikekalkan.","Enjin audio tidak tersedia.","Main semula dijeda.","Main semula dihentikan.","Nama projek tidak boleh kosong.","Susunan memerlukan bekas dan projek studio.","Model Studio Pro belum tersedia.","Susunan berbilang trek","Garis masa semua trek; tatal mendatar untuk melihat bar lain","Trek / bar","Nama trek terpilih","Gandakan trek","Buang trek","Editor not","Editor ketukan","Sebelum","Bar sebelumnya","Bar yang disunting","Selepas","Bar seterusnya","16 langkah / bar · 6 tick / langkah","Julat nada editor","Julat nada","Klik ruang kosong untuk tambah; pilih not untuk sunting. Anak panah: gerak fokus. Delete: buang not pada ruang itu.","Grid satu bar; tatal mendatar untuk semua 16 langkah","Nada","Pilih not atau tambah pada grid","Not terpilih","Ketukan terpilih","Bar ini belum mempunyai not terpilih. Tambah melalui grid atau pilih not daripada senarai.","Mula (tick)","Tempoh (tick)","Kekuatan (%)","Simpan not","Dengar not","Not mesti tamat dalam panjang projek.","Kekuatan kuantisasi","Grid kuantisasi","Kekuatan","Kemas masa trek","Nada −1","Nada +1","Turunkan semua not trek satu semiton","Naikkan semua not trek satu semiton","Bekas mixer diperlukan.","Teras Pro Studio belum tersedia.","Perubahan mixer tidak dapat disimpan.","Imbang tahap setiap trek dan bentuk ruang bunyinya. Pilih trek untuk menyunting kesan.","Kawalan trek","Belum ada trek. Tambah instrumen untuk mula mengadun.","Kesan trek","Tentang Reverb dan Delay","Reverb menambah ekor gema ruang. Delay mengulang bunyi selepas jeda mengikut tempo projek. Nilai 0% mematikan kesan; naikkan sedikit demi sedikit untuk mengekalkan kejelasan.","Kesan ini ialah sintesis digital setempat. Bisu dan Solo menentukan trek yang kedengaran; Bisu tetap mematikan trek walaupun Solo dihidupkan.","Reset kesan","Output utama","Tahap output","Tahap isyarat projek. Kelantangan pembesar suara dilaras pada peranti.","Kiri","Kanan","Dipilih","Bisu","Solo","Tahap","Pan","Reverb","Delay","Tahap utama","Bisu aktif","Solo aktif","Dibisukan","Senyap: trek lain dalam Solo","Dalam adunan","Pilih trek selepas menambah instrumen.","Simpanan projek tersedia.","Projek melebihi had fail JSON 4 MB.","Simpanan pelayar tidak tersedia. Eksport JSON sebelum menutup halaman.","Simpanan berubah dalam tab lain. Eksport JSON projek semasa dan muat semula halaman sebelum menyimpan.","Had simpanan tidak sah.","Format simpanan tidak sah.","Tarikh simpanan tidak sah.","Identiti projek berulang.","Projek aktif tidak sah.","Simpanan projek rosak atau versinya tidak disokong. Data asal dikekalkan; eksport JSON projek semasa sebelum memuat semula.","Had semakan simpanan dicapai. Eksport JSON untuk sandaran.","Had saiz simpanan projek dicapai. Eksport JSON dan padam projek lama sebelum mencuba lagi.","Simpanan pelayar penuh. Eksport JSON; padam projek lama atau kosongkan ruang sebelum mencuba lagi.","Projek belum disimpan kerana simpanan pelayar tidak tersedia. Eksport JSON sebelum menutup halaman.","Had 20 projek dicapai. Eksport JSON dan padam projek lama sebelum menyimpan projek baharu.","Projek disimpan di pelayar ini. Eksport JSON untuk sandaran.","Projek tersimpan tidak ditemui.","Salinan projek dipadam daripada pelayar ini.","Simpan projek dahulu sebelum menjadikannya projek aktif.","Projek aktif dikemas kini.","Panel projek memerlukan bekas dan aplikasi Studio Pro.","Projek & fail","Simpan susunan berbilang trek di pelayar ini. Eksport JSON untuk salinan sandaran.","1–100 aksara. Nama digunakan pada fail eksport.","Simpan sekarang","Gandakan","Projek dalam pelayar","Buka projek","Padam salinan","Sandaran & data","Eksport JSON","Eksport CSV","Import projek JSON","Fail projek e-instru-project/v1, maksimum 4 MB. CSV mengeksport seluruh susunan; import CSV tidak disediakan.","Fail dan projek kekal pada peranti anda. Tiada akaun, pelayan atau audio mikrofon mentah disimpan.","Projek tidak dapat dibuka. Semak data projek.","Pengesahan diperlukan sebelum mengganti projek semasa.","Ganti projek semasa?","Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya.","Projek yang dipilih akan dibuka.","Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya. Projek yang dipilih akan dibuka.","Ganti projek","Nama projek mestilah 1–100 aksara tanpa aksara kawalan.","Nama projek tidak dapat dikemas kini.","Tindakan tidak dapat diselesaikan.","Projek belum disimpan. Eksport JSON untuk sandaran.","Had 20 projek dicapai. Eksport JSON dan padam projek lama dahulu.","Salinan projek belum disimpan.","Salinan disimpan tetapi belum dibuka.","Salinan projek disimpan dan dibuka.","Pilih projek tersimpan untuk dibuka.","Pilih salinan projek untuk dipadam.","Pengesahan diperlukan sebelum memadam projek.","Padam salinan projek?","Projek semasa akan diganti dengan projek kosong.","Salinan projek tidak dapat dipadam.","Muat turun fail tidak tersedia dalam pelayar ini.","JSON dimuat turun. Simpan fail ini sebagai sandaran.","CSV seluruh susunan dimuat turun.","Pilih fail .json projek Studio Pro, bukan fail audio atau CSV.","Fail JSON mestilah berisi dan tidak melebihi 4 MB.","Fail JSON melebihi had 4 MB.","Identiti fail ini sepadan dengan projek tersimpan. Simpanan projek itu akan diganti oleh susunan yang diimport.","Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya. Identiti fail ini sepadan dengan projek tersimpan. Simpanan projek itu akan diganti oleh susunan yang diimport.","Fail tidak dapat dibaca.","Pilih projek tersimpan","Belum ada projek tersimpan","Projek semasa telah disimpan.","Projek semasa belum disimpan. Autosimpan mengikut status studio.","Projek dikemas kini","Projek dikemas kini.","Projek dimuatkan","Projek dimuatkan.","Perubahan diundur","Perubahan diundur.","Perubahan diulang","Perubahan diulang.","Rakaman ditambah sebagai trek","Rakaman ditambah sebagai trek.","Nama projek diubah","Nama projek diubah.","Tempo diubah","Tempo diubah.","Panjang projek diubah","Panjang projek diubah.","Mula ulangan diubah","Mula ulangan diubah.","Akhir ulangan diubah","Akhir ulangan diubah.","Ulangan diubah","Ulangan diubah.","Trek ditambah","Trek ditambah.","Not dibuang","Not dibuang.","Not ditambah","Not ditambah.","Ketukan ditambah","Ketukan ditambah.","Nama trek dikemas kini","Nama trek dikemas kini.","Trek digandakan","Trek digandakan.","Trek dibuang","Trek dibuang.","Not dikemas kini","Not dikemas kini.","Masa trek dikemas kini","Masa trek dikemas kini.","Nada trek diturunkan satu semiton","Nada trek diturunkan satu semiton.","Nada trek dinaikkan satu semiton","Nada trek dinaikkan satu semiton.","Projek baharu dibuka","Projek baharu dibuka.","Projek digandakan","Projek digandakan.","Projek dibuka","Projek dibuka.","Projek kosong dibuka","Projek kosong dibuka.","Projek JSON diimport","Projek JSON diimport.","Rakam sekurang-kurangnya satu not atau ketukan sebelum menambah trek."],"templates":["{count} / 8 trek","{number} bar · Ulangan dimatikan","{number} bar · Ulang bar {index}–{total}","Ulang bar {index}–{total}","Bar {number}, beat {beats}, tick {tick}","Masukkan nombor bulat {number} hingga {total}.","Trek {instrument} ditambah. Isi langkah untuk mula.","{instrument} · {count} not","{title} · {action} · tick {tick} · tempoh {duration}","Bar {number} / {total}","Bar {number}, grid 16 langkah","{action}, bar {number}, langkah {index}, tick {tick}, {count} not; pilih untuk sunting","{action}, bar {number}, langkah {index}, tick {tick}; tambah not","{action} · tick {tick} · tempoh {duration} · kekuatan {amount}%","{action} · tick {tick}","{index}. {action} · bar {number} · tick {tick}","Kiri {amount}%","Kanan {amount}%","Tahap output {amount} peratus","Pilih trek {title}","Bisu {title}","{title} dibunyikan.","{title} dibisukan.","Solo {title} dimatikan.","Solo {title} dihidupkan.","Tahap {title}","Reset kesan {title}","Reset Reverb dan Delay {title}","Kesan {title} direset kepada 0%.","Tahap {title}: {amount}%.","Tahap utama: {amount}%.","Pan {title}: Tengah.","Pan {title}: Kiri {amount}%.","Pan {title}: Kanan {amount}%.","Reverb {title}: {amount}%.","Delay {title}: {amount}%.","{count} trek · {bpm} BPM","{title} · {count} trek · {bpm} BPM","{count} / 20 projek. Simpanan pelayar tidak menggantikan sandaran JSON.","Salinan “{title}” dalam pelayar akan dipadam. Eksport JSON dahulu jika diperlukan.","Salinan “{title}” dalam pelayar akan dipadam. Eksport JSON dahulu jika diperlukan. Projek semasa akan diganti dengan projek kosong.","API mixer tidak lengkap: {field}.","Bukti rakaman sumber tidak sah: {error}","Projek belum disimpan: {error}","Projek tidak dapat dibuka: {error}","Import gagal: {error}","Panel projek tidak dapat dikemas kini: {error}","Trek {index} · {action} · tick {tick} · tempoh {duration}"]} */
+  /* studio-pro:i18n-owned {"entries":["Studio Pro","Paparan","Buka Studio Pro","Tambah ke Studio Pro","Gabungkan rakaman, susun rentak dan laras bunyi setiap trek.","Ruang susunan","Satukan instrumen, susun corak dan dengar semuanya bersama.","← Pilih instrumen","Nama projek","Belum disimpan.","Main semula projek","▶ Main","▶ Sambung","Ⅱ Jeda","■ Henti","Metrum empat per empat","Metrum","Sejarah suntingan","↶ Undur","↷ Ulang","Panjang & ulangan","Panjang, ulangan dan kursor","Panjang bar","Ulang bahagian","Mula bar","Akhir bar","Kursor","Ulangan dimatikan","Tambah trek untuk mula menyusun.","Paparan Studio Pro","Susunan","Mixer","Projek","Susunan trek","Satu projek, sehingga 8 instrumen.","Instrumen untuk trek baharu","Xylophone","Rekoder soprano","＋ Tambah trek","Tambah trek","Mulakan dengan satu instrumen","Pilih instrumen dan tekan",". Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.","Pilih instrumen dan tekan Tambah trek. Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.","Pintasan dan cara guna","main atau jeda ·","undur · tambah","untuk ulang. Pintasan tidak mengambil alih medan suntingan atau dialog.","Gunakan anak panah pada tab untuk bertukar paparan. Kursor menggunakan bar:beat:tick; 24 tick bersamaan satu beat. Semua bunyi ialah sintesis digital. Simpan sandaran projek sebagai JSON melalui tab Projek.","Sahkan perubahan","Paparan yang selesa","Tutup tetapan paparan","Tema dan warna boleh dilaras berasingan. Label, corak dan bentuk membantu membezakan not dan keadaan.","Tema","Ikut peranti","Cerah","Gelap","Warna dan kontras","Warna asal","Merah–hijau · protanopia","Hijau–merah · deuteranopia","Biru–kuning · tritanopia","Kontras tinggi","Pilih palet yang paling mudah dibezakan oleh anda. Setiap mod turut menambah corak pada bar dan tanda keadaan.","Pratonton not dan keadaan","Empat not dengan label dan corak berbeza","✓ Sedia","■ Merakam","! Semak","Pilihan disimpan pada peranti ini.","Pilihan digunakan untuk sesi ini. Simpanan peranti tidak tersedia.","Tetapan asal","Redam","Data projek tidak dapat disalin.","Data projek tidak dapat disalin sebagai JSON.","Data projek terlalu besar.","Struktur projek terlalu dalam.","Nombor projek mesti terhingga.","Projek hanya menerima data JSON.","Data projek tidak boleh merujuk dirinya sendiri.","Audio mentah tidak disimpan dalam projek digital.","Data projek tidak sah.","Format projek tidak dikenali.","Identiti projek mesti 1–100 aksara.","Tajuk projek mesti 1–100 aksara.","Panjang projek mesti 4–32 bar.","Gelung mesti mempunyai mula dan akhir yang sah dalam projek.","Kelantangan induk mesti dalam julat 0–1.","Senarai trek diperlukan.","Maksimum 8 trek bagi satu projek.","Data trek tidak sah.","Identiti trek mesti sah dan unik.","Nama trek mesti 1–60 aksara.","Instrumen trek tidak dikenali.","Tetapan mixer trek berada di luar julat.","Keadaan senyap dan solo mesti sah.","Senarai event trek diperlukan.","Maksimum 512 event bagi satu trek.","Data event tidak sah.","Identiti event mesti sah dan unik dalam projek.","Event mesti berada sepenuhnya dalam panjang projek.","Kekuatan event mesti dalam julat 0–1.","Not rekoder mesti MIDI 72–98 tanpa tindakan perkusi.","Not melodi mesti MIDI 1–127 tanpa tindakan perkusi.","Event perkusi mesti menggunakan tindakan instrumen tanpa pitch MIDI.","Medan projek baharu tidak sah.","Medan gelung tidak sah.","Medan induk tidak sah.","Medan projek tidak sah.","Medan trek tidak sah.","Medan event tidak sah.","Medan sejarah tidak sah.","Trek tidak ditemui.","Event tidak ditemui.","Projek baharu","Pilih instrumen yang sah.","Grid dan kekuatan kuantisasi tidak sah.","Transposisi hanya untuk trek melodi.","Transposisi mesti bilangan semiton bulat dalam julat −127 hingga 127.","Saiz fail projek tidak sah.","Saiz fail rakaman tidak sah.","Fail JSON projek tidak sah.","Fail JSON rakaman tidak sah.","Data rakaman sumber tidak sah.","Tempo rakaman sumber mesti integer 40–200 BPM.","Bukti input asal tidak sah.","Tempo tangkapan sumber tidak sah.","Instrumen atau PPQ rakaman melodi tidak disokong.","Akhir rakaman melodi tidak sah.","Masa not sumber tidak sah.","Masa input asal tidak sah.","Tempoh tahan not sumber tidak sah.","Tempoh input asal tidak sah.","Semak not sumber yang belum diketahui sebelum mengimport.","Pitch not sumber tidak sah.","Not sumber di luar julat instrumen.","Semak dan sahkan not anggaran mikrofon sebelum mengimport.","Akhir rakaman sumber tidak meliputi semua not.","Rakaman sumber melebihi 180 saat.","Rakaman perkusi sumber tidak disokong.","Bukti input perkusi asal tidak sah.","Ketukan perkusi sumber tidak sah.","Format rakaman sumber tidak dikenali.","Rakaman sumber melebihi panjang maksimum 32 bar.","Fail projek melebihi had 4 MiB.","Had sejarah mesti integer 1–1000.","Pilihan sejarah tidak sah.","Projek studio tidak sah.","Web Audio tidak tersedia dalam pelayar ini.","Had bunyi serentak dicapai; kurangkan not yang bertindih.","Playback selesai.","Audio tidak dapat dimainkan.","Benarkan audio kemudian tekan Main semula.","Audio tidak tersedia.","Projek berubah; tekan Main untuk menyambung.","Projek terakhir dimuatkan dari pelayar.","Simpanan pelayar tidak tersedia. Eksport JSON untuk menyimpan projek.","Membuka audio…","Sedang main","Audio ditutup","Had 8 trek telah dicapai.","Tambah instrumen yang dipilih","Menyimpan…","Projek belum disimpan. Eksport JSON melalui tab Projek.","Projek aktif belum disimpan. Eksport JSON melalui tab Projek.","Disimpan dalam pelayar.","Perubahan tidak dapat digunakan.","Projek tidak sah.","Isi beberapa langkah dalam Susunan dahulu.","Main semula dijeda. Tekan Sambung apabila bersedia.","Rakaman ditambah ke Studio Pro. Masa input asal dikekalkan.","Enjin audio tidak tersedia.","Main semula dijeda.","Main semula dihentikan.","Nama projek tidak boleh kosong.","Susunan memerlukan bekas dan projek studio.","Model Studio Pro belum tersedia.","Susunan berbilang trek","Garis masa semua trek; tatal mendatar untuk melihat bar lain","Trek / bar","Nama trek terpilih","Gandakan trek","Buang trek","Editor not","Editor ketukan","Sebelum","Bar sebelumnya","Bar yang disunting","Selepas","Bar seterusnya","16 langkah / bar · 6 tick / langkah","Julat nada editor","Julat nada","Klik ruang kosong untuk tambah; pilih not untuk sunting. Anak panah: gerak fokus. Delete: buang not pada ruang itu.","Grid satu bar; tatal mendatar untuk semua 16 langkah","Nada","Pilih not atau tambah pada grid","Not terpilih","Ketukan terpilih","Bar ini belum mempunyai not terpilih. Tambah melalui grid atau pilih not daripada senarai.","Mula (tick)","Tempoh (tick)","Kekuatan (%)","Simpan not","Dengar not","Not mesti tamat dalam panjang projek.","Kekuatan kuantisasi","Grid kuantisasi","Kekuatan","Kemas masa trek","Nada −1","Nada +1","Turunkan semua not trek satu semiton","Naikkan semua not trek satu semiton","Bekas mixer diperlukan.","Teras Pro Studio belum tersedia.","Perubahan mixer tidak dapat disimpan.","Imbang tahap setiap trek dan bentuk ruang bunyinya. Pilih trek untuk menyunting kesan.","Kawalan trek","Belum ada trek. Tambah instrumen untuk mula mengadun.","Kesan trek","Tentang Reverb dan Delay","Reverb menambah ekor gema ruang. Delay mengulang bunyi selepas jeda mengikut tempo projek. Nilai 0% mematikan kesan; naikkan sedikit demi sedikit untuk mengekalkan kejelasan.","Kesan ini ialah sintesis digital setempat. Bisu dan Solo menentukan trek yang kedengaran; Bisu tetap mematikan trek walaupun Solo dihidupkan.","Reset kesan","Output utama","Tahap output","Tahap isyarat projek. Kelantangan pembesar suara dilaras pada peranti.","Kiri","Kanan","Dipilih","Bisu","Solo","Tahap","Pan","Reverb","Delay","Tahap utama","Bisu aktif","Solo aktif","Dibisukan","Senyap: trek lain dalam Solo","Dalam adunan","Pilih trek selepas menambah instrumen.","Simpanan projek tersedia.","Projek melebihi had fail JSON 4 MB.","Simpanan pelayar tidak tersedia. Eksport JSON sebelum menutup halaman.","Simpanan berubah dalam tab lain. Eksport JSON projek semasa dan muat semula halaman sebelum menyimpan.","Had simpanan tidak sah.","Format simpanan tidak sah.","Tarikh simpanan tidak sah.","Identiti projek berulang.","Projek aktif tidak sah.","Simpanan projek rosak atau versinya tidak disokong. Data asal dikekalkan; eksport JSON projek semasa sebelum memuat semula.","Had semakan simpanan dicapai. Eksport JSON untuk sandaran.","Had saiz simpanan projek dicapai. Eksport JSON dan padam projek lama sebelum mencuba lagi.","Simpanan pelayar penuh. Eksport JSON; padam projek lama atau kosongkan ruang sebelum mencuba lagi.","Projek belum disimpan kerana simpanan pelayar tidak tersedia. Eksport JSON sebelum menutup halaman.","Had 20 projek dicapai. Eksport JSON dan padam projek lama sebelum menyimpan projek baharu.","Projek disimpan di pelayar ini. Eksport JSON untuk sandaran.","Projek tersimpan tidak ditemui.","Salinan projek dipadam daripada pelayar ini.","Simpan projek dahulu sebelum menjadikannya projek aktif.","Projek aktif dikemas kini.","Panel projek memerlukan bekas dan aplikasi Studio Pro.","Projek & fail","Simpan susunan berbilang trek di pelayar ini. Eksport JSON untuk salinan sandaran.","1–100 aksara. Nama digunakan pada fail eksport.","Simpan sekarang","Gandakan","Projek dalam pelayar","Buka projek","Padam salinan","Sandaran & data","Eksport JSON","Eksport CSV","Import projek JSON","Fail projek e-instru-project/v1, maksimum 4 MB. CSV mengeksport seluruh susunan; import CSV tidak disediakan.","Fail dan projek kekal pada peranti anda. Tiada akaun, pelayan atau audio mikrofon mentah disimpan.","Projek tidak dapat dibuka. Semak data projek.","Pengesahan diperlukan sebelum mengganti projek semasa.","Ganti projek semasa?","Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya.","Projek yang dipilih akan dibuka.","Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya. Projek yang dipilih akan dibuka.","Ganti projek","Nama projek mestilah 1–100 aksara tanpa aksara kawalan.","Nama projek tidak dapat dikemas kini.","Tindakan tidak dapat diselesaikan.","Projek belum disimpan. Eksport JSON untuk sandaran.","Had 20 projek dicapai. Eksport JSON dan padam projek lama dahulu.","Salinan projek belum disimpan.","Salinan disimpan tetapi belum dibuka.","Salinan projek disimpan dan dibuka.","Pilih projek tersimpan untuk dibuka.","Pilih salinan projek untuk dipadam.","Pengesahan diperlukan sebelum memadam projek.","Padam salinan projek?","Projek semasa akan diganti dengan projek kosong.","Salinan projek tidak dapat dipadam.","Muat turun fail tidak tersedia dalam pelayar ini.","JSON dimuat turun. Simpan fail ini sebagai sandaran.","CSV seluruh susunan dimuat turun.","Pilih fail .json projek Studio Pro, bukan fail audio atau CSV.","Fail JSON mestilah berisi dan tidak melebihi 4 MB.","Fail JSON melebihi had 4 MB.","Identiti fail ini sepadan dengan projek tersimpan. Simpanan projek itu akan diganti oleh susunan yang diimport.","Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya. Identiti fail ini sepadan dengan projek tersimpan. Simpanan projek itu akan diganti oleh susunan yang diimport.","Fail tidak dapat dibaca.","Pilih projek tersimpan","Belum ada projek tersimpan","Projek semasa telah disimpan.","Projek semasa belum disimpan. Autosimpan mengikut status studio.","Projek dikemas kini","Projek dikemas kini.","Projek dimuatkan","Projek dimuatkan.","Perubahan diundur","Perubahan diundur.","Perubahan diulang","Perubahan diulang.","Rakaman ditambah sebagai trek","Rakaman ditambah sebagai trek.","Nama projek diubah","Nama projek diubah.","Tempo diubah","Tempo diubah.","Panjang projek diubah","Panjang projek diubah.","Mula ulangan diubah","Mula ulangan diubah.","Akhir ulangan diubah","Akhir ulangan diubah.","Ulangan diubah","Ulangan diubah.","Trek ditambah","Trek ditambah.","Not dibuang","Not dibuang.","Not ditambah","Not ditambah.","Ketukan ditambah","Ketukan ditambah.","Nama trek dikemas kini","Nama trek dikemas kini.","Trek digandakan","Trek digandakan.","Trek dibuang","Trek dibuang.","Not dikemas kini","Not dikemas kini.","Masa trek dikemas kini","Masa trek dikemas kini.","Nada trek diturunkan satu semiton","Nada trek diturunkan satu semiton.","Nada trek dinaikkan satu semiton","Nada trek dinaikkan satu semiton.","Projek baharu dibuka","Projek baharu dibuka.","Projek digandakan","Projek digandakan.","Projek dibuka","Projek dibuka.","Projek kosong dibuka","Projek kosong dibuka.","Projek JSON diimport","Projek JSON diimport.","Rakam sekurang-kurangnya satu not atau ketukan sebelum menambah trek.","Cuba contoh projek","Mulakan dengan contoh","Contoh projek","Buka contoh","Corak asal empat bar. Anda boleh menyunting setiap trek selepas dibuka.","Melodi dan rentak","Rentak sekolah","Rentak perarakan","Xylophone dan Kompang · 2 trek · 100 BPM · 4 bar","Tamborin dan Segi Tiga · 2 trek · 92 BPM · 4 bar","Dram Sisi, Dram Bes dan Simbal · 3 trek · 108 BPM · 4 bar","Contoh projek dibuka","Alat bar","Salin bar","Tampal bar","Kosongkan bar","Salin bar untuk digunakan semula di bar lain.","Gantikan not yang bermula dalam bar sasaran","Salin bar dahulu untuk mengaktifkan Tampal.","Bar salinan kosong. Pilih Gantikan untuk mengosongkan bar sasaran.","Tampal menambah not. Pilih Gantikan untuk membuang not asal yang bermula dalam bar sasaran.","Tampal akan menggantikan not yang bermula dalam bar sasaran. Anda boleh menekan Undur selepas ini.","Projek telah berubah. Pilih bar semula sebelum mengosongkan.","Bar mesti dalam julat projek.","Medan papan klip bar tidak sah.","Format papan klip bar tidak dikenali.","Data papan klip bar tidak sah.","Medan sumber papan klip bar tidak sah.","Sumber papan klip bar tidak sah.","Medan event papan klip bar tidak sah.","Masa event papan klip bar tidak sah.","Medan tampalan bar tidak sah.","Pilihan tampalan bar tidak sah.","Instrumen papan klip bar tidak serasi dengan trek.","Tempoh tampalan melebihi akhir projek. Panjangkan projek atau pilih bar lebih awal.","Contoh projek dibuka.","Pilih contoh projek yang sah."],"templates":["{count} / 8 trek","{number} bar · Ulangan dimatikan","{number} bar · Ulang bar {index}–{total}","Ulang bar {index}–{total}","Bar {number}, beat {beats}, tick {tick}","Masukkan nombor bulat {number} hingga {total}.","Trek {instrument} ditambah. Isi langkah untuk mula.","{instrument} · {count} not","{title} · {action} · tick {tick} · tempoh {duration}","Bar {number} / {total}","Bar {number}, grid 16 langkah","{action}, bar {number}, langkah {index}, tick {tick}, {count} not; pilih untuk sunting","{action}, bar {number}, langkah {index}, tick {tick}; tambah not","{action} · tick {tick} · tempoh {duration} · kekuatan {amount}%","{action} · tick {tick}","{index}. {action} · bar {number} · tick {tick}","Kiri {amount}%","Kanan {amount}%","Tahap output {amount} peratus","Pilih trek {title}","Bisu {title}","{title} dibunyikan.","{title} dibisukan.","Solo {title} dimatikan.","Solo {title} dihidupkan.","Tahap {title}","Reset kesan {title}","Reset Reverb dan Delay {title}","Kesan {title} direset kepada 0%.","Tahap {title}: {amount}%.","Tahap utama: {amount}%.","Pan {title}: Tengah.","Pan {title}: Kiri {amount}%.","Pan {title}: Kanan {amount}%.","Reverb {title}: {amount}%.","Delay {title}: {amount}%.","{count} trek · {bpm} BPM","{title} · {count} trek · {bpm} BPM","{count} / 20 projek. Simpanan pelayar tidak menggantikan sandaran JSON.","Salinan “{title}” dalam pelayar akan dipadam. Eksport JSON dahulu jika diperlukan.","Salinan “{title}” dalam pelayar akan dipadam. Eksport JSON dahulu jika diperlukan. Projek semasa akan diganti dengan projek kosong.","API mixer tidak lengkap: {field}.","Bukti rakaman sumber tidak sah: {error}","Projek belum disimpan: {error}","Projek tidak dapat dibuka: {error}","Import gagal: {error}","Panel projek tidak dapat dikemas kini: {error}","Trek {index} · {action} · tick {tick} · tempoh {duration}","Salinan: {instrument} · bar {index} · {count} not.","Instrumen tidak sepadan. Pilih trek {instrument} untuk menampal.","Bar {index} digantikan.","Bar {index} ditampal.","Bar {index} dikosongkan.","Kosongkan bar {index}?","Not yang bermula dalam bar {index} pada trek terpilih akan dibuang. Not dari bar sebelumnya dikekalkan. Anda boleh menekan Undur selepas ini."]} */
   const STORAGE_KEY = 'e-instru-language';
   const ATTRIBUTES = ['aria-label', 'title', 'placeholder', 'aria-valuetext'];
   const OBSERVED_ATTRIBUTES = [...ATTRIBUTES, 'content', 'name', 'data-i18n-ignore'];
@@ -8526,7 +8725,7 @@ for(const [id,prefix]of Object.entries({tamborin:'perc',kompang:'komp',snare:'sn
 
 // The professional arrangement is a separate score. Imported takes remain
 // immutable evidence; timing edits below never rewrite their input clocks.
-const SCHEMA='e-instru-project/v1',PPQ=24,BAR_TICKS=96,MAX_TRACKS=8,MAX_EVENTS=512,MAX_BARS=32;
+const SCHEMA='e-instru-project/v1',BAR_SCHEMA='e-instru-bar/v1',PPQ=24,BAR_TICKS=96,MAX_TRACKS=8,MAX_EVENTS=512,MAX_BARS=32;
 const MAX_JSON_SIZE=4*1024*1024,MAX_CAPTURE_MS=180000;
 function descriptor(id,label,minMidi,maxMidi,defaultMidi,actions,actionLabels){
  return Object.freeze({id,label,kind:minMidi===null?'percussion':'pitched',pitched:minMidi!==null,
@@ -8642,7 +8841,10 @@ function trackAt(project,id){const index=project.tracks.findIndex(track=>track.i
 function eventAt(track,id){const index=track.events.findIndex(event=>event.id===id);if(index<0)fail('Event tidak ditemui.');return index;}
 function nextId(prefix,ids){let count=1;while(ids.has(prefix+count))count++;return prefix+count;}
 function trackId(project){return nextId('track-',new Set(project.tracks.map(track=>track.id)));}
-function eventId(project,id){return nextId(id+'-event-',new Set(project.tracks.flatMap(track=>track.events.map(event=>event.id))));}
+// Track IDs may use the full 100-character schema allowance. Leave room for
+// the event suffix while retaining project-wide collision checks.
+function eventPrefix(id){return id.slice(0,84)+'-event-';}
+function eventId(project,id){return nextId(eventPrefix(id),new Set(project.tracks.flatMap(track=>track.events.map(event=>event.id))));}
 let sequence=0;
 function projectId(){
  sequence++;
@@ -8691,7 +8893,7 @@ function duplicateTrack(project,id){
  const next=clone(project),duplicate=clone(next.tracks[index]);
  duplicate.id=trackId(next);duplicate.name=(duplicate.name.slice(0,52)+' salinan').slice(0,60);
  const used=new Set(next.tracks.flatMap(track=>track.events.map(event=>event.id)));
- for(const event of duplicate.events){event.id=nextId(duplicate.id+'-event-',used);used.add(event.id);}
+ for(const event of duplicate.events){event.id=nextId(eventPrefix(duplicate.id),used);used.add(event.id);}
  if(duplicate.sourceTake!==undefined)freeze(duplicate.sourceTake);
  next.tracks.splice(index+1,0,duplicate);return checked(next);
 }
@@ -8711,6 +8913,64 @@ function updateEvent(project,id,eventIdValue,patch){
 function removeEvent(project,id,eventIdValue){
  checked(project);const index=trackAt(project,id),eventIndex=eventAt(project.tracks[index],eventIdValue),next=clone(project);
  next.tracks[index].events.splice(eventIndex,1);return checked(next);
+}
+function barStart(project,barIndex){
+ if(!integer(barIndex,0,project.lengthBars-1))fail('Bar mesti dalam julat projek.');
+ return barIndex*BAR_TICKS;
+}
+function inBar(event,start){return event.tick>=start&&event.tick<start+BAR_TICKS;}
+function copyBar(project,id,barIndex){
+ checked(project);const index=trackAt(project,id),start=barStart(project,barIndex),track=project.tracks[index];
+ // A bar owns note onsets, not the tails of notes started in earlier bars.
+ // Keep full gates and only copy edited score values; raw evidence stays put.
+ return {schema:BAR_SCHEMA,instrumentId:track.instrumentId,events:track.events.filter(event=>inBar(event,start)).map(event=>({
+  tick:event.tick-start,durationTick:event.durationTick,midi:event.midi,action:event.action,velocity:event.velocity
+ })).sort(byTick),source:{projectId:project.id,trackId:track.id,barIndex}};
+}
+function checkedBarClipboard(clipboard){
+ keys(clipboard,['schema','instrumentId','events','source'],'papan klip bar');
+ if(!own(clipboard,'schema')||clipboard.schema!==BAR_SCHEMA)fail('Format papan klip bar tidak dikenali.');
+ const definition=own(clipboard,'instrumentId')&&instrument(clipboard.instrumentId);
+ if(!definition||!own(clipboard,'events')||!Array.isArray(clipboard.events))fail('Data papan klip bar tidak sah.');
+ if(clipboard.events.length>MAX_EVENTS)fail('Maksimum 512 event bagi satu trek.');
+ const problems=jsonProblems(clipboard);if(problems.length)fail(problems.join('\n'));
+ if(own(clipboard,'source')){
+  const source=keys(clipboard.source,['projectId','trackId','barIndex'],'sumber papan klip bar');
+  if(!own(source,'projectId')||!text(source.projectId,100)||!own(source,'trackId')||!text(source.trackId,100)||!own(source,'barIndex')||!integer(source.barIndex,0,MAX_BARS-1))fail('Sumber papan klip bar tidak sah.');
+ }
+ for(const event of clipboard.events){
+  keys(event,['tick','durationTick','midi','action','velocity'],'event papan klip bar');
+  if(['tick','durationTick','midi','action','velocity'].some(field=>!own(event,field))||!integer(event.tick,0,BAR_TICKS-1)||!integer(event.durationTick,1,MAX_BARS*BAR_TICKS)||event.tick+event.durationTick>MAX_BARS*BAR_TICKS)fail('Masa event papan klip bar tidak sah.');
+  if(!range(event.velocity,0,1))fail('Kekuatan event mesti dalam julat 0–1.');
+  if(definition.pitched){
+   if(!integer(event.midi,definition.minMidi,definition.maxMidi)||event.action!==null)fail(definition.id==='recorder'?'Not rekoder mesti MIDI 72–98 tanpa tindakan perkusi.':'Not melodi mesti MIDI 1–127 tanpa tindakan perkusi.');
+  }else if(event.midi!==null||!definition.actions.includes(event.action))fail('Event perkusi mesti menggunakan tindakan instrumen tanpa pitch MIDI.');
+ }
+ return clipboard;
+}
+function pasteBar(project,id,barIndex,clipboard,options={}){
+ checked(project);const index=trackAt(project,id),start=barStart(project,barIndex),track=project.tracks[index];
+ checkedBarClipboard(clipboard);keys(options,['replace'],'tampalan bar');
+ if(options.replace!==undefined&&typeof options.replace!=='boolean')fail('Pilihan tampalan bar tidak sah.');
+ if(clipboard.instrumentId!==track.instrumentId)fail('Instrumen papan klip bar tidak serasi dengan trek.');
+ const kept=options.replace?track.events.filter(event=>!inBar(event,start)):track.events;
+ if(kept.length+clipboard.events.length>MAX_EVENTS)fail('Maksimum 512 event bagi satu trek.');
+ if(clipboard.events.some(event=>start+event.tick+event.durationTick>project.lengthBars*BAR_TICKS))fail('Tempoh tampalan melebihi akhir projek. Panjangkan projek atau pilih bar lebih awal.');
+ const next=clone(project),target=next.tracks[index];
+ target.events=options.replace?target.events.filter(event=>!inBar(event,start)):target.events;
+ if(clipboard.events.length===0)return checked(next);
+ // Include IDs removed by replacement as well, so pasted events never inherit
+ // an identity from the project that the caller passed to this operation.
+ const used=new Set(project.tracks.flatMap(item=>item.events.map(event=>event.id)));
+ for(const event of clipboard.events){
+  const freshId=nextId(eventPrefix(id),used);used.add(freshId);
+  target.events.push({id:freshId,tick:start+event.tick,durationTick:event.durationTick,midi:event.midi,action:event.action,velocity:event.velocity});
+ }
+ target.events.sort(byTick);return checked(next);
+}
+function clearBar(project,id,barIndex){
+ checked(project);const index=trackAt(project,id),start=barStart(project,barIndex),next=clone(project);
+ next.tracks[index].events=next.tracks[index].events.filter(event=>!inBar(event,start));return checked(next);
 }
 function quantizeTrack(project,id,gridTick=6,strength=1){
  checked(project);const index=trackAt(project,id),end=project.lengthBars*BAR_TICKS;
@@ -8831,9 +9091,9 @@ function createHistory(initial,limit=60){
  }
  return Object.freeze({get,commit,undo(){if(cursor>0)cursor--;return get();},redo(){if(cursor<states.length-1)cursor++;return get();},canUndo:()=>cursor>0,canRedo:()=>cursor<states.length-1});
 }
-root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX_BARS,INSTRUMENTS,
+root.ProStudioCore=Object.freeze({SCHEMA,BAR_SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX_BARS,INSTRUMENTS,
  createProject,validate,clone,updateProject,addTrack,updateTrack,removeTrack,duplicateTrack,addEvent,updateEvent,removeEvent,
- quantizeTrack,transposeTrack,importTake,projectFromJSON,exportProject,csv,createHistory});
+ copyBar,pasteBar,clearBar,quantizeTrack,transposeTrack,importTake,projectFromJSON,exportProject,csv,createHistory});
 })(typeof window!=='undefined'?window:globalThis);
 </script>
 <script id="pro-audio">
@@ -9166,7 +9426,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
         for (let index = firstEntry(from); index < project.entries.length; index++) {
           const { track, event } = project.entries[index];
           if (event.tick >= end - EPSILON) break;
-          if (!includeTrack(track)) continue;
+          if (!includeTrack(track) || !audible(track) || event.velocity <= 0) continue;
           if (++count > MAX_BATCH) { warnDensity(); return false; }
           const tickDuration = project.loop.enabled ? Math.min(event.durationTick, project.loop.endTick - event.tick) : event.durationTick;
           scheduleNote(track, event, anchorTime + (absolute - anchorTick + event.tick - from) * unit, tickDuration);
@@ -9174,10 +9434,17 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       });
     }
 
-    function fillWindow() {
+    function fillWindow(carriedTracks) {
       const unit = secondsPerTick(), now = context.currentTime;
       const earliest = anchorTick + Math.max(0, now + .003 - anchorTime) / unit;
       const horizon = anchorTick + Math.max(0, now + LOOKAHEAD - anchorTime) / unit;
+      if (earliest > scheduledTo + EPSILON) {
+        // A late timer drops expired strikes, but a missed recorder onset may
+        // still have an active gate. Recover only this cycle's unscheduled note.
+        const tick = mapTick(earliest), at = anchorTime + (earliest - anchorTick) * unit;
+        scheduleCarries(tick, at, (track, event) => track.instrumentId === 'recorder' &&
+          (!carriedTracks || !carriedTracks.has(track.id)) && earliest - tick + event.tick >= scheduledTo - EPSILON);
+      }
       scheduleWindow(Math.max(scheduledTo, earliest), horizon);
       scheduledTo = horizon;
       if (metronome) forSegments(Math.max(metroTo, earliest), horizon, (absolute, from, end) => {
@@ -9224,11 +9491,11 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     function scheduleCarries(tick, at, includeTrack = () => true) {
       let carry = 0;
       for (const { track, event } of project.entries) {
-        if (carry >= MAX_BATCH) { warnDensity(); break; }
-        if (includeTrack(track) && audible(track) && !isPercussion(track.instrumentId) && event.tick < tick - EPSILON && event.tick + event.durationTick > tick &&
+        if (includeTrack(track, event) && audible(track) && event.velocity > 0 && !isPercussion(track.instrumentId) && event.tick < tick - EPSILON && event.tick + event.durationTick > tick &&
           (!project.loop.enabled || tick < project.loop.startTick || event.tick >= project.loop.startTick)) {
+          if (++carry > MAX_BATCH) { warnDensity(); break; }
           const end = project.loop.enabled ? Math.min(event.tick + event.durationTick, project.loop.endTick) : event.tick + event.durationTick;
-          scheduleNote(track, event, at, end - tick); carry++;
+          scheduleNote(track, event, at, end - tick);
         }
       }
     }
@@ -9299,6 +9566,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
         ++epoch; clearTimer(); silence();
         if (playing && context && context.state === 'running') startAt(cursor);
         else if (pending) { setState('paused', 'Projek berubah; tekan Main untuk menyambung.'); notify('onPosition', cursor); }
+        else if (playing) { setState('paused'); notify('onPosition', cursor); }
       } else {
         for (const track of next.tracks) if (!audible(track)) { cancelVoices(voice => voice.trackId === track.id); destroyBus(track.id); }
         applyMixer();
@@ -9309,7 +9577,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
           // onsets. Other tracks and the metronome retain their existing voices.
           scheduleCarries(mapTick(absolute), at, track => newlyAudible.has(track.id) && track.instrumentId === 'recorder');
           scheduleWindow(absolute, scheduledTo, track => newlyAudible.has(track.id));
-          fillWindow();
+          fillWindow(newlyAudible);
         }
       }
       return true;
@@ -9363,6 +9631,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
   const BAR_TICKS = 96;
   const STEP_TICKS = 6;
   const STEPS = 16;
+  let mountCount = 0;
   const COLORS = ['#126B66', '#5273A6', '#96663C', '#835D91', '#397B85', '#8F5D65', '#667D3B', '#79684C'];
   const FALLBACKS = {
     xylophone: { label: 'Xylophone', pitched: true, minMidi: 1, maxMidi: 127, defaultMidi: 60, actions: [] },
@@ -9395,6 +9664,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     const C = global.ProStudioCore;
     if (!C) throw new Error('Model Studio Pro belum tersedia.');
     const doc = container.ownerDocument || global.document;
+    const barHelpId = 'pa-bar-help-' + (++mountCount);
     const root = el(doc, 'section', 'pro-arranger');
     root.setAttribute('aria-label', 'Susunan berbilang trek');
     container.append(root);
@@ -9417,6 +9687,11 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     let gridButtons = [];
     let playheadNodes = [];
     let totalTicks = BAR_TICKS;
+    let barClipboard = null;
+    let copiedBar = null;
+    let replaceBar = false;
+    let barToolsOpen = false;
+    let barTools = null;
 
     const descriptors = () => C.INSTRUMENTS || FALLBACKS;
     const descriptor = track => descriptors()[track.instrumentId] || FALLBACKS[track.instrumentId] || FALLBACKS.xylophone;
@@ -9650,6 +9925,86 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       root.append(tools);
     }
 
+    function clipboardStatus() {
+      const desc = descriptors()[barClipboard.instrumentId] || FALLBACKS[barClipboard.instrumentId];
+      return 'Salinan: ' + desc.label + ' · bar ' + (copiedBar + 1) + ' · ' + barClipboard.events.length + ' not.';
+    }
+
+    function renderBarTools(project, track) {
+      const targetBar = bar;
+      barTools = el(doc, 'details', 'pa-bar-tools');
+      barTools.open = barToolsOpen;
+      const details = barTools;
+      details.addEventListener('toggle', () => { if (root.contains(details)) barToolsOpen = details.open; });
+      const summary = key(el(doc, 'summary', 'pa-bar-tools-summary', 'Alat bar'), 'bar-tools');
+      details.append(summary);
+      const body = el(doc, 'div', 'pa-bar-tools-body');
+      const status = el(doc, 'p', 'pa-clipboard-status', barClipboard ? clipboardStatus() : 'Salin bar untuk digunakan semula di bar lain.');
+      body.append(status);
+      const buttons = el(doc, 'div', 'pa-bar-buttons');
+      const copy = button('Salin bar', 'pa-button', () => {
+        try {
+          barClipboard = C.copyBar(app.getProject(), track.id, targetBar);
+          copiedBar = targetBar;
+          pendingFocus = 'copy-bar';
+          render();
+          announce(clipboardStatus());
+        } catch (error) { fail(error); }
+      }, 'copy-bar');
+      const compatible = !!barClipboard && barClipboard.instrumentId === track.instrumentId;
+      const paste = button('Tampal bar', 'pa-button', () => {
+        if (!barClipboard || !compatible) return;
+        pendingFocus = 'paste-bar';
+        commit(current => C.pasteBar(current, track.id, targetBar, barClipboard, { replace: replaceBar }),
+          'Bar ' + (targetBar + 1) + (replaceBar ? ' digantikan' : ' ditampal'));
+      }, 'paste-bar');
+      paste.disabled = !compatible || (!replaceBar && barClipboard.events.length === 0);
+      paste.setAttribute('aria-describedby', barHelpId);
+      const clear = button('Kosongkan bar', 'pa-button pa-destructive pa-clear-bar', () => {
+        const apply = () => {
+          if (disposed) return;
+          pendingFocus = 'bar-tools';
+          commit(current => {
+            if (current.id !== project.id) throw new Error('Projek telah berubah. Pilih bar semula sebelum mengosongkan.');
+            return C.clearBar(current, track.id, targetBar);
+          }, 'Bar ' + (targetBar + 1) + ' dikosongkan');
+        };
+        if (typeof app.confirm === 'function') {
+          app.confirm({
+            title: 'Kosongkan bar ' + (targetBar + 1) + '?',
+            message: 'Not yang bermula dalam bar ' + (targetBar + 1) + ' pada trek terpilih akan dibuang. Not dari bar sebelumnya dikekalkan. Anda boleh menekan Undur selepas ini.',
+            confirmLabel: 'Kosongkan bar',
+            onConfirm: apply
+          });
+        } else apply();
+      }, 'clear-bar');
+      clear.disabled = !track.events.some(inBar);
+      buttons.append(copy, paste, clear);
+      body.append(buttons);
+      const replace = key(el(doc, 'input'), 'replace-bar');
+      replace.type = 'checkbox';
+      replace.checked = replaceBar;
+      replace.disabled = !compatible;
+      replace.addEventListener('change', () => { replaceBar = replace.checked; render(); });
+      const replaceLabel = el(doc, 'label', 'pa-replace-bar');
+      replaceLabel.append(replace, el(doc, 'span', '', 'Gantikan not yang bermula dalam bar sasaran'));
+      body.append(replaceLabel);
+      let message = 'Salin bar dahulu untuk mengaktifkan Tampal.';
+      if (barClipboard && !compatible) {
+        const desc = descriptors()[barClipboard.instrumentId] || FALLBACKS[barClipboard.instrumentId];
+        message = 'Instrumen tidak sepadan. Pilih trek ' + desc.label + ' untuk menampal.';
+      } else if (compatible) {
+        message = replaceBar ? 'Tampal akan menggantikan not yang bermula dalam bar sasaran. Anda boleh menekan Undur selepas ini.' : !barClipboard.events.length ?
+          'Bar salinan kosong. Pilih Gantikan untuk mengosongkan bar sasaran.' :
+          'Tampal menambah not. Pilih Gantikan untuk membuang not asal yang bermula dalam bar sasaran.';
+      }
+      const help = el(doc, 'p', 'pa-bar-help', message);
+      help.id = barHelpId;
+      body.append(help);
+      details.append(body);
+      return details;
+    }
+
     function renderEditor(project, track) {
       const desc = descriptor(track);
       const pitched = isPitched(desc);
@@ -9671,6 +10026,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       navigation.append(previous, barSelect, next);
       heading.append(navigation);
       editor.append(heading);
+      editor.append(renderBarTools(project, track));
       const settings = el(doc, 'div', 'pa-grid-settings');
       settings.append(el(doc, 'p', 'pa-small-text', '16 langkah / bar · 6 tick / langkah'));
       if (pitched) {
@@ -9854,6 +10210,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       if (!project || !Array.isArray(project.tracks)) return;
       totalTicks = projectTicks(project);
       const savedFocus = captureFocus();
+      if (barTools) barToolsOpen = barTools.open;
       const oldOverviewScroll = overviewScroll ? overviewScroll.scrollLeft : 0;
       const oldEditorScroll = editorScroll ? editorScroll.scrollLeft : 0;
       const wantedTrackId = typeof app.getSelectedTrackId === 'function' ? app.getSelectedTrackId() : null;
@@ -9882,6 +10239,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       root.hidden = !track;
       root.replaceChildren();
       overviewScroll = editorScroll = matrix = null;
+      barTools = null;
       gridButtons = [];
       playheadNodes = [];
       errorNode = el(doc, 'p', 'pa-error');
@@ -9934,6 +10292,9 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
         root.remove();
         gridButtons = [];
         playheadNodes = [];
+        barClipboard = null;
+        copiedBar = null;
+        barTools = null;
       }
     };
   }
@@ -9967,6 +10328,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     let gestureCount = 0;
     let rangeCount = 0;
     let selectedId = null;
+    let renderedProjectId = null;
 
     function element(tag, className, text) {
       const node = doc.createElement(tag);
@@ -10064,7 +10426,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       const label = element('label', 'pm-control-label', spec.label);
       const input = element('input', 'pm-range');
       const output = element('output', 'pm-value');
-      const control = { input, output, label, gesture: null, name: spec.label, value: 0, spec };
+      const control = { input, output, label, gesture: null, source: null, blocked: false, name: spec.label, value: 0, spec };
       const controlRemovers = [];
       const on = (name, fn) => controlRemovers.push(listen(input, name, fn));
       input.type = 'range';
@@ -10085,27 +10447,42 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       parent.append(field);
       ranges.push(control);
 
-      function begin() {
-        if (!control.gesture) control.gesture = { group: 'mixer:' + spec.key() + ':' + prefix + ':' + (++gestureCount), dirty: false };
+      function begin(source = 'input', fresh = false) {
+        if (fresh) { control.blocked = false; control.gesture = null; control.source = source; }
+        if (control.blocked) return;
+        if (!control.gesture) {
+          control.source = source;
+          control.gesture = { group: 'mixer:' + spec.key() + ':' + prefix + ':' + (++gestureCount), dirty: false };
+        }
       }
       function finish() {
         const gesture = control.gesture;
         control.gesture = null;
+        control.source = null;
+        control.blocked = false;
         if (gesture && gesture.dirty) announce(control.name + ': ' + spec.format(control.value) + '.');
       }
       control.finish = finish;
+      control.interrupt = () => {
+        // A held pointer/key must not continue an edit after its target or value
+        // was replaced elsewhere. The next physical gesture starts a new edit.
+        control.blocked = control.blocked || Boolean(control.gesture || control.source);
+        control.gesture = null;
+      };
       control.dispose = () => {
         controlRemovers.splice(0).forEach(remove => remove());
         const index = ranges.indexOf(control);
         if (index >= 0) ranges.splice(index, 1);
       };
       on('focus', () => { if (spec.select) spec.select(); });
-      on('pointerdown', begin);
-      on('keydown', event => { if (rangeKeys.has(event.key)) begin(); });
+      on('pointerdown', () => begin('pointer', true));
+      on('keydown', event => { if (rangeKeys.has(event.key)) begin('keyboard', !event.repeat); });
       on('keyup', event => { if (rangeKeys.has(event.key)) finish(); });
-      on('change', finish);
+      // Native ranges emit change on every keyboard step, including repeats.
+      on('change', () => { if (control.source !== 'keyboard') finish(); });
       on('blur', finish);
       on('input', () => {
+        if (input.disabled || control.blocked) { render(); return; }
         const value = Number(input.value);
         if (!Number.isFinite(value) || value < Number(input.min) || value > Number(input.max)) return;
         begin();
@@ -10113,8 +10490,9 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
         control.value = value;
         output.textContent = spec.format(value);
         input.setAttribute('aria-valuetext', spec.format(value));
-        if (spec.apply(value, { historyGroup: gesture.group, merge: true })) gesture.dirty = true;
-        else { control.gesture = null; render(); }
+        if (spec.apply(value, { historyGroup: gesture.group, merge: true })) {
+          if (control.gesture === gesture) gesture.dirty = true;
+        } else { control.interrupt(); render(); }
       });
       return control;
     }
@@ -10124,10 +10502,9 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       control.label.textContent = control.spec.label;
       control.input.setAttribute('aria-label', label);
       control.input.disabled = !enabled;
-      if (!control.gesture || !control.gesture.dirty) {
-        control.value = value;
-        if (Number(control.input.value) !== value || control.input.value === '') control.input.value = String(value);
-      }
+      if (control.gesture && control.value !== value) control.interrupt();
+      control.value = value;
+      if (Number(control.input.value) !== value || control.input.value === '') control.input.value = String(value);
       control.output.textContent = control.spec.format(control.value);
       control.input.setAttribute('aria-valuetext', control.spec.format(control.value));
     }
@@ -10180,8 +10557,8 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
         apply: (value, options) => trackPatch(id, { pan: value }, 'Pan ' + (getTrack(id) || { name: 'trek' }).name, options)
       });
       const dispose = () => {
-        volume.finish();
-        pan.finish();
+        volume.interrupt();
+        pan.interrupt();
         volume.dispose();
         pan.dispose();
         channelRemovers.splice(0).forEach(remove => remove());
@@ -10209,17 +10586,20 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       const track = getTrack(selectedId);
       if (track && trackPatch(track.id, { reverb: 0, delay: 0 }, 'Reset kesan ' + track.name)) announce('Kesan ' + track.name + ' direset kepada 0%.');
     });
-    listen(doc, 'pointerup', () => ranges.forEach(control => control.finish()));
-    listen(doc, 'pointercancel', () => ranges.forEach(control => control.finish()));
+    const finishPointers = () => ranges.forEach(control => { if (control.source === 'pointer') control.finish(); });
+    listen(doc, 'pointerup', finishPointers);
+    listen(doc, 'pointercancel', finishPointers);
 
     function render() {
       if (disposed) return;
       const project = app.getProject();
+      if (renderedProjectId !== null && renderedProjectId !== project.id) ranges.forEach(control => control.interrupt());
+      renderedProjectId = project.id;
       const tracks = project.tracks || [];
       const requestedId = app.getSelectedTrackId();
       const selectedTrack = tracks.find(track => track.id === requestedId) || tracks[0] || null;
       const nextSelectedId = selectedTrack ? selectedTrack.id : null;
-      if (selectedId !== nextSelectedId) Object.values(effectRanges).forEach(control => control.finish());
+      if (selectedId !== nextSelectedId) Object.values(effectRanges).forEach(control => control.interrupt());
       selectedId = nextSelectedId;
       const ids = new Set(tracks.map(track => track.id));
       let restoreFocus = false;
@@ -10306,11 +10686,72 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
   const MAX_PROJECTS = 20;
   const MAX_FILE_BYTES = 4 * 1024 * 1024;
   const MAX_STORE_BYTES = 8 * 1024 * 1024;
+  const STARTERS = Object.freeze([
+    Object.freeze({ id: 'melody-percussion', title: 'Melodi dan rentak', bpm: 100,
+      summary: 'Xylophone dan Kompang · 2 trek · 100 BPM · 4 bar' }),
+    Object.freeze({ id: 'school-rhythm', title: 'Rentak sekolah', bpm: 92,
+      summary: 'Tamborin dan Segi Tiga · 2 trek · 92 BPM · 4 bar' }),
+    Object.freeze({ id: 'march', title: 'Rentak perarakan', bpm: 108,
+      summary: 'Dram Sisi, Dram Bes dan Simbal · 3 trek · 108 BPM · 4 bar' })
+  ]);
   let panelSequence = 0;
 
   function core() {
     if (!root.ProStudioCore) throw new Error('Model Studio Pro belum tersedia.');
     return root.ProStudioCore;
+  }
+
+  function localized(text) {
+    return typeof root.StudioI18n?.t === 'function' ? root.StudioI18n.t(text) : text;
+  }
+
+  function createStarter(kind) {
+    const C = core();
+    const definition = STARTERS.find(function (item) { return item.id === kind; });
+    if (!definition) throw new Error('Pilih contoh projek yang sah.');
+    const beat = C.PPQ, barTicks = C.BAR_TICKS;
+    let project = C.createProject({ title: localized(definition.title), bpm: definition.bpm, lengthBars: 4 });
+
+    function addPart(instrumentId, volume, pan, events) {
+      project = C.addTrack(project, instrumentId);
+      const id = project.tracks[project.tracks.length - 1].id;
+      project = C.updateTrack(project, id, { name: localized(C.INSTRUMENTS[instrumentId].label), volume: volume, pan: pan });
+      events.forEach(function (event) { project = C.addEvent(project, id, event); });
+    }
+
+    function percussion(pattern) {
+      const events = [];
+      for (let bar = 0; bar < 4; bar += 1) {
+        pattern.forEach(function (hit) {
+          events.push({ tick: bar * barTicks + hit[0] * beat, durationTick: 6,
+            midi: null, action: hit[1], velocity: hit[2] });
+        });
+      }
+      return events;
+    }
+
+    // Original four-bar exercises. These are composed score events, not takes
+    // or claims about a performed recording; no capture evidence is fabricated.
+    if (kind === 'melody-percussion') {
+      const notes = [[60, 64, 67, 64], [62, 65, 69, 65], [64, 67, 72, 67], [65, 64, 62, 60]];
+      const melody = [];
+      notes.forEach(function (pitches, bar) {
+        pitches.forEach(function (midi, index) {
+          melody.push({ tick: bar * barTicks + index * beat, durationTick: bar === 3 && index === 3 ? beat : 18,
+            midi: midi, action: null, velocity: index === 0 ? .78 : .65 });
+        });
+      });
+      addPart('xylophone', .68, -.1, melody);
+      addPart('kompang', .56, .1, percussion([[0, 'center', .72], [1, 'edge', .52], [2, 'center', .66], [3, 'edge', .48]]));
+    } else if (kind === 'school-rhythm') {
+      addPart('tamborin', .56, -.1, percussion([[0, 'tap', .65], [1, 'shake', .45], [2, 'tap', .58], [3, 'shake', .45]]));
+      addPart('triangle', .48, .12, percussion([[0, 'open', .55], [2, 'muted', .4]]));
+    } else {
+      addPart('snare', .53, -.1, percussion([[0, 'hit', .48], [1, 'rim', .68], [2, 'hit', .48], [3, 'rim', .7]]));
+      addPart('bass_drum', .62, 0, percussion([[0, 'hit', .7], [2, 'soft', .52]]));
+      addPart('cymbals', .4, .12, percussion([[0, 'crash', .45], [2, 'soft', .28]]));
+    }
+    return project;
   }
 
   function byteLength(text) {
@@ -10480,7 +10921,10 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       if (!previous && state.projects.length >= MAX_PROJECTS) {
         return report('limit', 'Had 20 projek dicapai. Eksport JSON dan padam projek lama sebelum menyimpan projek baharu.', 'error');
       }
-      if (previous && sameProject(previous.project, project) && state.activeId === project.id) return projectCopy(project);
+      if (previous && sameProject(previous.project, project) && state.activeId === project.id) {
+        report('saved', 'Projek disimpan di pelayar ini. Eksport JSON untuk sandaran.', 'success');
+        return projectCopy(project);
+      }
       const projects = state.projects.filter(function (entry) { return entry.project.id !== project.id; });
       projects.push({ project: project, updatedAt: new Date().toISOString() });
       return write(nextState(projects, project.id), 'Projek disimpan di pelayar ini. Eksport JSON untuk sandaran.') ? projectCopy(project) : false;
@@ -10536,6 +10980,30 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     section.setAttribute('aria-labelledby', heading.id);
     section.appendChild(heading);
     section.appendChild(element('p', 'pro-projects-intro', 'Simpan susunan berbilang trek di pelayar ini. Eksport JSON untuk salinan sandaran.'));
+
+    const starters = element('details', 'pro-projects-starters');
+    const startersHeading = element('summary', '', 'Mulakan dengan contoh');
+    const startersBody = element('div', 'pro-projects-starters-body');
+    const starterLabel = element('label', '', 'Contoh projek');
+    const starterSelect = element('select', 'pro-projects-starter-select');
+    starterSelect.id = prefix + 'starter';
+    starterSelect.setAttribute('data-pro-project-starter', '');
+    starterLabel.htmlFor = starterSelect.id;
+    STARTERS.forEach(function (starter) {
+      const option = element('option', '', starter.title);
+      option.value = starter.id;
+      starterSelect.appendChild(option);
+    });
+    starterSelect.value = STARTERS[0].id;
+    const starterSummary = element('p', 'pro-projects-help');
+    starterSummary.id = prefix + 'starter-summary';
+    starterSummary.setAttribute('aria-live', 'polite');
+    starterSelect.setAttribute('aria-describedby', starterSummary.id);
+    const starterButton = button('starter', 'Buka contoh');
+    startersBody.append(starterLabel, starterSelect, starterSummary,
+      element('p', 'pro-projects-help', 'Corak asal empat bar. Anda boleh menyunting setiap trek selepas dibuka.'), starterButton);
+    starters.append(startersHeading, startersBody);
+    section.appendChild(starters);
 
     const nameField = element('div', 'pro-projects-field');
     const nameLabel = element('label', '', 'Nama projek');
@@ -10619,7 +11087,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     function store() { return app.getStore(); }
 
     function translated(text) {
-      return typeof root.StudioI18n?.t === 'function' ? root.StudioI18n.t(text) : text;
+      return localized(text);
     }
 
     function say(text, error) {
@@ -10641,10 +11109,13 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       return !sameProject(project, C.createProject({ id: project.id }));
     }
 
-    function askReplace(next, label, extraMessage) {
+    function askReplace(next, label, extraMessage, preservePending) {
       if (disposed) return;
       const current = app.getProject();
-      const unsaved = dirty(current);
+      let unsaved = dirty(current);
+      // Opening a starter preserves edits still waiting for the shell's debounce.
+      // A failed save must reach the explicit existing discard confirmation.
+      if (unsaved && preservePending) unsaved = !store().save(current);
       function replace() {
         if (disposed) return;
         try {
@@ -10690,6 +11161,11 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     }
 
     nameInput.addEventListener('change', commitName);
+    starterSelect.addEventListener('change', function () { if (!disposed) render(); });
+    starterButton.addEventListener('click', guard(function () {
+      if (!commitName()) return;
+      askReplace(createStarter(starterSelect.value), 'Contoh projek dibuka', '', true);
+    }));
     select.addEventListener('change', function () { if (!disposed) { selectedId = select.value; render(); } });
     saveButton.addEventListener('click', guard(function () {
       if (!commitName()) return;
@@ -10800,6 +11276,9 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
       try {
         const project = app.getProject();
         const entries = store().list();
+        const starter = STARTERS.find(function (item) { return item.id === starterSelect.value; });
+        const summaryText = starter ? translated(starter.summary) : '';
+        if (starterSummary.textContent !== summaryText) starterSummary.textContent = summaryText;
         if (doc.activeElement !== nameInput) nameInput.value = project.title;
         if (!entries.some(function (entry) { return entry.id === selectedId; })) {
           selectedId = entries.some(function (entry) { return entry.id === project.id; }) ? project.id : '';
@@ -10822,7 +11301,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
         count.textContent = entries.length + ' / 20 projek. Simpanan pelayar tidak menggantikan sandaran JSON.';
         const saved = store().load(project.id);
         dirtyState.textContent = saved && sameProject(project, saved) ? 'Projek semasa telah disimpan.' : 'Projek semasa belum disimpan. Autosimpan mengikut status studio.';
-        for (const control of [nameInput, saveButton, newButton, duplicateButton, jsonButton, csvButton, fileInput]) control.disabled = busy;
+        for (const control of [nameInput, saveButton, newButton, duplicateButton, jsonButton, csvButton, fileInput, starterSelect, starterButton]) control.disabled = busy;
         select.disabled = busy || !entries.length;
         loadButton.disabled = busy || !selectedId;
         deleteButton.disabled = busy || !selectedId;
@@ -10838,7 +11317,12 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     doc.addEventListener('prostudio:change', render);
     const unsubscribeLanguage = typeof root.StudioI18n?.onChange === 'function' ? root.StudioI18n.onChange(render) : null;
     render();
-    return Object.freeze({ render: render, dispose: function () {
+    return Object.freeze({ render: render, focusStarter: function () {
+      if (disposed || busy) return false;
+      starters.open = true;
+      starterSelect.focus();
+      return true;
+    }, dispose: function () {
       if (disposed) return;
       disposed = true;
       importSequence += 1;
@@ -10848,7 +11332,7 @@ root.ProStudioCore=Object.freeze({SCHEMA,PPQ,BAR_TICKS,MAX_TRACKS,MAX_EVENTS,MAX
     } });
   }
 
-  root.ProStudioProjects = Object.freeze({ createStore: createStore,
+  root.ProStudioProjects = Object.freeze({ createStore: createStore, createStarter: createStarter,
     STORAGE_KEY: STORAGE_KEY, STORAGE_SCHEMA: STORAGE_SCHEMA,
     MAX_PROJECTS: MAX_PROJECTS, MAX_FILE_BYTES: MAX_FILE_BYTES });
   root.ProStudioProjectPanel = Object.freeze({ mount: mount });
@@ -10885,10 +11369,11 @@ function normalizeSelection(){
 }
 function canEdit(){return !document.querySelector('dialog[open]');}
 function renderControls(){
- const hasEvents=project.tracks.some(track=>track.events.length);
- $('proPlay').disabled=!hasEvents||playbackState==='playing'||playbackState==='pending';
+ const hasEvents=project.tracks.some(track=>track.events.length),audioAvailable=!!engine&&playbackState!=='disposed';
+ $('proPlay').disabled=!audioAvailable||!hasEvents||playbackState==='playing'||playbackState==='pending';
  $('proPlay').textContent=playbackState==='paused'?'▶ Sambung':'▶ Main';
- $('proPause').disabled=playbackState!=='playing'&&playbackState!=='pending';
+ $('proPause').disabled=!audioAvailable||playbackState!=='playing'&&playbackState!=='pending';
+ $('proStop').disabled=!audioAvailable;$('proMetronome').disabled=!audioAvailable;
  $('proUndo').disabled=!history.canUndo();$('proRedo').disabled=!history.canRedo();
  $('proTransportState').textContent=({idle:'Sedia',pending:'Membuka audio…',playing:'Sedang main',paused:'Dijeda',disposed:'Audio ditutup'})[playbackState]||'Sedia';
  $('proAddTrack').disabled=project.tracks.length>=8;
@@ -10933,10 +11418,20 @@ function flushSave(){
   storageStatus('Disimpan dalam pelayar.');
   return true;
  }catch(error){storageStatus('Projek belum disimpan. Eksport JSON melalui tab Projek.',{level:'error'});return false;}
+ finally{projectPanel?.render?.();}
+}
+function updateEngine(){
+ if(!engine)return;
+ engine.update(project);
+ const tick=engine.getPosition(),end=project.lengthBars*BAR;
+ if(!Number.isFinite(tick))return;
+ if(playbackState==='idle'&&tick>=end)position=0;
+ else if(playbackState==='paused'&&tick>=end)position=engine.seek(end-1);
+ else position=tick;
 }
 function changed(label){
  normalizeSelection();
- engine?.update(project);
+ updateEngine();
  renderShell();queueSave();
  dispatch('change',{project:currentProject(),label:String(label||'Projek dikemas kini')});
 }
@@ -10945,10 +11440,10 @@ function mutate(transform,label,options={}){
   const draft=currentProject(),result=transform(draft),next=result===undefined?draft:result,errors=C.validate(next);
   if(errors.length)throw Error(errors[0]);
   if(JSON.stringify(next)===JSON.stringify(project))return true;
-  const now=Date.now(),key=options.historyGroup||null;
-  const replaceLast=!!(options.merge&&key&&group?.key===key&&now-group.at<=600);
+  const key=options.historyGroup||null;
+  const replaceLast=!!(options.merge&&key&&group?.key===key);
   project=history.commit(C.clone(next),{replaceLast});
-  group=options.merge&&key?{key,at:now}:null;
+  group=options.merge&&key?{key}:null;
   changed(label);
   return true;
  }catch(error){announce(error.message||'Perubahan tidak dapat digunakan.',true);return false;}
@@ -11004,9 +11499,9 @@ function lifecyclePause(){
 
 window.ProStudioApp={
  enter(){
-  active=true;root.hidden=false;engine?.update(project);renderShell();
+  active=true;root.hidden=false;updateEngine();renderShell();
   arranger?.render?.();mixer?.render?.();projectPanel?.render?.();
-  if(!store?.load(project.id)&&!dirty)queueSave();
+  if(dirty||!store?.load(project.id))queueSave();
   return true;
  },
  leave(){
@@ -11072,6 +11567,12 @@ $('proAddTrack').addEventListener('click',()=>{
   const added=project.tracks.find(track=>!before.has(track.id));if(added){selectTrack(added.id);announce('Trek '+added.name+' ditambah. Isi langkah untuk mula.');}
  }
 });
+$('proTryStarter').addEventListener('click',()=>{
+ if(!active||!canEdit())return;
+ setTab(2);
+ if(typeof projectPanel?.focusStarter==='function')projectPanel.focusStarter();
+ else($('pro-projects-1-starter')||$('proTabProjects')).focus();
+});
 for(let index=0;index<tabs.length;index++){
  const tab=$(tabs[index][0]);tab.addEventListener('click',()=>setTab(index));
  tab.addEventListener('keydown',event=>{
@@ -11095,7 +11596,7 @@ document.addEventListener('keydown',event=>{
   event.preventDefault();if(playbackState==='playing'||playbackState==='pending')pause('Main semula dijeda.');else play();
  }
 });
-document.addEventListener('visibilitychange',()=>{if(document.hidden){lifecyclePause();flushSave();}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){lifecyclePause();flushSave();}else if(active&&dirty)queueSave();});
 window.addEventListener('blur',lifecyclePause);
 window.addEventListener('pagehide',()=>{lifecyclePause();flushSave();});
 renderShell();

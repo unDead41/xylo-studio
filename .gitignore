@@ -5,6 +5,7 @@ __pycache__/
 *.log
 core
 core.*
+!/studio-pro/core.js
 .DS_Store
 .env
 .env.*

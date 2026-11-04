@@ -6,7 +6,7 @@ const vm = require('node:vm');
 
 // The actual model and arranger run against a deliberately small DOM boundary.
 // These checks verify editing and focus semantics, not browser layout or sound.
-function fixture(instrumentId = 'xylophone', initialEvents = []) {
+function fixture(instrumentId = 'xylophone', initialEvents = [], options = {}) {
   let document;
   class BoundaryNode {
     get parentNode() { return this.parentElement || null; }
@@ -84,9 +84,10 @@ function fixture(instrumentId = 'xylophone', initialEvents = []) {
   for (const event of initialEvents) project = C.addEvent(project, trackId, event);
   project.tracks[0].sourceTake = { schema: 'xylo-studio-take/v2', title: 'Rakam', bpm: 80, ppq: 24, instrument_id: 'xylophone', end_tick: 6, events: [{ raw_ms: 73, midi: 60, onset_tick: 0, duration_tick: 6 }], raw_capture: [{ raw_ms: 73, source: 'manual' }] };
   project = C.clone(project);
+  const history = C.createHistory(project);
   const sourceEvidence = JSON.stringify(project.tracks[0].sourceTake);
   let selectedTrackId = trackId;
-  const announcements = [], auditions = [], mutations = [];
+  const announcements = [], auditions = [], mutations = [], confirmations = [];
   const app = {
     getProject: () => C.clone(project), getSelectedTrackId: () => selectedTrackId,
     selectTrack(id) { selectedTrackId = id; document.dispatch('prostudio:selection'); },
@@ -94,13 +95,14 @@ function fixture(instrumentId = 'xylophone', initialEvents = []) {
       try {
         const next = transform(C.clone(project));
         const errors = C.validate(next); if (errors.length) throw Error(errors[0]);
-        project = next;
+        project = history.commit(next);
         if (!project.tracks.some(track => track.id === selectedTrackId)) selectedTrackId = project.tracks[0]?.id || null;
         mutations.push(label); document.dispatch('prostudio:change'); return true;
       } catch (error) { announcements.push(error.message); return false; }
     },
     announce: text => announcements.push(text), audition: (track, event) => auditions.push([track.id, event.id])
   };
+  if (options.confirm) app.confirm = request => { confirmations.push(request); return true; };
   const view = context.window.ProStudioArranger.mount(container, app);
   const get = key => container.querySelectorAll('[data-pa-key]').find(node => node.dataset.paKey === key);
   function enableTranslation() {
@@ -110,7 +112,22 @@ function fixture(instrumentId = 'xylophone', initialEvents = []) {
     vm.runInContext(script[1], context, { filename: 'studio-i18n' });
     return context.window.StudioI18n;
   }
-  return { C, app, view, container, document, get, project: () => project, trackId, sourceEvidence, announcements, auditions, mutations, documentListeners, enableTranslation };
+  function undo() {
+    project = history.undo();
+    if (!project.tracks.some(track => track.id === selectedTrackId)) selectedTrackId = project.tracks[0]?.id || null;
+    document.dispatch('prostudio:change');
+  }
+  return { C, app, view, container, document, get, project: () => project, trackId, sourceEvidence, announcements, auditions, mutations, documentListeners, enableTranslation, history, undo, confirmations,
+    mount: target => context.window.ProStudioArranger.mount(target, app) };
+}
+
+function chooseBar(s, index) {
+  const select = s.get('bar-select'); select.focus(); select.value = String(index); select.fire('change');
+}
+
+function openBarTools(s) {
+  const tools = s.container.querySelectorAll('.pa-bar-tools')[0]; tools.open = true; tools.fire('toggle');
+  return tools;
 }
 
 test('arranger limits the editor to one 16-step chromatic bar and preserves roving focus', () => {
@@ -218,6 +235,121 @@ test('BM/EN translation preserves literal track names while translating action l
   assert.equal(s.container.querySelectorAll('.pa-track-choice')[0].children[0].textContent, '1. Tengah');
   assert.equal(s.container.querySelectorAll('.pa-note-label')[0].textContent, api.t('Tengah', 'en'));
   assert.equal(JSON.stringify(s.project().tracks[0].sourceTake), s.sourceEvidence);
+});
+
+test('copy and merge paste preserve full gates across bars, history and focus', () => {
+  const s = fixture('xylophone', [{ tick: 5, midi: 60, durationTick: 12, velocity: 0.47 }, { tick: 95, midi: 64, durationTick: 20 }, { tick: 110, midi: 67 }]);
+  const original = JSON.stringify(s.project());
+  const originalIds = new Set(s.project().tracks[0].events.map(event => event.id));
+  assert.equal(s.container.querySelectorAll('.pa-bar-tools')[0].open, false);
+  assert.equal(s.get('paste-bar').disabled, true);
+  assert.equal(s.get('replace-bar').checked, false);
+  openBarTools(s);
+  s.get('copy-bar').focus(); s.get('copy-bar').fire('click');
+  assert.equal(JSON.stringify(s.project()), original);
+  assert.equal(s.history.canUndo(), false, 'Copying must not create a project edit.');
+  assert.equal(s.document.activeElement.dataset.paKey, 'copy-bar');
+  assert.match(s.container.querySelectorAll('.pa-clipboard-status')[0].textContent, /Xylophone · bar 1 · 2 not/);
+  chooseBar(s, 1);
+  s.get('paste-bar').focus(); s.get('paste-bar').fire('click');
+  const events = s.project().tracks[0].events;
+  assert.deepEqual(Array.from(events, event => event.tick), [5, 95, 101, 110, 191]);
+  const pasted = events.filter(event => !originalIds.has(event.id));
+  assert.equal(pasted.length, 2); assert.equal(pasted[0].durationTick, 12); assert.equal(pasted[0].velocity, 0.47);
+  assert.equal(pasted[1].durationTick, 20);
+  assert.equal(s.document.activeElement.dataset.paKey, 'paste-bar');
+  assert.equal(s.container.querySelectorAll('.pa-bar-tools')[0].open, true);
+  assert.equal(JSON.stringify(s.project().tracks[0].sourceTake), s.sourceEvidence);
+  s.undo();
+  assert.equal(JSON.stringify(s.project()), original);
+  assert.equal(s.get('paste-bar').disabled, false, 'Undo must keep the in-memory clipboard available.');
+});
+
+test('replace paste removes target-bar onsets while retaining earlier tails and other bars', () => {
+  const s = fixture('xylophone', [{ tick: 0, midi: 60, durationTick: 150 }, { tick: 96, midi: 64 }, { tick: 120, midi: 67 }, { tick: 210, midi: 72 }]);
+  const original = JSON.stringify(s.project());
+  const sourceId = s.project().tracks[0].events[0].id;
+  const removedIds = s.project().tracks[0].events.slice(1, 3).map(event => event.id);
+  openBarTools(s); s.get('copy-bar').fire('click'); chooseBar(s, 1);
+  s.get('replace-bar').checked = true; s.get('replace-bar').focus(); s.get('replace-bar').fire('change');
+  assert.equal(s.document.activeElement.dataset.paKey, 'replace-bar');
+  assert.match(s.container.querySelectorAll('.pa-bar-help')[0].textContent, /akan menggantikan/);
+  s.get('paste-bar').fire('click');
+  const events = s.project().tracks[0].events;
+  assert.deepEqual(Array.from(events, event => event.tick), [0, 96, 210]);
+  assert.equal(events[0].id, sourceId); assert.equal(events[0].durationTick, 150);
+  assert.equal(events[1].durationTick, 150); assert.equal(removedIds.includes(events[1].id), false);
+  assert.equal(JSON.stringify(s.project().tracks[0].sourceTake), s.sourceEvidence);
+  s.undo(); assert.equal(JSON.stringify(s.project()), original);
+});
+
+test('clear requests confirmation, preserves earlier tails, and returns focus to the disclosure', () => {
+  const s = fixture('xylophone', [{ tick: 90, midi: 60, durationTick: 20 }, { tick: 96, midi: 64 }, { tick: 180, midi: 67 }, { tick: 193, midi: 72 }], { confirm: true });
+  const original = JSON.stringify(s.project());
+  chooseBar(s, 1); openBarTools(s); s.get('clear-bar').focus(); s.get('clear-bar').fire('click');
+  assert.equal(JSON.stringify(s.project()), original, 'Opening confirmation must not clear notes.');
+  assert.equal(s.confirmations.length, 1); assert.equal(s.confirmations[0].title, 'Kosongkan bar 2?');
+  s.confirmations[0].onConfirm();
+  assert.deepEqual(Array.from(s.project().tracks[0].events, event => event.tick), [90, 193]);
+  assert.equal(s.project().tracks[0].events[0].durationTick, 20);
+  assert.equal(s.get('clear-bar').disabled, true);
+  assert.equal(s.document.activeElement.dataset.paKey, 'bar-tools');
+  assert.equal(JSON.stringify(s.project().tracks[0].sourceTake), s.sourceEvidence);
+  s.undo(); assert.equal(JSON.stringify(s.project()), original);
+});
+
+test('paste is disabled with a visible explanation for another instrument and clipboard stays within one mount', () => {
+  const s = fixture('xylophone', [{ tick: 0, midi: 60 }]);
+  openBarTools(s); s.get('copy-bar').fire('click');
+  s.app.mutate(project => s.C.addTrack(project, 'recorder'), 'Trek rekoder');
+  s.app.selectTrack(s.project().tracks[1].id);
+  assert.equal(s.get('paste-bar').disabled, true); assert.equal(s.get('replace-bar').disabled, true);
+  assert.match(s.container.querySelectorAll('.pa-bar-help')[0].textContent, /Instrumen tidak sepadan.*Xylophone/);
+  s.app.selectTrack(s.trackId); assert.equal(s.get('paste-bar').disabled, false);
+  const secondContainer = s.document.createElement('div'); s.document.body.append(secondContainer);
+  const secondView = s.mount(secondContainer);
+  const secondPaste = secondContainer.querySelectorAll('[data-pa-key]').find(node => node.dataset.paKey === 'paste-bar');
+  assert.equal(secondPaste.disabled, true, 'A second mounted arranger must start with an empty clipboard.');
+  assert.match(secondContainer.querySelectorAll('.pa-clipboard-status')[0].textContent, /Salin bar untuk/);
+  secondView.dispose();
+});
+
+test('paste endpoint errors are announced without a partial edit or a success announcement', () => {
+  const s = fixture('xylophone', [{ tick: 80, midi: 60, durationTick: 200 }]);
+  openBarTools(s); s.get('copy-bar').fire('click'); chooseBar(s, 3);
+  const original = JSON.stringify(s.project());
+  s.get('paste-bar').focus(); s.get('paste-bar').fire('click');
+  assert.equal(JSON.stringify(s.project()), original);
+  assert.match(s.announcements.at(-1), /Tempoh tampalan melebihi akhir projek/);
+  assert.equal(s.announcements.includes('Bar 4 ditampal.'), false);
+  assert.equal(s.document.activeElement.dataset.paKey, 'paste-bar');
+});
+
+test('paste event-limit errors use the app announcement and leave all existing events intact', () => {
+  const s = fixture('xylophone', [{ tick: 0, midi: 60 }]);
+  s.app.mutate(project => {
+    const sample = project.tracks[0].events[0];
+    project.tracks[0].events = Array.from({ length: 512 }, (_, index) => ({ ...sample, id: 'limit-event-' + index, tick: index === 0 ? 0 : 96 }));
+    return project;
+  }, 'Had event');
+  openBarTools(s); s.get('copy-bar').fire('click'); chooseBar(s, 1);
+  const original = JSON.stringify(s.project()); s.get('paste-bar').fire('click');
+  assert.equal(JSON.stringify(s.project()), original);
+  assert.match(s.announcements.at(-1), /Maksimum 512 event/);
+  assert.equal(s.announcements.includes('Bar 2 ditampal.'), false);
+});
+
+test('empty copied bars explain disabled merge and can explicitly replace a populated bar', () => {
+  const s = fixture('xylophone', [{ tick: 0, midi: 60 }]);
+  const original = JSON.stringify(s.project());
+  chooseBar(s, 1); openBarTools(s); s.get('copy-bar').fire('click');
+  assert.equal(s.get('paste-bar').disabled, true);
+  assert.match(s.container.querySelectorAll('.pa-bar-help')[0].textContent, /Bar salinan kosong/);
+  chooseBar(s, 0); s.get('replace-bar').checked = true; s.get('replace-bar').fire('change');
+  assert.equal(s.get('paste-bar').disabled, false); s.get('paste-bar').fire('click');
+  assert.equal(s.project().tracks[0].events.length, 0);
+  assert.equal(JSON.stringify(s.project().tracks[0].sourceTake), s.sourceEvidence);
+  s.undo(); assert.equal(JSON.stringify(s.project()), original);
 });
 
 test('quantization strength and transpose use pure model edits and keep source evidence', () => {

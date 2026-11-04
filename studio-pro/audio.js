@@ -327,7 +327,7 @@
         for (let index = firstEntry(from); index < project.entries.length; index++) {
           const { track, event } = project.entries[index];
           if (event.tick >= end - EPSILON) break;
-          if (!includeTrack(track)) continue;
+          if (!includeTrack(track) || !audible(track) || event.velocity <= 0) continue;
           if (++count > MAX_BATCH) { warnDensity(); return false; }
           const tickDuration = project.loop.enabled ? Math.min(event.durationTick, project.loop.endTick - event.tick) : event.durationTick;
           scheduleNote(track, event, anchorTime + (absolute - anchorTick + event.tick - from) * unit, tickDuration);
@@ -335,10 +335,17 @@
       });
     }
 
-    function fillWindow() {
+    function fillWindow(carriedTracks) {
       const unit = secondsPerTick(), now = context.currentTime;
       const earliest = anchorTick + Math.max(0, now + .003 - anchorTime) / unit;
       const horizon = anchorTick + Math.max(0, now + LOOKAHEAD - anchorTime) / unit;
+      if (earliest > scheduledTo + EPSILON) {
+        // A late timer drops expired strikes, but a missed recorder onset may
+        // still have an active gate. Recover only this cycle's unscheduled note.
+        const tick = mapTick(earliest), at = anchorTime + (earliest - anchorTick) * unit;
+        scheduleCarries(tick, at, (track, event) => track.instrumentId === 'recorder' &&
+          (!carriedTracks || !carriedTracks.has(track.id)) && earliest - tick + event.tick >= scheduledTo - EPSILON);
+      }
       scheduleWindow(Math.max(scheduledTo, earliest), horizon);
       scheduledTo = horizon;
       if (metronome) forSegments(Math.max(metroTo, earliest), horizon, (absolute, from, end) => {
@@ -385,11 +392,11 @@
     function scheduleCarries(tick, at, includeTrack = () => true) {
       let carry = 0;
       for (const { track, event } of project.entries) {
-        if (carry >= MAX_BATCH) { warnDensity(); break; }
-        if (includeTrack(track) && audible(track) && !isPercussion(track.instrumentId) && event.tick < tick - EPSILON && event.tick + event.durationTick > tick &&
+        if (includeTrack(track, event) && audible(track) && event.velocity > 0 && !isPercussion(track.instrumentId) && event.tick < tick - EPSILON && event.tick + event.durationTick > tick &&
           (!project.loop.enabled || tick < project.loop.startTick || event.tick >= project.loop.startTick)) {
+          if (++carry > MAX_BATCH) { warnDensity(); break; }
           const end = project.loop.enabled ? Math.min(event.tick + event.durationTick, project.loop.endTick) : event.tick + event.durationTick;
-          scheduleNote(track, event, at, end - tick); carry++;
+          scheduleNote(track, event, at, end - tick);
         }
       }
     }
@@ -460,6 +467,7 @@
         ++epoch; clearTimer(); silence();
         if (playing && context && context.state === 'running') startAt(cursor);
         else if (pending) { setState('paused', 'Projek berubah; tekan Main untuk menyambung.'); notify('onPosition', cursor); }
+        else if (playing) { setState('paused'); notify('onPosition', cursor); }
       } else {
         for (const track of next.tracks) if (!audible(track)) { cancelVoices(voice => voice.trackId === track.id); destroyBus(track.id); }
         applyMixer();
@@ -470,7 +478,7 @@
           // onsets. Other tracks and the metronome retain their existing voices.
           scheduleCarries(mapTick(absolute), at, track => newlyAudible.has(track.id) && track.instrumentId === 'recorder');
           scheduleWindow(absolute, scheduledTo, track => newlyAudible.has(track.id));
-          fillWindow();
+          fillWindow(newlyAudible);
         }
       }
       return true;

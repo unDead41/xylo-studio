@@ -1,7 +1,7 @@
 # Latest ui handoff
 
-The current ui candidate adds Studio Pro and accessible display preferences from base `27df2fa`. Accepted VERSION remains **v1.04.0**.
+Studio Pro continuation from `906d8fa040dc18b13d8a9cb74ea448b023091a94`: bar copy/paste/clear, three playable project examples, audio/mixer/autosave fixes and complete tracked model packaging. Accepted VERSION remains **v1.04.0**. Theme sources are excluded and unchanged.
 
-See [STUDIO_PRO.md](STUDIO_PRO.md) for the six-worker result, 332/332 tests, browser verification, source hashes and limits. Only ui is submitted; main/Pages/share/tutorial/auth branches remain outside this task.
+See [STUDIO_PRO_RESUME.md](STUDIO_PRO_RESUME.md) for the six-worker result, **375/375** tests including a clean tracked-tree export, browser verification, source hashes and limits. Submit ui only; main/Pages/share/tutorial/auth remain outside this task.
 
-The previous overall UI handoff is retained in [base 27df2fa](https://github.com/unDead41/xylo-studio/blob/27df2fadadf66cee3f2be26aeafff765e33e515e/docs/handoffs/ui/LATEST.md).
+Previous candidate evidence: [STUDIO_PRO.md](STUDIO_PRO.md). Earlier overall UI handoff: [base 27df2fa](https://github.com/unDead41/xylo-studio/blob/27df2fadadf66cee3f2be26aeafff765e33e515e/docs/handoffs/ui/LATEST.md).

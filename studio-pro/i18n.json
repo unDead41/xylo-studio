@@ -1595,6 +1595,154 @@
     [
       "Rakam sekurang-kurangnya satu not atau ketukan sebelum menambah trek.",
       "Record at least one note or hit before adding a track."
+    ],
+    [
+      "Cuba contoh projek",
+      "Try a starter project"
+    ],
+    [
+      "Mulakan dengan contoh",
+      "Start from an example"
+    ],
+    [
+      "Contoh projek",
+      "Project example"
+    ],
+    [
+      "Buka contoh",
+      "Open example"
+    ],
+    [
+      "Corak asal empat bar. Anda boleh menyunting setiap trek selepas dibuka.",
+      "Original four-bar patterns. You can edit each track after opening the project."
+    ],
+    [
+      "Melodi dan rentak",
+      "Melody and rhythm"
+    ],
+    [
+      "Rentak sekolah",
+      "School rhythm"
+    ],
+    [
+      "Rentak perarakan",
+      "Marching rhythm"
+    ],
+    [
+      "Xylophone dan Kompang · 2 trek · 100 BPM · 4 bar",
+      "Xylophone and Kompang · 2 tracks · 100 BPM · 4 bars"
+    ],
+    [
+      "Tamborin dan Segi Tiga · 2 trek · 92 BPM · 4 bar",
+      "Tambourine and Triangle · 2 tracks · 92 BPM · 4 bars"
+    ],
+    [
+      "Dram Sisi, Dram Bes dan Simbal · 3 trek · 108 BPM · 4 bar",
+      "Snare Drum, Bass Drum and Cymbals · 3 tracks · 108 BPM · 4 bars"
+    ],
+    [
+      "Contoh projek dibuka",
+      "Example project opened"
+    ],
+    [
+      "Alat bar",
+      "Bar tools"
+    ],
+    [
+      "Salin bar",
+      "Copy bar"
+    ],
+    [
+      "Tampal bar",
+      "Paste bar"
+    ],
+    [
+      "Kosongkan bar",
+      "Clear bar"
+    ],
+    [
+      "Salin bar untuk digunakan semula di bar lain.",
+      "Copy this bar to reuse it in another bar."
+    ],
+    [
+      "Gantikan not yang bermula dalam bar sasaran",
+      "Replace notes that start in the target bar"
+    ],
+    [
+      "Salin bar dahulu untuk mengaktifkan Tampal.",
+      "Copy a bar first to enable Paste."
+    ],
+    [
+      "Bar salinan kosong. Pilih Gantikan untuk mengosongkan bar sasaran.",
+      "The copied bar is empty. Select Replace to clear the target bar."
+    ],
+    [
+      "Tampal menambah not. Pilih Gantikan untuk membuang not asal yang bermula dalam bar sasaran.",
+      "Paste adds notes. Select Replace to remove existing notes that start in the target bar."
+    ],
+    [
+      "Tampal akan menggantikan not yang bermula dalam bar sasaran. Anda boleh menekan Undur selepas ini.",
+      "Paste will replace notes that start in the target bar. You can use Undo afterwards."
+    ],
+    [
+      "Projek telah berubah. Pilih bar semula sebelum mengosongkan.",
+      "The project has changed. Select the bar again before clearing it."
+    ],
+    [
+      "Bar mesti dalam julat projek.",
+      "The bar must be within the project range."
+    ],
+    [
+      "Medan papan klip bar tidak sah.",
+      "Invalid bar clipboard field."
+    ],
+    [
+      "Format papan klip bar tidak dikenali.",
+      "Unrecognized bar clipboard format."
+    ],
+    [
+      "Data papan klip bar tidak sah.",
+      "Invalid bar clipboard data."
+    ],
+    [
+      "Medan sumber papan klip bar tidak sah.",
+      "Invalid bar clipboard source field."
+    ],
+    [
+      "Sumber papan klip bar tidak sah.",
+      "Invalid bar clipboard source."
+    ],
+    [
+      "Medan event papan klip bar tidak sah.",
+      "Invalid bar clipboard event field."
+    ],
+    [
+      "Masa event papan klip bar tidak sah.",
+      "Invalid bar clipboard event timing."
+    ],
+    [
+      "Medan tampalan bar tidak sah.",
+      "Invalid bar paste field."
+    ],
+    [
+      "Pilihan tampalan bar tidak sah.",
+      "Invalid bar paste options."
+    ],
+    [
+      "Instrumen papan klip bar tidak serasi dengan trek.",
+      "The bar clipboard instrument does not match the track."
+    ],
+    [
+      "Tempoh tampalan melebihi akhir projek. Panjangkan projek atau pilih bar lebih awal.",
+      "The pasted notes extend beyond the project end. Lengthen the project or choose an earlier bar."
+    ],
+    [
+      "Contoh projek dibuka.",
+      "Example project opened."
+    ],
+    [
+      "Pilih contoh projek yang sah.",
+      "Choose a valid project example."
     ]
   ],
   "templates": [
@@ -1865,6 +2013,40 @@
       "translate": [
         "action"
       ]
+    },
+    {
+      "ms": "Salinan: {instrument} · bar {index} · {count} not.",
+      "en": "Copied: {instrument} · bar {index} · {count} notes.",
+      "translate": [
+        "instrument"
+      ]
+    },
+    {
+      "ms": "Instrumen tidak sepadan. Pilih trek {instrument} untuk menampal.",
+      "en": "The instrument does not match. Select a {instrument} track to paste.",
+      "translate": [
+        "instrument"
+      ]
+    },
+    {
+      "ms": "Bar {index} digantikan.",
+      "en": "Bar {index} replaced."
+    },
+    {
+      "ms": "Bar {index} ditampal.",
+      "en": "Bar {index} pasted."
+    },
+    {
+      "ms": "Bar {index} dikosongkan.",
+      "en": "Bar {index} cleared."
+    },
+    {
+      "ms": "Kosongkan bar {index}?",
+      "en": "Clear bar {index}?"
+    },
+    {
+      "ms": "Not yang bermula dalam bar {index} pada trek terpilih akan dibuang. Not dari bar sebelumnya dikekalkan. Anda boleh menekan Undur selepas ini.",
+      "en": "Notes that start in bar {index} on the selected track will be removed. Notes from the previous bar are kept. You can use Undo afterwards."
     }
   ]
 }

@@ -8,9 +8,9 @@ const plain=value=>JSON.parse(JSON.stringify(value));
 
 // Real project model, persistence and shell with boundary DOM/audio doubles.
 // These checks do not measure native focus layout or physical audio latency.
-function fixture({saved=new Map(),failWrites=false,deferAudio=false}={}){
+function fixture({saved=new Map(),failWrites=false,deferAudio=false,audioAvailable=true}={}){
  const ids=new Map(),documentListeners=new Map(),windowListeners=new Map(),timers=new Map(),changes=[];
- let timerId=0,uuid=0;
+ let timerId=0,uuid=0,wallTime=Date.now();
  const doc={hidden:false,activeElement:null};
  class Element{
   constructor(tag='div'){this.tagName=tag.toUpperCase();this.attrs={};this.listeners=new Map();this.hidden=false;this.open=false;this.checked=false;this.disabled=false;this.value='';this.textContent='';this.className='';this.tabIndex=0;this.isConnected=true;this.ownerDocument=doc;this.parentElement=null;this.classList={toggle:(name,on)=>{const values=new Set(this.className.split(/\s+/).filter(Boolean));if(on)values.add(name);else values.delete(name);this.className=[...values].join(' ');},contains:name=>this.className.split(/\s+/).includes(name)};}
@@ -36,12 +36,12 @@ function fixture({saved=new Map(),failWrites=false,deferAudio=false}={}){
   dispatchEvent(event){if(event.type==='prostudio:change')changes.push(plain(event.detail));for(const fn of documentListeners.get(event.type)||[])fn(event);return true;}});
  const storage={getItem:key=>saved.get(key)??null,setItem(key,value){if(failWrites){const error=new Error('quota');error.name='QuotaExceededError';throw error;}saved.set(key,value);}};
  const engine={state:'idle',position:0,plays:[],pauses:0,stops:0,pending:[],project:null,epoch:0};
- const handles={arranger:{renders:0,render(){this.renders++;},setPlayhead(tick){this.tick=tick;}},mixer:{render(){},setLevel(level){this.level=level;}},projects:{render(){}}};
+ const handles={arranger:{renders:0,render(){this.renders++;},setPlayhead(tick){this.tick=tick;}},mixer:{render(){},setLevel(level){this.level=level;}},projects:{renders:0,starterFocuses:0,render(){this.renders++;},focusStarter(){this.starterFocuses++;}}};
  const window={document:doc,localStorage:storage,crypto:{randomUUID:()=>`shell-test-${++uuid}`},
   addEventListener(name,fn){if(!windowListeners.has(name))windowListeners.set(name,[]);windowListeners.get(name).push(fn);},removeEventListener(){},
   ProStudioAudio:{createEngine(callbacks){
    engine.emit=(state,message='')=>{engine.state=state;callbacks.onState(state,message);};
-   engine.update=project=>{engine.project=plain(project);return true;};
+   engine.update=project=>{engine.project=plain(project);engine.position=Math.max(0,Math.min(engine.position,project.lengthBars*96));if(project.loop.enabled&&engine.position>=project.loop.endTick)engine.position=project.loop.startTick;return true;};
    engine.play=async(project,startTick)=>{engine.project=plain(project);engine.plays.push({project:plain(project),startTick});if(startTick!==undefined)engine.position=startTick;const epoch=++engine.epoch;engine.emit('pending');if(deferAudio)await new Promise(resolve=>engine.pending.push(resolve));if(epoch!==engine.epoch)return false;engine.emit('playing');return true;};
    engine.pause=()=>{engine.pauses++;engine.epoch++;engine.emit('paused');callbacks.onPosition(engine.position);return engine.position;};
    engine.stop=()=>{engine.stops++;engine.epoch++;engine.position=0;engine.emit('idle');callbacks.onPosition(0);return 0;};
@@ -51,13 +51,14 @@ function fixture({saved=new Map(),failWrites=false,deferAudio=false}={}){
   }},
   ProStudioArranger:{mount:()=>handles.arranger},ProStudioMixer:{mount:()=>handles.mixer}
  };
- const box={window,document:doc,CustomEvent:class{constructor(type,options){this.type=type;this.detail=options.detail;}},setTimeout:fn=>{const id=++timerId;timers.set(id,fn);return id;},clearTimeout:id=>timers.delete(id),console};
+ if(!audioAvailable)delete window.ProStudioAudio;
+ const box={window,document:doc,Date:class extends Date{static now(){return wallTime;}},CustomEvent:class{constructor(type,options){this.type=type;this.detail=options.detail;}},setTimeout:fn=>{const id=++timerId;timers.set(id,fn);return id;},clearTimeout:id=>timers.delete(id),console};
  vm.createContext(box);
  for(const file of ['core.js','projects.js'])vm.runInContext(fs.readFileSync(path.join(base,'studio-pro',file),'utf8'),box,{filename:file});
  window.ProStudioProjectPanel={mount:()=>handles.projects};
  vm.runInContext(fs.readFileSync(path.join(base,'studio-pro/shell.js'),'utf8'),box,{filename:'shell.js'});
  const dispatch=async(name,extra={})=>{const event={target:body,key:'',defaultPrevented:false,preventDefault(){this.defaultPrevented=true;},...extra};for(const fn of documentListeners.get(name)||[])await fn(event);return event;};
- return {app:window.ProStudioApp,C:window.ProStudioCore,ids,engine,doc,changes,saved,handles,body,Element,dispatch,
+ return {app:window.ProStudioApp,C:window.ProStudioCore,ids,engine,doc,changes,saved,handles,body,Element,dispatch,setWritesFail(value){failWrites=value;},advance(ms){wallTime+=ms;},
   async windowEvent(name){for(const fn of windowListeners.get(name)||[])await fn({});},
   timers:()=>timers.size,flush(){const entries=[...timers];timers.clear();for(const[,fn]of entries)fn();},async resume(){for(const resolve of engine.pending.splice(0))resolve();for(let i=0;i<5;i++)await Promise.resolve();}};
 }
@@ -80,12 +81,20 @@ test('legacy import reports success without opening the shell and rejects unknow
 test('shared edits validate before committing and grouped mixer changes undo as one action',async()=>{
  const s=fixture();s.app.importTake(take());s.app.enter();const id=s.app.getSelectedTrackId();
  assert.equal(s.app.mutate(project=>s.C.updateTrack(project,id,{volume:.6}),'Tahap',{historyGroup:'mix:1',merge:true}),true);
+ s.advance(2500);
  assert.equal(s.app.mutate(project=>s.C.updateTrack(project,id,{volume:.4}),'Tahap',{historyGroup:'mix:1',merge:true}),true);
  await s.ids.get('proUndo').fire('click');assert.equal(s.app.getProject().tracks[0].volume,.8);
  await s.ids.get('proRedo').fire('click');assert.equal(s.app.getProject().tracks[0].volume,.4);
  const before=JSON.stringify(s.app.getProject());assert.equal(s.app.mutate(project=>{project.bpm=201;}),false);
  assert.equal(JSON.stringify(s.app.getProject()),before);assert.equal(s.engine.project.bpm,100);
  assert.ok(s.changes.every(change=>change.project.schema==='e-instru-project/v1'));
+});
+
+test('empty onboarding opens the starter chooser without mutating or loading a project',async()=>{
+ const s=fixture();s.app.enter();const before=JSON.stringify(s.app.getProject());
+ await s.ids.get('proTryStarter').fire('click');
+ assert.equal(s.ids.get('proTabProjects').getAttribute('aria-selected'),'true');assert.equal(s.ids.get('proPanelProjects').hidden,false);
+ assert.equal(s.handles.projects.starterFocuses,1);assert.equal(JSON.stringify(s.app.getProject()),before);
 });
 
 test('add-track controls select each new instrument and show the eight-track limit',async()=>{
@@ -112,6 +121,21 @@ test('quota and corrupted storage remain visible and never discard the working p
  assert.equal(s.app.getProject().tracks.length,1);assert.match(s.ids.get('proSaveStatus').textContent,/penuh/);assert.ok(s.ids.get('proSaveStatus').classList.contains('is-error'));
  const saved=new Map([['e-instru-pro-projects/v1','{bad data}']]),bad=fixture({saved});bad.app.enter();bad.app.importTake(take());bad.flush();
  assert.equal(saved.get('e-instru-pro-projects/v1'),'{bad data}');assert.match(bad.ids.get('proSaveStatus').textContent,/rosak/);
+});
+
+test('a failed save retries on returning to Pro and refreshes the open project panel after success',()=>{
+ const s=fixture({failWrites:true});s.app.enter();s.app.importTake(take());s.flush();
+ const before=JSON.stringify(s.app.getProject());s.app.leave();assert.equal(s.timers(),0);
+ s.setWritesFail(false);s.app.enter();assert.equal(s.timers(),1);const renders=s.handles.projects.renders;s.flush();
+ assert.equal(JSON.stringify(s.app.getProject()),before);assert.equal(s.app.getStore().load(s.app.getProject().id).tracks.length,1);
+ assert.equal(s.ids.get('proSaveStatus').classList.contains('is-error'),false);assert.ok(s.handles.projects.renders>renders);
+});
+
+test('returning to a visible tab retries a failed lifecycle save without resuming audio',async()=>{
+ const s=fixture({failWrites:true});s.app.enter();s.app.importTake(take());await s.ids.get('proPlay').fire('click');
+ s.doc.hidden=true;await s.dispatch('visibilitychange');assert.equal(s.timers(),0);assert.equal(s.engine.state,'paused');
+ s.setWritesFail(false);s.doc.hidden=false;await s.dispatch('visibilitychange');assert.equal(s.timers(),1);s.flush();
+ assert.equal(s.app.getStore().load(s.app.getProject().id).tracks.length,1);assert.equal(s.engine.state,'paused');
 });
 
 test('replacement cancels a previous autosave rather than resurrecting a deleted active project',()=>{
@@ -148,6 +172,40 @@ test('native tab keys move selection and loop cursor follows the engine seek res
  assert.equal(s.engine.position,192);assert.equal(s.ids.get('proPosition').textContent,'03:1:00');assert.equal(s.ids.get('proCursor').value,'192');
  s.ids.get('proBpm').value='40.5';await s.ids.get('proBpm').fire('change');assert.equal(s.app.getProject().bpm,100);assert.equal(s.ids.get('proBpm').getAttribute('aria-invalid'),'true');
  s.ids.get('proBpm').value='200';await s.ids.get('proBpm').fire('change');assert.equal(s.app.getProject().bpm,200);assert.equal(s.ids.get('proBpm').getAttribute('aria-invalid'),null);
+});
+
+test('paused loop edits and history keep the cursor synchronized with engine normalization',async()=>{
+ const s=fixture();s.app.enter();s.app.importTake(take());
+ s.ids.get('proCursor').value='650';await s.ids.get('proCursor').fire('input');
+ for(const[id,value]of [['proLoopStart','2'],['proLoopEnd','3']]){s.ids.get(id).value=value;await s.ids.get(id).fire('change');}
+ s.ids.get('proLoopEnabled').checked=true;await s.ids.get('proLoopEnabled').fire('change');
+ assert.equal(s.engine.position,96);assert.equal(s.ids.get('proCursor').value,'96');assert.equal(s.ids.get('proPosition').textContent,'02:1:00');
+ await s.ids.get('proUndo').fire('click');assert.equal(s.app.getProject().loop.enabled,false);assert.equal(s.ids.get('proCursor').value,String(s.engine.position));
+ await s.ids.get('proRedo').fire('click');assert.equal(s.app.getProject().loop.enabled,true);assert.equal(s.ids.get('proCursor').value,String(s.engine.position));
+ s.ids.get('proLoopEnabled').checked=false;await s.ids.get('proLoopEnabled').fire('change');
+ s.ids.get('proCursor').value='700';await s.ids.get('proCursor').fire('input');
+ s.ids.get('proLength').value='4';await s.ids.get('proLength').fire('change');
+ assert.equal(s.engine.position,383);assert.equal(s.ids.get('proCursor').value,'383');assert.equal(s.ids.get('proPosition').textContent,'04:4:23');
+ await s.ids.get('proUndo').fire('click');assert.equal(s.app.getProject().lengthBars,8);assert.equal(s.ids.get('proCursor').value,String(s.engine.position));
+});
+
+test('selection remains valid through track deletion, history and project replacement',async()=>{
+ const s=fixture();s.app.enter();s.app.importTake(take());
+ s.ids.get('proInstrument').value='kompang';await s.ids.get('proAddTrack').fire('click');const second=s.app.getSelectedTrackId(),first=s.app.getProject().tracks[0].id;
+ assert.equal(s.app.mutate(project=>s.C.updateTrack(project,first,{volume:.5})),true);assert.equal(s.app.getSelectedTrackId(),second);
+ await s.ids.get('proUndo').fire('click');assert.equal(s.app.getSelectedTrackId(),second);
+ assert.equal(s.app.mutate(project=>s.C.removeTrack(project,second)),true);assert.equal(s.app.getSelectedTrackId(),first);
+ await s.ids.get('proUndo').fire('click');assert.equal(s.app.getSelectedTrackId(),first);assert.equal(s.app.selectTrack(second),true);
+ await s.ids.get('proRedo').fire('click');assert.equal(s.app.getSelectedTrackId(),first);
+ assert.equal(s.app.replaceProject(s.C.createProject()),true);assert.equal(s.app.getSelectedTrackId(),null);assert.equal(s.ids.get('proCursor').value,'0');
+});
+
+test('unavailable or disposed audio disables transport while preserving project editing',async()=>{
+ const missing=fixture({audioAvailable:false});missing.app.enter();missing.app.importTake(take());
+ for(const id of ['proPlay','proPause','proStop','proMetronome'])assert.equal(missing.ids.get(id).disabled,true,id);
+ const s=fixture();s.app.enter();s.app.importTake(take());s.engine.emit('disposed');
+ for(const id of ['proPlay','proPause','proStop','proMetronome'])assert.equal(s.ids.get(id).disabled,true,id);
+ assert.equal(s.app.mutate(project=>{project.title='Offline edits';}),true);assert.equal(s.app.getProject().title,'Offline edits');
 });
 
 test('blur cancels pending audio, leave stops, and completed playback restarts from zero',async()=>{

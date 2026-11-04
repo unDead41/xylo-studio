@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — Studio Pro continuation, ui branch, 2026-11-04
+
+- Add validated copy/paste/clear bar workflows, an optional replace mode and undo through a closed Bar tools disclosure.
+- Add three original playable four-bar project examples and an empty-workspace route to their explicit selection.
+- Fix scheduling starvation from muted/solo-excluded/zero-velocity events, suspended-context tempo changes and late-timer sustained recorder recovery.
+- Keep active mixer gestures bound to their original value/track, group held keyboard edits into one undo step, retry pending saves on return and refresh saved-project status/cursor state.
+- Track the maintained core model explicitly despite the broad core-dump ignore rule; verify embedding and all 375 tests from a clean staged-tree export.
+- Preserve eight instruments, ten songs, source-take evidence, BM/English and v1.04.0. Theme sources are excluded from this continuation. Submit ui only.
+
 ## Unreleased — Studio Pro and accessible display, ui branch, 2026-11-04
 
 - Add an independent eight-track arrangement workspace with a one-bar piano/percussion step editor, exact event inspector, quantization, transpose, duplication and undo/redo.

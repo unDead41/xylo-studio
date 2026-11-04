@@ -23,6 +23,7 @@
     let gestureCount = 0;
     let rangeCount = 0;
     let selectedId = null;
+    let renderedProjectId = null;
 
     function element(tag, className, text) {
       const node = doc.createElement(tag);
@@ -120,7 +121,7 @@
       const label = element('label', 'pm-control-label', spec.label);
       const input = element('input', 'pm-range');
       const output = element('output', 'pm-value');
-      const control = { input, output, label, gesture: null, name: spec.label, value: 0, spec };
+      const control = { input, output, label, gesture: null, source: null, blocked: false, name: spec.label, value: 0, spec };
       const controlRemovers = [];
       const on = (name, fn) => controlRemovers.push(listen(input, name, fn));
       input.type = 'range';
@@ -141,27 +142,42 @@
       parent.append(field);
       ranges.push(control);
 
-      function begin() {
-        if (!control.gesture) control.gesture = { group: 'mixer:' + spec.key() + ':' + prefix + ':' + (++gestureCount), dirty: false };
+      function begin(source = 'input', fresh = false) {
+        if (fresh) { control.blocked = false; control.gesture = null; control.source = source; }
+        if (control.blocked) return;
+        if (!control.gesture) {
+          control.source = source;
+          control.gesture = { group: 'mixer:' + spec.key() + ':' + prefix + ':' + (++gestureCount), dirty: false };
+        }
       }
       function finish() {
         const gesture = control.gesture;
         control.gesture = null;
+        control.source = null;
+        control.blocked = false;
         if (gesture && gesture.dirty) announce(control.name + ': ' + spec.format(control.value) + '.');
       }
       control.finish = finish;
+      control.interrupt = () => {
+        // A held pointer/key must not continue an edit after its target or value
+        // was replaced elsewhere. The next physical gesture starts a new edit.
+        control.blocked = control.blocked || Boolean(control.gesture || control.source);
+        control.gesture = null;
+      };
       control.dispose = () => {
         controlRemovers.splice(0).forEach(remove => remove());
         const index = ranges.indexOf(control);
         if (index >= 0) ranges.splice(index, 1);
       };
       on('focus', () => { if (spec.select) spec.select(); });
-      on('pointerdown', begin);
-      on('keydown', event => { if (rangeKeys.has(event.key)) begin(); });
+      on('pointerdown', () => begin('pointer', true));
+      on('keydown', event => { if (rangeKeys.has(event.key)) begin('keyboard', !event.repeat); });
       on('keyup', event => { if (rangeKeys.has(event.key)) finish(); });
-      on('change', finish);
+      // Native ranges emit change on every keyboard step, including repeats.
+      on('change', () => { if (control.source !== 'keyboard') finish(); });
       on('blur', finish);
       on('input', () => {
+        if (input.disabled || control.blocked) { render(); return; }
         const value = Number(input.value);
         if (!Number.isFinite(value) || value < Number(input.min) || value > Number(input.max)) return;
         begin();
@@ -169,8 +185,9 @@
         control.value = value;
         output.textContent = spec.format(value);
         input.setAttribute('aria-valuetext', spec.format(value));
-        if (spec.apply(value, { historyGroup: gesture.group, merge: true })) gesture.dirty = true;
-        else { control.gesture = null; render(); }
+        if (spec.apply(value, { historyGroup: gesture.group, merge: true })) {
+          if (control.gesture === gesture) gesture.dirty = true;
+        } else { control.interrupt(); render(); }
       });
       return control;
     }
@@ -180,10 +197,9 @@
       control.label.textContent = control.spec.label;
       control.input.setAttribute('aria-label', label);
       control.input.disabled = !enabled;
-      if (!control.gesture || !control.gesture.dirty) {
-        control.value = value;
-        if (Number(control.input.value) !== value || control.input.value === '') control.input.value = String(value);
-      }
+      if (control.gesture && control.value !== value) control.interrupt();
+      control.value = value;
+      if (Number(control.input.value) !== value || control.input.value === '') control.input.value = String(value);
       control.output.textContent = control.spec.format(control.value);
       control.input.setAttribute('aria-valuetext', control.spec.format(control.value));
     }
@@ -236,8 +252,8 @@
         apply: (value, options) => trackPatch(id, { pan: value }, 'Pan ' + (getTrack(id) || { name: 'trek' }).name, options)
       });
       const dispose = () => {
-        volume.finish();
-        pan.finish();
+        volume.interrupt();
+        pan.interrupt();
         volume.dispose();
         pan.dispose();
         channelRemovers.splice(0).forEach(remove => remove());
@@ -265,17 +281,20 @@
       const track = getTrack(selectedId);
       if (track && trackPatch(track.id, { reverb: 0, delay: 0 }, 'Reset kesan ' + track.name)) announce('Kesan ' + track.name + ' direset kepada 0%.');
     });
-    listen(doc, 'pointerup', () => ranges.forEach(control => control.finish()));
-    listen(doc, 'pointercancel', () => ranges.forEach(control => control.finish()));
+    const finishPointers = () => ranges.forEach(control => { if (control.source === 'pointer') control.finish(); });
+    listen(doc, 'pointerup', finishPointers);
+    listen(doc, 'pointercancel', finishPointers);
 
     function render() {
       if (disposed) return;
       const project = app.getProject();
+      if (renderedProjectId !== null && renderedProjectId !== project.id) ranges.forEach(control => control.interrupt());
+      renderedProjectId = project.id;
       const tracks = project.tracks || [];
       const requestedId = app.getSelectedTrackId();
       const selectedTrack = tracks.find(track => track.id === requestedId) || tracks[0] || null;
       const nextSelectedId = selectedTrack ? selectedTrack.id : null;
-      if (selectedId !== nextSelectedId) Object.values(effectRanges).forEach(control => control.finish());
+      if (selectedId !== nextSelectedId) Object.values(effectRanges).forEach(control => control.interrupt());
       selectedId = nextSelectedId;
       const ids = new Set(tracks.map(track => track.id));
       let restoreFocus = false;

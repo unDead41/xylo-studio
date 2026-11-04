@@ -110,6 +110,8 @@ Game presents its selected challenge and phase before the arena. Setup guidance 
 
 Studio Pro is a separate workspace with three tabs: Susunan, Mixer and Projek. Shared transport and project timing stay above the active panel; a one-bar step editor bounds the piano/percussion grid. Track overviews and note grids own their horizontal scrolling, while the page and project forms keep natural document height. The chooser offers one compact Pro entry, and each legacy inspector has one send-to-Pro action.
 
+Arrangement reuse lives in the closed Alat bar disclosure below the bar selector. The empty workspace has one secondary example-project action; it opens the closed example selector in Projects without loading anything until Buka contoh is pressed. This continuation uses existing surface, border, focus and text tokens; it adds no theme owner.
+
 Keep the blue-gray/mint/white identity. Existing index.html tokens remain the canonical light palette. `studio-pro/display.css` owns dark semantic overrides and color-vision variants; `--on-primary` changes with the theme to maintain readable filled controls. Fonts, spacing and physical SVG materials stay shared. The display module runs before the body to restore system/light/dark and independent color-vision preferences.
 
 Protanopia/deuteranopia use blue/orange/purple separation; tritanopia uses teal/rose separation; high contrast uses explicit light/dark boundaries. Alternative xylophone bars have independent stripe/dot patterns. All notes keep names/keyboard labels, tracks have numbered names, and mute/solo/recording/error states have text and outlines. Avoid color-only meaning. The application does not claim clinical personalization or physical-device accessibility certification.

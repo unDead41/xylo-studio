@@ -255,12 +255,59 @@ test('tempo/event edits keep the musical cursor and cancel all obsolete audio', 
   assert.ok(newSources[0].frequency.events.some(event => Math.abs(event[1] - 440 * 2 ** ((76 - 69) / 12)) < 1e-8)); h.engine.dispose();
 });
 
+test('a tempo edit during audio interruption leaves a resumable paused transport at the same tick', async () => {
+  const h = harness(), p = project({ tracks: [track('r', { instrumentId: 'recorder', events: [note(0, { durationTick: 96 })] })] });
+  await h.engine.play(p); h.advance(500); const tick = h.engine.getPosition(), audio = h.contexts[0], old = [...audio.sources];
+  audio.state = 'suspended'; const slower = clone(p); slower.bpm = 60;
+  assert.equal(h.engine.update(slower), true); assert.equal(h.engine.getState(), 'paused');
+  assert.ok(Math.abs(h.engine.getPosition() - tick) < 1e-8); assert.equal(h.timers.size, 0);
+  assert.ok(old.every(source => source.stops.includes(undefined)));
+  assert.equal(await h.engine.play(slower), true); assert.ok(Math.abs(h.engine.getPosition() - tick) < 1e-8);
+  assert.equal(audio.sources.length - old.length, 3, 'the held recorder note resumes at the updated tempo'); h.engine.dispose();
+});
+
 test('late timer wakeups skip old onsets instead of playing a backlog', async () => {
   const h = harness(), p = project({ tracks: [track('d', { instrumentId: 'bass_drum', events: [0, 6, 12, 18, 24, 30, 36, 42, 48].map(tick => note(tick, { midi: null, action: 'hit' })) })] });
   await h.engine.play(p); assert.equal(h.calls.length, 1);
   h.advance(900, false); h.runOverdue();
   assert.ok(h.calls.every(call => call.at === .025 || call.at >= .903));
   assert.ok(h.calls.length < 5); assert.ok(h.engine.getPosition() > 40); h.engine.dispose();
+});
+
+test('a late timer restores a missed active recorder gate without duplicating scheduled notes or old drums', async () => {
+  const h = harness(), p = project({ tracks: [
+    track('r', { instrumentId: 'recorder', events: [note(0, { durationTick: 96 }), note(24, { midi: 79, durationTick: 96 })] }),
+    track('expired', { instrumentId: 'recorder', events: [note(24, { midi: 76, durationTick: 6 })] }),
+    track('d', { instrumentId: 'snare', events: [note(24, { midi: null, action: 'hit' })] })
+  ] });
+  await h.engine.play(p); const audio = h.contexts[0], original = [...audio.sources]; assert.equal(original.length, 3);
+  h.advance(900, false); h.runOverdue();
+  const carry = audio.sources.slice(original.length); assert.equal(carry.length, 3, 'the missed held note returns once');
+  assert.ok(carry.every(source => Math.abs(source.startAt - .903) < 1e-8 && Math.abs(source.stops[0] - 2.585) < 1e-8));
+  assert.ok(original.every(source => source.stops.length === 1), 'an already scheduled long gate remains intact');
+  assert.equal(h.calls.length, 0, 'expired drum onsets are skipped');
+  h.advance(200); assert.equal(audio.sources.length, 6, 'the next refills do not duplicate the recovered gate'); h.engine.dispose();
+});
+
+test('late loop recovery restores only the current cycle and clips its gate at the loop boundary', async () => {
+  const h = harness(), p = project({ loop: { enabled: true, startTick: 24, endTick: 48 }, tracks: [
+    track('r', { instrumentId: 'recorder', events: [note(24, { durationTick: 96 })] }),
+    track('d', { instrumentId: 'snare', events: [note(24, { midi: null, action: 'hit' })] })
+  ] });
+  await h.engine.play(p, 24); const audio = h.contexts[0]; h.advance(1100, false); h.runOverdue();
+  const carry = audio.sources.slice(3); assert.equal(carry.length, 3, 'older missed loop cycles are not replayed');
+  assert.ok(carry.every(source => Math.abs(source.startAt - 1.103) < 1e-8 && Math.abs(source.stops[0] - 1.585) < 1e-8));
+  assert.equal(h.calls.length, 1); h.advance(450); assert.equal(audio.sources.length, 9);
+  assert.deepEqual(h.calls.map(call => Math.round(call.at * 1000)), [25, 1525]); h.engine.dispose();
+});
+
+test('unmuting during a delayed refill restores each held gate once', async () => {
+  const h = harness(), p = project({ tracks: [track('r', { instrumentId: 'recorder', muted: true,
+    events: [note(24, { durationTick: 96 })] })] });
+  await h.engine.play(p); h.advance(900, false);
+  const unmuted = clone(p); unmuted.tracks[0].muted = false; h.engine.update(unmuted); h.runOverdue();
+  assert.equal(h.contexts[0].sources.length, 3, 'unmute carry and missed-onset recovery share one restored gate');
+  h.advance(200); assert.equal(h.contexts[0].sources.length, 3); h.engine.dispose();
 });
 
 test('metronome is 4/4, remains independent of solo, and cancels when disabled', async () => {
@@ -297,6 +344,34 @@ test('the real percussion owner can use bound native-context methods and is canc
   h.engine.dispose(); assert.ok(audio.nodes.every(node => node.connections.length === 0));
 });
 
+test('all actual starter projects schedule every track and finish with no remaining voices or timers', async () => {
+  for (const kind of ['melody-percussion', 'school-rhythm', 'march']) {
+    const h = harness({ percussion: 'actual' }), box = { window: h.window }, calls = [];
+    vm.createContext(box); vm.runInContext(fs.readFileSync('studio-pro/core.js', 'utf8'), box);
+    vm.runInContext(fs.readFileSync('studio-pro/projects.js', 'utf8'), box);
+    const p = h.window.ProStudioProjects.createStarter(kind), before = JSON.stringify(p), actual = h.window.PercussionAudio;
+    h.window.PercussionAudio = Object.fromEntries(Object.entries(actual).map(([instrument, voice]) => [instrument, (...args) => {
+      calls.push({ instrument, action: args[1], at: args[2] }); return voice(...args);
+    }]));
+    assert.equal(await h.engine.play(p), true, kind);
+    h.advance(25 + p.lengthBars * 4 * 60 / p.bpm * 1000 + 100);
+    assert.equal(h.engine.getState(), 'idle'); assert.equal(h.engine.getPosition(), p.lengthBars * 96);
+    for (const part of p.tracks) {
+      if (part.instrumentId === 'xylophone' || part.instrumentId === 'recorder') {
+        for (const event of part.events) {
+          const at = .025 + event.tick * 60 / p.bpm / 24, hz = 440 * 2 ** ((event.midi - 69) / 12);
+          assert.ok(h.contexts[0].sources.some(source => Math.abs(source.startAt - at) < 1e-8 && Math.abs(source.frequency.events[0]?.[1] - hz) < 1e-8), kind + ' plays every pitched onset');
+        }
+      } else {
+        const played = calls.filter(call => call.instrument === part.instrumentId); assert.equal(played.length, part.events.length, kind + ' plays every percussion onset');
+        for (const event of part.events) assert.ok(played.some(call => call.action === event.action && Math.abs(call.at - (.025 + event.tick * 60 / p.bpm / 24)) < 1e-8));
+      }
+    }
+    assert.equal(JSON.stringify(p), before, 'playback preserves the original project');
+    h.advance(3000); assert.equal(h.timers.size, 0); assert.ok(h.contexts[0].sources.every(source => source.connections.length === 0)); h.engine.dispose();
+  }
+});
+
 test('optional Web Audio features and a missing shared percussion adapter have working fallbacks', async () => {
   const h = harness({ optional: false, percussion: 'absent' });
   await h.engine.play(project({ tracks: [track('t', { instrumentId: 'tamborin', events: [note(0, { midi: null, action: 'tap' })] })] }));
@@ -310,6 +385,20 @@ test('pathological one-tick loops and polyphony stay bounded and stop has no rem
   assert.ok(h.calls.length <= 256); h.advance(25); assert.ok(h.calls.length <= 512);
   assert.ok(h.calls.filter(call => !call.cancelled).length <= 256); assert.ok(h.states.some(state => /Had bunyi/.test(state.message)));
   h.engine.stop(); assert.equal(h.timers.size, 0); assert.ok(h.calls.every(call => call.cancelled === 1)); h.advance(1000); assert.ok(h.calls.length <= 512);
+});
+
+test('dense muted, solo-excluded, and zero-velocity notes cannot starve an audible track', async () => {
+  for (const mode of ['muted', 'solo', 'zero']) {
+    const h = harness(), events = Array.from({ length: 512 }, (_, id) => note(0, { id: 'silent-' + id, midi: null, action: 'hit', velocity: mode === 'zero' ? 0 : .8 }));
+    const p = project({ tracks: [track('dense', { instrumentId: 'snare', muted: mode === 'muted', events }),
+      track('audible', { instrumentId: 'triangle', solo: mode === 'solo', events: [note(0, { midi: null, action: 'open' })] })] });
+    await h.engine.play(p); assert.equal(h.calls.length, 1, mode + ' notes leave room for the audible track');
+    assert.equal(h.calls[0].instrument, 'triangle'); assert.ok(!h.states.some(state => /Had bunyi/.test(state.message))); h.engine.dispose();
+  }
+  const h = harness(), events = Array.from({ length: 512 }, (_, id) => note(0, { id: 'silent-carry-' + id, durationTick: 96, velocity: 0 }));
+  await h.engine.play(project({ tracks: [track('zero', { instrumentId: 'recorder', events }),
+    track('audible', { instrumentId: 'recorder', events: [note(0, { midi: 79, durationTick: 96 })] })] }), 24);
+  assert.equal(h.contexts[0].sources.length, 3, 'silent sustained gates also leave room for the audible carry'); h.engine.dispose();
 });
 
 test('missing audio, malformed project, interrupted context and throwing consumers fail safely', async () => {

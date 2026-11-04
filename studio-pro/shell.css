@@ -46,6 +46,7 @@
 #proView .pro-empty-mark{display:grid;place-items:center;flex:none;width:57px;height:57px;border:1px solid var(--border);border-radius:15px;background:var(--surface);font-size:30px;color:var(--primary)}
 #proView .pro-empty h3{font-size:17px}
 #proView .pro-empty p{max-width:650px;margin-top:7px;font-size:13px;line-height:1.65;color:var(--muted)}
+#proView .pro-empty-actions{margin-top:12px}
 #proView .pro-shortcuts{margin-top:16px;border:1px solid var(--border);border-radius:13px;padding:14px 18px;background:var(--surface-subtle,var(--background));color:var(--muted);font-size:12px}
 #proView .pro-shortcuts summary{min-height:24px;width:fit-content;font-weight:650;color:var(--ink);cursor:pointer}
 #proView .pro-shortcuts summary:focus-visible{outline:3px solid var(--focus);outline-offset:4px;border-radius:4px}

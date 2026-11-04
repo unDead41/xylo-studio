@@ -7,17 +7,18 @@
     "branch": "main",
     "directory": "/"
   },
-  "index_sha256": "ce98ab98c33cb661ba28dc7bd2da412f703e0db46eb1b9272b79d947a26c79a9",
+  "index_sha256": "91ad5adacd358703d8024efc79104f253fa35eb44c98308ce5e931a9229ae5c5",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
-    "passed": 332,
-    "failed": 0
+    "passed": 375,
+    "failed": 0,
+    "clean_tracked_export_passed": 375
   },
-  "source_base": "27df2fadadf66cee3f2be26aeafff765e33e515e",
+  "source_base": "906d8fa040dc18b13d8a9cb74ea448b023091a94",
   "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
   "integrated_tamborin_sha": "7cf77b7e275b94717748cb80aed73f6680daa59e",
   "previous_release_audit": "docs/audits/main/LATEST.md",
-  "integration_handoff": "docs/handoffs/ui/STUDIO_PRO.md",
+  "integration_handoff": "docs/handoffs/ui/STUDIO_PRO_RESUME.md",
   "previous_browser_verification": {
     "commands": [
       "node tests/browser-layout.cjs",
@@ -43,8 +44,8 @@
   ],
   "browser_tests": {
     "method": "Supported CUA cloud Chromium actions and read-only rendered DOM measurements",
-    "evidence": "docs/handoffs/ui/pro-verification/browser-verification.json",
-    "scope": "Combined Pro and retained BM/English UI;24 panel/language/width checks, navigation,display and storage observations. See evidence limits."
+    "evidence": "docs/handoffs/ui/resume-verification/browser-verification.json",
+    "scope": "24 panel/language/width checks with new disclosures plus starter/bar/transport/mixer/autosave browser workflows; see evidence limits."
   },
   "previous_integration_handoff": "https://github.com/unDead41/xylo-studio/blob/e84a0ca767858582d3faf240c62376b6e2574419/docs/handoffs/ui/LATEST.md",
   "integrated_ui_layout_sha": "e84a0ca767858582d3faf240c62376b6e2574419",
@@ -54,7 +55,7 @@
     "handoff": "docs/handoffs/instrument-pancaragam/LATEST.md"
   },
   "candidate_branch": "ui",
-  "previous_ui_head": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c",
+  "previous_ui_head": "906d8fa040dc18b13d8a9cb74ea448b023091a94",
   "studio_pro": {
     "schema": "e-instru-project/v1",
     "max_tracks": 8,
@@ -69,7 +70,14 @@
       "tritanopia",
       "contrast"
     ],
-    "source_checks": "docs/handoffs/ui/pro-verification/source-checks.json"
+    "source_checks": "docs/handoffs/ui/resume-verification/source-checks.json",
+    "bar_clipboard_schema": "e-instru-bar/v1",
+    "starter_examples": [
+      "melody-percussion",
+      "school-rhythm",
+      "march"
+    ],
+    "theme_scope": "Excluded from continuation; existing source preserved."
   },
   "localization": {
     "languages": [
@@ -78,10 +86,12 @@
     ],
     "default": "ms",
     "preference_key": "e-instru-language",
-    "exact_phrase_pairs": 1394,
-    "anchored_templates": 137,
-    "tests": 14,
-    "studio_pro_extension": "studio-pro/i18n.json"
+    "exact_phrase_pairs": 1431,
+    "anchored_templates": 144,
+    "tests": 19,
+    "studio_pro_extension": "studio-pro/i18n.json",
+    "retained_bilingual_tests": 14,
+    "studio_pro_tests": 5
   },
   "previous_ui_integration_handoff": "docs/handoffs/ui/LATEST.md",
   "previous_ui_browser_tests": {
@@ -90,5 +100,5 @@
     "scope": "Manual eight-route narrow layout, native dialog/focus/export, percussion session/trace and Game phase/result checks; see evidence for exact limits."
   },
   "concurrent_ui_commit": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c",
-  "studio_pro_commit": "3327473"
+  "initial_studio_pro_local_commit": "3327473"
 }

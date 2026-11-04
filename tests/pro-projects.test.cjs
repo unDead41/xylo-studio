@@ -29,7 +29,9 @@ function fixture(storage = memoryStorage()) {
     constructor(tag) {
       this.tagName = tag.toUpperCase(); this.nodeType = 1; this.ownerDocument = document;
       this.children = []; this.parentNode = null; this.attributes = {}; this.listeners = new Map();
-      this.value = ''; this.className = ''; this._text = ''; this.disabled = false; this.files = [];
+      this.value = ''; this.className = ''; this._text = ''; this.disabled = false; this.files = []; this.open = false;
+      this.classList = { toggle: (name, on) => { const classes = new Set(this.className.split(/\s+/).filter(Boolean)); if (on) classes.add(name); else classes.delete(name); this.className = [...classes].join(' '); },
+        contains: name => this.className.split(/\s+/).includes(name) };
       const parent = this;
       this.textNode = { nodeType: 3, parentNode: parent, parentElement: parent, previousSibling: null,
         get data() { return parent._text; }, set data(value) { parent._text = String(value); } };
@@ -53,6 +55,8 @@ function fixture(storage = memoryStorage()) {
     async fire(name) { if (this.disabled) return; for (const listener of this.listeners.get(name) || []) await listener({ target: this }); }
     click() { if (this.tagName === 'A') downloads.push({ filename: this.download, href: this.href }); else return this.fire('click'); }
     focus() { document.activeElement = this; }
+    showModal() { this.open = true; }
+    close() { this.open = false; for (const listener of this.listeners.get('close') || []) listener({ target: this }); }
   }
   document = { activeElement: null, createElement: tag => new Element(tag),
     addEventListener(name, listener) { if (!documentListeners.has(name)) documentListeners.set(name, []); documentListeners.get(name).push(listener); },
@@ -65,6 +69,8 @@ function fixture(storage = memoryStorage()) {
   const box = { document, localStorage: storage, Blob,
     URL: { createObjectURL(blob) { blobs.push(blob); return 'blob:local-' + blobs.length; }, revokeObjectURL(url) { revoked.push(url); } },
     setTimeout(fn) { timers.push(fn); return timers.length; },
+    clearTimeout(id) { timers[id - 1] = () => {}; },
+    CustomEvent: class { constructor(type, options) { this.type = type; this.detail = options.detail; } },
     addEventListener(name, listener) { if (!windowListeners.has(name)) windowListeners.set(name, []); windowListeners.get(name).push(listener); },
     removeEventListener(name, listener) { windowListeners.set(name, (windowListeners.get(name) || []).filter(fn => fn !== listener)); }
   };
@@ -84,6 +90,8 @@ function fixture(storage = memoryStorage()) {
   };
   function all(root = document.body) { return [root, ...root.children.flatMap(child => all(child))]; }
   document.getElementById = id => all(document.documentElement).find(node => node.id === id) || null;
+  document.querySelector = selector => selector === 'dialog[open]' ? all().find(node => node.tagName === 'DIALOG' && node.open) || null : null;
+  document.dispatchEvent = event => { for (const listener of documentListeners.get(event.type) || []) listener(event); return true; };
   const container = new Element('div'); document.body.appendChild(container);
   return { box, C, store, storage, statuses, app, document, container, confirmations, announcements, replacements, downloads, blobs, revoked, timers,
     setProject(next) { project = C.clone(next); },
@@ -94,8 +102,19 @@ function fixture(storage = memoryStorage()) {
       vm.runInContext(source, box);
       return box.StudioI18n;
     },
-    action(name) { return all(container).find(node => node.getAttribute('data-pro-project-action') === name); },
-    findClass(name) { return all(container).find(node => node.className.split(' ').includes(name)); },
+    enableShell() {
+      const markup = fs.readFileSync('studio-pro/shell.html', 'utf8');
+      for (const match of markup.matchAll(/<([a-z][a-z0-9]*)\b[^>]*\bid="([^"]+)"[^>]*>/gi)) {
+        const node = document.createElement(match[1]); node.id = match[2];
+        for (const attribute of match[0].matchAll(/\b([a-z-]+)="([^"]*)"/g)) node.setAttribute(attribute[1], attribute[2]);
+        node.hidden = /\shidden(?:\s|>)/.test(match[0]); document.body.appendChild(node);
+      }
+      vm.runInContext(fs.readFileSync('studio-pro/shell.js', 'utf8'), box);
+      return box.ProStudioApp;
+    },
+    runTimers() { const pending = timers.slice(); pending.forEach((fn, index) => { timers[index] = () => {}; fn(); }); },
+    action(name, root = container) { return all(root).find(node => node.getAttribute('data-pro-project-action') === name); },
+    findClass(name, root = container) { return all(root).find(node => node.className.split(' ').includes(name)); },
     findTag(tag) { return all(container).find(node => node.tagName === tag.toUpperCase()); },
     fireStorage(key, area = storage) { for (const listener of windowListeners.get('storage') || []) listener({ key, storageArea: area }); },
     documentListeners
@@ -141,6 +160,15 @@ test('unchanged save and active selection do not rewrite the store', () => {
   f.store.save(project); const writes = f.storage.writes;
   assert.ok(f.store.save(project)); assert.equal(f.store.setActiveId(project.id), true);
   assert.equal(f.storage.writes, writes);
+});
+
+test('returning to the saved snapshot clears a stale quota warning without rewriting storage', () => {
+  const f = fixture(); const saved = arrangement(f.C); f.store.save(saved);
+  const raw = f.storage.data.get(f.box.ProStudioProjects.STORAGE_KEY); const writes = f.storage.writes;
+  f.storage.fail = 'quota'; const changed = f.C.updateProject(saved, { title: 'Pending edit' });
+  assert.equal(f.store.save(changed), false); assert.equal(f.store.getStatus().code, 'quota');
+  assert.ok(f.store.save(saved)); assert.equal(f.store.getStatus().code, 'saved');
+  assert.equal(f.storage.writes, writes); assert.equal(f.storage.data.get(f.box.ProStudioProjects.STORAGE_KEY), raw);
 });
 
 test('bounded store retains all twenty projects and refuses silent eviction', () => {
@@ -422,4 +450,117 @@ test('local option metadata rerenders on language changes and releases the langu
   assert.equal(select.children[1].textContent, 'Henti · 2 tracks · 120 BPM');
   assert.equal(f.action('save').getAttribute('data-i18n-ignore'), null);
   panel.dispose(); assert.equal(listeners.size, 0);
+});
+
+test('all three original starters are independent playable four-bar scores validated by actual Core', () => {
+  const f = fixture(); const expected = {
+    'melody-percussion': ['xylophone', 'kompang'],
+    'school-rhythm': ['tamborin', 'triangle'],
+    march: ['snare', 'bass_drum', 'cymbals']
+  };
+  for (const [kind, instruments] of Object.entries(expected)) {
+    const project = f.box.ProStudioProjects.createStarter(kind);
+    assert.deepEqual(plain(f.C.validate(project)), []); assert.equal(project.lengthBars, 4);
+    assert.ok(project.bpm >= 40 && project.bpm <= 200); assert.equal(project.loop.enabled, false);
+    assert.deepEqual(plain(project.tracks.map(track => track.instrumentId)), instruments);
+    const eventIds = new Set();
+    for (const track of project.tracks) {
+      const instrument = f.C.INSTRUMENTS[track.instrumentId];
+      assert.ok(track.volume > 0); assert.equal(track.muted, false); assert.equal(track.solo, false);
+      assert.ok(track.events.length > 0 && track.events.length <= f.C.MAX_EVENTS);
+      assert.equal(Object.hasOwn(track, 'sourceTake'), false); assert.equal(Object.hasOwn(track, 'raw_capture'), false);
+      assert.deepEqual([...new Set(track.events.map(event => Math.floor(event.tick / f.C.BAR_TICKS)))], [0, 1, 2, 3]);
+      for (const event of track.events) {
+        assert.ok(event.velocity > 0); assert.ok(event.tick + event.durationTick <= 4 * f.C.BAR_TICKS);
+        assert.equal(eventIds.has(event.id), false); eventIds.add(event.id);
+        if (instrument.pitched) { assert.equal(Number.isInteger(event.midi), true); assert.equal(event.action, null); }
+        else { assert.equal(event.midi, null); assert.ok(instrument.actions.includes(event.action)); }
+      }
+    }
+    assert.deepEqual(plain(f.C.projectFromJSON(f.C.exportProject(project))), plain(project));
+    assert.equal(f.C.csv(project).split('\r\n').length, 1 + project.tracks.reduce((sum, track) => sum + track.events.length, 0));
+    const other = f.box.ProStudioProjects.createStarter(kind); assert.notEqual(other.id, project.id);
+    project.tracks[0].events[0].velocity = 0;
+    assert.ok(other.tracks[0].events[0].velocity > 0, 'A caller must never mutate the next starter');
+  }
+  assert.throws(() => f.box.ProStudioProjects.createStarter('not-a-template'), /Pilih contoh/);
+  assert.equal(f.storage.writes, 0, 'Creating a starter must not touch persistence');
+});
+
+test('starter disclosure and focus route stay passive until the user opens an example', () => {
+  const f = fixture(); const panel = f.mount(); const before = f.C.exportProject(f.app.getProject());
+  const details = f.findClass('pro-projects-starters'); const select = f.findClass('pro-projects-starter-select');
+  assert.equal(details.tagName, 'DETAILS'); assert.equal(details.open, false);
+  assert.equal(select.tagName, 'SELECT'); assert.equal(select.children.length, 3);
+  assert.equal(select.id, 'pro-projects-1-starter'); assert.equal(select.getAttribute('data-pro-project-starter'), '');
+  assert.ok(select.getAttribute('aria-describedby')); assert.ok(f.action('starter'));
+  assert.match(details.textContent, /2 trek · 100 BPM · 4 bar/);
+  assert.equal(panel.focusStarter(), true); assert.equal(details.open, true); assert.equal(f.document.activeElement, select);
+  assert.equal(f.C.exportProject(f.app.getProject()), before); assert.equal(f.storage.writes, 0);
+  panel.dispose(); assert.equal(panel.focusStarter(), false);
+});
+
+test('live shell starter replacement preserves pending source edits before cancelling their autosave', async () => {
+  const f = fixture(); const app = f.enableShell(); app.enter();
+  app.mutate(project => f.C.addTrack(f.C.updateProject(project, { title: 'Rakam' }), 'xylophone'), 'Pending track');
+  app.mutate(project => f.C.addEvent(project, project.tracks[0].id, { midi: 64, tick: 24 }), 'Pending note');
+  const previous = app.getProject(); const previousJSON = f.C.exportProject(previous);
+  assert.equal(app.getStore().load(previous.id), null);
+  const select = f.findClass('pro-projects-starter-select', f.document.body); select.value = 'march'; await select.fire('change');
+  await f.action('starter', f.document.body).click();
+  assert.equal(f.document.getElementById('proConfirmDialog').open, false);
+  assert.equal(app.getProject().title, 'Rentak perarakan'); assert.equal(app.getProject().tracks.length, 3);
+  assert.equal(f.C.exportProject(app.getStore().load(previous.id)), previousJSON);
+  f.runTimers();
+  assert.equal(f.C.exportProject(app.getStore().load(previous.id)), previousJSON);
+  assert.equal(app.getStore().getActiveId(), app.getProject().id);
+  assert.equal(app.getStore().load(previous.id).title, 'Rakam');
+});
+
+test('live shell quota and corrupt storage keep pending projects until native discard confirmation', async () => {
+  for (const failure of ['quota', 'corrupt']) {
+    const storage = memoryStorage(failure === 'corrupt' ? { 'e-instru-pro-projects/v1': '{broken' } : {});
+    const f = fixture(storage); const app = f.enableShell(); app.enter();
+    app.mutate(project => f.C.addTrack(f.C.updateProject(project, { title: 'Henti' }), 'kompang'), 'Pending work');
+    if (failure === 'quota') storage.fail = 'quota';
+    const previous = f.C.exportProject(app.getProject()); const raw = storage.data.get(f.box.ProStudioProjects.STORAGE_KEY);
+    await f.action('starter', f.document.body).click();
+    assert.equal(f.document.getElementById('proConfirmDialog').open, true);
+    assert.match(f.document.getElementById('proConfirmMessage').textContent, /belum disimpan/);
+    assert.equal(f.C.exportProject(app.getProject()), previous);
+    await f.document.getElementById('proConfirmCancel').fire('click');
+    assert.equal(f.C.exportProject(app.getProject()), previous); assert.equal(storage.data.get(f.box.ProStudioProjects.STORAGE_KEY), raw);
+  }
+});
+
+test('a full local library is preserved when an unsavable starter replacement is cancelled or explicitly accepted', async () => {
+  const f = fixture(); const app = f.enableShell(); app.enter();
+  app.mutate(project => f.C.addTrack(f.C.updateProject(project, { title: 'Pending arrangement' }), 'tamborin'));
+  for (let i = 0; i < 20; i += 1) app.getStore().save(f.C.createProject({ id: 'saved-' + i, title: 'Saved ' + i }));
+  const raw = f.storage.data.get(f.box.ProStudioProjects.STORAGE_KEY); const previous = f.C.exportProject(app.getProject());
+  await f.action('starter', f.document.body).click();
+  assert.equal(f.document.getElementById('proConfirmDialog').open, true);
+  assert.equal(f.C.exportProject(app.getProject()), previous);
+  await f.document.getElementById('proConfirmCancel').fire('click');
+  assert.equal(f.storage.data.get(f.box.ProStudioProjects.STORAGE_KEY), raw);
+  await f.action('starter', f.document.body).click();
+  await f.document.getElementById('proConfirmAccept').fire('click'); f.runTimers();
+  assert.equal(app.getProject().title, 'Melodi dan rentak'); assert.equal(app.getProject().tracks.length, 2);
+  assert.equal(f.storage.data.get(f.box.ProStudioProjects.STORAGE_KEY), raw, 'Explicitly opening an unsaved example must never evict a stored project');
+  assert.equal(app.getStore().list().length, 20);
+});
+
+test('starter titles localize on creation while user names and previous projects stay literal', () => {
+  const f = fixture(); let english = false;
+  const labels = { 'Melodi dan rentak': 'Melody and rhythm', 'Rentak sekolah': 'School rhythm', 'Rentak perarakan': 'March rhythm',
+    Kompang: 'Kompang', Tamborin: 'Tambourine', 'Segi Tiga': 'Triangle', 'Dram Sisi': 'Snare drum', 'Dram Bes': 'Bass drum', Simbal: 'Cymbals' };
+  f.box.StudioI18n = { t: source => english ? labels[source] || source : source };
+  const first = f.box.ProStudioProjects.createStarter('melody-percussion');
+  f.store.save(f.C.updateProject(first, { title: 'Rakam' })); const raw = f.storage.data.get(f.box.ProStudioProjects.STORAGE_KEY);
+  english = true;
+  assert.equal(f.box.ProStudioProjects.createStarter('melody-percussion').title, 'Melody and rhythm');
+  const school = f.box.ProStudioProjects.createStarter('school-rhythm');
+  assert.equal(school.title, 'School rhythm'); assert.equal(school.tracks[1].name, 'Triangle');
+  assert.equal(first.title, 'Melodi dan rentak'); assert.equal(f.store.load(first.id).title, 'Rakam');
+  assert.equal(f.storage.data.get(f.box.ProStudioProjects.STORAGE_KEY), raw);
 });

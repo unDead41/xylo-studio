@@ -6,11 +6,72 @@
   const MAX_PROJECTS = 20;
   const MAX_FILE_BYTES = 4 * 1024 * 1024;
   const MAX_STORE_BYTES = 8 * 1024 * 1024;
+  const STARTERS = Object.freeze([
+    Object.freeze({ id: 'melody-percussion', title: 'Melodi dan rentak', bpm: 100,
+      summary: 'Xylophone dan Kompang · 2 trek · 100 BPM · 4 bar' }),
+    Object.freeze({ id: 'school-rhythm', title: 'Rentak sekolah', bpm: 92,
+      summary: 'Tamborin dan Segi Tiga · 2 trek · 92 BPM · 4 bar' }),
+    Object.freeze({ id: 'march', title: 'Rentak perarakan', bpm: 108,
+      summary: 'Dram Sisi, Dram Bes dan Simbal · 3 trek · 108 BPM · 4 bar' })
+  ]);
   let panelSequence = 0;
 
   function core() {
     if (!root.ProStudioCore) throw new Error('Model Studio Pro belum tersedia.');
     return root.ProStudioCore;
+  }
+
+  function localized(text) {
+    return typeof root.StudioI18n?.t === 'function' ? root.StudioI18n.t(text) : text;
+  }
+
+  function createStarter(kind) {
+    const C = core();
+    const definition = STARTERS.find(function (item) { return item.id === kind; });
+    if (!definition) throw new Error('Pilih contoh projek yang sah.');
+    const beat = C.PPQ, barTicks = C.BAR_TICKS;
+    let project = C.createProject({ title: localized(definition.title), bpm: definition.bpm, lengthBars: 4 });
+
+    function addPart(instrumentId, volume, pan, events) {
+      project = C.addTrack(project, instrumentId);
+      const id = project.tracks[project.tracks.length - 1].id;
+      project = C.updateTrack(project, id, { name: localized(C.INSTRUMENTS[instrumentId].label), volume: volume, pan: pan });
+      events.forEach(function (event) { project = C.addEvent(project, id, event); });
+    }
+
+    function percussion(pattern) {
+      const events = [];
+      for (let bar = 0; bar < 4; bar += 1) {
+        pattern.forEach(function (hit) {
+          events.push({ tick: bar * barTicks + hit[0] * beat, durationTick: 6,
+            midi: null, action: hit[1], velocity: hit[2] });
+        });
+      }
+      return events;
+    }
+
+    // Original four-bar exercises. These are composed score events, not takes
+    // or claims about a performed recording; no capture evidence is fabricated.
+    if (kind === 'melody-percussion') {
+      const notes = [[60, 64, 67, 64], [62, 65, 69, 65], [64, 67, 72, 67], [65, 64, 62, 60]];
+      const melody = [];
+      notes.forEach(function (pitches, bar) {
+        pitches.forEach(function (midi, index) {
+          melody.push({ tick: bar * barTicks + index * beat, durationTick: bar === 3 && index === 3 ? beat : 18,
+            midi: midi, action: null, velocity: index === 0 ? .78 : .65 });
+        });
+      });
+      addPart('xylophone', .68, -.1, melody);
+      addPart('kompang', .56, .1, percussion([[0, 'center', .72], [1, 'edge', .52], [2, 'center', .66], [3, 'edge', .48]]));
+    } else if (kind === 'school-rhythm') {
+      addPart('tamborin', .56, -.1, percussion([[0, 'tap', .65], [1, 'shake', .45], [2, 'tap', .58], [3, 'shake', .45]]));
+      addPart('triangle', .48, .12, percussion([[0, 'open', .55], [2, 'muted', .4]]));
+    } else {
+      addPart('snare', .53, -.1, percussion([[0, 'hit', .48], [1, 'rim', .68], [2, 'hit', .48], [3, 'rim', .7]]));
+      addPart('bass_drum', .62, 0, percussion([[0, 'hit', .7], [2, 'soft', .52]]));
+      addPart('cymbals', .4, .12, percussion([[0, 'crash', .45], [2, 'soft', .28]]));
+    }
+    return project;
   }
 
   function byteLength(text) {
@@ -180,7 +241,10 @@
       if (!previous && state.projects.length >= MAX_PROJECTS) {
         return report('limit', 'Had 20 projek dicapai. Eksport JSON dan padam projek lama sebelum menyimpan projek baharu.', 'error');
       }
-      if (previous && sameProject(previous.project, project) && state.activeId === project.id) return projectCopy(project);
+      if (previous && sameProject(previous.project, project) && state.activeId === project.id) {
+        report('saved', 'Projek disimpan di pelayar ini. Eksport JSON untuk sandaran.', 'success');
+        return projectCopy(project);
+      }
       const projects = state.projects.filter(function (entry) { return entry.project.id !== project.id; });
       projects.push({ project: project, updatedAt: new Date().toISOString() });
       return write(nextState(projects, project.id), 'Projek disimpan di pelayar ini. Eksport JSON untuk sandaran.') ? projectCopy(project) : false;
@@ -236,6 +300,30 @@
     section.setAttribute('aria-labelledby', heading.id);
     section.appendChild(heading);
     section.appendChild(element('p', 'pro-projects-intro', 'Simpan susunan berbilang trek di pelayar ini. Eksport JSON untuk salinan sandaran.'));
+
+    const starters = element('details', 'pro-projects-starters');
+    const startersHeading = element('summary', '', 'Mulakan dengan contoh');
+    const startersBody = element('div', 'pro-projects-starters-body');
+    const starterLabel = element('label', '', 'Contoh projek');
+    const starterSelect = element('select', 'pro-projects-starter-select');
+    starterSelect.id = prefix + 'starter';
+    starterSelect.setAttribute('data-pro-project-starter', '');
+    starterLabel.htmlFor = starterSelect.id;
+    STARTERS.forEach(function (starter) {
+      const option = element('option', '', starter.title);
+      option.value = starter.id;
+      starterSelect.appendChild(option);
+    });
+    starterSelect.value = STARTERS[0].id;
+    const starterSummary = element('p', 'pro-projects-help');
+    starterSummary.id = prefix + 'starter-summary';
+    starterSummary.setAttribute('aria-live', 'polite');
+    starterSelect.setAttribute('aria-describedby', starterSummary.id);
+    const starterButton = button('starter', 'Buka contoh');
+    startersBody.append(starterLabel, starterSelect, starterSummary,
+      element('p', 'pro-projects-help', 'Corak asal empat bar. Anda boleh menyunting setiap trek selepas dibuka.'), starterButton);
+    starters.append(startersHeading, startersBody);
+    section.appendChild(starters);
 
     const nameField = element('div', 'pro-projects-field');
     const nameLabel = element('label', '', 'Nama projek');
@@ -319,7 +407,7 @@
     function store() { return app.getStore(); }
 
     function translated(text) {
-      return typeof root.StudioI18n?.t === 'function' ? root.StudioI18n.t(text) : text;
+      return localized(text);
     }
 
     function say(text, error) {
@@ -341,10 +429,13 @@
       return !sameProject(project, C.createProject({ id: project.id }));
     }
 
-    function askReplace(next, label, extraMessage) {
+    function askReplace(next, label, extraMessage, preservePending) {
       if (disposed) return;
       const current = app.getProject();
-      const unsaved = dirty(current);
+      let unsaved = dirty(current);
+      // Opening a starter preserves edits still waiting for the shell's debounce.
+      // A failed save must reach the explicit existing discard confirmation.
+      if (unsaved && preservePending) unsaved = !store().save(current);
       function replace() {
         if (disposed) return;
         try {
@@ -390,6 +481,11 @@
     }
 
     nameInput.addEventListener('change', commitName);
+    starterSelect.addEventListener('change', function () { if (!disposed) render(); });
+    starterButton.addEventListener('click', guard(function () {
+      if (!commitName()) return;
+      askReplace(createStarter(starterSelect.value), 'Contoh projek dibuka', '', true);
+    }));
     select.addEventListener('change', function () { if (!disposed) { selectedId = select.value; render(); } });
     saveButton.addEventListener('click', guard(function () {
       if (!commitName()) return;
@@ -500,6 +596,9 @@
       try {
         const project = app.getProject();
         const entries = store().list();
+        const starter = STARTERS.find(function (item) { return item.id === starterSelect.value; });
+        const summaryText = starter ? translated(starter.summary) : '';
+        if (starterSummary.textContent !== summaryText) starterSummary.textContent = summaryText;
         if (doc.activeElement !== nameInput) nameInput.value = project.title;
         if (!entries.some(function (entry) { return entry.id === selectedId; })) {
           selectedId = entries.some(function (entry) { return entry.id === project.id; }) ? project.id : '';
@@ -522,7 +621,7 @@
         count.textContent = entries.length + ' / 20 projek. Simpanan pelayar tidak menggantikan sandaran JSON.';
         const saved = store().load(project.id);
         dirtyState.textContent = saved && sameProject(project, saved) ? 'Projek semasa telah disimpan.' : 'Projek semasa belum disimpan. Autosimpan mengikut status studio.';
-        for (const control of [nameInput, saveButton, newButton, duplicateButton, jsonButton, csvButton, fileInput]) control.disabled = busy;
+        for (const control of [nameInput, saveButton, newButton, duplicateButton, jsonButton, csvButton, fileInput, starterSelect, starterButton]) control.disabled = busy;
         select.disabled = busy || !entries.length;
         loadButton.disabled = busy || !selectedId;
         deleteButton.disabled = busy || !selectedId;
@@ -538,7 +637,12 @@
     doc.addEventListener('prostudio:change', render);
     const unsubscribeLanguage = typeof root.StudioI18n?.onChange === 'function' ? root.StudioI18n.onChange(render) : null;
     render();
-    return Object.freeze({ render: render, dispose: function () {
+    return Object.freeze({ render: render, focusStarter: function () {
+      if (disposed || busy) return false;
+      starters.open = true;
+      starterSelect.focus();
+      return true;
+    }, dispose: function () {
       if (disposed) return;
       disposed = true;
       importSequence += 1;
@@ -548,7 +652,7 @@
     } });
   }
 
-  root.ProStudioProjects = Object.freeze({ createStore: createStore,
+  root.ProStudioProjects = Object.freeze({ createStore: createStore, createStarter: createStarter,
     STORAGE_KEY: STORAGE_KEY, STORAGE_SCHEMA: STORAGE_SCHEMA,
     MAX_PROJECTS: MAX_PROJECTS, MAX_FILE_BYTES: MAX_FILE_BYTES });
   root.ProStudioProjectPanel = Object.freeze({ mount: mount });

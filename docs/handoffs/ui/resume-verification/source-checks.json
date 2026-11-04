@@ -1,0 +1,80 @@
+{
+  "base_commit": "906d8fa040dc18b13d8a9cb74ea448b023091a94",
+  "branch": "ui",
+  "accepted_version": "v1.04.0",
+  "commands": [
+    {
+      "command": "node scripts/embed-studio-pro.cjs --check",
+      "exit_code": 0
+    },
+    {
+      "command": "node --test tests/*.test.cjs",
+      "exit_code": 0,
+      "passed": 375,
+      "failed": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "clean_export": {
+    "method": "git write-tree; git archive staged_tree; extract into a fresh temporary directory; run embedding check and the complete suite",
+    "passed": 375,
+    "failed": 0,
+    "embedding_exit_code": 0,
+    "evidence": "clean-node-tests.txt",
+    "packaging_fix": "Explicitly track studio-pro/core.js despite core.* ignore; no untracked local source is required."
+  },
+  "sha256": {
+    ".gitignore": "4ddc83669b386d684aa7e2ac523cc86a8e48ffe09b7ab370dbde6569c34f108e",
+    "index.html": "91ad5adacd358703d8024efc79104f253fa35eb44c98308ce5e931a9229ae5c5",
+    "scripts/embed-studio-pro.cjs": "f853be494efed566972201b521b8e4a6df07e5db80462826b5e9bda427557faa",
+    "studio-pro/arranger.css": "a545967788393900ad1549da411ef12714553349cbc369f2f1fe0e4f7086d92d",
+    "studio-pro/arranger.js": "257d3db4f9ec3232420f7a5d31f684aaa7f8c3357aba2f4e7fb53e428eef3e6f",
+    "studio-pro/audio.js": "3a3b4b8a46984ef2b60500e12f08d31633543ef1a6e3424079909845d22c7be1",
+    "studio-pro/core.js": "e8546f927dfac089fe79b0d4d88341976bb28c3b23a8439fb55e0d29db0e579b",
+    "studio-pro/display.css": "4f4c98e400d391fdd672adc11c4b53cccdd90d515abc215162739a962a2a65dd",
+    "studio-pro/display.html": "19aa85d12e65dca388d23951bb3656c771fb136296990e6e51036abc37f2cb5c",
+    "studio-pro/display.js": "b61a18b77841235071718ccbd082bc34192f9b9190e9b3da7191e38b56b0405c",
+    "studio-pro/i18n.json": "08e497b4dba9a58c39337050afcfbdd2ae9504952cc711c33aa7695b892564fd",
+    "studio-pro/mixer.css": "70446983257c5ae1dbcccb372aef526a1a2ce6219233ae6551fa0dea2cd35c28",
+    "studio-pro/mixer.js": "1d6e37611a8da23dabbe3e9ba0109bb59242cea0e80d10c92fe6217395de15b9",
+    "studio-pro/projects.css": "12d13ce17b6be943a5e3d0a425d1de38dd550eac65cbd8ebdcc232e5a6ede3b3",
+    "studio-pro/projects.js": "7c50eaf18a9e4a1bbd3e89ece87c818e8e00b3a6e388ee60d40d2b5177db268d",
+    "studio-pro/shell.css": "cb419612762c3ed92ebfbf82c683c7797b4c6a5d6d07e107a2c0c766b8163c47",
+    "studio-pro/shell.html": "e964691cb5501ec893d70b8245e63f7e9a43feea6a5a4f1c572c165802bef36b",
+    "studio-pro/shell.js": "22d14c8e7128cc83b833b8bd95329235a2c4cf3f433fe1646df36f43262f2266",
+    "tests/pro-arranger.test.cjs": "a4a60603605f3e3c2936c08e9d0746bd38a6724d7e4edb18a15683cfdf8ac352",
+    "tests/pro-audio.test.cjs": "88f74ea35209244bcb6a390923e0cd62cd0a4ab871939e2dd772212a60e4a339",
+    "tests/pro-core.test.cjs": "d54cb69369be9542f12b87031bcc1882686dc74425fb7e9f8ec4a19b53d1f773",
+    "tests/pro-embed.test.cjs": "950c70c58cd8084eaa3849470e690d9ab679cb10bf7c5504a8220343eadd479f",
+    "tests/pro-i18n.test.cjs": "1a2b0848e8ac144027dd2ffe9ed726c60003a85cdbf63258af16dd777a3e2418",
+    "tests/pro-mixer.test.cjs": "9ad9db7c96c863ba2e53e1a11aa549707706792a446a9f4c0c86b4d4a71c5426",
+    "tests/pro-navigation.test.cjs": "8e317e49566b8c2904fa2b0af3355a3425ebb7f178670c2bd694b97afcd30d87",
+    "tests/pro-projects.test.cjs": "ab59ad58268919d5954584dd6477d74159928a5d6afef46ffd00470ea7fd1409",
+    "tests/pro-shell.test.cjs": "931a301972f3318e811e27c91c1f203276b91b1029e09193eb8e38748d88bb00"
+  },
+  "excluded_theme_files": {
+    "studio-pro/display.js": "b61a18b77841235071718ccbd082bc34192f9b9190e9b3da7191e38b56b0405c",
+    "studio-pro/display.css": "4f4c98e400d391fdd672adc11c4b53cccdd90d515abc215162739a962a2a65dd",
+    "studio-pro/display.html": "19aa85d12e65dca388d23951bb3656c771fb136296990e6e51036abc37f2cb5c"
+  },
+  "theme_source_changed": false,
+  "localization": {
+    "exact_phrase_pairs": 1431,
+    "anchored_templates": 144,
+    "extension_entries": 436,
+    "extension_templates": 55
+  },
+  "strict_static_audit": {
+    "baseline_errors": 140,
+    "candidate_errors": 142,
+    "unresolved_owners": 0,
+    "rules": {
+      "affordance.actionless-button": 136,
+      "form.textarea-resize-missing": 6
+    },
+    "classification": "Reviewed native-listener/global-resize scanner limitations; not a passing strict audit."
+  }
+}

@@ -256,3 +256,157 @@ test('history bounds undo depth and preserves source evidence through repeated t
  assert.equal(JSON.stringify(history.get().tracks[0].sourceTake),evidence);
  for(const limit of [0,1.5,1001,NaN])assert.throws(()=>C.createHistory(initial,limit));
 });
+
+test('bar copying owns onsets, preserves complete cross-bar gates and returns portable independent score values',()=>{
+ const C=core();let p=withEvent(C,'recorder',{tick:90,durationTick:30,midi:72},{lengthBars:4}),id=p.tracks[0].id;
+ p=C.addEvent(p,id,{tick:96,durationTick:100,midi:74,velocity:.45});
+ p=C.addEvent(p,id,{tick:191,durationTick:40,midi:76});p=C.addEvent(p,id,{tick:192,midi:77});
+ const before=JSON.stringify(p),clip=C.copyBar(freeze(p),id,1);
+ assert.equal(C.BAR_SCHEMA,'e-instru-bar/v1');assert.equal(clip.schema,C.BAR_SCHEMA);assert.equal(clip.instrumentId,'recorder');
+ assert.deepEqual(plain(clip.source),{projectId:p.id,trackId:id,barIndex:1});
+ assert.deepEqual(plain(clip.events),[
+  {tick:0,durationTick:100,midi:74,action:null,velocity:.45},
+  {tick:95,durationTick:40,midi:76,action:null,velocity:.8}
+ ]);
+ assert.ok(clip.events.every(event=>!('id'in event)&&!('raw_capture'in event)&&!('sourceTake'in event)));
+ clip.events[0].midi=80;clip.source.projectId='other';assert.equal(JSON.stringify(p),before);
+ assert.deepEqual(plain(C.copyBar(p,id,3).events),[]);
+ assert.deepEqual(plain(C.copyBar(p,id,0).events.map(event=>[event.tick,event.durationTick])),[[90,30]]);
+});
+
+test('portable bar paste layers notes with fresh globally unique IDs and keeps source gates exact',()=>{
+ const C=core();let source=withEvent(C,'recorder',{tick:0,durationTick:120,midi:72},{lengthBars:4}),sourceId=source.tracks[0].id;
+ source=C.addEvent(source,sourceId,{tick:24,durationTick:24,midi:74,velocity:.3});
+ const clip=freeze(plain(C.copyBar(source,sourceId,0))),clipBefore=JSON.stringify(clip);
+ let target=withEvent(C,'recorder',{tick:200,durationTick:6,midi:79},{lengthBars:4}),id=target.tracks[0].id;
+ target=C.addTrack(target,'xylophone');target=C.addEvent(target,target.tracks[1].id,{id:id+'-event-2',tick:0});
+ const before=JSON.stringify(target),oldIds=new Set(target.tracks.flatMap(track=>track.events.map(event=>event.id))),next=C.pasteBar(freeze(target),id,2,clip);
+ assert.deepEqual(plain(next.tracks[0].events.map(event=>[event.tick,event.durationTick,event.midi,event.velocity])),[[192,120,72,.8],[200,6,79,.8],[216,24,74,.3]]);
+ const added=next.tracks[0].events.filter(event=>!oldIds.has(event.id));assert.equal(added.length,2);
+ assert.equal(new Set(next.tracks.flatMap(track=>track.events.map(event=>event.id))).size,4);
+ assert.equal(C.validate(next).length,0);assert.equal(JSON.stringify(target),before);assert.equal(JSON.stringify(clip),clipBefore);
+ assert.equal('sourceTake'in next.tracks[0],false);assert.equal('raw_capture'in next.tracks[0],false);
+ added[0].midi=76;assert.equal(clip.events[0].midi,72);assert.equal(source.tracks[0].events[0].midi,72);
+});
+
+test('replacement and clear affect only selected-bar onsets and preserve incoming tails from other bars',()=>{
+ const C=core();let p=withEvent(C,'xylophone',{tick:90,durationTick:24},{lengthBars:4}),id=p.tracks[0].id;
+ p=C.addEvent(p,id,{tick:96,midi:62});p=C.addEvent(p,id,{tick:191,midi:64});p=C.addEvent(p,id,{tick:192,midi:65});
+ const oldIds=new Set(p.tracks[0].events.map(event=>event.id)),clipboard=freeze({schema:C.BAR_SCHEMA,instrumentId:'xylophone',events:[{tick:12,durationTick:18,midi:67,action:null,velocity:.6}]}),before=JSON.stringify(p);
+ const layer=C.pasteBar(freeze(p),id,1,clipboard);assert.deepEqual(plain(layer.tracks[0].events.map(event=>event.tick)),[90,96,108,191,192]);
+ const replace=C.pasteBar(p,id,1,clipboard,{replace:true});assert.deepEqual(plain(replace.tracks[0].events.map(event=>event.tick)),[90,108,192]);
+ assert.equal(replace.tracks[0].events[0].durationTick,24);assert.ok(!oldIds.has(replace.tracks[0].events[1].id));
+ const cleared=C.clearBar(p,id,1);assert.deepEqual(plain(cleared.tracks[0].events.map(event=>event.tick)),[90,192]);
+ assert.deepEqual(plain(cleared.tracks[0].events.map(event=>event.id)),[p.tracks[0].events[0].id,p.tracks[0].events[3].id]);
+ assert.equal(JSON.stringify(p),before);
+});
+
+test('empty clipboard preserves layering and clears only through explicit replacement',()=>{
+ const C=core();let p=withEvent(C,'tamborin',{tick:0},{lengthBars:4}),id=p.tracks[0].id;
+ p=C.addEvent(p,id,{tick:96,action:'shake'});const clip=C.copyBar(p,id,3),before=JSON.stringify(p);
+ const layered=C.pasteBar(freeze(p),id,0,freeze(clip));assert.notEqual(layered,p);assert.equal(JSON.stringify(layered),before);
+ const replaced=C.pasteBar(p,id,0,clip,{replace:true});assert.deepEqual(plain(replaced.tracks[0].events.map(event=>event.tick)),[96]);
+ assert.equal(C.copyBar(replaced,id,0).events.length,0);
+ const alreadyEmpty=C.clearBar(p,id,2);assert.notEqual(alreadyEmpty,p);assert.equal(JSON.stringify(alreadyEmpty),before);
+ const unordered=plain(p);unordered.tracks[0].events.reverse();const orderBefore=JSON.stringify(unordered);
+ assert.equal(C.validate(unordered).length,0);assert.equal(JSON.stringify(C.pasteBar(unordered,id,0,clip)),orderBefore);
+ const history=C.createHistory(p);history.commit(C.clearBar(p,id,0));history.undo();
+ history.commit(C.pasteBar(history.get(),id,0,clip));assert.equal(history.canUndo(),false);assert.equal(history.canRedo(),true);
+ assert.throws(()=>C.pasteBar(p,id,0,clip,{replace:'true'}),/Pilihan tampalan/);
+ assert.throws(()=>C.pasteBar(p,id,0,clip,{replace:false,other:true}),/Medan/);
+ assert.throws(()=>C.pasteBar(p,id,0,clip,null),/Medan/);
+ assert.equal(JSON.stringify(p),before);
+});
+
+test('bar compatibility is exact for all eight instruments with named percussion and no fabricated pitches',()=>{
+ const C=core();
+ for(const instrumentId of Object.keys(C.INSTRUMENTS)){
+  const p=withEvent(C,instrumentId),id=p.tracks[0].id,clip=C.copyBar(p,id,0),next=C.pasteBar(freeze(p),id,1,freeze(clip));
+  assert.equal(next.tracks[0].events.length,2);assert.equal(next.tracks[0].events[1].tick,96);assert.equal(C.validate(next).length,0);
+  assert.equal(next.tracks[0].events[1].midi,p.tracks[0].events[0].midi);assert.equal(next.tracks[0].events[1].action,p.tracks[0].events[0].action);
+  if(!C.INSTRUMENTS[instrumentId].pitched)assert.equal(next.tracks[0].events[1].midi,null);
+  for(const other of Object.keys(C.INSTRUMENTS).filter(value=>value!==instrumentId)){
+   const target=withTrack(C,other),targetId=target.tracks[0].id;
+   assert.throws(()=>C.pasteBar(target,targetId,0,clip),/tidak serasi/,instrumentId+' to '+other);
+  }
+ }
+ const x=withEvent(C,'xylophone',{midi:72}),r=withTrack(C,'recorder');
+ assert.throws(()=>C.pasteBar(r,r.tracks[0].id,0,C.copyBar(x,x.tracks[0].id,0)),/tidak serasi/);
+});
+
+test('paste rejects project-end overflow atomically and supports an exact final tick without shortening gates',()=>{
+ const C=core();let p=withEvent(C,'recorder',{tick:300,durationTick:6},{lengthBars:4}),id=p.tracks[0].id;
+ const clipboard={schema:C.BAR_SCHEMA,instrumentId:'recorder',events:[{tick:0,durationTick:120,midi:72,action:null,velocity:.8}]},before=JSON.stringify(p);
+ assert.throws(()=>C.pasteBar(freeze(p),id,3,clipboard),/melebihi akhir projek/);
+ assert.throws(()=>C.pasteBar(p,id,3,clipboard,{replace:true}),/melebihi akhir projek/);assert.equal(JSON.stringify(p),before);
+ const fits=C.pasteBar(p,id,2,clipboard);assert.equal(fits.tracks[0].events[0].durationTick,120);assert.equal(fits.tracks[0].events[0].tick,192);
+ const final={schema:C.BAR_SCHEMA,instrumentId:'recorder',events:[{tick:95,durationTick:1,midi:98,action:null,velocity:0}]};
+ const end=C.pasteBar(p,id,3,final);assert.equal(end.tracks[0].events.at(-1).tick,383);assert.equal(end.tracks[0].events.at(-1).durationTick,1);
+ final.events[0].durationTick=2;assert.throws(()=>C.pasteBar(p,id,3,final),/melebihi akhir projek/);
+});
+
+test('bar clipboard input rejects invalid JSON shapes, editable values and unbounded or forged source fields',()=>{
+ const C=core(),p=withEvent(C,'xylophone'),id=p.tracks[0].id,original=plain(C.copyBar(p,id,0)),before=JSON.stringify(p);
+ for(const value of [null,undefined,[],true,42,'{}'])assert.throws(()=>C.pasteBar(p,id,0,value),{name:'Error'});
+ const cases=[
+  clip=>clip.schema='other',clip=>delete clip.schema,clip=>delete clip.instrumentId,clip=>clip.instrumentId='constructor',
+  clip=>clip.events=null,clip=>delete clip.events,clip=>clip.events=[null],clip=>clip.events=new Array(1),
+  clip=>clip.events[0].id='fake-id',clip=>clip.raw_capture=[],clip=>clip.sourceTake={},clip=>clip.raw_audio='AAAA',
+  clip=>clip.events[0].tick=-1,clip=>clip.events[0].tick=96,clip=>clip.events[0].tick=.5,clip=>clip.events[0].tick=NaN,
+  clip=>clip.events[0].durationTick=0,clip=>clip.events[0].durationTick=3073,
+  clip=>{clip.events[0].tick=95;clip.events[0].durationTick=3072;},
+  clip=>clip.events[0].midi=0,clip=>clip.events[0].midi=128,clip=>clip.events[0].midi='60',clip=>clip.events[0].action='tap',
+  clip=>clip.events[0].velocity=-.1,clip=>clip.events[0].velocity=1.1,clip=>clip.events[0].velocity=NaN,clip=>clip.events[0].velocity=Infinity,
+  clip=>delete clip.events[0].velocity,clip=>clip.source=null,clip=>clip.source='original',
+  clip=>clip.source.projectId='x'.repeat(101),clip=>clip.source.trackId=' ',clip=>clip.source.barIndex=-1,clip=>clip.source.barIndex=32,
+  clip=>clip.source.barIndex='0',clip=>delete clip.source.projectId,clip=>clip.source.raw_capture=[],clip=>clip.source.audioBuffer=[1,2],
+  clip=>clip.events[0].source={raw_ms:0},clip=>clip.events[0].durationTick=BigInt(6),clip=>clip.source.projectId=()=>1
+ ];
+ for(const mutate of cases){const bad=plain(original);mutate(bad);assert.throws(()=>C.pasteBar(p,id,0,bad),{name:'Error'},mutate.toString());}
+ const cyclic=plain(original);cyclic.source.projectId=cyclic;assert.throws(()=>C.pasteBar(p,id,0,cyclic),/dirinya sendiri/);
+ const huge=plain(original);huge.events=Array.from({length:513},()=>plain(original.events[0]));assert.throws(()=>C.pasteBar(p,id,0,huge),/512/);
+ const perc=withEvent(C,'tamborin'),percussion=plain(C.copyBar(perc,perc.tracks[0].id,0));
+ for(const mutate of [clip=>clip.events[0].midi=NaN,clip=>clip.events[0].midi=60,clip=>clip.events[0].action='other']){
+  const bad=plain(percussion);mutate(bad);assert.throws(()=>C.pasteBar(perc,perc.tracks[0].id,0,bad));
+ }
+ assert.equal(JSON.stringify(p),before);
+});
+
+test('bar operations validate zero-based bar and track selection without changing the project',()=>{
+ const C=core(),p=withEvent(C,'xylophone',{}, {lengthBars:4}),id=p.tracks[0].id,clip=C.copyBar(p,id,0),before=JSON.stringify(p);
+ for(const barIndex of [-1,4,32,1.5,NaN,Infinity,'0',null,undefined])for(const operation of [()=>C.copyBar(p,id,barIndex),()=>C.pasteBar(p,id,barIndex,clip),()=>C.clearBar(p,id,barIndex)])assert.throws(operation,/Bar mesti/);
+ for(const operation of [()=>C.copyBar(p,'missing',0),()=>C.pasteBar(p,'missing',0,clip),()=>C.clearBar(p,'missing',0)])assert.throws(operation,/Trek tidak ditemui/);
+ assert.equal(JSON.stringify(p),before);
+});
+
+test('bar pasting enforces the post-replacement event limit and rejects overflow before clearing',()=>{
+ const C=core(),p=plain(withTrack(C,'xylophone',{lengthBars:4})),id=p.tracks[0].id;
+ p.tracks[0].events=Array.from({length:512},(_,index)=>({id:'full-'+index,tick:index%96,durationTick:1,midi:60,action:null,velocity:.8}));
+ const clip=C.copyBar(p,id,0),single={schema:C.BAR_SCHEMA,instrumentId:'xylophone',events:[clip.events[0]]},before=JSON.stringify(p);
+ assert.throws(()=>C.pasteBar(freeze(p),id,1,single),/512/);assert.equal(JSON.stringify(p),before);
+ const replaced=C.pasteBar(p,id,0,freeze(clip),{replace:true});assert.equal(replaced.tracks[0].events.length,512);
+ const oldIds=new Set(p.tracks[0].events.map(event=>event.id));assert.ok(replaced.tracks[0].events.every(event=>!oldIds.has(event.id)));
+ assert.equal(new Set(replaced.tracks[0].events.map(event=>event.id)).size,512);assert.equal(C.validate(replaced).length,0);
+ assert.throws(()=>C.pasteBar(p,id,1,clip,{replace:true}),/512/);assert.equal(JSON.stringify(p),before);
+});
+
+test('valid maximum-length imported track IDs support fresh event and bar identities without overflow',()=>{
+ const C=core(),p=plain(withTrack(C)),longId='track-'+'a'.repeat(94);assert.equal(longId.length,100);
+ p.tracks[0].id=longId;assert.equal(C.validate(p).length,0);
+ const added=C.addEvent(freeze(p),longId,{tick:0}),clip=C.copyBar(added,longId,0),pasted=C.pasteBar(added,longId,1,clip);
+ assert.equal(pasted.tracks[0].events.length,2);assert.ok(pasted.tracks[0].events.every(event=>event.id.length<=100));
+ assert.notEqual(pasted.tracks[0].events[0].id,pasted.tracks[0].events[1].id);assert.equal(C.validate(pasted).length,0);
+});
+
+test('bar edits, quantization and undo/redo keep original recorder input evidence unchanged',()=>{
+ const C=core(),X=legacy('xylo-core'),take=X.fromTaps([{midi:72,raw_ms:1000,raw_duration_ms:600,release_ms:1600},{midi:74,raw_ms:1750,raw_duration_ms:300,release_ms:2050}],80,12,2,5,'recorder');
+ const initial=C.importTake(C.createProject(),take),id=initial.tracks[0].id,evidence=JSON.stringify(initial.tracks[0].sourceTake),history=C.createHistory(freeze(initial)),clip=freeze(C.copyBar(initial,id,0));
+ history.commit(C.pasteBar(history.get(),id,1,clip));assert.equal(history.get().tracks[0].events.length,4);
+ history.commit(C.clearBar(history.get(),id,0));assert.equal(history.get().tracks[0].events.length,2);
+ const quantized=C.quantizeTrack(history.get(),id,48,.5);history.commit(quantized);assert.equal(C.validate(history.get()).length,0);
+ assert.equal(JSON.stringify(history.get().tracks[0].sourceTake),evidence);assert.ok(Object.isFrozen(history.get().tracks[0].sourceTake.raw_capture[0]));
+ while(history.canUndo()){const state=history.undo();assert.equal(JSON.stringify(state.tracks[0].sourceTake),evidence);assert.equal(C.validate(state).length,0);}
+ assert.deepEqual(plain(history.get()),plain(initial));
+ while(history.canRedo()){const state=history.redo();assert.equal(JSON.stringify(state.tracks[0].sourceTake),evidence);assert.equal(C.validate(state).length,0);}
+ assert.deepEqual(plain(history.get()),plain(quantized));assert.equal('raw_capture'in clip,false);
+});

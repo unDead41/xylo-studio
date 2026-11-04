@@ -56,7 +56,7 @@ function fixture({empty=false,reject=false}={}){
  const range=name=>labelled(name);
  const output=input=>all(node=>node.tagName==='OUTPUT'&&node.getAttribute('for')===input.id)[0];
  const input=(control,value,extra={})=>{control.value=String(value);control.fire('input',extra);};
- return{mixer,container,document,app,mutations,announcements,all,labelled,range,output,input,get project(){return copy(project);},replace(next){project=copy(next);document.fire('prostudio:change');},get selectedId(){return selectedId;}};
+ return{mixer,container,document,app,C:core,mutations,announcements,all,labelled,range,output,input,get project(){return copy(project);},replace(next){project=copy(next);document.fire('prostudio:change');},get selectedId(){return selectedId;}};
 }
 
 test('native volume and pan controls persist precise values without rebuilding a focused range',()=>{
@@ -145,4 +145,50 @@ test('custom track names opt out of translation while mixer controls remain tran
  s.labelled('Pilih trek Henti').fire('click');assert.equal(selectedName.textContent,'Henti');
  const empty=s.project;empty.tracks=[];s.replace(empty);
  assert.equal(selectedName.getAttribute('data-i18n-ignore'),null);assert.equal(selectedName.textContent,'Pilih trek selepas menambah instrumen.');
+});
+
+test('a held arrow key remains one history gesture despite native per-step change events',()=>{
+ const s=fixture(),volume=s.range('Tahap Melodi');volume.focus();
+ volume.fire('keydown',{key:'ArrowLeft',repeat:false});s.input(volume,.79);volume.fire('change');
+ volume.fire('keydown',{key:'ArrowLeft',repeat:true});s.input(volume,.78);volume.fire('change');
+ assert.equal(s.mutations[0].options.historyGroup,s.mutations[1].options.historyGroup);
+ assert.equal(s.announcements.length,0,'announce the completed adjustment once after keyup');
+ volume.fire('keyup',{key:'ArrowLeft'});assert.match(s.announcements.at(-1),/78%/);
+ volume.fire('keydown',{key:'ArrowLeft',repeat:false});s.input(volume,.77);volume.fire('change');volume.fire('keyup',{key:'ArrowLeft'});
+ assert.notEqual(s.mutations[1].options.historyGroup,s.mutations[2].options.historyGroup);
+});
+
+test('external values replace an active slider immediately and its interrupted drag cannot overwrite them',()=>{
+ const s=fixture(),master=s.range('Tahap utama');master.focus();master.fire('pointerdown');s.input(master,.57);
+ const changed=s.project;changed.master.volume=.23;s.replace(changed);
+ assert.equal(s.range('Tahap utama'),master);assert.equal(s.document.activeElement,master);
+ assert.equal(master.value,'0.23');assert.equal(s.output(master).textContent,'23%');
+ const before=s.mutations.length;s.input(master,.66);assert.equal(s.mutations.length,before);assert.equal(s.project.master.volume,.23);assert.equal(master.value,'0.23');
+ s.document.fire('pointerup');master.fire('pointerdown');s.input(master,.31);master.fire('change');
+ assert.equal(s.project.master.volume,.31);assert.notEqual(s.mutations[0].options.historyGroup,s.mutations.at(-1).options.historyGroup);
+});
+
+test('selection changes interrupt an effect drag before its stable input targets another track',()=>{
+ const s=fixture(),reverb=s.range('Reverb Melodi');reverb.focus();reverb.fire('pointerdown');s.input(reverb,.26);
+ s.app.selectTrack('track-b');assert.equal(s.range('Reverb Rekoder'),reverb);assert.equal(s.document.activeElement,reverb);
+ const before=s.mutations.length;s.input(reverb,.57);assert.equal(s.mutations.length,before);
+ assert.equal(s.project.tracks[0].reverb,.26);assert.equal(s.project.tracks[1].reverb,0);assert.equal(reverb.value,'0');
+ s.document.fire('pointerup');reverb.fire('pointerdown');s.input(reverb,.38);reverb.fire('change');assert.equal(s.project.tracks[1].reverb,.38);
+});
+
+test('opening another project interrupts an active drag even when it reuses track IDs and values',()=>{
+ const s=fixture(),volume=s.range('Tahap Melodi');volume.focus();volume.fire('pointerdown');s.input(volume,.46);
+ const loaded=s.project;loaded.id='another-project';s.replace(loaded);
+ const before=s.mutations.length;s.input(volume,.72);assert.equal(s.mutations.length,before);assert.equal(s.project.tracks[0].volume,.46);assert.equal(volume.value,'0.46');
+ volume.fire('change');volume.fire('pointerdown');s.input(volume,.61);volume.fire('change');assert.equal(s.project.tracks[0].volume,.61);
+});
+
+test('meter, playback and unrelated duplicated-track updates preserve an ongoing slider gesture',()=>{
+ const s=fixture(),volume=s.range('Tahap Melodi');volume.focus();volume.fire('pointerdown');s.input(volume,.74);
+ s.mixer.setLevel(.2);s.document.fire('prostudio:position',{detail:{tick:42}});
+ const duplicated=s.C.duplicateTrack(s.project,'track-a');s.replace(duplicated);
+ assert.equal(s.range('Tahap Melodi'),volume);assert.equal(s.document.activeElement,volume);
+ assert.equal(s.range('Tahap Melodi salinan').value,'0.74');
+ s.input(volume,.69);volume.fire('change');assert.equal(s.project.tracks[0].volume,.69);assert.equal(s.project.tracks[1].volume,.74);
+ assert.equal(s.mutations[0].options.historyGroup,s.mutations[1].options.historyGroup);
 });
