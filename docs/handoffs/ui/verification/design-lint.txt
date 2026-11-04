@@ -1,0 +1,27 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+{
+  "findings": [
+    {
+      "severity": "info",
+      "message": "Design system defines 11 colors, 3 typography scales, 2 rounding levels.",
+      "rule": "token-summary"
+    },
+    {
+      "severity": "info",
+      "path": "omitted.spacing",
+      "message": "spacing intentionally omitted — no spacing tokens will be validated",
+      "rule": "declared-omission"
+    },
+    {
+      "severity": "info",
+      "path": "omitted.components",
+      "message": "components intentionally omitted — no components tokens will be validated",
+      "rule": "declared-omission"
+    }
+  ],
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 3
+  }
+}

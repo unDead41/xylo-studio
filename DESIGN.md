@@ -9,11 +9,16 @@ colors:
   border: "#D7E2E9"
   focus: "#156CC4"
   soft: "#E6F2F0"
+  surfaceSubtle: "#F7FAFC"
+  dangerSoft: "#FFF1F2"
+  scrollbarHover: "#728B9C"
 typography:
   display:
     fontFamily: "'Trebuchet MS', 'Avenir Next', sans-serif"
   body:
     fontFamily: "'Segoe UI', Arial, sans-serif"
+    fontSize: "15px"
+    lineHeight: "1.6"
   utility:
     fontFamily: "Consolas, ui-monospace, monospace"
 rounded:
@@ -41,11 +46,11 @@ The existing `:root` in index.html is the canonical runtime token owner (Model B
 
 ## Typography
 
-Use the existing display face for instrument names and note letters, body face for instructions, and monospace for MIDI/timing/keyboard labels. All fonts are local fallbacks. Do not introduce a remote font or change global typography for a single instrument.
+Use the existing display face for instrument names and note letters, body face for instructions, and monospace for MIDI/timing/keyboard labels. All fonts are local fallbacks. The shared workbench body is 15px (14px on phones); controls are 14px/13px, supporting instructions 12–13px, and compact utility labels 10–11px. Studio headings share a 36px desktop scale and 29px phone scale, reducing to 27px below 360px. Do not introduce a remote font or change global typography for a single instrument.
 
 ## Layout
 
-Chooser: eight instrument cards in two columns on desktop, stacked on phones. The first four choices retain their positions; a Perkusi sekolah & pancaragam heading introduces the other four. All eight studios use the same `.studio-heading`, `.workspace`, `.main-work`, `.instrument-panel` and `.inspector` geometry. The main area contains the playable instrument, Rakam/Main/Henti transport, persistent status, tempo/metronome/Reset row, song catalog or percussion patterns, trace, then a visible Data ketukan table. JSON/CSV exports live in the inspector. The 314px inspector narrows to 282px at 1050px and stacks below the main area at 850px. Document scrolling owns the page; traces and event tables retain their own scroll bounds.
+Chooser: eight compact instrument cards in two columns on desktop, stacked on phones. Native family links lead to Melodi & nada (2), Rentak & tradisi (2), or Perkusi sekolah & pancaragam (4), preserving original instrument order and artwork. Each card pairs the object with its purpose, exact shortcut hint and Buka studio action. All eight studios use the same `.studio-heading`, `.workspace`, `.main-work`, `.instrument-panel` and `.inspector` geometry. The main area contains the playable instrument, Rakam/Main/Henti transport, persistent status, tempo/metronome/Reset row, song catalog or percussion patterns, trace, then a visible Data ketukan table. JSON/CSV exports live in the inspector. The 314px inspector narrows to 282px at 1050px and stacks below the main area at 850px. Document scrolling owns the page; traces and event tables retain their own scroll bounds. A sticky application header keeps Studio/Permainan accessible; focus and native family targets receive a header-safe scroll offset. The inspector sticks only on desktop and flows normally on narrow screens.
 
 ## Elevation & Depth
 
@@ -71,7 +76,7 @@ Retain existing rounded controls and panels. Instrument choices use 24px corners
 
 Keep the recorder visually recognizable and playable, with an accurate separate thumb hole and data-driven fingering. Put sounding MIDI/octave information beside simplified C–C′ labels. Never silently change score pitch to make it fit. Keep game rules and game audio xylophone-based. Reuse the controller/scheduler/export and existing dialogs/status owners for future instruments.
 
-Reconcile drift: original docs described the xylophone-only entry; the approved multi-instrument entry extends that identity. Palette, fonts and xylophone physical design match the existing runtime; no global token was changed.
+Reconcile drift: original docs described the xylophone-only entry; the multi-instrument entry extends that identity. The overall UI pass retains the established palette, fonts and physical instruments while improving the shared reading scale, grouping and control geometry. Runtime `:root` in index.html remains the token owner; `ui-polish-style` adds shared state/scrollbar tokens and component recipes, and `ui-chooser-style` owns only compact family/card geometry. The frontmatter mirrors the runtime values. New recording states reuse danger/primary/warning semantic roles. No external font, dark theme or decorative background is introduced.
 
 ## Tamborin extension
 
@@ -86,3 +91,17 @@ Reuse the same canonical shell as the other three studios, with the percussion p
 Dram Sisi uses a teal cylindrical shell, steel rim, tension rods and two drumsticks. Dram Bes has a broad upright skin, deep shell, steel rods and a padded mallet. Simbal shows two grooved brass plates with leather handles. Segi Tiga shows a suspended open steel frame and beater. Chooser previews reuse these actual vector materials with separate paint IDs; there are no external assets.
 
 The new studios use the existing Studio heading and main/inspector arrangement, plus the shared percussion transport, settings, trace and table. Two focusable SVG regions and F/J buttons distinguish the actions using text, outline and color. Button labels wrap on narrow screens; reduced motion disables the brief strike translation. Long metal decays are bounded and cancelled by Stop/navigation. No continuous decorative animation is added.
+
+## Shared workbench and Game UI
+
+The physical instrument remains the signature. Larger text, calmer panel shadows and clear Rakam/Main/Henti labels support it. Keyboard guidance uses native disclosure; it does not compete with the playing area. Percussion uses one shared session badge and trace-source explanation, so live practice is distinguishable from a saved take.
+
+Game presents its selected challenge and phase before the arena. Setup guidance stays short; detailed timing/scoring rules live in a native disclosure. Start/resume/replay controls are available in the arena overlay, and results show score, local best and a route back to challenge selection. State colors, focus rings and control targets come from the shared workbench. Decorative motion respects reduced motion; rhythmic tile movement retains its gameplay purpose.
+
+| Maintained rule | Previous drift | Resolution |
+| --- | --- | --- |
+| One instrument entry | Eight long cards required extensive scrolling | Compact family groups and native jump navigation |
+| Readable shared controls | Many instructions were 9–11px | Shared 12–13px supporting copy and larger controls |
+| Equivalent action names | Pitched play used a generic score label | Main lagu/Main rakaman names follow the current take |
+| Shared modal owner | Edited rows could lose focus after rebuilding | Native modal semantics plus explicit editor focus recovery |
+| Stable record context | Practice and saved percussion trace could mix | Shared trace-source state and separate temporary practice trace |

@@ -18,12 +18,19 @@ async function metrics(page,view){return page.locator('#'+view).evaluate(el=>{
  const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{}),args:['--no-sandbox','--disable-dev-shm-usage']});
  try{
   const context=await browser.newContext({viewport:{width:1440,height:1080},hasTouch:true}),page=await context.newPage();page.setDefaultTimeout(10000);page.on('pageerror',e=>errors.push(String(e)));await page.goto('http://127.0.0.1:'+server.address().port);
+  for(const link of await page.locator('#instrumentChooser .chooser-family-nav a').all()){
+   const target=await link.getAttribute('href');assert.match(target,/^#[\w-]+$/);await link.focus();await page.keyboard.press('Enter');assert.equal(await page.locator(target).evaluate(el=>el.matches(':focus')),true,'family navigation moves focus to its heading');
+  }
+  await page.locator('#instrumentChooser .chooser-foot a[href="#chooseHeading"]').click();assert.equal(await page.locator('#chooseHeading').evaluate(el=>el.matches(':focus')),true);
   for(const width of [1440,1050,850,540,390,320]){
    await page.setViewportSize({width,height:width<600?844:1080});let canonical;
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'chooser page overflow at '+width);
    for(const [name,choose,view,back]of routes){
     await page.locator('#'+choose).click();await page.evaluate(()=>scrollTo(0,0));const m=await metrics(page,view);measurements.push({width,instrument:name,...m});
-    assert.equal(m.overflow,false,name+' page overflow at '+width);assert.equal(m.font,width<=540?'26px':'31px');
+    assert.equal(await page.locator('#'+view+' .studio-heading h1').evaluate(el=>el.matches(':focus')),true,name+' entry focuses its heading');
+    assert.equal(m.overflow,false,name+' page overflow at '+width);
     if(!canonical)canonical=m;
+    assert.ok(Number.parseFloat(m.font)>0,name+' heading has measurable text');assert.equal(m.font,canonical.font,name+' shared heading typography');
     assert.equal(m.grid,canonical.grid,name+' workspace columns');assert.equal(m.panel.x,canonical.panel.x);assert.equal(m.panel.width,canonical.panel.width);assert.equal(m.radius,canonical.radius);
     assert.equal(m.inspector.width,canonical.inspector.width);assert.equal(m.inspector.x,canonical.inspector.x);
     if(width>850){assert.equal(m.inspector.y,m.panel.y);assert.equal(m.panel.y,canonical.panel.y);}
@@ -34,10 +41,10 @@ async function metrics(page,view){return page.locator('#'+view).evaluate(el=>{
      assert.deepEqual(await page.locator('#'+view+' .transport button').evaluateAll(nodes=>nodes.map(n=>n.id)),[prefix+'Record',prefix+'Replay',prefix+'Stop']);
      assert.equal(await page.locator('#'+view+' .perc-data table').isVisible(),true);
      assert.equal(await page.locator('#'+view+' .perc-data h2').innerText(),'Data ketukan');
-     assert.equal((await page.locator('#'+prefix+'Back').innerText()).replace(/\s+/g,' '),'⇄ Tukar instrumen');
+     assert.match((await page.locator('#'+prefix+'Back').innerText()).replace(/\s+/g,' '),/Tukar instrumen/);
      if(width===1440||width===390){await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(output,name+(width===1440?'-desktop.png':'-phone.png'))});await page.screenshot({path:path.join(output,name+(width===1440?'-desktop-full.png':'-phone-full.png')),fullPage:true});}
     }
-    await page.locator('#'+back).click();assert.equal(await page.locator('#chooseHeading').isVisible(),true);
+    await page.locator('#'+back).click();assert.equal(await page.locator('#chooseHeading').isVisible(),true);assert.equal(await page.locator('#chooseHeading').evaluate(el=>el.matches(':focus')),true,name+' return focuses chooser heading');
    }
    check(width+'px: all eight studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place');
   }

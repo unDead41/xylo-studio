@@ -6,7 +6,7 @@ Buka [laman](https://undead41.github.io/xylo-studio/) atau muat turun ZIP branch
 
 ## Instrumen
 
-Skrin pertama ialah **Pilih instrumen anda** dengan lapan instrumen: Xylophone, Rekoder Soprano Baroque, Tamborin, Kompang, Dram Sisi, Dram Bes, Simbal dan Segi Tiga. Kad disusun dalam dua lajur pada desktop dan satu lajur pada skrin kecil; empat alat baharu berada di bawah Perkusi sekolah & pancaragam. Gunakan **Tukar instrumen** untuk kembali; rakaman dan suntingan setiap instrumen dikekalkan dalam ruang kerjanya sendiri. Penjenamaan aplikasi ialah **e-Instru Studio**; nama repository dan URL laman kekal.
+Skrin pertama ialah **Pilih instrumen anda** dengan lapan instrumen: Xylophone, Rekoder Soprano Baroque, Tamborin, Kompang, Dram Sisi, Dram Bes, Simbal dan Segi Tiga. Kad padat disusun dalam dua lajur pada desktop dan satu lajur pada skrin kecil. Pautan kumpulan Melodi & nada, Rentak & tradisi dan Perkusi sekolah & pancaragam memudahkan pilihan; setiap kad menerangkan tindakan dan pintasan studio. Gunakan **Tukar instrumen** untuk kembali; rakaman dan suntingan setiap instrumen dikekalkan dalam ruang kerjanya sendiri. Penjenamaan aplikasi ialah **e-Instru Studio**; nama repository dan URL laman kekal.
 
 Rekoder mempunyai lapan pad C–C′ (bunyi sebenar C5–C6, MIDI 72–84). Tahan tetikus/sentuhan atau A S D F G H J K untuk memanjangkan nada; lepaskan untuk berhenti. Panduan penjarian SVG menunjukkan lubang belakang T, hadapan 1–7 dan keadaan buka/tutup melalui bentuk serta label. Lihat [pemetaan dan sumber pengeluar](docs/RECORDER.md). Not tambahan katalog dipaparkan; pitch di luar julat soprano menyekat playback dengan amaran, tanpa mengubah score. Mikrofon sedia ada hanya untuk xylophone.
 
@@ -54,3 +54,11 @@ Kompang menggunakan model, pengawal rakaman, jejak dan penjadual Tamborin yang s
 Keempat-empat studio menggunakan rakaman, jejak, jadual suntingan, tempo 40–200 BPM, metronom, Reset serta JSON/CSV daripada pengawal perkusi yang sama. Setiap alat mempunyai dua kawasan SVG interaktif, dua butang besar dan empat corak latihan 4/4. Segi Tiga tertahan ialah satu ketukan pendek baharu; ia bukan arahan untuk menghentikan ketukan terbuka sebelumnya. Simbal dan Segi Tiga mempunyai ekor deringan sehingga satu saat dalam main semula.
 
 Identiti simpanan berasingan ialah `snare`, `bass_drum`, `cymbals` dan `triangle`. Import menolak fail milik instrumen lain. Semua alat baharu ialah perkusi tidak berpic dengan bunyi sintesis; tiada MIDI palsu atau audio mentah disimpan. Bukti ujian dan batasan: [handoff pancaragam](docs/handoffs/instrument-pancaragam/LATEST.md).
+
+## Calon UI/UX keseluruhan — branch ui
+
+Penambahbaikan semasa dibangunkan di `ui` daripada main lapan instrumen terkini. Teks dan kawalan dikongsi lebih mudah dibaca, navigasi Studio/Permainan kekal tersedia semasa menatal, dan butang Rakam/Main/Henti menyusun semula pada telefon. Main lagu dan Main rakaman mengikut sumber semasa; bantuan papan kekunci, keadaan kosong dan panduan rakaman lebih jelas.
+
+Studio perkusi membezakan latihan bebas, rakaman, contoh dan main semula. Latihan baharu menggunakan jejak sementara; rakaman tersimpan dan masa input asal kekal. Dialog memberikan fokus awal dan ralat pada medan yang betul, kemudian memulihkan fokus selepas suntingan; kata laluan eksport setempat mempunyai butang Tunjuk/Sembunyi.
+
+Permainan mempunyai ringkasan cabaran/keadaan, panduan ringkas, peraturan terperinci dalam panel boleh buka, serta butang mula/sambung/main lagi pada arena dan keputusan. Peraturan skor, nyawa dan masa kekal sama. Versi diterima kekal v1.04.0; calon ini dipush ke `ui` untuk semakan. Penerbitan Pages masih daripada main. [Bukti dan handoff UI terkini](docs/handoffs/ui/LATEST.md).

@@ -1,0 +1,33 @@
+{
+  "index_sha256": "46d1afe230d520223456231f86d2a1b9d8d04a04f96d8fbca5ba810bab3c5ebd",
+  "base_main": "c0ba48bb9c35244354779cc227ecb7c999bff5dd",
+  "base_ui": "115e54d87b10804ae6f94ff0efe895099d035e20",
+  "static_unique_ids": 568,
+  "broken_label_aria_references": 0,
+  "inline_script_count": 11,
+  "unchanged_modules": {
+    "xylo-core": "04f07c02540a63fdd0ce71be4a0f2232ea7297fbe987f3b5d12d8940231e0677",
+    "xylo-game-core": "e2374085e14d5faec4a0f6ca9f6ee7f0127b3e5ff89db388faecf87dfcfa368d",
+    "percussion-core": "78cb7bd8967d0aaffa9b263d3723e33b09a76c92f7f1ac8756c282cc098ec58c",
+    "percussion-audio": "b642bfcec31e00780d0ec2a454b748fcf039165bb5e89edd88849c26d86ebe2c",
+    "tamborin-ui": "756f1da41c52a7f7c0b849be2500a1e0212c65adf494fda0cad09ed49cffe4fd",
+    "kompang-ui": "7fb5abfd81ab18f5ff6e349fd4d49359724f0836f18ce678aaaf5bb4f03264ef",
+    "school-band-ui": "0e2621db4c04befd2e046a2acffb6a7d656dae2f92bd2daf330eaf5d560e2b43"
+  },
+  "changed_ui_modules": [
+    "xylo-ui",
+    "xylo-game-ui",
+    "percussion-ui",
+    "instrument-navigation"
+  ],
+  "node_tests": {
+    "passed": 207,
+    "failed": 0,
+    "skipped": 0
+  },
+  "design_lint": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "diff_check": "passed"
+}

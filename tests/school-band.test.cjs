@@ -63,7 +63,8 @@ test('all eight instruments keep independent workspaces across switching and rel
 });
 
 test('school band has eight real cards, unique IDs and valid native control references without runtime downloads',()=>{
- const chooser=html.match(/<section id="instrumentChooser"[\s\S]*?<\/section>/)[0];assert.equal((chooser.match(/class="instrument-choice"/g)||[]).length,8);
+ const chooser=html.slice(html.indexOf('<section id="instrumentChooser"'),html.indexOf('<div id="studioView"')),cards=[...chooser.matchAll(/<button\b[^>]*>/g)].filter(([tag])=>/\bclass="[^"]*\binstrument-choice\b[^"]*"/.test(tag));assert.equal(cards.length,8);
+ assert.deepEqual(cards.map(([tag])=>tag.match(/\bid="([^"]+)"/)[1]).sort(),['chooseXylophone','chooseRecorder','chooseTamborin','chooseKompang','chooseSnare','chooseBassDrum','chooseCymbals','chooseTriangle'].sort());
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
  for(const match of html.matchAll(/\b(?:for|aria-labelledby|aria-describedby)="([^"]+)"/g))for(const id of match[1].split(/\s+/))assert.ok(ids.includes(id),'Missing '+id);
  assert.doesNotMatch(html,/<script\b[^>]*src=/);for(const i of instruments)for(const suffix of ['Primary','Secondary'])assert.match(html,new RegExp('id="'+i.prefix+suffix+'"[^>]*role="button"[^>]*tabindex="0"'));

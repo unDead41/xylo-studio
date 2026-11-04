@@ -27,3 +27,5 @@ Versi projek dalam `VERSION` menggunakan `vX.XX.X`, diselaraskan dengan changelo
 Semua branch lama dalam migrasi dipelihara sebagai parent sejarah main sebelum nama lamanya dihentikan. Fail sejarah ialah bukti lama, bukan keputusan semasa.
 
 Pengecualian tugasan Kompang (4 November 2026): arahan langsung terkini Ijamm membenarkan push hasil gabungan yang diuji ke `main` dalam `unDead41/xylo-studio`. Tiada branch `main-digitalized` dalam repositori ini. Branch ui, instrument-tamborin, share dan tutorial tidak ditulis oleh tugasan ini. Tiada perubahan tetapan Pages diperlukan.
+
+Susulan UI/UX keseluruhan (4 November 2026): gunakan `ui`, dengan main `c0ba48bb9c35244354779cc227ecb7c999bff5dd` sebagai asas supaya lapan instrumen dipelihara. Enam worktree pekerja menyumbang patch terpencil; penyelaras menggabung dan menguji hasil sebelum push `ui`. Permintaan ini tidak memerlukan penerbitan main/Pages. Versi diterima kekal v1.04.0; perubahan dicatat sebagai calon Unreleased.

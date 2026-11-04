@@ -58,3 +58,22 @@ test('suspended audio pauses safely, and restored invalid settings/records canno
 test('arena pause control supports mobile pause/resume and disappears after Reset',async()=>{
  const s=make();await start(s);assert.equal(el(s,'gameArenaPauseBtn').hidden,false);await click(s,'gameArenaPauseBtn');assert.equal(el(s,'gameArenaPauseBtn').textContent,'Sambung');s.advance(30000);assert.equal(el(s,'gameHealthValue').textContent,'100 / 100');await click(s,'gameArenaPauseBtn');assert.equal(el(s,'gamePauseBtn').textContent,'Jeda');await click(s,'gameResetBtn');assert.equal(el(s,'gameArenaPauseBtn').hidden,true);
 });
+test('board action starts safely, exposes pending/countdown states and Reset cancels pending audio',async()=>{
+ const s=studio({game:true,variant:null,audioState:'suspended',deferResume:true});await enter(s);
+ assert.equal(el(s,'gamePhase').textContent,'Sedia');assert.equal(el(s,'gameOverlayActionBtn').hidden,false);assert.equal(el(s,'gameOverlayResultLink').hidden,true);
+ const pending=click(s,'gameOverlayActionBtn');assert.equal(el(s,'gameView').dataset.phase,'pending');assert.equal(el(s,'gameArena').getAttribute('aria-busy'),'true');assert.equal(el(s,'gameOverlayActionBtn').hidden,true);
+ await click(s,'gameOverlayActionBtn');await click(s,'gameResetBtn');s.resumeAudio();await pending;s.advance(5000);
+ assert.equal(el(s,'gameView').dataset.phase,'idle');assert.equal(el(s,'gameArena').getAttribute('aria-busy'),'false');assert.equal(el(s,'gameOverlayActionBtn').textContent,'Mula permainan');assert.equal(el(s,'gameScore').textContent,'0');assert.equal(s.oscillators.length,0);
+ await click(s,'gameOverlayActionBtn');assert.equal(el(s,'gamePhase').dataset.state,'countdown');assert.equal(el(s,'gameOverlayActionBtn').hidden,true);await hit(s,2);assert.equal(el(s,'gameScore').textContent,'0');s.advance(3025);assert.equal(el(s,'gamePhase').textContent,'Sedang bermain');
+});
+test('board resume action preserves progress and requires preparation beats before scoring',async()=>{
+ const s=make();await enter(s);await click(s,'gameOverlayActionBtn');s.advance(3025);await hit(s,2);const score=el(s,'gameScore').textContent;
+ await click(s,'gameArenaPauseBtn');assert.equal(el(s,'gamePhase').textContent,'Dijeda');assert.equal(el(s,'gameOverlayActionBtn').textContent,'Sambung permainan');assert.equal(el(s,'gameOverlayActionBtn').hidden,false);s.advance(60000);
+ await click(s,'gameOverlayActionBtn');assert.equal(el(s,'gamePhase').dataset.state,'countdown');assert.equal(el(s,'gameOverlayActionBtn').hidden,true);s.advance(1000);await hit(s,1);assert.equal(el(s,'gameScore').textContent,score);s.advance(1200);await hit(s,1);assert.equal(el(s,'gameScore').textContent,'200');assert.equal(el(s,'gameHealthValue').textContent,'100 / 100');
+});
+test('results show actual score and challenge, then replay or change settings without losing Studio',async()=>{
+ const s=make(),title=el(s,'takeTitle').value,notes=el(s,'statNotes').textContent,chart=await perfect(s);
+ assert.equal(el(s,'gameChallenge').textContent,chart.title+' · Petikan pendek · Medium');assert.equal(el(s,'gamePhase').textContent,'Selesai');assert.equal(el(s,'gameResultScore').textContent,el(s,'gameScore').textContent);assert.match(el(s,'gameResultBest').textContent,/Terbaik baharu/);assert.ok(el(s,'gameResultText').textContent.includes(chart.title));assert.equal(el(s,'gameOverlayResultLink').hidden,false);assert.equal(el(s,'gameOverlayActionBtn').textContent,'Main sekali lagi');
+ await click(s,'gameOverlayActionBtn');assert.equal(el(s,'gameResult').hidden,true);assert.equal(el(s,'gameDifficulty').disabled,true);assert.equal(el(s,'gamePhase').dataset.state,'countdown');s.advance(9500);assert.equal(el(s,'gamePhase').textContent,'Nyawa habis');assert.match(el(s,'gameResultBest').textContent,/Terbaik cabaran ini:/);
+ await click(s,'gameChangeBtn');assert.equal(el(s,'gameView').dataset.phase,'idle');assert.equal(el(s,'gameResult').hidden,true);assert.equal(el(s,'gameDifficulty').disabled,false);assert.equal(el(s,'gameOverlayResultLink').hidden,true);await choose(s,'gameDifficulty','easy');assert.ok(el(s,'gameChallenge').textContent.endsWith(' · Easy'));await click(s,'studioModeBtn');assert.equal(el(s,'takeTitle').value,title);assert.equal(el(s,'statNotes').textContent,notes);
+});

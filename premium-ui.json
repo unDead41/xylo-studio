@@ -1,11 +1,30 @@
 {
   "profile": "product-admin",
-  "sourceRoots": ["index.html"],
+  "sourceRoots": [
+    "."
+  ],
   "locale": "ms-MY",
   "canonicalMap": "UX-CONTRACT.md",
-  "requiredCapabilities": ["Select/Listbox", "Form", "Scrollbar", "Toast"],
-  "ownership": {"Select/Listbox": "native"},
-  "requiredCommands": ["unit"],
-  "commands": {"unit": "node --test tests/*.test.cjs"},
-  "evidence": {"browserWorkflows": "tests/browser-recorder.cjs", "regression": "tests/recorder.test.cjs"}
+  "requiredCapabilities": [
+    "Select/Listbox",
+    "Form",
+    "Scrollbar",
+    "Toast"
+  ],
+  "ownership": {
+    "Select/Listbox": "native"
+  },
+  "requiredCommands": [
+    "unit"
+  ],
+  "commands": {
+    "unit": "node --test tests/*.test.cjs"
+  },
+  "evidence": {
+    "browserWorkflows": "tests/browser-layout.cjs",
+    "regression": "tests/ui.test.cjs",
+    "accessibility": "tests/accessibility.test.cjs",
+    "recordingStates": "tests/percussion-view-flow.test.cjs",
+    "verification": "docs/handoffs/ui/verification/browser-verification.json"
+  }
 }

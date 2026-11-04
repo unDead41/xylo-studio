@@ -1,0 +1,53 @@
+{
+  "index_sha256": "46d1afe230d520223456231f86d2a1b9d8d04a04f96d8fbca5ba810bab3c5ebd",
+  "method": "Manual supported CUA cloud Chromium UI checks through managed preview",
+  "desktop": {
+    "viewport_css_px": 1363,
+    "chooser_groups": [
+      2,
+      2,
+      4
+    ],
+    "native_family_link_focus": "choiceBandHeading",
+    "native_family_target_below_sticky_header": true
+  },
+  "responsive": [
+    {
+      "nominal_iframe_width": 390,
+      "client_width": 380,
+      "scroll_width": 380,
+      "all_eight_routes_checked": true,
+      "heading_css_px": 29,
+      "all_inspectors_stack": true
+    },
+    {
+      "nominal_iframe_width": 320,
+      "client_width": 310,
+      "scroll_width": 310,
+      "all_eight_routes_checked": true,
+      "heading_css_px": 27,
+      "all_inspectors_stack": true
+    }
+  ],
+  "verified_workflows": [
+    "Eight grouped instrument routes and return focus",
+    "Native edit dialog initial focus on editPitch",
+    "Blank onset validation focuses editTick with aria-invalid; first-onset zero invariant retained",
+    "Successful edit restores a connected event-row editor",
+    "Local export-password reveal, close/reopen mask reset and input focus",
+    "Native dialog trap and Escape",
+    "Wrong password validation and valid JSON export dialog (4403-character test score)",
+    "Export Escape returns to exportBtn; dialog width640px desktop",
+    "Percussion armed badge, two keyboard inputs recorded, temporary one-hit practice trace with two saved actions, replay restores two-hit take trace",
+    "Replacement dialog initially focuses percCancelRecord",
+    "320px Game: start, pause, resume with two preparation beats, automatic life-end, result/replay/change controls, change focuses gameSong",
+    "320px Game: no horizontal overflow, resume action remains within arena overlay (164.578125px wide) and detailed rules disclosure opens"
+  ],
+  "limits": [
+    "Narrow checks used browser iframes, not physical-phone or mobile-device emulation.",
+    "The global preview was briefly replaced by another project; source presence/title were rechecked after reclaiming the managed preview.",
+    "One pointer locator operation timed out before activation; equivalent native keyboard recording/replay checks succeeded.",
+    "No physical acoustic or speaker listening, microphone permission/capture, Safari/Firefox, screen-reader session or full 200% zoom matrix is claimed.",
+    "Browser harnesses were syntax-checked and updated, not executed through an alternative browser-control system."
+  ]
+}

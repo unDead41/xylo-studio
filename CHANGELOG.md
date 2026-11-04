@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — overall UI/UX, ui branch, 2026-11-04
+
+- Group eight compact instrument cards by musical family, retain physical artwork and add native keyboard-friendly jump navigation.
+- Improve the shared reading scale, sticky navigation, responsive action rows and common instrument/recording inspector layout.
+- Clarify recording/playback guidance, source-aware labels and independent percussion session/practice traces.
+- Improve native dialog context, validation/error focus, event-editor focus recovery and local export-password visibility control.
+- Improve Game setup, phase/readiness, in-arena Start/Resume/Replay and local result guidance without changing rules.
+- Built with six isolated workers from current eight-instrument main; push only ui and keep accepted v1.04.0.
+
 ## School percussion extension — 2026-11-04 (version unchanged)
 
 - Add playable Dram Sisi, Dram Bes, Simbal and Segi Tiga, bringing the chooser to eight instruments.

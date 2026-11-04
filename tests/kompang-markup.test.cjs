@@ -4,14 +4,26 @@ const fs=require('node:fs'),vm=require('node:vm');
 const html=fs.readFileSync('index.html','utf8');
 const view=()=>html.match(/<section id="kompangView"[\s\S]*?(?=\n<section id="snareView"|\n<\/main>)/)?.[0]||'';
 
-test('four enabled instrument cards retain real routes, categories and Buka studio actions',()=>{
- for(const id of ['chooseXylophone','chooseRecorder','chooseTamborin','chooseKompang']){
+test('all eight enabled instrument cards retain native routes and describe their controls before entry',()=>{
+ const ids=['chooseXylophone','chooseRecorder','chooseTamborin','chooseKompang','chooseSnare','chooseBassDrum','chooseCymbals','chooseTriangle'];
+ for(const id of ids){
   const button=html.match(new RegExp('<button[^>]*id="'+id+'"[\\s\\S]*?</button>'))?.[0];
-  assert.ok(button,id);assert.doesNotMatch(button.slice(0,button.indexOf('>')),/\bdisabled\b/);
+  assert.ok(button,id);const tag=button.slice(0,button.indexOf('>'));assert.doesNotMatch(tag,/\bdisabled\b/);assert.match(tag,/\btype="button"/);assert.match(tag,/aria-label="Pilih [^"]+"/);
   assert.match(button,/Buka studio/);assert.match(button,/(?:choice-art|recorderPreview)/);
+  const descriptions=tag.match(/aria-describedby="([^"]+)"/)?.[1].split(/\s+/);assert.ok(descriptions?.length>=2,id+' capability and controls descriptions');
+  for(const target of descriptions)assert.match(button,new RegExp('\\bid="'+target+'"'),id+' resolves '+target+' within its card');
+  assert.match(button,/<kbd>[^<]+<\/kbd>/,id+' offers visible keyboard guidance');
  }
- for(const id of ['chooseTamborin','chooseKompang'])assert.match(html.match(new RegExp('<button[^>]*id="'+id+'"[\\s\\S]*?</button>'))[0],/Cadangan baharu/);
- assert.match(html,/Lapan instrumen/);
+});
+
+test('chooser family links reach named focus targets without replacing the eight playable routes',()=>{
+ const chooser=html.slice(html.indexOf('<section id="instrumentChooser"'),html.indexOf('<div id="studioView"'));
+ const nav=chooser.match(/<nav\b[^>]*class="[^"]*\bchooser-family-nav\b[^"]*"[^>]*>[\s\S]*?<\/nav>/)?.[0];assert.ok(nav,'native family navigation');
+ const targets=[...nav.matchAll(/<a\b[^>]*href="#([^"]+)"/g)].map(m=>m[1]);assert.equal(targets.length,3);assert.equal(new Set(targets).size,3);
+ const families=[...chooser.matchAll(/<section\b[^>]*class="[^"]*\bchooser-family\b[^"]*"[^>]*aria-labelledby="([^"]+)"[^>]*>([\s\S]*?)<\/section>/g)];
+ assert.deepEqual(families.map(m=>m[1]),targets);assert.deepEqual(families.map(m=>(m[2].match(/<button\b/g)||[]).length),[2,2,4]);
+ for(const id of targets)assert.match(chooser,new RegExp('<h2\\b[^>]*id="'+id+'"[^>]*tabindex="-1"[^>]*>[^<]+<\\/h2>'),id+' is a named navigation target');
+ assert.match(chooser,/<a\b[^>]*href="#chooseHeading"/,'native return to chooser heading');
 });
 
 test('Kompang exposes two separate focusable SVG hit regions on one unpitched membrane',()=>{

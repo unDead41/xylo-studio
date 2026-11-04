@@ -33,3 +33,11 @@ Percussion JSON schema e-instru-percussion-take/v1 and per-instrument e-instru-p
 The same unpitched core and Studio factory now support `snare` (hit/rim), `bass_drum` (hit/soft), `cymbals` (crash/soft) and `triangle` (open/muted). `school-band-ui` constructs these four thin configuration adapters once. Each supplies its own SVG, labels, patterns, synthesis function and storage identity. `instrument-navigation` incorporates the resulting route descriptors; the pitched registry and Game remain unchanged.
 
 The shared factory accepts `voiceTailMs`, defaulting to the previous 650ms behavior. The school instruments use 1000ms so the final long cymbal/triangle strike can decay before normal completion. Stop and lifecycle cancellation remain immediate. Muted triangle is an independent short strike, not a global damping command. See `docs/handoffs/instrument-pancaragam/LATEST.md` for source identity and actual checks.
+
+## Overall UI/UX candidate — ui, 4 November 2026
+
+The eight-instrument chooser uses native family fragment links and retains existing instrument IDs and route owners. Shared workbench styling owns reading scale, sticky app navigation, transport wrapping, inspector and table geometry. Existing native select, dialog and feedback owners remain canonical.
+
+UI changes affect the pitched, percussion, Game and instrument-navigation adapters. Core catalog/pitch/game rules, percussion model/audio and instrument configurations remain the existing owners. Percussion practice traces now begin a separate temporary timeline; saved takes/raw evidence are untouched and replay restores the saved trace. Dialog validation/focus recovery and source-aware accessible playback names improve interaction correctness without changing recording schemas or timing.
+
+This task's deliverable is branch ui with accepted VERSION v1.04.0 and an Unreleased candidate record. See `docs/handoffs/ui/LATEST.md` for six-worker provenance, actual test counts, source hashes, browser coverage and limits.
