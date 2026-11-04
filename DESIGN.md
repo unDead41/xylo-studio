@@ -32,6 +32,12 @@ omitted:
 ---
 # Design context
 
+## Appearance extension
+
+The root tokens above remain the accepted light palette. The inline `display-styles` block, generated from `studio-pro/display.css`, provides dark semantic surfaces/foregrounds and independent vision overrides. Primary and danger fills have their own foreground tokens so pale dark-mode controls and orange vision controls remain readable. Physical wood, skin, brass and recorder artwork stays material-colored; surrounding surfaces and interaction feedback follow the chosen appearance.
+
+Paparan is a single compact header control. Its native modal keeps brightness and vision as separate choices, with a note/state preview and honest save status. A dark performance arena remains inside the light shell; Game tiles and pads share lane fills and dark labels. Vision modes add eight bar textures, unobscured note/key labels, solid/dashed action borders and visible state outlines. Timeline labels/grids/playhead and canvas colors use semantic tokens; motion is not required to recognize pressed/current states.
+
 ## Overview
 
 e-Instru Studio is a BM digital instrument and rhythm game for mouse, keyboard and touch. The reference is the existing raised, rainbow xylophone: a tangible classroom instrument at the center of a calm studio. Preserve the light layout, clear tempo controls, synchronized event table/timeline and separate Studio/Game navigation. The new first screen selects an instrument; it is a functional entry to the same studio.

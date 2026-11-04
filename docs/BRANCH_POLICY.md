@@ -1,5 +1,7 @@
 # Branch dan chat
 
+Susulan tema 4 November 2026 menggunakan `ui-themes` dalam worktree tersendiri daripada `ui` SHA `27df2fadadf66cee3f2be26aeafff765e33e515e`. Cabang ini membawa paparan cerah/gelap dan palet bantuan penglihatan sahaja; kerja Studio Pro yang sedang berjalan kekal pada pekerjanya. Penghantaran cabang tema tidak mengubah main/Pages, share atau tutorial. Gunakan satu pemilik `StudioDisplay` sahaja ketika audit menggabungkan sumber Pro dan tema.
+
 Keputusan Ijamm pada 2 November 2026. Nama branch tepat ialah nama dalam jadual.
 
 | Branch | Nama chat | Tugas |

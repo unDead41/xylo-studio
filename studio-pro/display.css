@@ -1,0 +1,369 @@
+/* Display preferences share the existing runtime token owner. */
+:root{color-scheme:light;--on-primary:#FFF;--vision-accent:#126B66;--vision-note-0:#EB8C88;--vision-note-1:#EDA971;--vision-note-2:#E6C360;--vision-note-3:#8FC79B;--vision-note-4:#6BBEB8;--vision-note-5:#82B9DB;--vision-note-6:#A1ACE0;--vision-note-7:#C3A2D6}
+:root[data-theme=dark]{color-scheme:dark;--primary:#88D7CF;--ink:#EAF2F8;--background:#101B26;--surface:#1A2B3B;--muted:#B8CAD8;--border:#4C6276;--soft:#193F43;--surface-subtle:#203344;--danger:#FFB1BC;--danger-bg:#4A2834;--warning:#F4D291;--warning-bg:#403721;--focus:#A7D2FF;--scroll-thumb:#7E96AC;--scroll-track:#142332;--scroll-thumb-hover:#A1B4C7;--scroll-thumb-active:#CAD7E3;--panel-shadow:0 3px 16px #0002}
+:root[data-vision=protanopia],:root[data-vision=deuteranopia]{--primary:#185B9B;--soft:#E6EFF9;--danger:#805010;--danger-bg:#FFF0D9;--warning:#6B4D20;--warning-bg:#FAEACF;--focus:#6A3B97;--vision-accent:#185B9B}
+:root[data-vision=tritanopia]{--primary:#00686D;--soft:#E2F1F1;--danger:#9C3D3D;--danger-bg:#FCE7E5;--warning:#6D4559;--warning-bg:#F2E6ED;--focus:#863E64;--vision-accent:#00686D}
+:root[data-theme=dark][data-vision=protanopia],:root[data-theme=dark][data-vision=deuteranopia]{--primary:#A8D2FF;--soft:#213D58;--danger:#FFD499;--danger-bg:#493922;--warning:#E5CEF5;--warning-bg:#3B304D;--focus:#E5CAFF}
+:root[data-theme=dark][data-vision=tritanopia]{--primary:#9ADADD;--soft:#173E45;--danger:#FFC6BC;--danger-bg:#492F36;--warning:#EDC2DB;--warning-bg:#3F3042;--focus:#FFC8E4}
+:root[data-vision=contrast]{--primary:#173B72;--ink:#111;--muted:#343434;--background:#FFF;--surface:#FFF;--surface-subtle:#F1F1F1;--border:#505050;--soft:#E3EBF5;--danger:#682500;--danger-bg:#FFF;--warning:#563000;--warning-bg:#FFF;--focus:#111;--scroll-thumb:#333;--scroll-track:#EEE}
+:root[data-theme=dark][data-vision=contrast]{--primary:#FFF;--ink:#FFF;--muted:#DDD;--background:#000;--surface:#101010;--surface-subtle:#222;--border:#CCC;--soft:#333;--danger:#FFF;--danger-bg:#292929;--warning:#FFF;--warning-bg:#292929;--focus:#FFF;--scroll-thumb:#DDD;--scroll-track:#222}
+.header-inner{flex-wrap:wrap;height:auto;min-height:72px;gap:10px 14px}.header{height:auto}.mode-switch{margin-left:auto;display:flex;flex-wrap:wrap}.display-trigger{font-size:12px;min-height:40px;padding:8px 12px;flex:none}.pro-send{margin:12px 0 4px;width:100%}.pro-entry{width:100%;padding:18px 22px;margin:0 0 22px;justify-content:space-between;gap:18px;background:var(--soft);border-color:var(--primary);text-align:left}.pro-entry>span:first-child{display:grid;gap:4px}.pro-entry strong{font:700 22px var(--display);color:var(--primary)}.pro-entry>span>span{font-size:13px;color:var(--muted);line-height:1.6}.pro-entry-action{font-size:13px;white-space:nowrap;color:var(--primary)}.display-body{display:grid;gap:12px}.display-body .field{margin:0}.display-body .field select{width:100%}.display-hint{font-size:12px!important;line-height:1.7;margin:8px 0 0!important;color:var(--muted)}.display-preview{min-width:0;border:1px solid var(--border);border-radius:12px;padding:14px}.display-preview legend{font-size:12px;font-weight:650;padding:0 6px}.display-notes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:13px}.display-notes span{font:700 15px var(--mono);color:#142632;padding:14px 2px;text-align:center;border:2px solid #425D72;border-radius:8px;background:var(--vision-note-0)}.display-notes span:nth-child(2){background-color:var(--vision-note-1)}.display-notes span:nth-child(3){background-color:var(--vision-note-2)}.display-notes span:nth-child(4){background-color:var(--vision-note-3)}.display-state{font-size:12px;font-weight:700;padding:6px 10px;border:1px solid currentColor;border-radius:5px;line-height:1.5}.display-state-ready{color:var(--primary);background:var(--soft)}.display-state-record{color:var(--danger);background:var(--danger-bg);border-width:2px}.display-state-warn{color:var(--warning);background:var(--warning-bg);border-style:dashed;border-width:2px}
+/* Dark variants cover existing shared surfaces without recoloring physical SVG materials. */
+html[data-theme=dark] :is(.settings-row,.side-help,.timeline,.mic-state,.help-step,.dialog-actions,.game-settings,.game-summary,.game-phase,.game-help,.game-result,.game-surface,.perc-trace,.perc-event,.percussion-playing-area,.recorder-wrap,.percussion-play-area,.choice-art,.song,.song .song-icon,.hole-state,.fingering-reference,.take-title,th,textarea){background:var(--surface-subtle);color:var(--ink);border-color:var(--border)}
+html[data-theme=dark] :is(.instrument-choice,.choice-action,.recorder-pad,.studio-action-pad,kbd,.game-pads button,.game-stats,.game-stat){background:var(--surface);color:var(--ink);border-color:var(--border)}
+html[data-theme=dark] :is(.recorder-pad small,.recorder-pad kbd,.studio-action-pad kbd,.percussion-topline,.perc-feedback){color:var(--muted);background:var(--surface)}
+html[data-theme=dark] :is(button:hover,.song.active,.song.active:hover){background:var(--soft);border-color:var(--primary);color:var(--ink)}
+html[data-theme=dark] :is(button.primary,button.danger){color:var(--background)}
+html[data-theme=dark] button.primary:hover{background:var(--primary);filter:brightness(1.1);color:var(--background)}
+html[data-theme=dark] :is(.goal.good,.tag.green){background:var(--soft);color:var(--primary);border-color:var(--primary)}
+html[data-theme=dark] :is(.goal.warn,.range-warning,.tag.amber,.review-line){background:var(--warning-bg);color:var(--warning);border-color:var(--warning)}
+html[data-theme=dark] :is(.recorder-pad.down,.studio-action-pad[aria-pressed=true]){background:var(--primary);color:var(--background);outline:2px solid var(--ink);outline-offset:2px}
+html[data-theme=dark] .toast{background:var(--ink);color:var(--background)}
+html[data-theme=dark] td{border-color:var(--border)}
+html[data-theme=dark] .timeline :is(text,.timeline-empty){fill:var(--muted)}
+/* Non-color cues stay visible in every supported color-vision mode. */
+html:not([data-vision=standard]) .bar{color:#142632;outline:1px solid #405464;outline-offset:-1px;background-color:var(--vision-note-0)!important;background-image:repeating-linear-gradient(0deg,transparent 0 7px,#14263220 7px 8px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+1){--bar:var(--vision-note-0);background-color:var(--vision-note-0)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+2){--bar:var(--vision-note-1);background-color:var(--vision-note-1)!important;background-image:repeating-linear-gradient(45deg,transparent 0 7px,#14263225 7px 9px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+3){--bar:var(--vision-note-2);background-color:var(--vision-note-2)!important;background-image:radial-gradient(#14263244 1px,transparent 1.5px)!important;background-size:8px 8px!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+4){--bar:var(--vision-note-3);background-color:var(--vision-note-3)!important;background-image:repeating-linear-gradient(90deg,transparent 0 7px,#14263222 7px 9px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+5){--bar:var(--vision-note-4);background-color:var(--vision-note-4)!important;background-image:repeating-linear-gradient(-45deg,transparent 0 7px,#14263225 7px 9px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+6){--bar:var(--vision-note-5);background-color:var(--vision-note-5)!important;background-image:repeating-linear-gradient(0deg,transparent 0 4px,#14263230 4px 5px,transparent 5px 10px,#14263230 10px 12px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+7){--bar:var(--vision-note-6);background-color:var(--vision-note-6)!important;background-image:repeating-linear-gradient(45deg,transparent 0 3px,#14263226 3px 4px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+8){--bar:var(--vision-note-7);background-color:var(--vision-note-7)!important;background-image:radial-gradient(#14263244 2px,transparent 2.5px)!important;background-size:10px 10px!important}
+html:not([data-vision=standard]) .bar.down{outline:4px double #142632;outline-offset:-5px}
+html:not([data-vision=standard]) :is(button[aria-pressed=true],button[aria-selected=true],.song.active){outline:2px solid var(--primary);outline-offset:-3px}
+html:not([data-vision=standard]) :is(.status-strip.recording,.session-state[data-state=recording]){border-left:5px double var(--danger);font-weight:750}
+html:not([data-vision=standard]) .display-notes span:nth-child(1){background-image:repeating-linear-gradient(0deg,transparent 0 7px,#14263225 7px 8px)}
+html:not([data-vision=standard]) .display-notes span:nth-child(2){background-image:repeating-linear-gradient(45deg,transparent 0 7px,#14263225 7px 9px)}
+html:not([data-vision=standard]) .display-notes span:nth-child(3){background-image:radial-gradient(#14263244 1px,transparent 1.5px);background-size:8px 8px}
+html:not([data-vision=standard]) .display-notes span:nth-child(4){background-image:repeating-linear-gradient(90deg,transparent 0 7px,#14263225 7px 9px)}
+@media(max-width:850px){.header-inner{padding-top:9px;padding-bottom:9px}.brand{flex:1}.mode-switch{order:3;margin-left:0}.display-trigger{margin-left:auto}.pro-entry{padding:16px}.pro-entry-action{white-space:normal;text-align:right}}
+@media(max-width:540px){:root{--focus-offset:155px}.header-inner{gap:8px}.mode-switch{width:100%}.mode-switch button{flex:1;min-width:0;padding:8px 9px;font-size:12px}.pro-entry{align-items:flex-start;gap:10px}.pro-entry>span>span{font-size:12px}.pro-entry strong{font-size:20px}.pro-entry-action{font-size:12px;max-width:90px}.display-dialog select{max-width:100%}}
+@media(forced-colors:active){.display-state,.display-notes span,.bar,.pro-entry{border:2px solid CanvasText}.bar.down{outline:4px double Highlight}.display-state-record{border-style:double}.display-state-warn{border-style:dashed}}
+
+/* Light is the accepted classroom palette. Theme and vision selectors may override these defaults. */
+:root{
+ --primary:#126B66;--ink:#172F41;--background:#EDF3F7;--surface:#FFF;--muted:#526879;--border:#D7E2E9;--soft:#E6F2F0;
+ --danger:#B23845;--danger-bg:#FFF1F2;--warning:#805119;--warning-bg:#FFF2DD;--focus:#156CC4;
+ --surface-subtle:#F7FAFC;--surface-hover:#F3F7FA;--surface-hover-border:#ADBFCB;--on-primary:#FFF;--on-danger:#FFF;
+ --secondary:#4F5990;--secondary-soft:#EFF1FA;--note-ink:#142632;--note-edge:#425D72;
+ --scroll-thumb:#9CAEBB;--scroll-track:#EDF3F7;--scroll-thumb-hover:#728B9C;--scroll-thumb-active:#526879;
+ --timeline-grid:#DFE8EE;--timeline-label:#617A8C;--timeline-playhead:var(--primary);--progress-track:#DCE9E7;
+ --game-bg:#172F41;--game-lane:#1B3547;--game-grid:#A6C2CF22;--game-beat:#A6C2CF18;--game-label:#9EB9C9;--game-note-ink:#172F41;
+ --game-overlay:#172F41D9;--game-ink:#F3F9FA;--game-muted:#C5D7E2;--game-accent:#9EE4D8;
+ --game-pad:#203E51;--game-pad-hover:#284B60;--game-pad-pressed:#426F7B;--game-pad-border:#A6C2CF25;
+ --game-excellent:#91E0CD;--game-good:#F4D37F;--game-miss:#FFA7A6;
+}
+html:not([data-theme=dark]){color-scheme:light}
+
+/* Shared action and state recipes also follow light color-vision preferences. */
+button:hover{background:var(--surface-hover);border-color:var(--surface-hover-border)}
+button:disabled:hover{background:var(--surface);border-color:var(--border)}
+button.primary,button.primary:hover{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+button.danger,button.danger:hover{background:var(--danger);border-color:var(--danger);color:var(--on-danger)}
+button.danger .record-dot{background:var(--on-danger)}
+.event-row.is-current .pitch-pill{color:var(--on-primary)}
+.song.active,.song.active:hover{background:var(--soft);border-color:var(--primary)}
+.export-tabs button[aria-pressed=true]{background:var(--soft);border-color:var(--primary);color:var(--primary)}
+.goal.good,.tag.green,.instrument-choice .choice-badge,.choice-action{background:var(--soft);color:var(--primary);border-color:var(--primary)}
+.goal.warn,.tag.amber,.range-warning,.review-line{background:var(--warning-bg);color:var(--warning);border-color:var(--warning)}
+.validation-list{background:var(--danger-bg);color:var(--danger)}
+.session-state[data-state=pending],.game-state[data-state=paused]{border-color:var(--warning)}
+.session-state[data-state=example],.session-state[data-state=replay],.session-state[data-state=metronome],.game-state[data-state=running],.game-state[data-state=countdown]{border-color:var(--primary)}
+
+/* The shell consumes semantic surfaces; instrument SVG material colors stay intact. */
+.settings-row,.side-help,.mic-state,.help-step,.dialog-actions,th,textarea{background:var(--surface-subtle);border-color:var(--border)}
+.timeline{background:var(--surface);border-color:var(--border)}
+td{border-color:var(--border)}
+kbd,.hole-state{background:var(--surface);border-color:var(--border)}
+.hole-state.closed{color:var(--primary);border-color:var(--primary)}
+.fingering-reference,.percussion-guide,.extended-notes{border-color:var(--border)}
+.instrument-chooser .chooser-family-nav a{border-color:var(--border)}
+.instrument-chooser .chooser-family-nav a:hover{background:var(--soft);border-color:var(--primary)}
+.instrument-chooser .choice-controls kbd{background:var(--surface);border-color:var(--border)}
+.perc-trace>p{background:var(--surface-subtle)}
+.perc-event{background:var(--soft);color:var(--primary);border-color:var(--primary)}
+.perc-event[data-secondary=true]{background:var(--secondary-soft);color:var(--secondary);border-color:var(--secondary)}
+.perc-legend i{background:var(--primary)}
+.perc-legend span+span i{background:var(--secondary)}
+.display-notes span{color:var(--note-ink);border-color:var(--note-edge)}
+
+/* Active pads use the action foreground, including orange and high-contrast palettes. */
+html:not([data-theme=dark]) .recorder-pad.down,html:not([data-theme=dark]) .recorder-pad:active,
+html:not([data-theme=dark]) .studio-action-pad:active,
+html:not([data-theme=dark]) .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+html:not([data-theme=dark]) .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{
+ background:var(--primary);border-color:var(--primary);color:var(--on-primary);
+}
+html:not([data-theme=dark]) .recorder-pad.down small,html:not([data-theme=dark]) .recorder-pad:active small{color:var(--on-primary)}
+html:not([data-theme=dark]) .recorder-pad.down kbd,html:not([data-theme=dark]) .recorder-pad:active kbd,
+html:not([data-theme=dark]) .studio-action-pad:active kbd,
+html:not([data-theme=dark]) .percussion-play-area:has(.is-tap) .studio-action-pad:first-child kbd,
+html:not([data-theme=dark]) .percussion-play-area:has(.is-shake) .studio-action-pad:last-child kbd{
+ background:var(--surface);color:var(--primary);border-color:var(--primary);
+}
+
+/* SVG axes are interface data, rather than physical instrument artwork. */
+#timeline line:not(#playHead),.timeline .timeline-grid{stroke:var(--timeline-grid)}
+#timeline text,.timeline .timeline-label{fill:var(--timeline-label)}
+#timeline #playHead,.timeline .timeline-playhead{stroke:var(--timeline-playhead)}
+
+/* The original light shell keeps its dark performance arena. Canvas uses the same tokens. */
+progress{background:var(--progress-track)}
+progress::-webkit-progress-bar{background:var(--progress-track)}
+.game-arena{background:var(--game-bg)}
+.game-overlay{background:var(--game-overlay);color:var(--game-ink)}
+.game-overlay.is-countdown{background:transparent}
+.game-overlay-kicker{color:var(--game-accent)}
+.game-overlay p{color:var(--game-muted)}
+.game-overlay.is-countdown p{background:var(--game-overlay)}
+.game-overlay.is-countdown>strong,.game-judgment{text-shadow:0 2px 10px var(--game-bg)}
+.game-judgment{color:var(--game-ink)}
+.game-judgment[data-kind=excellent]{color:var(--game-excellent)}
+.game-judgment[data-kind=good]{color:var(--game-good)}
+.game-judgment[data-kind=miss],.game-judgment[data-kind=wrong]{color:var(--game-miss)}
+.game-hit-line{background:var(--game-accent);box-shadow:0 0 10px var(--game-accent)}
+.game-hit-line span{color:var(--game-accent)}
+.game-pads button{background:var(--game-pad-fill,var(--game-pad));color:var(--game-pad-ink,var(--game-ink));border-color:var(--game-pad-border)}
+.game-pads button:hover{background:var(--game-pad-fill,var(--game-pad-hover))}
+.game-pads button.is-pressed{background:var(--game-pad-fill,var(--game-pad-pressed));outline:3px solid var(--game-pad-ink,var(--game-accent));outline-offset:-5px}
+.game-pads kbd{background:transparent;color:var(--game-pad-ink,var(--game-ink));border-color:currentColor}
+.game-pads span{color:var(--game-pad-ink,var(--game-muted))}
+.game-arena-pause{background:var(--game-pad);color:var(--game-ink);border-color:var(--game-label)}
+.game-arena-pause:hover{background:var(--game-pad-hover);border-color:var(--game-accent)}
+
+@media(forced-colors:active){
+ .display-state,.perc-event,.hole-state.closed{border-color:CanvasText}
+ .game-pads button,.game-arena-pause{border:1px solid ButtonText}
+ .game-pads button.is-pressed{outline:3px solid Highlight;outline-offset:-4px}
+}
+
+/* Dark corrections for shared surfaces, physical controls and live feedback. */
+:root[data-theme=dark]{
+  --on-primary:#101B26;
+  --on-danger:#101B26;
+  --border:#657F94;
+  --surface-hover:var(--soft);
+  --surface-hover-border:var(--primary);
+  --primary-hover:var(--primary);
+  --secondary:#D5DCFF;
+  --secondary-soft:#30374F;
+  --timeline-grid:#4C6276;
+  --timeline-label:var(--muted);
+  --timeline-playhead:var(--primary);
+  --game-bg:#101B26;
+  --game-lane:#162738;
+  --game-grid:#B8CAD830;
+  --game-beat:#B8CAD822;
+  --game-label:#B8CAD8;
+  --game-note-ink:#142632;
+  --game-overlay:#101B26EB;
+  --game-ink:#EAF2F8;
+  --game-muted:#B8CAD8;
+  --game-accent:var(--primary);
+  --game-pad:#203344;
+  --game-pad-hover:#274554;
+  --game-pad-pressed:#436C78;
+  --game-pad-border:#142632;
+  --game-excellent:#91E0CD;
+  --game-good:#F4D291;
+  --game-miss:#FFB1BC;
+  --progress-track:#3A5263;
+}
+
+html[data-theme=dark] .header{background:var(--surface);border-color:var(--border)}
+html[data-theme=dark] dialog{background:var(--surface);color:var(--ink);border-color:var(--border);box-shadow:0 24px 90px #0008}
+html[data-theme=dark] dialog::backdrop{background:#050C14B8}
+html[data-theme=dark] :is(.dialog-head,.dialog-actions){border-color:var(--border)}
+html[data-theme=dark] :is(.dialog-actions,.display-preview){background:var(--surface-subtle)}
+html[data-theme=dark] .validation-list{background:var(--danger-bg);color:var(--danger);border-color:var(--danger)}
+html[data-theme=dark] :is(input,textarea)::placeholder{color:var(--muted);opacity:1}
+
+/* Primary and recording controls keep their semantic fill while hovered. */
+html[data-theme=dark] button.primary{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+html[data-theme=dark] button.primary:is(:hover,:active):enabled{background:var(--primary-hover);border-color:var(--primary);color:var(--on-primary)}
+html[data-theme=dark] button.danger{background:var(--danger);border-color:var(--danger);color:var(--on-danger)}
+html[data-theme=dark] button.danger:is(:hover,:active):enabled{background:var(--danger);border-color:var(--danger);color:var(--on-danger);filter:brightness(1.05)}
+html[data-theme=dark] .danger .record-dot{background:var(--on-danger)}
+html[data-theme=dark] .event-row.is-current .pitch-pill{background:var(--primary);color:var(--on-primary)}
+html[data-theme=dark] button:disabled:not(.bar):hover{background:var(--surface);border-color:var(--border);color:var(--ink);filter:none;transform:none}
+html[data-theme=dark] button.primary:disabled:hover{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+html[data-theme=dark] button.danger:disabled:hover{background:var(--danger);border-color:var(--danger);color:var(--on-danger)}
+
+/* The instrument keeps its note fill and dark labels in every pointer state. */
+html[data-theme=dark] button.bar{background:var(--bar);color:#142632;border:0}
+html[data-theme=dark] .instrument button.bar:is(:hover,:active,.down,:disabled){background:var(--bar);color:#142632;border:0}
+html[data-theme=dark] button.bar:disabled{filter:none;transform:none}
+html[data-theme=dark] .bar-key{background:#FFFFFFB3;border-color:#FFFFFF80;color:#142632}
+html[data-theme=dark] .rail{box-shadow:0 8px 0 #0A1520}
+html[data-theme=dark] .beat-dots i{background:var(--border)}
+html[data-theme=dark] .beat-dots i.on{background:var(--primary)}
+
+/* SVG material fills are unchanged; the outside labels follow the surface. */
+html[data-theme=dark] .recorder-object svg .anatomy-label{fill:var(--muted)}
+html[data-theme=dark] .timeline .event.is-current{stroke:var(--ink);stroke-width:2}
+html[data-theme=dark] .hole-state.closed{color:var(--primary);border-color:var(--primary)}
+html[data-theme=dark] :is(.percussion-guide,.fingering-reference,.extended-notes){border-color:var(--border)}
+html[data-theme=dark] .percussion-play-area .percussion-topline{background:transparent}
+html[data-theme=dark] .percussion-topline .perc-feedback{background:transparent;color:var(--primary)}
+html[data-theme=dark] .percussion-play-area button.perc-surface{background:transparent;border:0}
+html[data-theme=dark] .percussion-play-area button.perc-surface:is(:hover,:active,:disabled){background:transparent;border:0;color:inherit;filter:none;transform:none}
+html[data-theme=dark] .perc-trace>p{background:var(--surface);color:var(--muted);border-color:var(--border)}
+html[data-theme=dark] .perc-trace .perc-event{background:var(--soft);color:var(--primary);border-color:var(--primary)}
+html[data-theme=dark] .perc-trace .perc-event[data-secondary=true]{background:var(--secondary-soft);color:var(--secondary);border-color:var(--secondary)}
+html[data-theme=dark] :is(.session-state[data-state=pending],.game-state[data-state=paused]){border-color:var(--warning)}
+html[data-theme=dark] :is(.session-state[data-state=example],.session-state[data-state=replay],.session-state[data-state=metronome],.game-state[data-state=running],.game-state[data-state=countdown]){border-color:var(--primary)}
+
+/* The active instrument pad remains recognizable when the pointer stays on it. */
+html[data-theme=dark] :is(.recorder-pads,.extended-pads) button.recorder-pad:is(.down,:active),
+html[data-theme=dark] .percussion-play-area .studio-action-pad:is(:active,[aria-pressed=true]),
+html[data-theme=dark] .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+html[data-theme=dark] .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+html[data-theme=dark][data-vision=standard] :is(.recorder-pads,.extended-pads) button.recorder-pad:is(.down,:active),
+html[data-theme=dark][data-vision=standard] .percussion-play-area .studio-action-pad:is(:active,[aria-pressed=true]),
+html[data-theme=dark][data-vision=standard] .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+html[data-theme=dark][data-vision=standard] .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{outline:2px solid var(--ink);outline-offset:2px}
+html[data-theme=dark] :is(.recorder-pads,.extended-pads) .recorder-pad:is(.down,:active) :is(small,kbd),
+html[data-theme=dark] .percussion-play-area .studio-action-pad:is(:active,[aria-pressed=true]) :is(kbd,.band-subtitle),
+html[data-theme=dark] .percussion-play-area:has(.is-tap) .studio-action-pad:first-child :is(kbd,.band-subtitle),
+html[data-theme=dark] .percussion-play-area:has(.is-shake) .studio-action-pad:last-child :is(kbd,.band-subtitle){background:transparent;border-color:currentColor;color:var(--on-primary)}
+
+/* Game pads share the pale lane fills; the labels use the tile text color. */
+html[data-theme=dark] .game-pads button,
+html[data-theme=dark] .game-pads button:is(:hover,:active,.is-pressed):enabled,
+html[data-theme=dark] .game-pads button:disabled:hover{background:var(--game-pad-fill,var(--vision-note-0));color:var(--game-pad-ink,var(--game-note-ink));border-color:var(--game-pad-border)}
+html[data-theme=dark] .game-pads button.is-pressed{filter:brightness(1.1)}
+html[data-theme=dark] .game-pads button:disabled{filter:none;transform:none}
+html[data-theme=dark] .game-pads button :is(kbd,span){background:transparent;color:var(--game-pad-ink,var(--game-note-ink));border-color:currentColor}
+
+@media(forced-colors:active){
+  html[data-theme=dark] :is(dialog,.display-preview){border-color:CanvasText;box-shadow:none}
+  html[data-theme=dark] button.bar{border:2px solid ButtonText}
+  html[data-theme=dark] .instrument button.bar:is(:hover,:active,.down,:disabled){border:2px solid ButtonText}
+  html[data-theme=dark] .timeline .event.is-current{stroke:Highlight}
+  html[data-theme=dark] :is(.recorder-pads,.extended-pads) button.recorder-pad:is(.down,:active),
+  html[data-theme=dark] .percussion-play-area .studio-action-pad:is(:active,[aria-pressed=true]),
+  html[data-theme=dark] .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+  html[data-theme=dark] .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{outline-color:Highlight}
+}
+
+/* Color-vision preferences add independent shape and text cues to the shared themes.
+   Note fills remain owned by StudioDisplay.palette(), including its inline tokens. */
+:root:is([data-vision=protanopia],[data-vision=deuteranopia]){
+ --primary:#185B9B;--soft:#E6EFF9;--danger:#805010;--danger-bg:#FFF0D9;
+ --warning:#6B4D20;--warning-bg:#FAEACF;--focus:#6A3B97;
+ --secondary:#634486;--secondary-soft:#F0E9F8;--on-primary:#FFF;--on-danger:#FFF;
+ --vision-object-primary:#185B9B;--vision-object-secondary:#634486;
+ --game-accent:#B7DBFF;--game-excellent:#B7DBFF;--game-good:#FFD499;--game-miss:#E5CEF5;
+}
+:root[data-vision=tritanopia]{
+ --primary:#00686D;--soft:#E2F1F1;--danger:#9C3D3D;--danger-bg:#FCE7E5;
+ --warning:#6D4559;--warning-bg:#F2E6ED;--focus:#863E64;
+ --secondary:#843B60;--secondary-soft:#F5E9F0;--on-primary:#FFF;--on-danger:#FFF;
+ --vision-object-primary:#00686D;--vision-object-secondary:#843B60;
+ --game-accent:#B5EEEE;--game-excellent:#B5EEEE;--game-good:#FFD5C9;--game-miss:#F2CCE3;
+}
+:root[data-theme=dark]:is([data-vision=protanopia],[data-vision=deuteranopia]){
+ --primary:#A8D2FF;--soft:#213D58;--danger:#FFD499;--danger-bg:#493922;
+ --warning:#E5CEF5;--warning-bg:#3B304D;--focus:#E5CAFF;
+ --secondary:#E1C6FA;--secondary-soft:#3B304D;--on-primary:#101B26;--on-danger:#101B26;
+}
+:root[data-theme=dark][data-vision=tritanopia]{
+ --primary:#9ADADD;--soft:#173E45;--danger:#FFC6BC;--danger-bg:#492F36;
+ --warning:#EDC2DB;--warning-bg:#3F3042;--focus:#FFC8E4;
+ --secondary:#F4CAE0;--secondary-soft:#412C3A;--on-primary:#101B26;--on-danger:#101B26;
+}
+:root[data-vision=contrast]{
+ --primary:#173B72;--ink:#111;--muted:#343434;--background:#FFF;--surface:#FFF;
+ --surface-subtle:#F1F1F1;--border:#505050;--soft:#E3EBF5;
+ --danger:#682500;--danger-bg:#FFF;--warning:#563000;--warning-bg:#FFF;--focus:#111;
+ --secondary:#303030;--secondary-soft:#E8E8E8;--on-primary:#FFF;--on-danger:#FFF;
+ --timeline-grid:#626262;--timeline-label:#343434;--timeline-playhead:#111;
+ --vision-object-primary:#111;--vision-object-secondary:#111;
+ --scroll-thumb:#333;--scroll-track:#EEE;--game-accent:#FFF;--game-excellent:#FFF;--game-good:#FFF;--game-miss:#FFF;
+}
+:root[data-theme=dark][data-vision=contrast]{
+ --primary:#FFF;--ink:#FFF;--muted:#DDD;--background:#000;--surface:#101010;
+ --surface-subtle:#222;--border:#CCC;--soft:#333;
+ --danger:#FFF;--danger-bg:#292929;--warning:#FFF;--warning-bg:#292929;--focus:#FFF;
+ --secondary:#FFF;--secondary-soft:#292929;--on-primary:#000;--on-danger:#000;
+ --timeline-grid:#999;--timeline-label:#FFF;--timeline-playhead:#FFF;
+ --scroll-thumb:#DDD;--scroll-track:#222;
+}
+
+/* The eight textures in display.css are paired with unobscured note/key labels. */
+html:not([data-vision=standard]) .bar{--bar-edge:#405464!important;color:#142632;filter:none}
+html:not([data-vision=standard]) .bar-top{align-self:stretch;margin-left:2px;margin-right:2px;padding:4px 1px;background:#FFFFFFE8;border-radius:6px}
+html:not([data-vision=standard]) :is(.bar-note,.bar-sol,.bar-key){color:#142632}
+html:not([data-vision=standard]) .bar-key{background:#FFF;border-color:#405464}
+html:not([data-vision=standard]) :is(.bar:hover,.bar.down,.bar:active){filter:none}
+html:not([data-vision=standard]) :is(.bar.down,.bar:active){
+ outline:4px double #142632;outline-offset:-6px;
+ box-shadow:inset 0 0 0 2px #142632,0 1px 0 var(--bar-edge),0 5px 7px #172F4114;
+}
+
+/* Pressed pads keep a double edge when animation and movement are disabled. */
+html:root:not([data-vision=standard]) :is(button.recorder-pad.down,button.recorder-pad:active,button.studio-action-pad:active,button.studio-action-pad[aria-pressed=true]),
+html:not([data-vision=standard]) .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+html:not([data-vision=standard]) .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{
+ background:var(--primary);color:var(--on-primary);border-color:var(--primary);
+ outline:4px double var(--primary);outline-offset:2px;
+ box-shadow:inset 0 0 0 2px var(--on-primary),0 1px 0 var(--primary);
+}
+html:root:not([data-vision=standard]) :is(.recorder-pad.down,.recorder-pad:active) small{color:var(--on-primary)}
+html:root:not([data-vision=standard]) :is(.recorder-pad.down,.recorder-pad:active,.studio-action-pad) kbd{color:var(--ink);background:var(--surface);border-color:var(--border)}
+html:root:not([data-vision=standard]) :is(button.bar:focus-visible,button.recorder-pad:focus-visible,button.studio-action-pad:focus-visible,.game-pads button:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
+
+/* Primary actions use a solid boundary; secondary actions use a dashed boundary.
+   Text labels remain the action identity, including in monochrome. */
+html:not([data-vision=standard]) .studio-action-pad{border-width:2px;border-style:solid}
+html:not([data-vision=standard]) .studio-action-pad:last-child{border-style:dashed}
+html:not([data-vision=standard]) .perc-event{color:var(--primary);background:var(--soft);border:2px solid var(--primary)}
+html:not([data-vision=standard]) .perc-event[data-secondary=true]{color:var(--secondary);background:var(--secondary-soft);border:2px dashed var(--secondary)}
+html:not([data-vision=standard]) .perc-trace .perc-event[aria-current=true]{outline:3px double var(--ink);outline-offset:2px;font-weight:800}
+html:not([data-vision=standard]) :is(.perc-legend i,.komp-stage-note span:before){width:11px;height:11px;background:var(--primary);border:1px solid currentColor}
+html:not([data-vision=standard]) :is(.perc-legend span+span i,.komp-stage-note span+span:before){background:transparent;border:2px dashed var(--secondary);border-radius:0}
+html:not([data-vision=standard]) :is(.kompang-zone .komp-zone-fill,.komp-center-feedback,.perc-hit-ring,.band-zone .band-hit-shape){fill:var(--vision-object-primary);stroke:var(--vision-object-primary)}
+html:not([data-vision=standard]) .perc-hit-ring{fill:none}
+html:not([data-vision=standard]) :is(.kompang-zone[data-action=edge] .komp-zone-fill,.komp-edge-feedback,.band-zone[data-tone=secondary] .band-hit-shape){fill:var(--vision-object-secondary);stroke:var(--vision-object-secondary);stroke-dasharray:7 5}
+html:not([data-vision=standard]) :is(.komp-zone-label,.komp-zone-key,.band-zone-label,.band-zone-key){fill:#142632;paint-order:stroke fill;stroke:#FFFFFA;stroke-width:1.3px;stroke-linejoin:round}
+html:not([data-vision=standard]) :is(.kompang-zone:focus-visible .komp-zone-fill,.band-zone:focus-visible .band-hit-shape){stroke:var(--vision-object-primary);stroke-width:4;stroke-opacity:1;stroke-dasharray:3 2}
+
+/* Existing state wording and the current-row play symbol remain visible cues. */
+html:not([data-vision=standard]) :is(.mode-switch button[aria-pressed=true],.song.active strong){text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;font-weight:800}
+html:not([data-vision=standard]) :is(.status-strip.recording,.session-state[data-state=recording]){border-left:5px double var(--danger);font-weight:800}
+html:not([data-vision=standard]) :is(.session-state[data-state=armed],.session-state[data-state=pending],.game-state[data-state=paused]){border:2px dashed currentColor}
+html:not([data-vision=standard]) :is(.session-state[data-state=example],.session-state[data-state=replay],.session-state[data-state=metronome],.game-state[data-state=running],.game-state[data-state=countdown]){border:2px solid currentColor}
+html:not([data-vision=standard]) .event-row.is-current{outline:2px solid var(--primary);outline-offset:-2px}
+html:not([data-vision=standard]) .timeline .event{stroke:#405464;stroke-width:1}
+html:not([data-vision=standard]) .timeline .event[data-estimated=true]{stroke:var(--vision-object-secondary);stroke-width:2;stroke-dasharray:3 2}
+html:not([data-vision=standard]) .timeline .event.is-current{stroke:var(--timeline-playhead,var(--primary));stroke-width:3}
+html:not([data-vision=standard]) .beat-dots i{background:transparent;border:1px solid var(--muted)}
+html:not([data-vision=standard]) .beat-dots i.on{background:var(--primary);outline:2px solid var(--primary);outline-offset:2px}
+html:not([data-vision=standard]) .display-state-record{border-width:3px;border-style:double}
+
+/* Lane letters, note labels, judgment words and health numbers remain primary. */
+html:not([data-vision=standard]) .game-pads button{border-top:4px solid currentColor}
+html:not([data-vision=standard]) .game-pads button:nth-child(2){border-top-style:double}
+html:not([data-vision=standard]) .game-pads button:nth-child(3){border-top-style:dashed}
+html:not([data-vision=standard]) .game-pads button:nth-child(4){border-top-style:dotted}
+html:not([data-vision=standard]) .game-pads button.is-pressed{outline:4px double currentColor;outline-offset:-6px}
+html:not([data-vision=standard]) .game-judgment[data-kind=excellent]{color:var(--game-excellent)}
+html:not([data-vision=standard]) .game-judgment[data-kind=good]{color:var(--game-good)}
+html:not([data-vision=standard]) :is(.game-judgment[data-kind=miss],.game-judgment[data-kind=wrong]){color:var(--game-miss)}
+html:not([data-vision=standard]) .game-life.is-low label:after{content:' · Rendah';font-weight:800;text-decoration:underline;text-underline-offset:2px}
+
+html[data-vision=contrast] :is(.display-preview,.instrument-choice,.panel,input,select,textarea){border-width:2px;border-color:var(--border);box-shadow:none}
+html[data-vision=contrast] :is(button:disabled,input:disabled,select:disabled){opacity:.7}
+html[data-vision=contrast] .bar{outline:2px solid #142632;outline-offset:-2px}
+html[data-vision=contrast] :is(.bar.down,.bar:active){outline:4px double #142632;outline-offset:-6px}
+html[data-vision=contrast] .display-notes span{border-color:#142632}
+
+@media(forced-colors:active){
+ html:not([data-vision=standard]) :is(.bar,.display-notes span){background:ButtonFace!important;background-image:none!important;color:ButtonText;outline:2px solid ButtonText}
+ html:not([data-vision=standard]) :is(.bar-top,.bar-note,.bar-sol,.bar-key){background:ButtonFace;color:ButtonText;border-color:ButtonText}
+ html:not([data-vision=standard]) :is(.bar.down,.bar:active,.recorder-pad.down,.studio-action-pad:active,.game-pads button.is-pressed){outline:4px double Highlight}
+ html:not([data-vision=standard]) :is(.bar:focus-visible,.recorder-pad:focus-visible,.studio-action-pad:focus-visible,.game-pads button:focus-visible){outline:3px solid Highlight}
+ html:not([data-vision=standard]) :is(.perc-event,.perc-event[data-secondary=true],.display-state){color:CanvasText;border-color:CanvasText}
+}

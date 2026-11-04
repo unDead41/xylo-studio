@@ -1,5 +1,13 @@
 # SOR — e-Instru Studio
 
+## Display preference extension — ui-themes, 4 November 2026
+
+One optional, offline `StudioDisplay` owner controls system/light/dark appearance and independent standard/protanopia/deuteranopia/tritanopia/high-contrast vision palettes. Its only storage key is `e-instru-display-v1`. The early inline bootstrap restores appearance before CSS/body paint and refreshes browser theme metadata after parsing. Storage failure leaves preferences usable for the session; invalid values fall back to validated defaults. Native color-scheme and forced-colors behavior remain supported.
+
+The appearance dialog is a single shared header action, available on chooser, eight instruments and Game. Existing note letters/keys, source wording, recorder hole symbols, action labels and judgment words remain. Vision palettes add bar textures, solid/dashed actions, press outlines and explicit Game lane-key labels. SVG timeline and cached canvas colors follow preferences; physical instrument materials retain their existing identity.
+
+The preference-change event repaints existing bar styles/timeline fills and draws the existing Game canvas directly. It never rebuilds held pads, resets cursor/scroll, writes music data, changes pitches/timing or invokes Game judgments. Opening the settings dialog separately requests the existing Game pause behavior, preventing missed input behind a modal; resume retains preparation beats. Source files share names/API/storage with the concurrent Studio Pro work. Only one display owner/dialog may exist after integration; see the `ui-themes` handoff for merge guidance.
+
 Version 1.0, approved branch workflow 2 November 2026. Owner: Ijamm.
 
 Self-contained BM digital instrument, recorder and four-lane rhythm game in index.html. No build, external assets, backend or companion runtime is required. Digital exports: JSON full data and CSV timing.

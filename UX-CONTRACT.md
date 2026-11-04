@@ -1,5 +1,9 @@
 # UX contract
 
+Appearance is a separate preference from music state: Cerah/Gelap/Ikut peranti and color-vision palette can be chosen independently in Paparan. Both native selects have labels; the modal traps focus, closes with Escape/Tutup/Selesai and returns focus to its opener. Opening it pauses a running Game and explains that behavior. Changing preferences via controls, system media or another tab does not manufacture notes, cancel held input, restart playback, change judgments or overwrite saved takes. Invalid/blocked preference storage cannot prevent guest instruments from opening.
+
+Every supported vision mode pairs colors with note/key labels, distinct textures, action borders and pressed/recording/selected outlines. Game tiles show lane keys beside pitch labels, and judgments/life remain text. High contrast and OS forced-colors have explicit boundaries. Theme repaint preserves existing DOM identities, current trace/row selection, playhead position and scroll. The Game canvas uses cached semantic colors refreshed on appearance change, with no additional per-frame style reads.
+
 BM digital Studio and four-lane rhythm game. JSON/CSV are the two export formats. No account/backend is required. Local password gate is a UI convenience, never described as server security.
 
 Studio: first captured input is time zero; raw input log survives tempo changes, quantization and edits. Unknown microphone notes stay unknown. Timeline audition selects the matching table event; it never injects a note into recording. Tempo 40–200 BPM is editable during playback and locked during recording. Reset stops transport and restores capture tempo while preserving notes/edits. Long arrangements retain explicit extended pitches/rests.

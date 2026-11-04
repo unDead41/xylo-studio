@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-04",
+  "source_sha256": "29a633410d127292e68b1472d6986f15e3e1271fb83fd2c22d11227a7093b3a4",
+  "surface": "Supported CUA cloud Chrome (CDP), managed preview",
+  "desktop": {
+    "client_width": 1353,
+    "light": {
+      "theme": "light",
+      "vision": "standard",
+      "background": "rgb(237, 243, 247)",
+      "scroll_width": 1353
+    },
+    "dark": {
+      "background": "rgb(16, 27, 38)",
+      "header": "rgb(26, 43, 59)",
+      "primary_button_ink": "rgb(16, 27, 38)",
+      "primary_button_fill": "rgb(136, 215, 207)"
+    },
+    "dark_protanopia": {
+      "bar_palette": [
+        "#9BC8F0",
+        "#F3BE70",
+        "#CBC0EB",
+        "#E9D791",
+        "#91CBCD",
+        "#E9BDCE",
+        "#BACDE4",
+        "#D2CBC0"
+      ],
+      "eight_distinct_textures": true,
+      "timeline_first_E_fill": "#CBC0EB",
+      "timeline_grid": "rgb(76, 98, 118)"
+    }
+  },
+  "phone_dialog": {
+    "nominal_iframe_width": 320,
+    "actual_client_width": 310,
+    "theme_vision_combinations": 10,
+    "all_scroll_widths": 310,
+    "dialog_outer_width": 292,
+    "dialog_client_width": 290,
+    "dialog_scroll_width": 290
+  },
+  "studio_routes": [
+    {
+      "nominal_iframe_width": 320,
+      "actual_client_and_scroll_width": 310,
+      "workspace_width": 282,
+      "theme": "dark",
+      "vision": "contrast",
+      "routes": [
+        "Xylophone",
+        "Rekoder Soprano",
+        "Tamborin",
+        "Kompang",
+        "Dram Sisi",
+        "Dram Bes",
+        "Simbal",
+        "Segi Tiga"
+      ],
+      "all_expected_views_opened": true
+    },
+    {
+      "nominal_iframe_width": 390,
+      "actual_client_and_scroll_width": 380,
+      "workspace_width": 352,
+      "theme": "dark",
+      "vision": "contrast",
+      "routes": [
+        "Xylophone",
+        "Rekoder Soprano",
+        "Tamborin",
+        "Kompang",
+        "Dram Sisi",
+        "Dram Bes",
+        "Simbal",
+        "Segi Tiga"
+      ],
+      "all_expected_views_opened": true
+    }
+  ],
+  "game": {
+    "settings_open_phase": "paused",
+    "settings_open_status": "Permainan dijeda untuk tetapan paparan. Tekan Sambung selepas selesai.",
+    "close_keeps_phase": "paused",
+    "tritanopia_lane_fills": [
+      "#81C8CD",
+      "#F2AEA1",
+      "#D7B3C7",
+      "#AAD8D5"
+    ],
+    "pad_and_key_ink": "rgb(23, 47, 65)",
+    "four_lane_border_styles": [
+      "solid",
+      "double",
+      "dashed",
+      "dotted"
+    ]
+  },
+  "native_escape": {
+    "dialog_closes": true,
+    "trigger_aria_expanded": "false"
+  },
+  "reload": {
+    "title": "e-Instru Studio — Pilih instrumen anda",
+    "theme": "light",
+    "vision": "tritanopia",
+    "one_display_dialog": true
+  },
+  "limits": [
+    "Phone dimensions used same-origin iframes, not physical phones or touch emulation.",
+    "No screen-reader, Safari/Firefox, physical audio, microphone or acoustic measurements.",
+    "Browser preview is shared with concurrent work; source title/controls were checked after reclaiming it.",
+    "Two responsive locator issues were corrected using actual source IDs and native keyboard activation; no product code workaround was added.",
+    "Screenshots were visually inspected through CUA; no screenshot file is attached to this handoff."
+  ]
+}

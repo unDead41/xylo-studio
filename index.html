@@ -1,7 +1,86 @@
 <!doctype html>
 <html lang="ms">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#EDF3F7">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><!-- studio-display:boot:start -->
+<script id="studio-display">
+(function(root){'use strict';
+ const KEY='e-instru-display-v1';
+ const THEMES=['system','light','dark'],VISIONS=['standard','protanopia','deuteranopia','tritanopia','contrast'];
+ const PALETTES={standard:['#EB8C88','#EDA971','#E6C360','#8FC79B','#6BBEB8','#82B9DB','#A1ACE0','#C3A2D6'],protanopia:['#9BC8F0','#F3BE70','#CBC0EB','#E9D791','#91CBCD','#E9BDCE','#BACDE4','#D2CBC0'],deuteranopia:['#A3CEF0','#F0BB74','#C9BCEA','#E8D994','#9EC9D5','#E8BED2','#BDCFDF','#D9CABC'],tritanopia:['#81C8CD','#F2AEA1','#D7B3C7','#AAD8D5','#F0C3B0','#BAC4DC','#E1BBD1','#A9CBCB'],contrast:['#FFFFFF','#E6E6E6','#CDCDCD','#FFFFFF','#E6E6E6','#CDCDCD','#FFFFFF','#E6E6E6']};
+ const isRecord=value=>value!==null&&typeof value==='object'&&!Array.isArray(value);
+ function normalize(value){
+  const next=isRecord(value)?value:{};
+  return{theme:Object.hasOwn(next,'theme')&&THEMES.includes(next.theme)?next.theme:'system',vision:Object.hasOwn(next,'vision')&&VISIONS.includes(next.vision)?next.vision:'standard'};
+ }
+ let preferences=normalize(null),saveState='default',media=null,saved=null;
+ // Read failures and malformed preference data have different user consequences.
+ // Neither recovery path rewrites unrelated music or account storage.
+ try{saved=root.localStorage.getItem(KEY);}catch{saveState='session';}
+ if(saved!==null)try{
+  const value=JSON.parse(saved);preferences=normalize(value);
+  if(isRecord(value)&&(THEMES.includes(value.theme)||VISIONS.includes(value.vision)))saveState='restored';
+ }catch{}
+ try{media=root.matchMedia?.('(prefers-color-scheme: dark)')||null;}catch{}
+ const resolvedTheme=()=>preferences.theme==='system'?(media?.matches?'dark':'light'):preferences.theme;
+ function emit(name,detail){if(typeof root.CustomEvent==='function'&&typeof root.dispatchEvent==='function')root.dispatchEvent(new root.CustomEvent(name,{detail}));}
+ function apply(){
+  const selectedTheme=resolvedTheme(),el=document.documentElement;el.dataset.theme=selectedTheme;el.dataset.vision=preferences.vision;el.style.colorScheme=selectedTheme;
+  PALETTES[preferences.vision].forEach((color,i)=>el.style.setProperty('--vision-note-'+i,color));
+  const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute('content',preferences.vision==='contrast'?(selectedTheme==='dark'?'#000000':'#FFFFFF'):(selectedTheme==='dark'?'#101B26':'#EDF3F7'));
+  const theme=document.getElementById('displayTheme'),vision=document.getElementById('displayVision');if(theme)theme.value=preferences.theme;if(vision)vision.value=preferences.vision;
+  const status=document.getElementById('displaySaveStatus');if(status)status.textContent=saveState==='session'?'Pilihan digunakan untuk sesi ini. Simpanan pelayar tidak tersedia.':saveState==='saved'?'Pilihan disimpan dalam pelayar ini.':saveState==='restored'?'Pilihan dipulihkan daripada pelayar ini.':'Tetapan asal digunakan. Ubah pilihan untuk menyimpannya dalam pelayar ini.';
+  emit('studiodisplaychange',{...preferences,resolvedTheme:selectedTheme,palette:PALETTES[preferences.vision].slice()});
+ }
+ function set(patch){
+  preferences=normalize({...preferences,...(isRecord(patch)?patch:{})});
+  try{root.localStorage.setItem(KEY,JSON.stringify(preferences));saveState='saved';}catch{saveState='session';}
+  apply();return {...preferences};
+ }
+ function ready(){
+  // The boot script can run before the meta element and dialog have been parsed.
+  apply();
+  const $=id=>document.getElementById(id),dialog=$('displayDialog'),trigger=$('displaySettingsBtn'),theme=$('displayTheme'),vision=$('displayVision'),closeButton=$('displayClose'),doneButton=$('displayDone'),resetButton=$('displayReset');
+  if(!dialog||!trigger||!theme||!vision||!closeButton||!doneButton||!resetButton)return;
+  let returnFocus=null;
+  trigger.setAttribute('aria-haspopup','dialog');trigger.setAttribute('aria-controls','displayDialog');trigger.setAttribute('aria-expanded','false');
+  function finishClose(){
+   if(dialog.open)return;
+   trigger.setAttribute('aria-expanded','false');
+   if(!returnFocus)return;
+   const previous=returnFocus;returnFocus=null;
+   const target=previous.isConnected!==false&&!previous.disabled&&!previous.closest?.('[hidden], [inert]')?previous:trigger;
+   target.focus?.({preventScroll:true});
+  }
+  function close(){if(dialog.open)dialog.close();finishClose();}
+  trigger.addEventListener('click',()=>{
+   if(dialog.open||document.querySelector('dialog[open]'))return;
+   returnFocus=document.activeElement&&document.activeElement!==document.body?document.activeElement:trigger;
+   apply();emit('studiodisplayopen');dialog.showModal();trigger.setAttribute('aria-expanded','true');theme.focus({preventScroll:true});
+  });
+  theme.addEventListener('change',()=>set({theme:theme.value}));
+  vision.addEventListener('change',()=>set({vision:vision.value}));
+  closeButton.addEventListener('click',close);doneButton.addEventListener('click',close);
+  resetButton.addEventListener('click',()=>set({theme:'system',vision:'standard'}));
+  dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
+  dialog.addEventListener('close',finishClose);
+ }
+ root.StudioDisplay=Object.freeze({get:()=>({...preferences}),set,normalize,resolvedTheme,palette:()=>PALETTES[preferences.vision].slice(),KEY});
+ const followSystem=()=>{if(preferences.theme==='system')apply();};
+ if(typeof media?.addEventListener==='function')media.addEventListener('change',followSystem);
+ else if(typeof media?.addListener==='function')media.addListener(followSystem);
+ root.addEventListener('storage',event=>{
+  if(event.key!==KEY&&event.key!==null)return;
+  // sessionStorage events use the same event type but do not own these settings.
+  if(event.storageArea)try{if(event.storageArea!==root.localStorage)return;}catch{return;}
+  let value=null;try{value=JSON.parse(event.newValue||'null');}catch{return;}
+  preferences=normalize(value);saveState=isRecord(value)&&(THEMES.includes(value.theme)||VISIONS.includes(value.vision))?'restored':'default';apply();
+ });
+ apply();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+})(window);
+</script>
+<!-- studio-display:boot:end -->
+<meta name="theme-color" content="#EDF3F7">
 <meta name="application-version" content="1.04.0">
 <title>e-Instru Studio — Pilih instrumen anda</title>
 <meta name="description" content="e-Instru Studio: main lapan instrumen sekolah termasuk xylophone, rekoder dan perkusi pancaragam, rakam melodi atau rentak, cuba 10 lagu dan eksport JSON/CSV. HTML kendiri tanpa akaun.">
@@ -298,12 +377,385 @@ dialog{width:min(640px,calc(100vw - 28px));max-width:640px;max-height:calc(100dv
 #instrumentChooser .choice-copy>.eyebrow{font-size:10px}#instrumentChooser .choose-family>p{font-size:13px}
 .password-field{display:flex;align-items:center;gap:8px}.password-field input{flex:1;min-width:0}.password-field button{min-width:90px;font-size:13px;min-height:44px}
 </style>
+<!-- studio-display:styles:start -->
+<style id="display-styles">
+/* Display preferences share the existing runtime token owner. */
+:root{color-scheme:light;--on-primary:#FFF;--vision-accent:#126B66;--vision-note-0:#EB8C88;--vision-note-1:#EDA971;--vision-note-2:#E6C360;--vision-note-3:#8FC79B;--vision-note-4:#6BBEB8;--vision-note-5:#82B9DB;--vision-note-6:#A1ACE0;--vision-note-7:#C3A2D6}
+:root[data-theme=dark]{color-scheme:dark;--primary:#88D7CF;--ink:#EAF2F8;--background:#101B26;--surface:#1A2B3B;--muted:#B8CAD8;--border:#4C6276;--soft:#193F43;--surface-subtle:#203344;--danger:#FFB1BC;--danger-bg:#4A2834;--warning:#F4D291;--warning-bg:#403721;--focus:#A7D2FF;--scroll-thumb:#7E96AC;--scroll-track:#142332;--scroll-thumb-hover:#A1B4C7;--scroll-thumb-active:#CAD7E3;--panel-shadow:0 3px 16px #0002}
+:root[data-vision=protanopia],:root[data-vision=deuteranopia]{--primary:#185B9B;--soft:#E6EFF9;--danger:#805010;--danger-bg:#FFF0D9;--warning:#6B4D20;--warning-bg:#FAEACF;--focus:#6A3B97;--vision-accent:#185B9B}
+:root[data-vision=tritanopia]{--primary:#00686D;--soft:#E2F1F1;--danger:#9C3D3D;--danger-bg:#FCE7E5;--warning:#6D4559;--warning-bg:#F2E6ED;--focus:#863E64;--vision-accent:#00686D}
+:root[data-theme=dark][data-vision=protanopia],:root[data-theme=dark][data-vision=deuteranopia]{--primary:#A8D2FF;--soft:#213D58;--danger:#FFD499;--danger-bg:#493922;--warning:#E5CEF5;--warning-bg:#3B304D;--focus:#E5CAFF}
+:root[data-theme=dark][data-vision=tritanopia]{--primary:#9ADADD;--soft:#173E45;--danger:#FFC6BC;--danger-bg:#492F36;--warning:#EDC2DB;--warning-bg:#3F3042;--focus:#FFC8E4}
+:root[data-vision=contrast]{--primary:#173B72;--ink:#111;--muted:#343434;--background:#FFF;--surface:#FFF;--surface-subtle:#F1F1F1;--border:#505050;--soft:#E3EBF5;--danger:#682500;--danger-bg:#FFF;--warning:#563000;--warning-bg:#FFF;--focus:#111;--scroll-thumb:#333;--scroll-track:#EEE}
+:root[data-theme=dark][data-vision=contrast]{--primary:#FFF;--ink:#FFF;--muted:#DDD;--background:#000;--surface:#101010;--surface-subtle:#222;--border:#CCC;--soft:#333;--danger:#FFF;--danger-bg:#292929;--warning:#FFF;--warning-bg:#292929;--focus:#FFF;--scroll-thumb:#DDD;--scroll-track:#222}
+.header-inner{flex-wrap:wrap;height:auto;min-height:72px;gap:10px 14px}.header{height:auto}.mode-switch{margin-left:auto;display:flex;flex-wrap:wrap}.display-trigger{font-size:12px;min-height:40px;padding:8px 12px;flex:none}.pro-send{margin:12px 0 4px;width:100%}.pro-entry{width:100%;padding:18px 22px;margin:0 0 22px;justify-content:space-between;gap:18px;background:var(--soft);border-color:var(--primary);text-align:left}.pro-entry>span:first-child{display:grid;gap:4px}.pro-entry strong{font:700 22px var(--display);color:var(--primary)}.pro-entry>span>span{font-size:13px;color:var(--muted);line-height:1.6}.pro-entry-action{font-size:13px;white-space:nowrap;color:var(--primary)}.display-body{display:grid;gap:12px}.display-body .field{margin:0}.display-body .field select{width:100%}.display-hint{font-size:12px!important;line-height:1.7;margin:8px 0 0!important;color:var(--muted)}.display-preview{min-width:0;border:1px solid var(--border);border-radius:12px;padding:14px}.display-preview legend{font-size:12px;font-weight:650;padding:0 6px}.display-notes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:13px}.display-notes span{font:700 15px var(--mono);color:#142632;padding:14px 2px;text-align:center;border:2px solid #425D72;border-radius:8px;background:var(--vision-note-0)}.display-notes span:nth-child(2){background-color:var(--vision-note-1)}.display-notes span:nth-child(3){background-color:var(--vision-note-2)}.display-notes span:nth-child(4){background-color:var(--vision-note-3)}.display-state{font-size:12px;font-weight:700;padding:6px 10px;border:1px solid currentColor;border-radius:5px;line-height:1.5}.display-state-ready{color:var(--primary);background:var(--soft)}.display-state-record{color:var(--danger);background:var(--danger-bg);border-width:2px}.display-state-warn{color:var(--warning);background:var(--warning-bg);border-style:dashed;border-width:2px}
+/* Dark variants cover existing shared surfaces without recoloring physical SVG materials. */
+html[data-theme=dark] :is(.settings-row,.side-help,.timeline,.mic-state,.help-step,.dialog-actions,.game-settings,.game-summary,.game-phase,.game-help,.game-result,.game-surface,.perc-trace,.perc-event,.percussion-playing-area,.recorder-wrap,.percussion-play-area,.choice-art,.song,.song .song-icon,.hole-state,.fingering-reference,.take-title,th,textarea){background:var(--surface-subtle);color:var(--ink);border-color:var(--border)}
+html[data-theme=dark] :is(.instrument-choice,.choice-action,.recorder-pad,.studio-action-pad,kbd,.game-pads button,.game-stats,.game-stat){background:var(--surface);color:var(--ink);border-color:var(--border)}
+html[data-theme=dark] :is(.recorder-pad small,.recorder-pad kbd,.studio-action-pad kbd,.percussion-topline,.perc-feedback){color:var(--muted);background:var(--surface)}
+html[data-theme=dark] :is(button:hover,.song.active,.song.active:hover){background:var(--soft);border-color:var(--primary);color:var(--ink)}
+html[data-theme=dark] :is(button.primary,button.danger){color:var(--background)}
+html[data-theme=dark] button.primary:hover{background:var(--primary);filter:brightness(1.1);color:var(--background)}
+html[data-theme=dark] :is(.goal.good,.tag.green){background:var(--soft);color:var(--primary);border-color:var(--primary)}
+html[data-theme=dark] :is(.goal.warn,.range-warning,.tag.amber,.review-line){background:var(--warning-bg);color:var(--warning);border-color:var(--warning)}
+html[data-theme=dark] :is(.recorder-pad.down,.studio-action-pad[aria-pressed=true]){background:var(--primary);color:var(--background);outline:2px solid var(--ink);outline-offset:2px}
+html[data-theme=dark] .toast{background:var(--ink);color:var(--background)}
+html[data-theme=dark] td{border-color:var(--border)}
+html[data-theme=dark] .timeline :is(text,.timeline-empty){fill:var(--muted)}
+/* Non-color cues stay visible in every supported color-vision mode. */
+html:not([data-vision=standard]) .bar{color:#142632;outline:1px solid #405464;outline-offset:-1px;background-color:var(--vision-note-0)!important;background-image:repeating-linear-gradient(0deg,transparent 0 7px,#14263220 7px 8px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+1){--bar:var(--vision-note-0);background-color:var(--vision-note-0)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+2){--bar:var(--vision-note-1);background-color:var(--vision-note-1)!important;background-image:repeating-linear-gradient(45deg,transparent 0 7px,#14263225 7px 9px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+3){--bar:var(--vision-note-2);background-color:var(--vision-note-2)!important;background-image:radial-gradient(#14263244 1px,transparent 1.5px)!important;background-size:8px 8px!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+4){--bar:var(--vision-note-3);background-color:var(--vision-note-3)!important;background-image:repeating-linear-gradient(90deg,transparent 0 7px,#14263222 7px 9px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+5){--bar:var(--vision-note-4);background-color:var(--vision-note-4)!important;background-image:repeating-linear-gradient(-45deg,transparent 0 7px,#14263225 7px 9px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+6){--bar:var(--vision-note-5);background-color:var(--vision-note-5)!important;background-image:repeating-linear-gradient(0deg,transparent 0 4px,#14263230 4px 5px,transparent 5px 10px,#14263230 10px 12px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+7){--bar:var(--vision-note-6);background-color:var(--vision-note-6)!important;background-image:repeating-linear-gradient(45deg,transparent 0 3px,#14263226 3px 4px)!important}
+html:not([data-vision=standard]) .bar:nth-of-type(8n+8){--bar:var(--vision-note-7);background-color:var(--vision-note-7)!important;background-image:radial-gradient(#14263244 2px,transparent 2.5px)!important;background-size:10px 10px!important}
+html:not([data-vision=standard]) .bar.down{outline:4px double #142632;outline-offset:-5px}
+html:not([data-vision=standard]) :is(button[aria-pressed=true],button[aria-selected=true],.song.active){outline:2px solid var(--primary);outline-offset:-3px}
+html:not([data-vision=standard]) :is(.status-strip.recording,.session-state[data-state=recording]){border-left:5px double var(--danger);font-weight:750}
+html:not([data-vision=standard]) .display-notes span:nth-child(1){background-image:repeating-linear-gradient(0deg,transparent 0 7px,#14263225 7px 8px)}
+html:not([data-vision=standard]) .display-notes span:nth-child(2){background-image:repeating-linear-gradient(45deg,transparent 0 7px,#14263225 7px 9px)}
+html:not([data-vision=standard]) .display-notes span:nth-child(3){background-image:radial-gradient(#14263244 1px,transparent 1.5px);background-size:8px 8px}
+html:not([data-vision=standard]) .display-notes span:nth-child(4){background-image:repeating-linear-gradient(90deg,transparent 0 7px,#14263225 7px 9px)}
+@media(max-width:850px){.header-inner{padding-top:9px;padding-bottom:9px}.brand{flex:1}.mode-switch{order:3;margin-left:0}.display-trigger{margin-left:auto}.pro-entry{padding:16px}.pro-entry-action{white-space:normal;text-align:right}}
+@media(max-width:540px){:root{--focus-offset:155px}.header-inner{gap:8px}.mode-switch{width:100%}.mode-switch button{flex:1;min-width:0;padding:8px 9px;font-size:12px}.pro-entry{align-items:flex-start;gap:10px}.pro-entry>span>span{font-size:12px}.pro-entry strong{font-size:20px}.pro-entry-action{font-size:12px;max-width:90px}.display-dialog select{max-width:100%}}
+@media(forced-colors:active){.display-state,.display-notes span,.bar,.pro-entry{border:2px solid CanvasText}.bar.down{outline:4px double Highlight}.display-state-record{border-style:double}.display-state-warn{border-style:dashed}}
+
+/* Light is the accepted classroom palette. Theme and vision selectors may override these defaults. */
+:root{
+ --primary:#126B66;--ink:#172F41;--background:#EDF3F7;--surface:#FFF;--muted:#526879;--border:#D7E2E9;--soft:#E6F2F0;
+ --danger:#B23845;--danger-bg:#FFF1F2;--warning:#805119;--warning-bg:#FFF2DD;--focus:#156CC4;
+ --surface-subtle:#F7FAFC;--surface-hover:#F3F7FA;--surface-hover-border:#ADBFCB;--on-primary:#FFF;--on-danger:#FFF;
+ --secondary:#4F5990;--secondary-soft:#EFF1FA;--note-ink:#142632;--note-edge:#425D72;
+ --scroll-thumb:#9CAEBB;--scroll-track:#EDF3F7;--scroll-thumb-hover:#728B9C;--scroll-thumb-active:#526879;
+ --timeline-grid:#DFE8EE;--timeline-label:#617A8C;--timeline-playhead:var(--primary);--progress-track:#DCE9E7;
+ --game-bg:#172F41;--game-lane:#1B3547;--game-grid:#A6C2CF22;--game-beat:#A6C2CF18;--game-label:#9EB9C9;--game-note-ink:#172F41;
+ --game-overlay:#172F41D9;--game-ink:#F3F9FA;--game-muted:#C5D7E2;--game-accent:#9EE4D8;
+ --game-pad:#203E51;--game-pad-hover:#284B60;--game-pad-pressed:#426F7B;--game-pad-border:#A6C2CF25;
+ --game-excellent:#91E0CD;--game-good:#F4D37F;--game-miss:#FFA7A6;
+}
+html:not([data-theme=dark]){color-scheme:light}
+
+/* Shared action and state recipes also follow light color-vision preferences. */
+button:hover{background:var(--surface-hover);border-color:var(--surface-hover-border)}
+button:disabled:hover{background:var(--surface);border-color:var(--border)}
+button.primary,button.primary:hover{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+button.danger,button.danger:hover{background:var(--danger);border-color:var(--danger);color:var(--on-danger)}
+button.danger .record-dot{background:var(--on-danger)}
+.event-row.is-current .pitch-pill{color:var(--on-primary)}
+.song.active,.song.active:hover{background:var(--soft);border-color:var(--primary)}
+.export-tabs button[aria-pressed=true]{background:var(--soft);border-color:var(--primary);color:var(--primary)}
+.goal.good,.tag.green,.instrument-choice .choice-badge,.choice-action{background:var(--soft);color:var(--primary);border-color:var(--primary)}
+.goal.warn,.tag.amber,.range-warning,.review-line{background:var(--warning-bg);color:var(--warning);border-color:var(--warning)}
+.validation-list{background:var(--danger-bg);color:var(--danger)}
+.session-state[data-state=pending],.game-state[data-state=paused]{border-color:var(--warning)}
+.session-state[data-state=example],.session-state[data-state=replay],.session-state[data-state=metronome],.game-state[data-state=running],.game-state[data-state=countdown]{border-color:var(--primary)}
+
+/* The shell consumes semantic surfaces; instrument SVG material colors stay intact. */
+.settings-row,.side-help,.mic-state,.help-step,.dialog-actions,th,textarea{background:var(--surface-subtle);border-color:var(--border)}
+.timeline{background:var(--surface);border-color:var(--border)}
+td{border-color:var(--border)}
+kbd,.hole-state{background:var(--surface);border-color:var(--border)}
+.hole-state.closed{color:var(--primary);border-color:var(--primary)}
+.fingering-reference,.percussion-guide,.extended-notes{border-color:var(--border)}
+.instrument-chooser .chooser-family-nav a{border-color:var(--border)}
+.instrument-chooser .chooser-family-nav a:hover{background:var(--soft);border-color:var(--primary)}
+.instrument-chooser .choice-controls kbd{background:var(--surface);border-color:var(--border)}
+.perc-trace>p{background:var(--surface-subtle)}
+.perc-event{background:var(--soft);color:var(--primary);border-color:var(--primary)}
+.perc-event[data-secondary=true]{background:var(--secondary-soft);color:var(--secondary);border-color:var(--secondary)}
+.perc-legend i{background:var(--primary)}
+.perc-legend span+span i{background:var(--secondary)}
+.display-notes span{color:var(--note-ink);border-color:var(--note-edge)}
+
+/* Active pads use the action foreground, including orange and high-contrast palettes. */
+html:not([data-theme=dark]) .recorder-pad.down,html:not([data-theme=dark]) .recorder-pad:active,
+html:not([data-theme=dark]) .studio-action-pad:active,
+html:not([data-theme=dark]) .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+html:not([data-theme=dark]) .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{
+ background:var(--primary);border-color:var(--primary);color:var(--on-primary);
+}
+html:not([data-theme=dark]) .recorder-pad.down small,html:not([data-theme=dark]) .recorder-pad:active small{color:var(--on-primary)}
+html:not([data-theme=dark]) .recorder-pad.down kbd,html:not([data-theme=dark]) .recorder-pad:active kbd,
+html:not([data-theme=dark]) .studio-action-pad:active kbd,
+html:not([data-theme=dark]) .percussion-play-area:has(.is-tap) .studio-action-pad:first-child kbd,
+html:not([data-theme=dark]) .percussion-play-area:has(.is-shake) .studio-action-pad:last-child kbd{
+ background:var(--surface);color:var(--primary);border-color:var(--primary);
+}
+
+/* SVG axes are interface data, rather than physical instrument artwork. */
+#timeline line:not(#playHead),.timeline .timeline-grid{stroke:var(--timeline-grid)}
+#timeline text,.timeline .timeline-label{fill:var(--timeline-label)}
+#timeline #playHead,.timeline .timeline-playhead{stroke:var(--timeline-playhead)}
+
+/* The original light shell keeps its dark performance arena. Canvas uses the same tokens. */
+progress{background:var(--progress-track)}
+progress::-webkit-progress-bar{background:var(--progress-track)}
+.game-arena{background:var(--game-bg)}
+.game-overlay{background:var(--game-overlay);color:var(--game-ink)}
+.game-overlay.is-countdown{background:transparent}
+.game-overlay-kicker{color:var(--game-accent)}
+.game-overlay p{color:var(--game-muted)}
+.game-overlay.is-countdown p{background:var(--game-overlay)}
+.game-overlay.is-countdown>strong,.game-judgment{text-shadow:0 2px 10px var(--game-bg)}
+.game-judgment{color:var(--game-ink)}
+.game-judgment[data-kind=excellent]{color:var(--game-excellent)}
+.game-judgment[data-kind=good]{color:var(--game-good)}
+.game-judgment[data-kind=miss],.game-judgment[data-kind=wrong]{color:var(--game-miss)}
+.game-hit-line{background:var(--game-accent);box-shadow:0 0 10px var(--game-accent)}
+.game-hit-line span{color:var(--game-accent)}
+.game-pads button{background:var(--game-pad-fill,var(--game-pad));color:var(--game-pad-ink,var(--game-ink));border-color:var(--game-pad-border)}
+.game-pads button:hover{background:var(--game-pad-fill,var(--game-pad-hover))}
+.game-pads button.is-pressed{background:var(--game-pad-fill,var(--game-pad-pressed));outline:3px solid var(--game-pad-ink,var(--game-accent));outline-offset:-5px}
+.game-pads kbd{background:transparent;color:var(--game-pad-ink,var(--game-ink));border-color:currentColor}
+.game-pads span{color:var(--game-pad-ink,var(--game-muted))}
+.game-arena-pause{background:var(--game-pad);color:var(--game-ink);border-color:var(--game-label)}
+.game-arena-pause:hover{background:var(--game-pad-hover);border-color:var(--game-accent)}
+
+@media(forced-colors:active){
+ .display-state,.perc-event,.hole-state.closed{border-color:CanvasText}
+ .game-pads button,.game-arena-pause{border:1px solid ButtonText}
+ .game-pads button.is-pressed{outline:3px solid Highlight;outline-offset:-4px}
+}
+
+/* Dark corrections for shared surfaces, physical controls and live feedback. */
+:root[data-theme=dark]{
+  --on-primary:#101B26;
+  --on-danger:#101B26;
+  --border:#657F94;
+  --surface-hover:var(--soft);
+  --surface-hover-border:var(--primary);
+  --primary-hover:var(--primary);
+  --secondary:#D5DCFF;
+  --secondary-soft:#30374F;
+  --timeline-grid:#4C6276;
+  --timeline-label:var(--muted);
+  --timeline-playhead:var(--primary);
+  --game-bg:#101B26;
+  --game-lane:#162738;
+  --game-grid:#B8CAD830;
+  --game-beat:#B8CAD822;
+  --game-label:#B8CAD8;
+  --game-note-ink:#142632;
+  --game-overlay:#101B26EB;
+  --game-ink:#EAF2F8;
+  --game-muted:#B8CAD8;
+  --game-accent:var(--primary);
+  --game-pad:#203344;
+  --game-pad-hover:#274554;
+  --game-pad-pressed:#436C78;
+  --game-pad-border:#142632;
+  --game-excellent:#91E0CD;
+  --game-good:#F4D291;
+  --game-miss:#FFB1BC;
+  --progress-track:#3A5263;
+}
+
+html[data-theme=dark] .header{background:var(--surface);border-color:var(--border)}
+html[data-theme=dark] dialog{background:var(--surface);color:var(--ink);border-color:var(--border);box-shadow:0 24px 90px #0008}
+html[data-theme=dark] dialog::backdrop{background:#050C14B8}
+html[data-theme=dark] :is(.dialog-head,.dialog-actions){border-color:var(--border)}
+html[data-theme=dark] :is(.dialog-actions,.display-preview){background:var(--surface-subtle)}
+html[data-theme=dark] .validation-list{background:var(--danger-bg);color:var(--danger);border-color:var(--danger)}
+html[data-theme=dark] :is(input,textarea)::placeholder{color:var(--muted);opacity:1}
+
+/* Primary and recording controls keep their semantic fill while hovered. */
+html[data-theme=dark] button.primary{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+html[data-theme=dark] button.primary:is(:hover,:active):enabled{background:var(--primary-hover);border-color:var(--primary);color:var(--on-primary)}
+html[data-theme=dark] button.danger{background:var(--danger);border-color:var(--danger);color:var(--on-danger)}
+html[data-theme=dark] button.danger:is(:hover,:active):enabled{background:var(--danger);border-color:var(--danger);color:var(--on-danger);filter:brightness(1.05)}
+html[data-theme=dark] .danger .record-dot{background:var(--on-danger)}
+html[data-theme=dark] .event-row.is-current .pitch-pill{background:var(--primary);color:var(--on-primary)}
+html[data-theme=dark] button:disabled:not(.bar):hover{background:var(--surface);border-color:var(--border);color:var(--ink);filter:none;transform:none}
+html[data-theme=dark] button.primary:disabled:hover{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+html[data-theme=dark] button.danger:disabled:hover{background:var(--danger);border-color:var(--danger);color:var(--on-danger)}
+
+/* The instrument keeps its note fill and dark labels in every pointer state. */
+html[data-theme=dark] button.bar{background:var(--bar);color:#142632;border:0}
+html[data-theme=dark] .instrument button.bar:is(:hover,:active,.down,:disabled){background:var(--bar);color:#142632;border:0}
+html[data-theme=dark] button.bar:disabled{filter:none;transform:none}
+html[data-theme=dark] .bar-key{background:#FFFFFFB3;border-color:#FFFFFF80;color:#142632}
+html[data-theme=dark] .rail{box-shadow:0 8px 0 #0A1520}
+html[data-theme=dark] .beat-dots i{background:var(--border)}
+html[data-theme=dark] .beat-dots i.on{background:var(--primary)}
+
+/* SVG material fills are unchanged; the outside labels follow the surface. */
+html[data-theme=dark] .recorder-object svg .anatomy-label{fill:var(--muted)}
+html[data-theme=dark] .timeline .event.is-current{stroke:var(--ink);stroke-width:2}
+html[data-theme=dark] .hole-state.closed{color:var(--primary);border-color:var(--primary)}
+html[data-theme=dark] :is(.percussion-guide,.fingering-reference,.extended-notes){border-color:var(--border)}
+html[data-theme=dark] .percussion-play-area .percussion-topline{background:transparent}
+html[data-theme=dark] .percussion-topline .perc-feedback{background:transparent;color:var(--primary)}
+html[data-theme=dark] .percussion-play-area button.perc-surface{background:transparent;border:0}
+html[data-theme=dark] .percussion-play-area button.perc-surface:is(:hover,:active,:disabled){background:transparent;border:0;color:inherit;filter:none;transform:none}
+html[data-theme=dark] .perc-trace>p{background:var(--surface);color:var(--muted);border-color:var(--border)}
+html[data-theme=dark] .perc-trace .perc-event{background:var(--soft);color:var(--primary);border-color:var(--primary)}
+html[data-theme=dark] .perc-trace .perc-event[data-secondary=true]{background:var(--secondary-soft);color:var(--secondary);border-color:var(--secondary)}
+html[data-theme=dark] :is(.session-state[data-state=pending],.game-state[data-state=paused]){border-color:var(--warning)}
+html[data-theme=dark] :is(.session-state[data-state=example],.session-state[data-state=replay],.session-state[data-state=metronome],.game-state[data-state=running],.game-state[data-state=countdown]){border-color:var(--primary)}
+
+/* The active instrument pad remains recognizable when the pointer stays on it. */
+html[data-theme=dark] :is(.recorder-pads,.extended-pads) button.recorder-pad:is(.down,:active),
+html[data-theme=dark] .percussion-play-area .studio-action-pad:is(:active,[aria-pressed=true]),
+html[data-theme=dark] .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+html[data-theme=dark] .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+html[data-theme=dark][data-vision=standard] :is(.recorder-pads,.extended-pads) button.recorder-pad:is(.down,:active),
+html[data-theme=dark][data-vision=standard] .percussion-play-area .studio-action-pad:is(:active,[aria-pressed=true]),
+html[data-theme=dark][data-vision=standard] .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+html[data-theme=dark][data-vision=standard] .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{outline:2px solid var(--ink);outline-offset:2px}
+html[data-theme=dark] :is(.recorder-pads,.extended-pads) .recorder-pad:is(.down,:active) :is(small,kbd),
+html[data-theme=dark] .percussion-play-area .studio-action-pad:is(:active,[aria-pressed=true]) :is(kbd,.band-subtitle),
+html[data-theme=dark] .percussion-play-area:has(.is-tap) .studio-action-pad:first-child :is(kbd,.band-subtitle),
+html[data-theme=dark] .percussion-play-area:has(.is-shake) .studio-action-pad:last-child :is(kbd,.band-subtitle){background:transparent;border-color:currentColor;color:var(--on-primary)}
+
+/* Game pads share the pale lane fills; the labels use the tile text color. */
+html[data-theme=dark] .game-pads button,
+html[data-theme=dark] .game-pads button:is(:hover,:active,.is-pressed):enabled,
+html[data-theme=dark] .game-pads button:disabled:hover{background:var(--game-pad-fill,var(--vision-note-0));color:var(--game-pad-ink,var(--game-note-ink));border-color:var(--game-pad-border)}
+html[data-theme=dark] .game-pads button.is-pressed{filter:brightness(1.1)}
+html[data-theme=dark] .game-pads button:disabled{filter:none;transform:none}
+html[data-theme=dark] .game-pads button :is(kbd,span){background:transparent;color:var(--game-pad-ink,var(--game-note-ink));border-color:currentColor}
+
+@media(forced-colors:active){
+  html[data-theme=dark] :is(dialog,.display-preview){border-color:CanvasText;box-shadow:none}
+  html[data-theme=dark] button.bar{border:2px solid ButtonText}
+  html[data-theme=dark] .instrument button.bar:is(:hover,:active,.down,:disabled){border:2px solid ButtonText}
+  html[data-theme=dark] .timeline .event.is-current{stroke:Highlight}
+  html[data-theme=dark] :is(.recorder-pads,.extended-pads) button.recorder-pad:is(.down,:active),
+  html[data-theme=dark] .percussion-play-area .studio-action-pad:is(:active,[aria-pressed=true]),
+  html[data-theme=dark] .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+  html[data-theme=dark] .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{outline-color:Highlight}
+}
+
+/* Color-vision preferences add independent shape and text cues to the shared themes.
+   Note fills remain owned by StudioDisplay.palette(), including its inline tokens. */
+:root:is([data-vision=protanopia],[data-vision=deuteranopia]){
+ --primary:#185B9B;--soft:#E6EFF9;--danger:#805010;--danger-bg:#FFF0D9;
+ --warning:#6B4D20;--warning-bg:#FAEACF;--focus:#6A3B97;
+ --secondary:#634486;--secondary-soft:#F0E9F8;--on-primary:#FFF;--on-danger:#FFF;
+ --vision-object-primary:#185B9B;--vision-object-secondary:#634486;
+ --game-accent:#B7DBFF;--game-excellent:#B7DBFF;--game-good:#FFD499;--game-miss:#E5CEF5;
+}
+:root[data-vision=tritanopia]{
+ --primary:#00686D;--soft:#E2F1F1;--danger:#9C3D3D;--danger-bg:#FCE7E5;
+ --warning:#6D4559;--warning-bg:#F2E6ED;--focus:#863E64;
+ --secondary:#843B60;--secondary-soft:#F5E9F0;--on-primary:#FFF;--on-danger:#FFF;
+ --vision-object-primary:#00686D;--vision-object-secondary:#843B60;
+ --game-accent:#B5EEEE;--game-excellent:#B5EEEE;--game-good:#FFD5C9;--game-miss:#F2CCE3;
+}
+:root[data-theme=dark]:is([data-vision=protanopia],[data-vision=deuteranopia]){
+ --primary:#A8D2FF;--soft:#213D58;--danger:#FFD499;--danger-bg:#493922;
+ --warning:#E5CEF5;--warning-bg:#3B304D;--focus:#E5CAFF;
+ --secondary:#E1C6FA;--secondary-soft:#3B304D;--on-primary:#101B26;--on-danger:#101B26;
+}
+:root[data-theme=dark][data-vision=tritanopia]{
+ --primary:#9ADADD;--soft:#173E45;--danger:#FFC6BC;--danger-bg:#492F36;
+ --warning:#EDC2DB;--warning-bg:#3F3042;--focus:#FFC8E4;
+ --secondary:#F4CAE0;--secondary-soft:#412C3A;--on-primary:#101B26;--on-danger:#101B26;
+}
+:root[data-vision=contrast]{
+ --primary:#173B72;--ink:#111;--muted:#343434;--background:#FFF;--surface:#FFF;
+ --surface-subtle:#F1F1F1;--border:#505050;--soft:#E3EBF5;
+ --danger:#682500;--danger-bg:#FFF;--warning:#563000;--warning-bg:#FFF;--focus:#111;
+ --secondary:#303030;--secondary-soft:#E8E8E8;--on-primary:#FFF;--on-danger:#FFF;
+ --timeline-grid:#626262;--timeline-label:#343434;--timeline-playhead:#111;
+ --vision-object-primary:#111;--vision-object-secondary:#111;
+ --scroll-thumb:#333;--scroll-track:#EEE;--game-accent:#FFF;--game-excellent:#FFF;--game-good:#FFF;--game-miss:#FFF;
+}
+:root[data-theme=dark][data-vision=contrast]{
+ --primary:#FFF;--ink:#FFF;--muted:#DDD;--background:#000;--surface:#101010;
+ --surface-subtle:#222;--border:#CCC;--soft:#333;
+ --danger:#FFF;--danger-bg:#292929;--warning:#FFF;--warning-bg:#292929;--focus:#FFF;
+ --secondary:#FFF;--secondary-soft:#292929;--on-primary:#000;--on-danger:#000;
+ --timeline-grid:#999;--timeline-label:#FFF;--timeline-playhead:#FFF;
+ --scroll-thumb:#DDD;--scroll-track:#222;
+}
+
+/* The eight textures in display.css are paired with unobscured note/key labels. */
+html:not([data-vision=standard]) .bar{--bar-edge:#405464!important;color:#142632;filter:none}
+html:not([data-vision=standard]) .bar-top{align-self:stretch;margin-left:2px;margin-right:2px;padding:4px 1px;background:#FFFFFFE8;border-radius:6px}
+html:not([data-vision=standard]) :is(.bar-note,.bar-sol,.bar-key){color:#142632}
+html:not([data-vision=standard]) .bar-key{background:#FFF;border-color:#405464}
+html:not([data-vision=standard]) :is(.bar:hover,.bar.down,.bar:active){filter:none}
+html:not([data-vision=standard]) :is(.bar.down,.bar:active){
+ outline:4px double #142632;outline-offset:-6px;
+ box-shadow:inset 0 0 0 2px #142632,0 1px 0 var(--bar-edge),0 5px 7px #172F4114;
+}
+
+/* Pressed pads keep a double edge when animation and movement are disabled. */
+html:root:not([data-vision=standard]) :is(button.recorder-pad.down,button.recorder-pad:active,button.studio-action-pad:active,button.studio-action-pad[aria-pressed=true]),
+html:not([data-vision=standard]) .percussion-play-area:has(.is-tap) .studio-action-pad:first-child,
+html:not([data-vision=standard]) .percussion-play-area:has(.is-shake) .studio-action-pad:last-child{
+ background:var(--primary);color:var(--on-primary);border-color:var(--primary);
+ outline:4px double var(--primary);outline-offset:2px;
+ box-shadow:inset 0 0 0 2px var(--on-primary),0 1px 0 var(--primary);
+}
+html:root:not([data-vision=standard]) :is(.recorder-pad.down,.recorder-pad:active) small{color:var(--on-primary)}
+html:root:not([data-vision=standard]) :is(.recorder-pad.down,.recorder-pad:active,.studio-action-pad) kbd{color:var(--ink);background:var(--surface);border-color:var(--border)}
+html:root:not([data-vision=standard]) :is(button.bar:focus-visible,button.recorder-pad:focus-visible,button.studio-action-pad:focus-visible,.game-pads button:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
+
+/* Primary actions use a solid boundary; secondary actions use a dashed boundary.
+   Text labels remain the action identity, including in monochrome. */
+html:not([data-vision=standard]) .studio-action-pad{border-width:2px;border-style:solid}
+html:not([data-vision=standard]) .studio-action-pad:last-child{border-style:dashed}
+html:not([data-vision=standard]) .perc-event{color:var(--primary);background:var(--soft);border:2px solid var(--primary)}
+html:not([data-vision=standard]) .perc-event[data-secondary=true]{color:var(--secondary);background:var(--secondary-soft);border:2px dashed var(--secondary)}
+html:not([data-vision=standard]) .perc-trace .perc-event[aria-current=true]{outline:3px double var(--ink);outline-offset:2px;font-weight:800}
+html:not([data-vision=standard]) :is(.perc-legend i,.komp-stage-note span:before){width:11px;height:11px;background:var(--primary);border:1px solid currentColor}
+html:not([data-vision=standard]) :is(.perc-legend span+span i,.komp-stage-note span+span:before){background:transparent;border:2px dashed var(--secondary);border-radius:0}
+html:not([data-vision=standard]) :is(.kompang-zone .komp-zone-fill,.komp-center-feedback,.perc-hit-ring,.band-zone .band-hit-shape){fill:var(--vision-object-primary);stroke:var(--vision-object-primary)}
+html:not([data-vision=standard]) .perc-hit-ring{fill:none}
+html:not([data-vision=standard]) :is(.kompang-zone[data-action=edge] .komp-zone-fill,.komp-edge-feedback,.band-zone[data-tone=secondary] .band-hit-shape){fill:var(--vision-object-secondary);stroke:var(--vision-object-secondary);stroke-dasharray:7 5}
+html:not([data-vision=standard]) :is(.komp-zone-label,.komp-zone-key,.band-zone-label,.band-zone-key){fill:#142632;paint-order:stroke fill;stroke:#FFFFFA;stroke-width:1.3px;stroke-linejoin:round}
+html:not([data-vision=standard]) :is(.kompang-zone:focus-visible .komp-zone-fill,.band-zone:focus-visible .band-hit-shape){stroke:var(--vision-object-primary);stroke-width:4;stroke-opacity:1;stroke-dasharray:3 2}
+
+/* Existing state wording and the current-row play symbol remain visible cues. */
+html:not([data-vision=standard]) :is(.mode-switch button[aria-pressed=true],.song.active strong){text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;font-weight:800}
+html:not([data-vision=standard]) :is(.status-strip.recording,.session-state[data-state=recording]){border-left:5px double var(--danger);font-weight:800}
+html:not([data-vision=standard]) :is(.session-state[data-state=armed],.session-state[data-state=pending],.game-state[data-state=paused]){border:2px dashed currentColor}
+html:not([data-vision=standard]) :is(.session-state[data-state=example],.session-state[data-state=replay],.session-state[data-state=metronome],.game-state[data-state=running],.game-state[data-state=countdown]){border:2px solid currentColor}
+html:not([data-vision=standard]) .event-row.is-current{outline:2px solid var(--primary);outline-offset:-2px}
+html:not([data-vision=standard]) .timeline .event{stroke:#405464;stroke-width:1}
+html:not([data-vision=standard]) .timeline .event[data-estimated=true]{stroke:var(--vision-object-secondary);stroke-width:2;stroke-dasharray:3 2}
+html:not([data-vision=standard]) .timeline .event.is-current{stroke:var(--timeline-playhead,var(--primary));stroke-width:3}
+html:not([data-vision=standard]) .beat-dots i{background:transparent;border:1px solid var(--muted)}
+html:not([data-vision=standard]) .beat-dots i.on{background:var(--primary);outline:2px solid var(--primary);outline-offset:2px}
+html:not([data-vision=standard]) .display-state-record{border-width:3px;border-style:double}
+
+/* Lane letters, note labels, judgment words and health numbers remain primary. */
+html:not([data-vision=standard]) .game-pads button{border-top:4px solid currentColor}
+html:not([data-vision=standard]) .game-pads button:nth-child(2){border-top-style:double}
+html:not([data-vision=standard]) .game-pads button:nth-child(3){border-top-style:dashed}
+html:not([data-vision=standard]) .game-pads button:nth-child(4){border-top-style:dotted}
+html:not([data-vision=standard]) .game-pads button.is-pressed{outline:4px double currentColor;outline-offset:-6px}
+html:not([data-vision=standard]) .game-judgment[data-kind=excellent]{color:var(--game-excellent)}
+html:not([data-vision=standard]) .game-judgment[data-kind=good]{color:var(--game-good)}
+html:not([data-vision=standard]) :is(.game-judgment[data-kind=miss],.game-judgment[data-kind=wrong]){color:var(--game-miss)}
+html:not([data-vision=standard]) .game-life.is-low label:after{content:' · Rendah';font-weight:800;text-decoration:underline;text-underline-offset:2px}
+
+html[data-vision=contrast] :is(.display-preview,.instrument-choice,.panel,input,select,textarea){border-width:2px;border-color:var(--border);box-shadow:none}
+html[data-vision=contrast] :is(button:disabled,input:disabled,select:disabled){opacity:.7}
+html[data-vision=contrast] .bar{outline:2px solid #142632;outline-offset:-2px}
+html[data-vision=contrast] :is(.bar.down,.bar:active){outline:4px double #142632;outline-offset:-6px}
+html[data-vision=contrast] .display-notes span{border-color:#142632}
+
+@media(forced-colors:active){
+ html:not([data-vision=standard]) :is(.bar,.display-notes span){background:ButtonFace!important;background-image:none!important;color:ButtonText;outline:2px solid ButtonText}
+ html:not([data-vision=standard]) :is(.bar-top,.bar-note,.bar-sol,.bar-key){background:ButtonFace;color:ButtonText;border-color:ButtonText}
+ html:not([data-vision=standard]) :is(.bar.down,.bar:active,.recorder-pad.down,.studio-action-pad:active,.game-pads button.is-pressed){outline:4px double Highlight}
+ html:not([data-vision=standard]) :is(.bar:focus-visible,.recorder-pad:focus-visible,.studio-action-pad:focus-visible,.game-pads button:focus-visible){outline:3px solid Highlight}
+ html:not([data-vision=standard]) :is(.perc-event,.perc-event[data-secondary=true],.display-state){color:CanvasText;border-color:CanvasText}
+}
+</style>
+<!-- studio-display:styles:end -->
 </head>
 <body>
 <svg aria-hidden="true" style="display:none"><defs>
 <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol><symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-5 5 5-5 5 5M4 16v4h16v-4"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="m8 4-5 5 5 5M3 9h10a7 7 0 0 1 0 14"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/></symbol><symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.7 8.5a2.5 2.5 0 1 1 4.4 1.6c-1.3 1-2.1 1.2-2.1 3M12 17h.01"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></symbol><symbol id="i-edit" viewBox="0 0 24 24"><path d="m14 4 6 6M3 21l5-1L21 7a3 3 0 0 0-5-5L3 15Z"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V3h8v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
 </defs></svg>
-<header class="header"><div class="header-inner"><div class="brand"><div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div><div class="brand-name">e-Instru <span>Studio</span></div><span class="app-version" id="appVersion" aria-label="Versi 1.04.0">V1.04.0</span></div><nav id="modeSwitch" class="mode-switch" hidden aria-label="Mod e-Instru Studio"><button id="studioModeBtn" aria-pressed="true">Studio</button><button id="gameModeBtn" aria-pressed="false">Permainan</button></nav></div></header>
+<header class="header"><div class="header-inner"><div class="brand"><div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div><div class="brand-name">e-Instru <span>Studio</span></div><span class="app-version" id="appVersion" aria-label="Versi 1.04.0">V1.04.0</span></div><nav id="modeSwitch" class="mode-switch" hidden aria-label="Mod e-Instru Studio"><button id="studioModeBtn" aria-pressed="true">Studio</button><button id="gameModeBtn" aria-pressed="false">Permainan</button></nav><button type="button" id="displaySettingsBtn" class="display-trigger" aria-haspopup="dialog" aria-controls="displayDialog" aria-expanded="false">Paparan</button></div></header>
 <main>
 
 <section id="instrumentChooser" class="instrument-chooser" aria-labelledby="chooseHeading">
@@ -558,6 +1010,20 @@ dialog{width:min(640px,calc(100vw - 28px));max-width:640px;max-height:calc(100dv
  </aside></div><footer class="footer"><span>e-Instru Studio · Segi Tiga</span><span>Sintesis digital · 512 ketukan / 180 saat</span><span>Reset mengekalkan rakaman dan suntingan.</span></footer>
 </section>
 
+<!-- studio-display:dialog:start -->
+<dialog id="displayDialog" class="display-dialog" aria-labelledby="displayHeading" aria-describedby="displayDescription displayGameHint">
+ <div class="dialog-head"><h2 id="displayHeading">Paparan yang selesa</h2><button type="button" id="displayClose" aria-label="Tutup tetapan paparan">Tutup</button></div>
+ <div class="dialog-body display-body">
+  <p id="displayDescription">Tema dan warna boleh dilaras berasingan. Label, corak dan bentuk membantu membezakan not dan keadaan.</p>
+  <p id="displayGameHint" class="display-hint">Permainan yang sedang berjalan dijeda apabila tetapan dibuka.</p>
+  <div class="field"><label for="displayTheme">Tema</label><select id="displayTheme"><option value="system">Ikut peranti</option><option value="light">Cerah</option><option value="dark">Gelap</option></select></div>
+  <div class="field"><label for="displayVision">Warna dan kontras</label><select id="displayVision" aria-describedby="displayVisionHint"><option value="standard">Warna asal</option><option value="protanopia">Merah–hijau · protanopia</option><option value="deuteranopia">Hijau–merah · deuteranopia</option><option value="tritanopia">Biru–kuning · tritanopia</option><option value="contrast">Kontras tinggi</option></select><p id="displayVisionHint" class="display-hint">Pilih palet yang paling mudah dibezakan oleh anda. Mod bantuan menambah corak pada bar dan tanda keadaan, selain warna.</p></div>
+  <fieldset class="display-preview"><legend>Pratonton not dan keadaan</legend><div class="display-notes" role="group" aria-label="Empat not berlabel"><span>C · 1</span><span>D · 2</span><span>E · 3</span><span>F · 4</span></div><div class="row wrap"><span class="display-state display-state-ready">✓ Sedia</span><span class="display-state display-state-record">■ Merakam</span><span class="display-state display-state-warn">! Semak</span></div></fieldset>
+  <p id="displaySaveStatus" class="display-hint" role="status" aria-live="polite" aria-atomic="true">Tetapan asal digunakan.</p>
+ </div>
+ <div class="dialog-actions"><button type="button" id="displayReset">Tetapan asal</button><button type="button" class="primary" id="displayDone">Selesai</button></div>
+</dialog>
+<!-- studio-display:dialog:end -->
 </main>
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
@@ -747,6 +1213,11 @@ root.XyloGameCore=Object.freeze({LEVELS,RULES,chart,Run});
 (function(){'use strict';
 const C=window.XyloCore,$=id=>document.getElementById(id),SVG='http://www.w3.org/2000/svg';
 const COLORS=['#EB8C88','#EDA971','#E6C360','#8FC79B','#6BBEB8','#82B9DB','#A1ACE0','#C3A2D6'], EDGES=['#C36567','#C48651','#B59A3E','#6A9F77','#4D9590','#628EAF','#7B85AF','#9C7BAD'];
+function displayColors(){return window.StudioDisplay?.palette?.()||COLORS;}
+function displayEdge(index){return window.StudioDisplay?.get?.().vision&&window.StudioDisplay.get().vision!=='standard'?'#405464':EDGES[index];}
+function eventFill(event,index){return event.midi===0?'var(--timeline-rest,#AAB6BE)':event.estimated?'var(--warning,#D49747)':index>=0?displayColors()[index]:'var(--timeline-extra,#8499B3)';}
+function refreshDisplay(){const colors=displayColors();[...$('instrument').querySelectorAll('.bar')].forEach((bar,i)=>{bar.style.setProperty('--bar',colors[i]);bar.style.setProperty('--bar-edge',displayEdge(i));});const notes=C.notes(take.octave);timelineNodes.forEach((node,i)=>{const event=take.events[i];if(event)node.setAttribute('fill',eventFill(event,notes.findIndex(n=>n.midi===event.midi)));});}
+window.addEventListener('studiodisplaychange',refreshDisplay);
 let workspaceMode='studio';
 let selectedVariant='long',timelineWidth=780,timelineHeight=155,currentEvent=-1,rowNodes=[],timelineNodes=[],timeCells=[],axisTimeNodes=[],renderedEvents=null,tempoGesture=false;
 const voiceStarts=new WeakMap();
@@ -850,7 +1321,7 @@ function confirmReplace(title,text,label,action){$('confirmHeading').textContent
 function guardActive(){if(mode!=='idle'){announce('Hentikan playback atau rakaman dahulu.');return true;}return false;}
 function noteFor(midi){return C.noteInfo(midi);}
 function countMic(){return take.events.filter(e=>e.estimated).length;}
-function rebuildInstrument(){const el=$('instrument');el.replaceChildren();const rail=document.createElement('div');rail.className='rail';rail.setAttribute('aria-hidden','true');el.append(rail);C.notes(take.octave).forEach((n,i)=>{const b=document.createElement('button');b.className='bar';b.dataset.midi=String(n.midi);b.type='button';b.style.setProperty('--height',(224-i*10)+'px');b.style.setProperty('--bar',COLORS[i]);b.style.setProperty('--bar-edge',EDGES[i]);b.setAttribute('aria-label',n.label+', '+n.sol+', kekunci '+n.key);const top=document.createElement('span');top.className='bar-top';const label=document.createElement('span');label.className='bar-note';label.textContent=n.label;const sol=document.createElement('span');sol.className='bar-sol';sol.textContent=n.sol;top.append(label,sol);const key=document.createElement('span');key.className='bar-key';key.textContent=n.key;b.append(top,key);b.addEventListener('pointerdown',e=>{if(e.button!==0||b.disabled)return;e.preventDefault();b.focus({preventScroll:true});hit(n.midi);});b.addEventListener('click',e=>{if(e.detail===0&&!b.disabled)hit(n.midi);});el.append(b);});renderInstrumentView();$('pitchRange').textContent=manualNotes()[0].label+' — '+manualNotes()[7].label;}
+function rebuildInstrument(){const el=$('instrument');el.replaceChildren();const rail=document.createElement('div');rail.className='rail';rail.setAttribute('aria-hidden','true');el.append(rail);C.notes(take.octave).forEach((n,i)=>{const b=document.createElement('button');b.className='bar';b.dataset.midi=String(n.midi);b.type='button';b.style.setProperty('--height',(224-i*10)+'px');b.style.setProperty('--bar',displayColors()[i]);b.style.setProperty('--bar-edge',displayEdge(i));b.setAttribute('aria-label',n.label+', '+n.sol+', kekunci '+n.key);const top=document.createElement('span');top.className='bar-top';const label=document.createElement('span');label.className='bar-note';label.textContent=n.label;const sol=document.createElement('span');sol.className='bar-sol';sol.textContent=n.sol;top.append(label,sol);const key=document.createElement('span');key.className='bar-key';key.textContent=n.key;b.append(top,key);b.addEventListener('pointerdown',e=>{if(e.button!==0||b.disabled)return;e.preventDefault();b.focus({preventScroll:true});hit(n.midi);});b.addEventListener('click',e=>{if(e.detail===0&&!b.disabled)hit(n.midi);});el.append(b);});renderInstrumentView();$('pitchRange').textContent=manualNotes()[0].label+' — '+manualNotes()[7].label;}
 function flash(midi){if(instrumentId==='recorder'){updateFingering(midi);paintHeld(midi,true);const epoch=playEpoch;if(mode!=='playing')setTimeout(()=>{if(epoch===playEpoch&&![...heldInputs.values()].some(item=>item.midi===midi))paintHeld(midi,false);},350);return;}const n=noteFor(midi),b=$('instrument').querySelector('[data-midi="'+midi+'"]');if(b){b.classList.add('down');clearTimeout(b._flashTimer);b._flashTimer=setTimeout(()=>b.classList.remove('down'),140);}$('lastPitch').textContent=n?(midi===0?'Rehat':n.label+' · '+n.hz.toFixed(1)+' Hz'+(b?'':' · luar 8 bar')):'Not tidak pasti';}
 async function ensureAudio(){if(audio?.state==='running')return audio;if(audioPromise)return audioPromise;const pending=(async()=>{try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error('Pelayar tidak menyokong Web Audio.');if(!audio||audio.state==='closed'){audio=new AC();audio.addEventListener('statechange',()=>{if(audio.state==='running')return;releaseInputs();if(mode!=='idle')stopAll('Audio dijeda pelayar. Tekan Main atau Rakam untuk sambung.');else{playEpoch++;silence();}});}if(audio.state!=='running')await audio.resume();if(audio.state!=='running')throw Error('Audio belum diizinkan pelayar.');return audio;}catch(e){announce('Bunyi tidak tersedia. Rakaman mouse dan eksport masih boleh digunakan.');return null;}})();audioPromise=pending;try{return await pending;}finally{if(audioPromise===pending)audioPromise=null;}}
 function tone(midi,at,metro=false,gateSeconds=.5,voiceInstrument=instrumentId){if(!metro&&voiceInstrument==='recorder')return recorderVoice(midi,at,gateSeconds);if(!metro&&midi===0)return;if(!audio||audio.state!=='running')return;const t=Math.max(audio.currentTime+.003,at??audio.currentTime+.008),duration=metro?.055:.85;const main=audio.createOscillator(),gain=audio.createGain();main.type='sine';main.frequency.value=metro?midi:C.freq(midi);gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(metro?.07:.24,t+.003);gain.gain.exponentialRampToValueAtTime(.0001,t+duration);main.connect(gain);gain.connect(audio.destination);voiceStarts.set(main,t);activeOsc.add(main);main.onended=()=>{activeOsc.delete(main);try{gain.disconnect();}catch{}};main.start(t);main.stop(t+duration+.02);if(!metro){const harmonic=audio.createOscillator(),hg=audio.createGain();harmonic.type='sine';harmonic.frequency.value=C.freq(midi)*3;hg.gain.setValueAtTime(.0001,t);hg.gain.exponentialRampToValueAtTime(.035,t+.001);hg.gain.exponentialRampToValueAtTime(.0001,t+.12);harmonic.connect(hg);hg.connect(audio.destination);voiceStarts.set(harmonic,t);activeOsc.add(harmonic);harmonic.onended=()=>{activeOsc.delete(harmonic);try{hg.disconnect();}catch{}};harmonic.start(t);harmonic.stop(t+.15);}}
@@ -881,7 +1352,7 @@ function clock(){if(mode==='playing')updatePlaybackUI();else if(['recording','mi
 function paintDots(beat){[...$('beatDots').children].forEach((x,i)=>x.classList.toggle('on',i===beat));}
 function renderControls(){const active=mode!=='idle',recording=['armed','recording','mic','mic_pending'].includes(mode);$('recordLabel').textContent=recording?'Henti':'Rakam';$('recordBtn').setAttribute('aria-label',recording?'Henti rakaman':'Rakam not anda');$('recordBtn').classList.toggle('danger',recording);$('recordBtn').disabled=mode==='play_pending';$('playLabel').textContent=mode==='playing'?'Henti score':take.source==='preset_proposal'?'Main lagu':'Main rakaman';$('playBtn').setAttribute('aria-label',mode==='playing'?'Henti score':(take.source==='preset_proposal'?'Main lagu: ':'Main rakaman: ')+(take.title||'score semasa'));$('playBtn').disabled=recording||mode==='play_pending'||!take.events.length||C.validate(take).length>0||C.unsupportedPitches(take,instrumentId).length>0;$('stopBtn').disabled=!active&&!activeOsc.size;$('micBtn').disabled=active||instrumentId==='recorder';$('micBtn').title=instrumentId==='recorder'?'Pengesan mikrofon hanya untuk xylophone; rekoder belum disokong.':'Analisis xylophone secara tempatan';if(instrumentId==='recorder')$('micBtn').setAttribute('aria-describedby','recorderMicHint');else $('micBtn').removeAttribute('aria-describedby');$('bpm').disabled=!tempoAllowed();$('tapTempoBtn').disabled=!tempoAllowed();$('octave').disabled=active||instrumentId==='recorder';$('grid').disabled=active;$('tail').disabled=active;$('undoBtn').disabled=active||!history.length;$('clearBtn').disabled=active||!take.events.length;$('restoreBtn').disabled=active||!lastCustom?.events.length;$('exportBtn').disabled=active||!take.events.length;$('quickJsonBtn').disabled=active||!take.events.length;$('scoreVariant').disabled=active;$('takeTitle').disabled=active;$('reviewMic').disabled=active;for(const x of $('songGrid').querySelectorAll('button'))x.disabled=active;for(const b of $('instrument').querySelectorAll('.bar'))b.disabled=mode.startsWith('mic');for(const b of $('eventRows').querySelectorAll('button'))b.disabled=active;}
 function renderSongs(){const g=$('songGrid');g.replaceChildren();for(const p of C.PRESETS){const b=document.createElement('button');b.className='song';b.dataset.song=String(p.id);const active=take.source==='preset_proposal'&&take.song_id===p.id&&(take.score_variant||'short')===selectedVariant;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));const ic=document.createElement('span');ic.className='song-icon';ic.innerHTML='<svg class="icon"><use href="#i-music"/></svg>';const text=document.createElement('span'),name=document.createElement('strong'),small=document.createElement('small');name.textContent=p.title;const proposal=C.preset(p.id,4,selectedVariant);small.textContent=proposal.bpm+' BPM · '+(C.durationMs(proposal)/1000).toFixed(1)+'s · cadangan';text.append(name,small);b.append(ic,text);b.addEventListener('click',()=>{if(guardActive())return;snapshot();take=C.preset(p.id,take.octave,selectedVariant,instrumentId);render();save();status('Dimuatkan: '+p.title+' · '+(selectedVariant==='long'?'versi panjang':'petikan pendek')+'. Tekan Main lagu untuk dengar.');});g.append(b);}}
-function drawTimeline(){timelineNodes=[];axisTimeNodes=[];const svg=$('timeline');svg.replaceChildren();const end=Math.max(96,take.end_tick||384),rows=[...(take.events.some(e=>e.midi===null)?[null]:[]),...(take.events.some(e=>e.midi===0)?[0]:[]),...C.scorePitches(take)],ns=C.notes(take.octave);timelineWidth=Math.max(780,Math.ceil(end/6)*9+68);timelineHeight=Math.max(155,rows.length*13+51);const right=timelineWidth-30,plot=timelineWidth-68,bottom=timelineHeight-29,y=n=>n===null?bottom:bottom-Math.max(0,rows.indexOf(n))*13;svg.setAttribute('viewBox','0 0 '+timelineWidth+' '+timelineHeight);svg.style.width=timelineWidth+'px';svg.style.minWidth='100%';svg.style.height=timelineHeight+'px';const label=document.createElementNS(SVG,'title');label.textContent='Jejak melodi. Pilih not dengan Tab, kemudian Enter atau Ruang untuk dengar; pitch di luar lapan bar turut ditunjukkan.';svg.append(label);rows.forEach((m,i)=>{const line=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({x1:38,x2:right,y1:bottom-i*13,y2:bottom-i*13,stroke:'#E9EFF3'}))line.setAttribute(k,v);svg.append(line);const tx=document.createElementNS(SVG,'text');tx.textContent=noteFor(m)?.label||'?';for(const[k,v]of Object.entries({x:5,y:bottom+3-i*13,fill:'#617A8C','font-size':8,'font-family':'Consolas,monospace'}))tx.setAttribute(k,v);svg.append(tx);});const step=end>768?96:48;for(let tick=0;tick<=end;tick+=step){const x=38+tick/end*plot,line=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({x1:x,x2:x,y1:20,y2:timelineHeight-21,stroke:'#DFE8EE','stroke-dasharray':'2 4'}))line.setAttribute(k,v);svg.append(line);const tx=document.createElementNS(SVG,'text');tx.textContent=(tick*60000/(take.bpm*24)/1000).toFixed(1)+'s';axisTimeNodes.push({node:tx,tick});for(const[k,v]of Object.entries({x:x-5,y:timelineHeight-7,fill:'#617A8C','font-size':8,'font-family':'Consolas,monospace'}))tx.setAttribute(k,v);svg.append(tx);}for(const section of take.sections||[]){const x=38+section.onset_tick/end*plot,text=document.createElementNS(SVG,'text');text.textContent=section.label;for(const[k,v]of Object.entries({x,y:13,fill:'#526879','font-size':8}))text.setAttribute(k,v);svg.append(text);}if(!take.events.length){const text=document.createElementNS(SVG,'text');text.textContent='Tekan Rakam dan mainkan not untuk mengisi jejak.';for(const[k,v]of Object.entries({x:timelineWidth/2,y:76,'text-anchor':'middle',class:'timeline-empty'}))text.setAttribute(k,v);svg.append(text);}take.events.forEach((e,i)=>{const r=document.createElementNS(SVG,'rect'),x=38+e.onset_tick/end*plot,w=Math.max(5,e.duration_tick/end*plot-3),bar=ns.findIndex(n=>n.midi===e.midi),color=e.midi===0?'#AAB6BE':e.estimated?'#D49747':bar>=0?COLORS[bar]:'#8499B3',name=noteFor(e.midi)?.label||'?';for(const[k,v]of Object.entries({x,y:y(e.midi)-7,width:w,height:10,rx:3,fill:color,class:'event',tabindex:0,role:'button','aria-label':(e.midi===0?'Rehat ':'Dengar not ')+(i+1)+': '+name}))r.setAttribute(k,v);timelineNodes.push(r);r.addEventListener('click',()=>previewEvent(i));r.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();previewEvent(i);}});const title=document.createElementNS(SVG,'title');title.textContent=name+' · tick '+e.onset_tick+(e.midi>0&&bar<0?' · di luar 8 bar':'');r.append(title);svg.append(r);});const head=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({id:'playHead',x1:38,x2:38,y1:17,y2:timelineHeight-20,stroke:'#126B66','stroke-width':2,visibility:'hidden'}))head.setAttribute(k,v);svg.append(head);}
+function drawTimeline(){timelineNodes=[];axisTimeNodes=[];const svg=$('timeline');svg.replaceChildren();const end=Math.max(96,take.end_tick||384),rows=[...(take.events.some(e=>e.midi===null)?[null]:[]),...(take.events.some(e=>e.midi===0)?[0]:[]),...C.scorePitches(take)],ns=C.notes(take.octave);timelineWidth=Math.max(780,Math.ceil(end/6)*9+68);timelineHeight=Math.max(155,rows.length*13+51);const right=timelineWidth-30,plot=timelineWidth-68,bottom=timelineHeight-29,y=n=>n===null?bottom:bottom-Math.max(0,rows.indexOf(n))*13;svg.setAttribute('viewBox','0 0 '+timelineWidth+' '+timelineHeight);svg.style.width=timelineWidth+'px';svg.style.minWidth='100%';svg.style.height=timelineHeight+'px';const label=document.createElementNS(SVG,'title');label.textContent='Jejak melodi. Pilih not dengan Tab, kemudian Enter atau Ruang untuk dengar; pitch di luar lapan bar turut ditunjukkan.';svg.append(label);rows.forEach((m,i)=>{const line=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({x1:38,x2:right,y1:bottom-i*13,y2:bottom-i*13,stroke:'var(--timeline-grid,#E9EFF3)',class:'timeline-grid'}))line.setAttribute(k,v);svg.append(line);const tx=document.createElementNS(SVG,'text');tx.textContent=noteFor(m)?.label||'?';for(const[k,v]of Object.entries({x:5,y:bottom+3-i*13,fill:'var(--timeline-label,#617A8C)',class:'timeline-label','font-size':8,'font-family':'Consolas,monospace'}))tx.setAttribute(k,v);svg.append(tx);});const step=end>768?96:48;for(let tick=0;tick<=end;tick+=step){const x=38+tick/end*plot,line=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({x1:x,x2:x,y1:20,y2:timelineHeight-21,stroke:'var(--timeline-grid,#DFE8EE)',class:'timeline-grid','stroke-dasharray':'2 4'}))line.setAttribute(k,v);svg.append(line);const tx=document.createElementNS(SVG,'text');tx.textContent=(tick*60000/(take.bpm*24)/1000).toFixed(1)+'s';axisTimeNodes.push({node:tx,tick});for(const[k,v]of Object.entries({x:x-5,y:timelineHeight-7,fill:'var(--timeline-label,#617A8C)',class:'timeline-label','font-size':8,'font-family':'Consolas,monospace'}))tx.setAttribute(k,v);svg.append(tx);}for(const section of take.sections||[]){const x=38+section.onset_tick/end*plot,text=document.createElementNS(SVG,'text');text.textContent=section.label;for(const[k,v]of Object.entries({x,y:13,fill:'var(--timeline-label,#526879)',class:'timeline-label','font-size':8}))text.setAttribute(k,v);svg.append(text);}if(!take.events.length){const text=document.createElementNS(SVG,'text');text.textContent='Tekan Rakam dan mainkan not untuk mengisi jejak.';for(const[k,v]of Object.entries({x:timelineWidth/2,y:76,'text-anchor':'middle',class:'timeline-empty'}))text.setAttribute(k,v);svg.append(text);}take.events.forEach((e,i)=>{const r=document.createElementNS(SVG,'rect'),x=38+e.onset_tick/end*plot,w=Math.max(5,e.duration_tick/end*plot-3),bar=ns.findIndex(n=>n.midi===e.midi),color=eventFill(e,bar),name=noteFor(e.midi)?.label||'?';for(const[k,v]of Object.entries({x,y:y(e.midi)-7,width:w,height:10,rx:3,fill:color,class:'event','data-note-index':bar,'data-estimated':String(!!e.estimated),'stroke-dasharray':e.estimated?'2 2':'none',tabindex:0,role:'button','aria-label':(e.midi===0?'Rehat ':'Dengar not ')+(i+1)+': '+name}))r.setAttribute(k,v);timelineNodes.push(r);r.addEventListener('click',()=>previewEvent(i));r.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();previewEvent(i);}});const title=document.createElementNS(SVG,'title');title.textContent=name+' · tick '+e.onset_tick+(e.midi>0&&bar<0?' · di luar 8 bar':'');r.append(title);svg.append(r);});const head=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({id:'playHead',x1:38,x2:38,y1:17,y2:timelineHeight-20,stroke:'var(--timeline-playhead,#126B66)',class:'timeline-playhead','stroke-width':2,visibility:'hidden'}))head.setAttribute(k,v);svg.append(head);}
 function renderRows(){rowNodes=[];timeCells=[];const tbody=$('eventRows');tbody.replaceChildren();if(!take.events.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.className='empty-cell';td.textContent='Belum ada ketukan. Tekan Rakam, mainkan not, kemudian Henti. Data dan masa input akan muncul di sini.';tr.append(td);tbody.append(tr);return;}take.events.forEach((e,i)=>{const tr=document.createElement('tr');tr.className='event-row';tr.dataset.eventIndex=String(i);rowNodes.push(tr);for(let k=0;k<6;k++)tr.append(document.createElement('td'));tr.children[0].textContent=String(i+1).padStart(2,'0');const p=document.createElement('span');p.className='pitch-pill mono';p.textContent=noteFor(e.midi)?.label||'?';tr.children[1].append(p);timeCells.push(tr.children[2]);tr.children[2].className='mono';tr.children[2].textContent=(e.onset_tick*60000/(take.bpm*24)/1000).toFixed(3)+'s';tr.children[3].className='mono';tr.children[3].textContent=(e.duration_tick/24).toFixed(e.duration_tick%24?2:0);const source=document.createElement('span');source.textContent=e.estimated?(e.reviewed?'Anggaran · disemak':'Anggaran · perlu semak'):e.source==='preset_proposal'?'Score cadangan':(e.raw_ms??0).toFixed(1)+'ms input';source.style.fontSize='10px';if(e.estimated)source.style.color='var(--warning)';tr.children[4].append(source);const btn=document.createElement('button');btn.className='small ghost';btn.setAttribute('aria-label','Sunting not '+(i+1)+': '+(noteFor(e.midi)?.label||'belum diketahui'));btn.title='Sunting not '+(i+1);btn.innerHTML='<svg class="icon"><use href="#i-edit"/></svg>';btn.addEventListener('click',()=>edit(i));tr.children[5].append(btn);tbody.append(tr);});}
 function renderTiming(){$('bpm').value=take.bpm;$('bpmValue').textContent=String(take.bpm);$('bpm').setAttribute('aria-valuetext',take.bpm+' BPM');$('statNotes').textContent=take.events.filter(e=>e.midi!==0).length;$('statDuration').replaceChildren(document.createTextNode((C.durationMs(take)/1000).toFixed(1)));const unit=document.createElement('span');unit.textContent='s';unit.style.fontSize='12px';$('statDuration').append(unit);$('statBpm').textContent=take.bpm;$('eventCount').textContent=take.events.length+' event';const errors=C.validate(take),duration=C.durationMs(take)/1000,long=take.score_variant==='long',short=take.score_variant==='short',good=errors.length===0&&(long||!short||duration>=10&&duration<=15),bars=C.notes(take.octave).map(n=>n.midi),extra=[...new Set(take.events.filter(e=>e.midi>0&&!bars.includes(e.midi)).map(e=>noteFor(e.midi)?.label))];$('goal').className='goal'+(take.events.length&&good?' good':errors.length&&take.events.length?' warn':'');$('goalTitle').textContent=!take.events.length?'Sedia untuk rakaman pertama':long?'Versi panjang · '+duration.toFixed(1)+'s':short?(good?'Dalam sasaran 10–15 saat':'Petikan pendek · '+duration.toFixed(1)+'s'):'Rakaman anda · '+duration.toFixed(1)+'s';$('goalText').textContent=!take.events.length?'Tekan Rakam, mainkan not dan Henti. Anda juga boleh memilih lagu latihan.':errors.length?errors[0]:extra.length?'Pitch luar 8 bar: '+extra.join(', ')+'. Pitch asal dikekalkan.':long?(take.form_repeats||1)+' pusingan bentuk melodi. Lead-in dan resonans tidak dikira.':'Lead-in dan ekor resonans tidak dikira.';timeCells.forEach((cell,i)=>cell.textContent=(take.events[i].onset_tick*60000/(take.bpm*24)/1000).toFixed(3)+'s');for(const item of axisTimeNodes)item.node.textContent=(item.tick*60000/(take.bpm*24)/1000).toFixed(1)+'s';}
 function render(){if(renderedEvents!==take.events){currentEvent=-1;tempoGesture=false;renderedEvents=take.events;if(mode==='idle'){$('eventTableScroll').scrollTop=0;$('timelineScroll').scrollLeft=0;}}if(take.source==='preset_proposal')selectedVariant=take.score_variant||'short';$('scoreVariant').value=selectedVariant;rebuildInstrument();renderSongs();$('octave').value=take.octave;$('grid').value=take.grid_tick;$('tail').value=take.tail_tick;$('takeTitle').value=take.title;renderRows();drawTimeline();renderTiming();const mic=countMic();$('sourceTag').textContent=!take.events.length?'Score kosong':take.source==='preset_proposal'?(take.score_variant==='long'?'Cadangan · panjang':'Cadangan'):mic?'Mikrofon · anggaran':'Rakaman sendiri';$('sourceTag').className='tag'+(mic?' amber':take.source==='preset_proposal'?'':' green');$('sourceNote').textContent=take.source==='preset_proposal'?(take.arrangement_note||'Score cadangan projek. Not dan timestamp video rujukan belum disahkan.')+(take.transpose_semitones?' Transposisi '+(take.transpose_semitones>0?'+':'')+take.transpose_semitones+' semitone.':''):mic?'Pitch dan onset mikrofon ialah anggaran. Semakan manual tidak menggantikan pengesahan akustik berkalibrasi.':'JSON mengekalkan masa input asal. Score grid boleh disunting tanpa mengubah log input.';$('reviewWrap').hidden=!mic;$('reviewMic').checked=mic>0&&take.events.filter(e=>e.estimated).every(e=>e.reviewed);$('timelineCaption').textContent=take.events.length?'Klik not atau pilih dengan Tab, kemudian Enter / Ruang untuk dengar. Sunting melalui ikon pensel dalam Data ketukan.':'Tekan Rakam, mainkan not dan Henti. Jejak melodi akan terisi bersama Data ketukan.';renderControls();markEvent(currentEvent,true);}
@@ -967,6 +1438,9 @@ render();status('Dimuatkan: '+take.title+'. Tekan Main lagu atau Rakam melodi an
 (function(){'use strict';
 const C=window.XyloCore,G=window.XyloGameCore,B=window.XyloStudioBridge,$=id=>document.getElementById(id);
 const KEYS=['A','S','D','F'],COLORS=['#75c9bb','#eeb287','#e5cb79','#b8afe5'],SETTINGS='xylo-game-settings-v1',BEST='xylo-game-best-v1';
+const GAME_DEFAULTS={bg:'#172f41',lane:'#1b3547',grid:'#a6c2cf22',beat:'#a6c2cf18',label:'#9eb9c9','note-ink':'#172f41'};
+let gamePalette=COLORS.slice(),gamePaint={...GAME_DEFAULTS};
+function refreshGameDisplay(){const display=window.StudioDisplay,vision=display?.get?.().vision;gamePalette=vision&&vision!=='standard'?display.palette().slice(0,4):COLORS.slice();const style=typeof getComputedStyle==='function'?getComputedStyle(document.documentElement):null;for(const [key,value]of Object.entries(GAME_DEFAULTS))gamePaint[key]=style?.getPropertyValue('--game-'+key).trim()||value;for(const [i,pad]of pads.entries()){pad.style.setProperty('--game-pad-fill',gamePalette[i]);pad.style.setProperty('--game-pad-ink','var(--game-note-ink,#172f41)');}if(inGame)draw(phase==='running'?time():phase==='paused'?frozen:0);}
 let inGame=false,phase='idle',score=null,run=null,audio=null,observedAudio=null,origin=0,gate=0,frozen=0,resuming=false,epoch=0,timer=0,frame=0,judgmentUntil=0,canvasWidth=0,canvasHeight=0;
 const heldKeys=new Set(),pointers=new Map(),best=Object.create(null),canvas=$('gameCanvas'),ctx=canvas.getContext('2d'),pads=[...$('gamePads').querySelectorAll('button')];
 const write=(id,text)=>{if($(id).textContent!==String(text))$(id).textContent=String(text);};
@@ -1035,11 +1509,14 @@ function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r
 function draw(t){
  if(!ctx||!score)return;const rect=canvas.getBoundingClientRect(),w=rect.width,h=rect.height;if(w<1||h<1)return;const dpr=Math.min(2,window.devicePixelRatio||1);
  if(canvasWidth!==w||canvasHeight!==h||canvas.width!==Math.round(w*dpr)){canvasWidth=w;canvasHeight=h;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
- ctx.clearRect(0,0,w,h);ctx.fillStyle='#172f41';ctx.fillRect(0,0,w,h);const line=h-88,plot=line-32,laneWidth=w/4;
- for(let lane=0;lane<4;lane++){if(lane%2){ctx.fillStyle='#1b3547';ctx.fillRect(lane*laneWidth,0,laneWidth,line);}ctx.strokeStyle='#a6c2cf22';ctx.beginPath();ctx.moveTo(lane*laneWidth,0);ctx.lineTo(lane*laneWidth,line);ctx.stroke();ctx.fillStyle='#9eb9c9';ctx.textAlign='center';ctx.font='10px Consolas,monospace';ctx.fillText('0'+(lane+1),laneWidth*(lane+.5),21);}
- const beat=60/score.bpm;ctx.strokeStyle='#a6c2cf18';for(let i=Math.max(0,Math.floor(t/beat)-1);i<t/beat+5;i++){const y=line-(i*beat-t)/score.travel*plot;if(y<27||y>line)continue;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
- const notes=score.notes;for(let i=0;i<notes.length;i++){const n=notes[i];if(run?.judged[i])continue;const y=line-(n.at-t)/score.travel*plot;if(y<26||y>line+30)continue;let gap=Infinity;for(let j=i+1;j<notes.length;j++)if(notes[j].lane===n.lane){gap=(notes[j].at-n.at)/score.travel*plot;break;}const tileHeight=Math.min(58,Math.max(18,gap-6)),x=n.lane*laneWidth+8,tileWidth=laneWidth-16;ctx.fillStyle=COLORS[n.lane];roundRect(x,y-tileHeight,tileWidth,tileHeight,5);ctx.fillStyle='#172f41';ctx.font='700 '+(tileHeight<27?11:14)+'px Consolas,monospace';ctx.textAlign='center';ctx.fillText(C.noteInfo(n.midi).label,x+tileWidth/2,y-tileHeight/2+4);}
+ ctx.clearRect(0,0,w,h);ctx.fillStyle=gamePaint.bg;ctx.fillRect(0,0,w,h);const line=h-88,plot=line-32,laneWidth=w/4;
+ for(let lane=0;lane<4;lane++){if(lane%2){ctx.fillStyle=gamePaint.lane;ctx.fillRect(lane*laneWidth,0,laneWidth,line);}ctx.strokeStyle=gamePaint.grid;ctx.beginPath();ctx.moveTo(lane*laneWidth,0);ctx.lineTo(lane*laneWidth,line);ctx.stroke();ctx.fillStyle=gamePaint.label;ctx.textAlign='center';ctx.font='10px Consolas,monospace';ctx.fillText(KEYS[lane]+' · '+(lane+1),laneWidth*(lane+.5),21);}
+ const beat=60/score.bpm;ctx.strokeStyle=gamePaint.beat;for(let i=Math.max(0,Math.floor(t/beat)-1);i<t/beat+5;i++){const y=line-(i*beat-t)/score.travel*plot;if(y<27||y>line)continue;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+ const notes=score.notes;for(let i=0;i<notes.length;i++){const n=notes[i];if(run?.judged[i])continue;const y=line-(n.at-t)/score.travel*plot;if(y<26||y>line+30)continue;let gap=Infinity;for(let j=i+1;j<notes.length;j++)if(notes[j].lane===n.lane){gap=(notes[j].at-n.at)/score.travel*plot;break;}const tileHeight=Math.min(58,Math.max(18,gap-6)),x=n.lane*laneWidth+8,tileWidth=laneWidth-16;ctx.fillStyle=gamePalette[n.lane];roundRect(x,y-tileHeight,tileWidth,tileHeight,5);ctx.fillStyle=gamePaint['note-ink'];ctx.font='700 '+(tileHeight<27?11:14)+'px Consolas,monospace';ctx.textAlign='center';ctx.fillText(KEYS[n.lane]+' · '+C.noteInfo(n.midi).label,x+tileWidth/2,y-tileHeight/2+4);}
 }
+window.addEventListener('studiodisplaychange',refreshGameDisplay);
+window.addEventListener('studiodisplayopen',()=>{if(inGame&&phase==='running')pause('Permainan dijeda untuk tetapan paparan. Tekan Sambung selepas selesai.');});
+refreshGameDisplay();
 for(const p of C.PRESETS){const o=document.createElement('option');o.value=String(p.id);o.textContent=p.title;$('gameSong').append(o);}$('gameSong').value='2';
 try{const saved=JSON.parse(localStorage.getItem(SETTINGS)||'null');if(saved&&C.PRESETS.some(p=>p.id===saved.song)&&['long','short'].includes(saved.variant)&&Object.hasOwn(G.LEVELS,saved.level)){$('gameSong').value=String(saved.song);$('gameVariant').value=saved.variant;$('gameDifficulty').value=saved.level;}const records=JSON.parse(localStorage.getItem(BEST)||'{}');for(const [key,value]of Object.entries(records||{}).slice(0,100))if(/^\d+:(short|long):(easy|medium|hard):\d+:v1$/.test(key)&&Number.isInteger(value)&&value>=0&&value<=1000000)best[key]=value;}catch{}
 for(const id of ['gameSong','gameVariant','gameDifficulty'])$(id).addEventListener('change',()=>{if(!active())selectChart();});

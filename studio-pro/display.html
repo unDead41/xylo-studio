@@ -1,0 +1,12 @@
+<dialog id="displayDialog" class="display-dialog" aria-labelledby="displayHeading" aria-describedby="displayDescription displayGameHint">
+ <div class="dialog-head"><h2 id="displayHeading">Paparan yang selesa</h2><button type="button" id="displayClose" aria-label="Tutup tetapan paparan">Tutup</button></div>
+ <div class="dialog-body display-body">
+  <p id="displayDescription">Tema dan warna boleh dilaras berasingan. Label, corak dan bentuk membantu membezakan not dan keadaan.</p>
+  <p id="displayGameHint" class="display-hint">Permainan yang sedang berjalan dijeda apabila tetapan dibuka.</p>
+  <div class="field"><label for="displayTheme">Tema</label><select id="displayTheme"><option value="system">Ikut peranti</option><option value="light">Cerah</option><option value="dark">Gelap</option></select></div>
+  <div class="field"><label for="displayVision">Warna dan kontras</label><select id="displayVision" aria-describedby="displayVisionHint"><option value="standard">Warna asal</option><option value="protanopia">Merah–hijau · protanopia</option><option value="deuteranopia">Hijau–merah · deuteranopia</option><option value="tritanopia">Biru–kuning · tritanopia</option><option value="contrast">Kontras tinggi</option></select><p id="displayVisionHint" class="display-hint">Pilih palet yang paling mudah dibezakan oleh anda. Mod bantuan menambah corak pada bar dan tanda keadaan, selain warna.</p></div>
+  <fieldset class="display-preview"><legend>Pratonton not dan keadaan</legend><div class="display-notes" role="group" aria-label="Empat not berlabel"><span>C · 1</span><span>D · 2</span><span>E · 3</span><span>F · 4</span></div><div class="row wrap"><span class="display-state display-state-ready">✓ Sedia</span><span class="display-state display-state-record">■ Merakam</span><span class="display-state display-state-warn">! Semak</span></div></fieldset>
+  <p id="displaySaveStatus" class="display-hint" role="status" aria-live="polite" aria-atomic="true">Tetapan asal digunakan.</p>
+ </div>
+ <div class="dialog-actions"><button type="button" id="displayReset">Tetapan asal</button><button type="button" class="primary" id="displayDone">Selesai</button></div>
+</dialog>
