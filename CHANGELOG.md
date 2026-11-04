@@ -1,5 +1,20 @@
 # Changelog
 
+## Kompang integration — 2026-11-04 (version unchanged)
+
+- Enable all four instrument routes and add a playable Kompang SVG with center/edge regions and F/J controls.
+- Reuse the Tamborin percussion transport, recording, trace, patterns, editing, JSON/CSV and lifecycle owner; add distinct center/edge synthesis and independent take identity.
+- Preserve accepted main recorder fixes, v1.04.0, all 10 songs, legacy workspaces and Game.
+- Latest direct instruction authorizes integration into digital main; no share/tutorial or other worker branch update.
+
+## Unreleased — instrument-tamborin candidate, 2026-11-04
+
+- Add a playable Tamborin card/view to the current e-Instru chooser, preserving Xylophone, Rekoder Soprano and the game.
+- Add two unpitched synthetic textures, pointer/Space/G input, example patterns, metronome, recording/editing/trace and independent JSON/CSV data.
+- Expose reusable percussion model, lookahead scheduler and Studio view/transport factory for the following Kompang integration.
+- Cancel delayed activation and completed/scheduled audio on transport/view/lifecycle changes; preserve original manual timing through tempo and Reset.
+- Initial Tamborin candidate retains its original verification record; integration keeps the accepted main version.
+
 ## v1.04.0 — 2026-11-04
 
 - Rebrand active UI/docs to e-Instru Studio; keep repository, Pages URL and compatibility identifiers.

@@ -1,0 +1,23 @@
+{
+  "index.html": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236",
+  "tests/browser-kompang.cjs": "d7c2dcfcd85e30a2adb4cb13208448122f48819e5717c7b24cf42435621448cc",
+  "tests/browser-recorder.cjs": "3186ee5040b782913c7c4ba5f54f3275e4e87bfd9c779b61dc77f89d9836ef1d",
+  "tests/browser-tamborin.cjs": "0cefbef400c13dd772b9f6bfb0238aeac8a37d742e8c2ff566b2ab9304d97689",
+  "tests/core.test.cjs": "d1147a46d80d9f57462642e328e7aee539afef522e2d024400008be306a2837a",
+  "tests/digital-only.test.cjs": "c0c3a1261728afc1d54f4af938bb10173d80d9c0f83a01b3615b2ecc73568549",
+  "tests/game-ui.test.cjs": "5f31a1c161cab9803fb1675eeee1ef7a72ae3ce4f9a257fb27975cb498f6ee83",
+  "tests/game.test.cjs": "97776befa17b9cf05cb59e0a2e88d2f06d9312711829a822ffee3e7404510a7c",
+  "tests/kompang-audio-core.test.cjs": "3d9b401e6d02e9c576ee1769c5e0aea305c690dfe5328f64f5facf9a76ec7ff4",
+  "tests/kompang-integration.test.cjs": "60f2e4d32cb987a5ec47b0b870cd1c1d2c62b3f930c3b5aa2f41cb4066e65d64",
+  "tests/kompang-markup.test.cjs": "4cf5d8505ee8846ef2fcdc5a710d3de0a0995bedddd8ea040cbc8137c3cc3f69",
+  "tests/long.test.cjs": "dc460b6c81015a7d268b6988fdd60574c4a3e8d005c92c5d2b068623551c478d",
+  "tests/percussion-audio.test.cjs": "5b7d6da2750a165412a4be874ffa8b8ea3bc6444e4dbb6ecde46da449e7fc185",
+  "tests/percussion-core.test.cjs": "d1c99feb69ebbffe2d22a82bff1c7cabbc2ee8375b4cbe2e284f61de40e5a91d",
+  "tests/percussion-storage.test.cjs": "ac18cf6caf4af0763088fa73bd7d991433afd0cefdc2dcb128523ed9fcb35c38",
+  "tests/recorder.test.cjs": "6e6a76fee9cffa236d81b5aa68c2d62636e00dff14f0e0b9d38b5e99d80be820",
+  "tests/tamborin-integration.test.cjs": "14bb18da3dab1a6c015319160b585ea6cbded96740a43014d5d56164472b79f9",
+  "tests/tamborin-lifecycle.test.cjs": "453423845dfe1f75cb0219d36d3ce9ecf791a16a9317c704743d135389c30ffd",
+  "tests/tamborin-ui.test.cjs": "ab21d6ea85ca0a21df03756eb32c69148e4927dc6f2ffa32c151476d63066cc1",
+  "tests/ui.test.cjs": "c27098d91ea4681f5781e798f09c35abd41df9195caaf4783140a01bd1b75b8a",
+  "tests/helpers/studio.cjs": "113fdb78cff7b9004594cee8c1c13a075faff483c3c0f71679d50ccc65c47f71"
+}

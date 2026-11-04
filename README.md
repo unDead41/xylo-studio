@@ -6,7 +6,7 @@ Buka [laman](https://undead41.github.io/xylo-studio/) atau muat turun ZIP branch
 
 ## Instrumen
 
-Skrin pertama ialah **Pilih instrumen anda**: Xylophone atau Rekoder Soprano Baroque. Gunakan **Tukar instrumen** untuk kembali; rakaman dan suntingan setiap instrumen dikekalkan dalam ruang kerjanya sendiri. Penjenamaan aplikasi ialah **e-Instru Studio**; nama repository dan URL laman kekal.
+Skrin pertama ialah **Pilih instrumen anda**: Xylophone, Rekoder Soprano Baroque, Tamborin dan Kompang dalam susunan 2×2 pada desktop. Gunakan **Tukar instrumen** untuk kembali; rakaman dan suntingan setiap instrumen dikekalkan dalam ruang kerjanya sendiri. Penjenamaan aplikasi ialah **e-Instru Studio**; nama repository dan URL laman kekal.
 
 Rekoder mempunyai lapan pad C–C′ (bunyi sebenar C5–C6, MIDI 72–84). Tahan tetikus/sentuhan atau A S D F G H J K untuk memanjangkan nada; lepaskan untuk berhenti. Panduan penjarian SVG menunjukkan lubang belakang T, hadapan 1–7 dan keadaan buka/tutup melalui bentuk serta label. Lihat [pemetaan dan sumber pengeluar](docs/RECORDER.md). Not tambahan katalog dipaparkan; pitch di luar julat soprano menyekat playback dengan amaran, tanpa mengubah score. Mikrofon sedia ada hanya untuk xylophone.
 
@@ -29,3 +29,13 @@ Semua bunyi ialah sintesis digital. Mikrofon dianalisis secara tempatan; raw aud
 Pasang Node.js 20+ kemudian jalankan `node --test tests/*.test.cjs`. Source utama ialah index.html; tiada dist atau checkout luar diperlukan. Host tests menggunakan boundary DOM/audio simulasi. Bukti keluaran dan semakan gabungan dalam [audit main](docs/audits/main/LATEST.md); sejarah implementasi dalam [handoff ui](docs/handoffs/ui/LATEST.md). Ujian pelayar tambahan: `node tests/browser-recorder.cjs` dengan Playwright/Chromium tersedia.
 
 Branch dan nama chat: docs/BRANCH_POLICY.md. SOR: docs/SOR.md. Tutorial/share hanya diperbaharui apabila diminta. GitHub Pages menggunakan main, folder root.
+
+## Studio perkusi — Tamborin dan Kompang
+
+Kedua-dua studio perkusi boleh dimainkan dengan tetikus, sentuhan dan papan kekunci. Tamborin: ketuk permukaan SVG atau tekan Ruang; G untuk goncang. Kompang: ketuk kawasan Tengah atau gelang Tepi pada permukaan SVG; F untuk tengah, J untuk tepi. Tab memfokuskan setiap kawasan/kawalan; Enter atau Ruang memainkannya. Tengah menghasilkan bunyi rendah dan berisi; tepi lebih tajam dan pendek. Bunyi ialah sintesis digital, bukan rakaman alat sebenar atau tuntutan kesetiaan akustik.
+
+Pilih satu daripada empat corak rentak, tempo 40–200 BPM dan metronom. Main contoh tidak mengisi rakaman. Tekan Rakam, main rentak dan Henti; ketukan pertama menjadi masa sifar. Main rakaman, jejak rentak, suntingan tindakan/masa serta eksport/import JSON dan eksport CSV tersedia. Data perkusi menggunakan schema dan kunci simpanan berasingan; rakaman xylophone/rekoder lama kekal serasi.
+
+Tempo dikunci semasa rakaman. Perubahan tempo retime masa main sahaja dan menghentikan playback; masa input asal tidak berubah. Reset menghentikan sesi dan memulihkan tempo tangkapan tanpa membuang tindakan atau suntingan. Jika retime ke tempo asal akan melebihi had 180 saat, Reset memulihkan BPM sambil mengekalkan masa suntingan yang sah dan memaklumkannya pada status.
+
+Kompang menggunakan model, pengawal rakaman, jejak dan penjadual Tamborin yang sama dengan konfigurasi tindakan serta sintesisnya sendiri. Data kedua-duanya disimpan berasingan; bertukar instrumen menghentikan bunyi/penjadual tanpa membuang rakaman. Bukti gabungan dan screenshot desktop/telefon: [handoff Kompang](docs/handoffs/instrument-kompang/LATEST.md). Ujian pelayar tambahan: `node tests/browser-kompang.cjs` dan `node tests/browser-tamborin.cjs` (Playwright/Chromium untuk ujian sahaja). Nombor keluaran diterima kekal v1.04.0; tiada kebergantungan runtime ditambah.

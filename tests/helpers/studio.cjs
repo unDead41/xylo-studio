@@ -3,18 +3,18 @@ const html=fs.readFileSync('index.html','utf8');
 
 // Execute the actual inline UI with a small DOM/audio test double. No real
 // microphone, speaker or browser timing is measured by these host tests.
-function studio({variant='short',legacy=null,game=false,storage={},chooser=false}={}){
- const elements=[],ids=new Map(),downloads=[],oscillators=[],copies=[],saved=new Map(),contexts=[],intervals=new Map();const frames=new Map();let timerId=0,now=1000;for(const [k,v]of Object.entries(storage))saved.set(k,v);
+function studio({variant='short',legacy=null,game=false,percussion=false,storage={},chooser=false,storageError=false,audioState='running',deferResume=false}={}){
+ const elements=[],ids=new Map(),downloads=[],blobs=[],oscillators=[],copies=[],saved=new Map(),contexts=[],intervals=new Map();const frames=new Map();let timerId=0,clockMs=1000;const audioResumes=[];if(percussion)game=true;for(const [k,v]of Object.entries(storage))saved.set(k,v);
  if(legacy)saved.set('xylo-studio-v1',JSON.stringify({take:legacy,lastCustom:legacy,version:1}));
  class Element{
-  constructor(tag='div'){this.tagName=tag.toUpperCase();this.children=[];this.listeners={};this.attrs={};this.dataset={};this._text='';this.value='';this.open=false;this.disabled=false;this.hidden=false;this.className='';this.scrollTop=0;this.scrollLeft=0;this.clientWidth=780;this.style={setProperty(){}};elements.push(this);const el=this;this.classList={add(c){const s=new Set(el.className.split(' ').filter(Boolean));s.add(c);el.className=[...s].join(' ');},remove(c){el.className=el.className.split(' ').filter(x=>x!==c).join(' ');},toggle(c,on){if(on===undefined)on=!el.className.split(' ').includes(c);this[on?'add':'remove'](c);}};}
+  constructor(tag='div'){this.tagName=tag.toUpperCase();this.children=[];this.listeners={};this.attrs={};this.dataset={};this._text='';this.value='';this.open=false;this.disabled=false;this.checked=false;this.hidden=false;this.className='';this.scrollTop=0;this.scrollLeft=0;this.clientWidth=780;this.style={setProperty(){}};elements.push(this);const el=this;this.classList={add(c){const s=new Set(el.className.split(' ').filter(Boolean));s.add(c);el.className=[...s].join(' ');},remove(c){el.className=el.className.split(' ').filter(x=>x!==c).join(' ');},toggle(c,on){if(on===undefined)on=!el.className.split(' ').includes(c);this[on?'add':'remove'](c);}};}
   set textContent(v){this._text=String(v);this.children=[];}get textContent(){return this._text+this.children.map(c=>c.textContent||'').join('');}
   append(...nodes){for(const n of nodes){this.children.push(n);n.parent=this;}}
   replaceChildren(...nodes){this._text='';this.children=[];this.append(...nodes);}
   setAttribute(k,v){this.attrs[k]=String(v);if(k==='class')this.className=String(v);if(k==='id'){this.id=String(v);ids.set(this.id,this);}if(k.startsWith('data-'))this.dataset[k.slice(5)]=String(v);}
   getAttribute(k){return this.attrs[k]??null;}removeAttribute(k){delete this.attrs[k];}
   addEventListener(k,fn){(this.listeners[k]??=[]).push(fn);}
-  async fire(k,extra={}){const e={target:this,preventDefault(){},button:0,detail:1,...extra};for(const fn of this.listeners[k]||[])await fn(e);}
+  async fire(k,extra={}){const e={target:this,defaultPrevented:false,preventDefault(){this.defaultPrevented=true;},button:0,detail:1,...extra};for(const fn of this.listeners[k]||[])await fn(e);return e;}
   click(){if(this.tagName==='A'){downloads.push({filename:this.download,url:this.href});return;}return this.fire('click');}
   showModal(){this.open=true;}close(){this.open=false;for(const fn of this.listeners.close||[])fn({target:this});}
   get parentElement(){return this.parent||null;}
@@ -31,20 +31,24 @@ function studio({variant='short',legacy=null,game=false,storage={},chooser=false
  if(game){for(const [i,key]of ['A','S','D','F'].entries()){const b=new Element('button');b.dataset.lane=String(i);ids.get('gamePads').append(b);}for(const value of ['easy','medium','hard']){const o=new Element('option');o.value=value;ids.get('gameDifficulty').append(o);}ids.get('gameVariant').value='short';ids.get('gameDifficulty').value='medium';}
  const documentListeners={};
  const document={hidden:false,getElementById:id=>ids.get(id)||null,createElement:t=>new Element(t),createElementNS:(_,t)=>new Element(t),createTextNode:text=>{const el=new Element('#text');el.textContent=text;return el;},querySelector:s=>s==='dialog[open]'?elements.find(e=>e.tagName==='DIALOG'&&e.open)||null:null,querySelectorAll:s=>elements.filter(e=>matches(e,s)),addEventListener(k,fn){(documentListeners[k]??=[]).push(fn);}};
- const parameter=()=>({value:0,setValueAtTime(){},exponentialRampToValueAtTime(){}});
+ const parameter=()=>({value:0,setValueAtTime(){},exponentialRampToValueAtTime(){},linearRampToValueAtTime(){}});
  class AudioContext{
-  constructor(){this.state='running';this.currentTime=1;this.destination={};contexts.push(this);}
-  resume(){this.state='running';return Promise.resolve();}
+  constructor(){this.state=audioState;this.currentTime=1;this.destination={};contexts.push(this);}
+  resume(){if(deferResume)return new Promise(resolve=>audioResumes.push(()=>{this.state='running';resolve();}));this.state='running';return Promise.resolve();}
   addEventListener(){}
+  createBuffer(channels,length,rate){return{getChannelData:()=>new Float32Array(length),duration:length/rate};}
+  createBufferSource(){const s={connect(){},disconnect(){},start(at){this.started=at;},stop(){this.stopped=true;}};oscillators.push(s);return s;}
+  createBiquadFilter(){return{frequency:parameter(),Q:parameter(),connect(){},disconnect(){}};}
+  get sampleRate(){return 48000;}
   createGain(){return{gain:parameter(),connect(){},disconnect(){}};}
   createOscillator(){const context=this,o={frequency:parameter(),connect(){},disconnect(){},start(at){this.started=at;},stop(at){this.stopCalled=true;this.stopped=at;if(at===undefined&&this.started>context.currentTime+.000001)this.cancelled=true;}};oscillators.push(o);return o;}
  }
  const windowListeners={};const window={AudioContext,crypto:{randomUUID:()=> 'ui-test'},addEventListener(k,fn){(windowListeners[k]??=[]).push(fn);}};
- const box={window,document,navigator:{clipboard:{writeText:async text=>copies.push(text)}},localStorage:{getItem:k=>saved.get(k)||null,setItem:(k,v)=>saved.set(k,v)},performance:{now:()=>now},Blob,URL:{createObjectURL:()=> 'blob:test',revokeObjectURL(){}},setTimeout:()=>1,clearTimeout(){},setInterval:fn=>{const id=++timerId;intervals.set(id,fn);return id;},clearInterval:id=>intervals.delete(id),requestAnimationFrame:fn=>{const id=++timerId;frames.set(id,fn);return id;},cancelAnimationFrame:id=>frames.delete(id),console};
- vm.createContext(box);for(const id of (game?['xylo-core','xylo-game-core','xylo-ui','xylo-game-ui']:['xylo-core','xylo-ui']))vm.runInContext(html.match(new RegExp('<script id="'+id+'">([\\s\\S]*?)<\\/script>'))[1],box);
- if(!chooser){for(const fn of ids.get('chooseXylophone').listeners.click||[])fn({target:ids.get('chooseXylophone')});}
+ const box={window,document,navigator:{clipboard:{writeText:async text=>copies.push(text)}},localStorage:{getItem:k=>{if(storageError)throw Error('Storage unavailable');return saved.get(k)||null;},setItem:(k,v)=>{if(storageError)throw Error('Storage unavailable');return saved.set(k,v);}},performance:{now:()=>clockMs},Blob,URL:{createObjectURL:blob=>{blobs.push(blob);return 'blob:test';},revokeObjectURL(){}},setTimeout:()=>1,clearTimeout(){},setInterval:fn=>{const id=++timerId;intervals.set(id,fn);return id;},clearInterval:id=>intervals.delete(id),requestAnimationFrame:fn=>{const id=++timerId;frames.set(id,fn);return id;},cancelAnimationFrame:id=>frames.delete(id),console};
+ vm.createContext(box);for(const id of (percussion?['xylo-core','xylo-game-core','xylo-ui','xylo-game-ui','percussion-core','percussion-audio','percussion-ui','tamborin-ui','kompang-ui','instrument-navigation']:game?['xylo-core','xylo-game-core','xylo-ui','xylo-game-ui']:['xylo-core','xylo-ui']))vm.runInContext(html.match(new RegExp('<script id="'+id+'">([\\s\\S]*?)<\\/script>'))[1],box);
+ if(!chooser&&!percussion){for(const fn of ids.get('chooseXylophone').listeners.click||[])fn({target:ids.get('chooseXylophone')});}
  if(variant){ids.get('scoreVariant').value=variant;for(const fn of ids.get('scoreVariant').listeners.change||[])fn({target:ids.get('scoreVariant')});}
- return{setNow:value=>now=value,async dispatchWindow(k,extra={}){for(const fn of windowListeners[k]||[])await fn(extra);},ids,downloads,oscillators,copies,saved,document,contexts,C:window.XyloCore,G:window.XyloGameCore,async dispatch(k,extra={}){const e={target:new Element('div'),preventDefault(){},...extra};for(const fn of documentListeners[k]||[])await fn(e);},advance(ms){for(let elapsed=0;elapsed<ms;elapsed+=25){for(const a of contexts)a.currentTime+=.025;for(const fn of [...intervals.values()])fn();for(const [id,fn]of [...frames]){frames.delete(id);fn();}}},async settle(){for(let i=0;i<5;i++)await Promise.resolve();}};
+ return{setNow:value=>clockMs=value,async dispatchWindow(k,extra={}){for(const fn of windowListeners[k]||[])await fn(extra);},ids,downloads,blobs,oscillators,copies,saved,document,contexts,C:window.XyloCore,G:window.XyloGameCore,P:window.PercussionCore,window,resumeAudio(){for(const resume of audioResumes.splice(0))resume();},activeIntervals:()=>intervals.size,async windowEvent(k,extra={}){for(const fn of windowListeners[k]||[])await fn(extra);},async dispatch(k,extra={}){const e={target:new Element('div'),defaultPrevented:false,preventDefault(){this.defaultPrevented=true;},...extra};for(const fn of documentListeners[k]||[])await fn(e);return e;},advance(ms){for(let elapsed=0;elapsed<ms;elapsed+=25){clockMs+=25;for(const a of contexts)a.currentTime+=.025;for(const fn of [...intervals.values()])fn();for(const [id,fn]of [...frames]){frames.delete(id);fn();}}},async settle(){for(let i=0;i<5;i++)await Promise.resolve();}};
 }
 
 

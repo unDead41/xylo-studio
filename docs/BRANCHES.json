@@ -9,7 +9,9 @@
     "tutorial": "Panduan setup dan bermain; kemas kini hanya apabila diminta.",
     "music": "Katalog lagu, pitch, tick, tempo dan eksport JSON/CSV.",
     "gameplay": "Peraturan permainan, kesukaran, skor, kombo, nyawa dan penilaian.",
-    "ui": "Susun atur, akses papan kekunci, sentuhan dan paparan responsif."
+    "ui": "Susun atur, akses papan kekunci, sentuhan dan paparan responsif.",
+    "instrument-tamborin": "Studio Tamborin dan komponen perkusi bersama; snapshot worker.",
+    "instrument-kompang": "Studio Kompang daripada instrument-tamborin; integrasi main dibenarkan untuk tugasan 4 November 2026."
   },
   "manual_update": [
     "share",

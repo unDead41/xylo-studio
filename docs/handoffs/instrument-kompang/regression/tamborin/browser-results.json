@@ -1,0 +1,19 @@
+{
+  "source_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236",
+  "browser": "133.0.6943.0",
+  "checks": [
+    "actual chooser, playable Tamborin, empty take and gesture-only audio",
+    "both synthesis textures generate a signal and finish without capture",
+    "mouse and keyboard capture with held-key dedup and metronome exclusion",
+    "editing, tempo and Reset preserve original input evidence",
+    "recording replay, example and Stop preserve take and cancel signal",
+    "JSON and CSV downloads",
+    "recorder workspaces and Tamborin-game roundtrip",
+    "390px touch input, no horizontal overflow and reduced motion"
+  ],
+  "passed": 8,
+  "pageErrors": [],
+  "tapRms": 0.025990651395862634,
+  "shakeRms": 0.014728277826618452,
+  "limits": "Headless digital signal and emulated touch only. Human speaker listening, real phone latency and other browser engines not verified."
+}

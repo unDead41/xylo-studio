@@ -45,7 +45,7 @@ Use the existing display face for instrument names and note letters, body face f
 
 ## Layout
 
-Chooser: two equal instrument cards on desktop, stacked on phones. Studio: retain the existing main instrument/inspector grid, with the playable instrument before the song catalog; the inspector flows below on narrow screens. Document scrolling owns the page. Jejak melodi and Data ketukan keep their own horizontal/internal scroll bounds.
+Chooser: four instrument cards in two columns and two rows on desktop, stacked on phones. Studio: retain the existing main instrument/inspector grid, with the playable instrument before the song catalog; the inspector flows below on narrow screens. Document scrolling owns the page. Jejak melodi and Data ketukan keep their own horizontal/internal scroll bounds.
 
 ## Elevation & Depth
 
@@ -72,3 +72,11 @@ Retain existing rounded controls and panels. Instrument choices use 24px corners
 Keep the recorder visually recognizable and playable, with an accurate separate thumb hole and data-driven fingering. Put sounding MIDI/octave information beside simplified C–C′ labels. Never silently change score pitch to make it fit. Keep game rules and game audio xylophone-based. Reuse the controller/scheduler/export and existing dialogs/status owners for future instruments.
 
 Reconcile drift: original docs described the xylophone-only entry; the approved multi-instrument entry extends that identity. Palette, fonts and xylophone physical design match the existing runtime; no global token was changed.
+
+## Tamborin extension
+
+The Tamborin view uses the same palette, typography, focus rules and white panel geometry. Its inline SVG shows a wooden shell, pale membrane and eight clearly paired metal jingles; brief press/shake feedback has a reduced-motion equivalent. Large Ketuk/Goncang buttons and the instrument precede the transport and settings. The responsive grid places the recording inspector below the instrument on narrow displays. The original ui chooser, recorder object/pads and pitched workspace remain the canonical owners; Tamborin adds a card and an independent unpitched view.
+
+## Kompang extension
+
+Reuse the Tamborin header, control panels, transport, trace and recording inspector. A wooden inline SVG shell, pale textured membrane and stitched rim provide depth without metal jingles. The center ellipse and edge annulus are disjoint focusable hit shapes, with subtle tone/line labels and localized teal/lilac feedback. F/J action buttons remain large; reduced motion retains outlines and text while removing movement. All four chooser cards use the existing card geometry and Buka studio action, with Cadangan baharu badges on the two unpitched instruments.

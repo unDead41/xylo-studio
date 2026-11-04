@@ -7,20 +7,27 @@
     "branch": "main",
     "directory": "/"
   },
-  "index_sha256": "45b1ddb7677e75923680f0cc11095c6c7e588651ae068496b85d129fcd7e2e89",
+  "index_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
-    "passed": 79,
+    "passed": 154,
     "failed": 0
   },
-  "source_base": "46338fe646408c758232eec9ba7b5f876ff1f9e4",
+  "source_base": "38eb0dc1136d2ce6756380633d4a09fe7a247113",
   "browser_tests": {
-    "command": "node tests/browser-recorder.cjs",
+    "commands": [
+      "node tests/browser-kompang.cjs",
+      "node tests/browser-recorder.cjs",
+      "node tests/browser-tamborin.cjs"
+    ],
     "chromium": "133.0.6943.0",
-    "passed": 17,
+    "passed": 38,
     "failed": 0,
-    "scope": "headless Web Audio signal and phone emulation; no acoustic/speaker verification"
+    "evidence": "docs/handoffs/instrument-kompang/browser-verification.json",
+    "scope": "headless Web Audio signals, OfflineAudioContext synthesis comparison and phone emulation; no speaker listening or physical acoustic verification"
   },
   "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
-  "release_audit": "docs/audits/main/LATEST.md"
+  "integrated_tamborin_sha": "7cf77b7e275b94717748cb80aed73f6680daa59e",
+  "previous_release_audit": "docs/audits/main/LATEST.md",
+  "integration_handoff": "docs/handoffs/instrument-kompang/LATEST.md"
 }

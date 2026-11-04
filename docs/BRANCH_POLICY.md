@@ -12,6 +12,8 @@ Keputusan Ijamm pada 2 November 2026. Nama branch tepat ialah nama dalam jadual.
 | `music` | e-instru studio - music | Katalog lagu, pitch, tick, tempo dan eksport JSON/CSV. |
 | `gameplay` | e-instru studio - gameplay | Peraturan permainan, kesukaran, skor, kombo, nyawa dan penilaian. |
 | `ui` | e-instru studio - ui | Susun atur, akses papan kekunci, sentuhan dan paparan responsif. |
+| `instrument-kompang` | e-instru studio - instrument-kompang | Studio Kompang menggunakan asas Tamborin sebenar; permintaan terkini 4 November 2026 membenarkan integrasi hasil diuji ke main repositori digital ini. |
+| `instrument-tamborin` | e-instru studio - instrument-tamborin | Branch tambahan dibenarkan Ijamm pada 4 November 2026; Studio Tamborin dan asas perkusi. Asas ui terkini, push branch ini sahaja. |
 
 `main` bukan chat pekerja. Setiap chat semak branch/ref, working tree, SHA asas, SOR dan handoff sebelum bekerja. Gunakan folder sendiri. Jangan menukar checkout chat lain.
 
@@ -22,3 +24,5 @@ Audit mengesan perubahan yang belum diterima, menyemak keserasian kod/API, menja
 Versi projek dalam `VERSION` menggunakan `vX.XX.X`, diselaraskan dengan changelog dan metadata keluaran. Nombor versi hanya dinaikkan bagi keluaran yang diterima, bukan setiap commit audit. Laporan ujian menyatakan SHA atau hash sumber yang diuji.
 
 Semua branch lama dalam migrasi dipelihara sebagai parent sejarah main sebelum nama lamanya dihentikan. Fail sejarah ialah bukti lama, bukan keputusan semasa.
+
+Pengecualian tugasan Kompang (4 November 2026): arahan langsung terkini Ijamm membenarkan push hasil gabungan yang diuji ke `main` dalam `unDead41/xylo-studio`. Tiada branch `main-digitalized` dalam repositori ini. Branch ui, instrument-tamborin, share dan tutorial tidak ditulis oleh tugasan ini. Tiada perubahan tetapan Pages diperlukan.

@@ -1,0 +1,32 @@
+{
+  "source_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236",
+  "browser": "133.0.6943.0",
+  "passed": 13,
+  "checks": [
+    "four enabled cards form two desktop rows, preserve badges and defer audio until input",
+    "Kompang opens empty with genuine SVG zones and shared recording controls",
+    "actual disjoint center/edge SVG hit regions capture once each with raw timing",
+    "F/J, focused Space/Enter, held-key dedup and editable-field isolation",
+    "edited action/onset and raw evidence survive tempo and Reset",
+    "both trace types, replay, all four patterns and metronome exclude synthetic input",
+    "real OfflineAudioContext confirms different spectral activity and decay for center/edge",
+    "actual JSON/CSV downloads retain Kompang identity, actions and original evidence",
+    "all four routes preserve independent workspaces, 10 songs and game roundtrip; leaving cancels audio/scheduler",
+    "Kompang reload restores only its own saved workspace",
+    "foreign saved identity cannot crash startup or overwrite stored evidence",
+    "390px emulated touch zones, no overflow and reduced motion",
+    "320px narrow viewport retains readable controls without horizontal overflow"
+  ],
+  "pageErrors": [],
+  "signatures": {
+    "center": {
+      "crossings": 9,
+      "tailRms": 0.0008879698328841988
+    },
+    "edge": {
+      "crossings": 84,
+      "tailRms": 0
+    }
+  },
+  "limits": "Headless Chromium signal rendering and emulated touch only. No human speaker listening, acoustic fidelity, real mobile latency, Safari/Firefox or screen reader evaluation."
+}

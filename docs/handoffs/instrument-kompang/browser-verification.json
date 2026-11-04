@@ -1,0 +1,23 @@
+{
+  "source_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236",
+  "browser": "Chromium 133.0.6943.0",
+  "passed": 38,
+  "reports": {
+    "kompang": {
+      "passed": 13,
+      "path": "docs/handoffs/instrument-kompang/screenshots/browser-results.json",
+      "source_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236"
+    },
+    "recorder": {
+      "passed": 17,
+      "path": "docs/handoffs/instrument-kompang/regression/recorder/browser-results.json",
+      "source_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236"
+    },
+    "tamborin": {
+      "passed": 8,
+      "path": "docs/handoffs/instrument-kompang/regression/tamborin/browser-results.json",
+      "source_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236"
+    }
+  },
+  "limits": "Headless Web Audio signals/offline rendering and emulated touch only; no human speaker listening or physical device/latency verification."
+}

@@ -1,0 +1,11 @@
+{
+  "duplicate_ids": [],
+  "unresolved_label_aria_refs": [],
+  "nested_buttons": 0,
+  "external_scripts": [],
+  "unchanged_from_main": {
+    "xylo-core": true,
+    "xylo-game-core": true
+  },
+  "source_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236"
+}
