@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Studio responsive verification</title>
+<style>body{margin:0;padding:12px;background:#e5ebf0;color:#172f41;font:14px system-ui}header{display:flex;align-items:center;gap:12px;margin-bottom:10px}select{font:inherit;padding:8px}iframe{display:block;border:1px solid #667788;background:white;max-width:none;height:900px}main{overflow:auto;max-width:100%}</style>
+<header><strong>Studio viewport</strong><label for="size">Width</label><select id="size"><option value="320">320 px</option><option value="390">390 px</option><option value="850">850 px</option><option value="1440">1440 px</option></select><span>Verify app overflow, tabs, dialogs and the grid inside the frame.</span></header>
+<main><iframe id="studioFrame" src="../index.html" title="Studio at selected viewport" width="320"></iframe></main>
+<script>document.getElementById('size').addEventListener('change',event=>{document.getElementById('studioFrame').width=event.target.value;});</script>
+</html>

@@ -46,3 +46,27 @@ Pitched controls name the current source (Main lagu or Main rakaman), and their 
 Every percussion studio exposes the same live session states: free play, waiting for first recorded input, recording, pending audio, example, replay and metronome. Practice-trace events and saved-take events are labelled separately. Starting a new free-play trace never mutates the saved take/raw capture; replay restores the saved trace. Instructions remain stable while the badge displays recording elapsed time.
 
 Game exposes the current challenge and idle/pending/countdown/running/paused/finished phase. Its overlay offers the relevant Start/Resume/Replay action. A paused game resumes with its established preparation beats; a completed game offers replay or change challenge. These are UI variants over the existing game owner: timing thresholds, scoring, life and song arrangements remain unchanged. Local best is labelled as local, not a shared leaderboard.
+
+## Studio Pro
+
+Pro is an additive workspace; the instrument chooser remains first on page load. Entry suspends legacy instruments/Game and cancels their audio. Pro exit flushes pending local saves and stops every scheduled voice/effect. Returning to Studio always restores a visible pitched or last-percussion workspace with matching focus, title and navigation state. Legacy take getters return validated copies; bringing a take into Pro never edits its source workspace. Rejected imports are visible in Pro.
+
+The project schema is `e-instru-project/v1`: 24 ticks/beat, 4/4, 40–200 BPM, 4–32 bars, eight tracks and 512 events per track. Pitched notes and named unpitched actions retain their distinction. Importing the first track adopts its source BPM; later tracks follow project tempo. Full source takes, including raw timing evidence, stay separate and immutable. Unsupported/unknown pitches and duration/range overflows produce a text error with no silent truncation.
+
+Susunan/Mixer/Projek are keyboard-operable tabs that preserve current edits and selection. The one-bar grid has arrow-key movement, explicit note/action labels, an exact event inspector, Delete and non-drag actions. Mixer sliders retain their focused DOM nodes; one gesture coalesces into one undo step. The output meter reports actual project signal and never animates fabricated data. Newly audible sustained recorder notes resume after mute/solo changes.
+
+Saved projects are local, capped at 20, with explicit quota/unavailable/corrupt/conflict states; no project is silently evicted. JSON is the project round-trip format and CSV exports the complete arrangement. Saved-project replacement first preserves pending edits; destructive deletion uses the shared app-owned native confirmation dialog. On persistence failure, keep work in memory and make JSON export available. A title field commits on change rather than replacing a focused draft.
+
+Display settings are a global native dialog opened by Paparan. Theme (system/light/dark) and color-vision mode (standard/protanopia/deuteranopia/tritanopia/contrast) are independent, validated and persisted. A color mode changes palettes, adds patterns and reinforces state outlines while retaining labels and geometry. OS high-contrast and reduced-motion behavior remain operable. A storage failure still applies preferences for the current session and shows a persistent explanation.
+
+| Capability | Canonical owner | Source of truth | Allowed variants | Verification |
+| --- | --- | --- | --- | --- |
+| Pro model/history | ProStudioCore | studio-pro/core.js | pitched vs action tracks | tests/pro-core.test.cjs |
+| Pro transport/mixer audio | ProStudioAudio | studio-pro/audio.js | loop, metronome, sustained recorder | tests/pro-audio.test.cjs |
+| Pro project lifecycle | ProStudioProjects and ProStudioApp | projects.js / shell.js | explicit save, autosave, local conflict | tests/pro-projects.test.cjs; tests/pro-shell.test.cjs |
+| Global display preferences | StudioDisplay | display.js / display.css | independent theme and vision | tests/display.test.cjs; tests/pro-embed.test.cjs |
+| Legacy Pro route adapter | instrument-navigation | inline index.html | all eight take getters | tests/pro-navigation.test.cjs |
+
+The generic static scanner does not model this project's native addEventListener bindings or global textarea resize rule; record findings and verify these controls through actual module/inline tests and browser interaction instead of adding dummy onclick attributes.
+
+The header's native BM/BI selector is available on the initial chooser and every view. BM is the default; a valid saved preference restores English. Switching language updates known visible text, document metadata, SVG guidance, live feedback, dialogs, validation and accessible attributes in place. It never navigates, rebuilds controllers, rewrites input/textarea values or saves a recording. Original nodes, listeners, selections and edited fields remain in place. New recording titles use the current language when created; existing titles, imported custom arrangement/section text, raw evidence, machine identifiers and JSON/CSV remain literal. Storage failure still permits an in-memory language selection.

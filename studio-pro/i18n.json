@@ -1,0 +1,1870 @@
+{
+  "entries": [
+    [
+      "Studio Pro",
+      "Studio Pro"
+    ],
+    [
+      "Paparan",
+      "Display"
+    ],
+    [
+      "Buka Studio Pro",
+      "Open Studio Pro"
+    ],
+    [
+      "Tambah ke Studio Pro",
+      "Add to Studio Pro"
+    ],
+    [
+      "Gabungkan rakaman, susun rentak dan laras bunyi setiap trek.",
+      "Combine recordings, arrange rhythms and adjust each track's sound."
+    ],
+    [
+      "Ruang susunan",
+      "Arrangement workspace"
+    ],
+    [
+      "Satukan instrumen, susun corak dan dengar semuanya bersama.",
+      "Combine instruments, arrange patterns and hear them together."
+    ],
+    [
+      "← Pilih instrumen",
+      "← Choose an instrument"
+    ],
+    [
+      "Nama projek",
+      "Project name"
+    ],
+    [
+      "Belum disimpan.",
+      "Not saved yet."
+    ],
+    [
+      "Main semula projek",
+      "Project playback"
+    ],
+    [
+      "▶ Main",
+      "▶ Play"
+    ],
+    [
+      "▶ Sambung",
+      "▶ Resume"
+    ],
+    [
+      "Ⅱ Jeda",
+      "Ⅱ Pause"
+    ],
+    [
+      "■ Henti",
+      "■ Stop"
+    ],
+    [
+      "Metrum empat per empat",
+      "Four-four time signature"
+    ],
+    [
+      "Metrum",
+      "Time signature"
+    ],
+    [
+      "Metronom",
+      "Metronome"
+    ],
+    [
+      "Sedia",
+      "Ready"
+    ],
+    [
+      "Sejarah suntingan",
+      "Edit history"
+    ],
+    [
+      "↶ Undur",
+      "↶ Undo"
+    ],
+    [
+      "↷ Ulang",
+      "↷ Redo"
+    ],
+    [
+      "Panjang & ulangan",
+      "Length & loop"
+    ],
+    [
+      "Panjang, ulangan dan kursor",
+      "Length, loop and cursor"
+    ],
+    [
+      "Panjang bar",
+      "Length in bars"
+    ],
+    [
+      "Ulang bahagian",
+      "Loop section"
+    ],
+    [
+      "Mula bar",
+      "Start bar"
+    ],
+    [
+      "Akhir bar",
+      "End bar"
+    ],
+    [
+      "Kursor",
+      "Cursor"
+    ],
+    [
+      "Ulangan dimatikan",
+      "Loop off"
+    ],
+    [
+      "Tambah trek untuk mula menyusun.",
+      "Add a track to start arranging."
+    ],
+    [
+      "Paparan Studio Pro",
+      "Studio Pro views"
+    ],
+    [
+      "Susunan",
+      "Arrangement"
+    ],
+    [
+      "Mixer",
+      "Mixer"
+    ],
+    [
+      "Projek",
+      "Projects"
+    ],
+    [
+      "Susunan trek",
+      "Track arrangement"
+    ],
+    [
+      "Satu projek, sehingga 8 instrumen.",
+      "One project, up to 8 instruments."
+    ],
+    [
+      "Instrumen untuk trek baharu",
+      "Instrument for a new track"
+    ],
+    [
+      "Xylophone",
+      "Xylophone"
+    ],
+    [
+      "Rekoder Soprano",
+      "Soprano Recorder"
+    ],
+    [
+      "Rekoder soprano",
+      "Soprano Recorder"
+    ],
+    [
+      "Tamborin",
+      "Tambourine"
+    ],
+    [
+      "Kompang",
+      "Kompang"
+    ],
+    [
+      "Dram Sisi",
+      "Snare Drum"
+    ],
+    [
+      "Dram Bes",
+      "Bass Drum"
+    ],
+    [
+      "Simbal",
+      "Cymbals"
+    ],
+    [
+      "Segi Tiga",
+      "Triangle"
+    ],
+    [
+      "＋ Tambah trek",
+      "＋ Add track"
+    ],
+    [
+      "Tambah trek",
+      "Add track"
+    ],
+    [
+      "Mulakan dengan satu instrumen",
+      "Start with one instrument"
+    ],
+    [
+      "Pilih instrumen dan tekan",
+      "Choose an instrument and press"
+    ],
+    [
+      ". Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.",
+      ". Then add steps in Arrangement. Recordings from instrument studios can also be added here."
+    ],
+    [
+      "Pilih instrumen dan tekan Tambah trek. Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.",
+      "Choose an instrument and press Add track. Then add steps in Arrangement. Recordings from instrument studios can also be added here."
+    ],
+    [
+      "Pintasan dan cara guna",
+      "Shortcuts and instructions"
+    ],
+    [
+      "Ruang",
+      "Space"
+    ],
+    [
+      "main atau jeda ·",
+      "play or pause ·"
+    ],
+    [
+      "undur · tambah",
+      "undo · add"
+    ],
+    [
+      "untuk ulang. Pintasan tidak mengambil alih medan suntingan atau dialog.",
+      "to redo. Shortcuts do not override editing fields or dialogs."
+    ],
+    [
+      "Gunakan anak panah pada tab untuk bertukar paparan. Kursor menggunakan bar:beat:tick; 24 tick bersamaan satu beat. Semua bunyi ialah sintesis digital. Simpan sandaran projek sebagai JSON melalui tab Projek.",
+      "Use the arrow keys on the tabs to switch views. The cursor uses bar:beat:tick; 24 ticks equal one beat. All sounds are digitally synthesized. Back up your project as JSON in the Projects tab."
+    ],
+    [
+      "Sahkan perubahan",
+      "Confirm change"
+    ],
+    [
+      "Batal",
+      "Cancel"
+    ],
+    [
+      "Teruskan",
+      "Continue"
+    ],
+    [
+      "Paparan yang selesa",
+      "Comfortable display"
+    ],
+    [
+      "Tutup tetapan paparan",
+      "Close display settings"
+    ],
+    [
+      "Tutup",
+      "Close"
+    ],
+    [
+      "Tema dan warna boleh dilaras berasingan. Label, corak dan bentuk membantu membezakan not dan keadaan.",
+      "Theme and colors can be adjusted separately. Labels, patterns and shapes help distinguish notes and states."
+    ],
+    [
+      "Tema",
+      "Theme"
+    ],
+    [
+      "Ikut peranti",
+      "Follow device"
+    ],
+    [
+      "Cerah",
+      "Light"
+    ],
+    [
+      "Gelap",
+      "Dark"
+    ],
+    [
+      "Warna dan kontras",
+      "Colors and contrast"
+    ],
+    [
+      "Warna asal",
+      "Original colors"
+    ],
+    [
+      "Merah–hijau · protanopia",
+      "Red–green · protanopia"
+    ],
+    [
+      "Hijau–merah · deuteranopia",
+      "Green–red · deuteranopia"
+    ],
+    [
+      "Biru–kuning · tritanopia",
+      "Blue–yellow · tritanopia"
+    ],
+    [
+      "Kontras tinggi",
+      "High contrast"
+    ],
+    [
+      "Pilih palet yang paling mudah dibezakan oleh anda. Setiap mod turut menambah corak pada bar dan tanda keadaan.",
+      "Choose the palette you find easiest to distinguish. Each mode also adds patterns to the bars and state indicators."
+    ],
+    [
+      "Pratonton not dan keadaan",
+      "Preview notes and states"
+    ],
+    [
+      "Empat not dengan label dan corak berbeza",
+      "Four notes with distinct labels and patterns"
+    ],
+    [
+      "✓ Sedia",
+      "✓ Ready"
+    ],
+    [
+      "■ Merakam",
+      "■ Recording"
+    ],
+    [
+      "! Semak",
+      "! Review"
+    ],
+    [
+      "Pilihan disimpan pada peranti ini.",
+      "Preferences are saved on this device."
+    ],
+    [
+      "Pilihan digunakan untuk sesi ini. Simpanan peranti tidak tersedia.",
+      "Preferences apply to this session. Device storage is unavailable."
+    ],
+    [
+      "Tetapan asal",
+      "Reset defaults"
+    ],
+    [
+      "Selesai",
+      "Done"
+    ],
+    [
+      "Ketuk",
+      "Tap"
+    ],
+    [
+      "Goncang",
+      "Shake"
+    ],
+    [
+      "Tengah",
+      "Center"
+    ],
+    [
+      "Tepi",
+      "Edge"
+    ],
+    [
+      "Ketuk kulit",
+      "Head hit"
+    ],
+    [
+      "Ketuk rim",
+      "Rim hit"
+    ],
+    [
+      "Ketuk kuat",
+      "Strong hit"
+    ],
+    [
+      "Ketuk lembut",
+      "Soft hit"
+    ],
+    [
+      "Laga kuat",
+      "Strong crash"
+    ],
+    [
+      "Laga lembut",
+      "Soft crash"
+    ],
+    [
+      "Ketuk terbuka",
+      "Open hit"
+    ],
+    [
+      "Ketuk tertahan",
+      "Muted hit"
+    ],
+    [
+      "Terbuka",
+      "Open"
+    ],
+    [
+      "Redam",
+      "Muted"
+    ],
+    [
+      "Data projek tidak dapat disalin.",
+      "Project data could not be copied."
+    ],
+    [
+      "Data projek tidak dapat disalin sebagai JSON.",
+      "Project data could not be copied as JSON."
+    ],
+    [
+      "Data projek terlalu besar.",
+      "Project data is too large."
+    ],
+    [
+      "Struktur projek terlalu dalam.",
+      "The project structure is too deeply nested."
+    ],
+    [
+      "Nombor projek mesti terhingga.",
+      "Project numbers must be finite."
+    ],
+    [
+      "Projek hanya menerima data JSON.",
+      "Projects only accept JSON data."
+    ],
+    [
+      "Data projek tidak boleh merujuk dirinya sendiri.",
+      "Project data cannot reference itself."
+    ],
+    [
+      "Audio mentah tidak disimpan dalam projek digital.",
+      "Raw audio is not stored in digital projects."
+    ],
+    [
+      "Data projek tidak sah.",
+      "Invalid project data."
+    ],
+    [
+      "Format projek tidak dikenali.",
+      "Unrecognized project format."
+    ],
+    [
+      "Identiti projek mesti 1–100 aksara.",
+      "Project ID must contain 1–100 characters."
+    ],
+    [
+      "Tajuk projek mesti 1–100 aksara.",
+      "Project title must contain 1–100 characters."
+    ],
+    [
+      "Tempo mesti integer 40–200 BPM.",
+      "Tempo must be an integer from 40 to 200 BPM."
+    ],
+    [
+      "Panjang projek mesti 4–32 bar.",
+      "Project length must be 4–32 bars."
+    ],
+    [
+      "Gelung mesti mempunyai mula dan akhir yang sah dalam projek.",
+      "The loop must have valid start and end positions within the project."
+    ],
+    [
+      "Kelantangan induk mesti dalam julat 0–1.",
+      "Master volume must be between 0 and 1."
+    ],
+    [
+      "Senarai trek diperlukan.",
+      "A track list is required."
+    ],
+    [
+      "Maksimum 8 trek bagi satu projek.",
+      "A project can contain up to 8 tracks."
+    ],
+    [
+      "Data trek tidak sah.",
+      "Invalid track data."
+    ],
+    [
+      "Identiti trek mesti sah dan unik.",
+      "Track IDs must be valid and unique."
+    ],
+    [
+      "Nama trek mesti 1–60 aksara.",
+      "Track name must contain 1–60 characters."
+    ],
+    [
+      "Instrumen trek tidak dikenali.",
+      "Unrecognized track instrument."
+    ],
+    [
+      "Tetapan mixer trek berada di luar julat.",
+      "Track mixer settings are out of range."
+    ],
+    [
+      "Keadaan senyap dan solo mesti sah.",
+      "Mute and solo states must be valid."
+    ],
+    [
+      "Senarai event trek diperlukan.",
+      "A track event list is required."
+    ],
+    [
+      "Maksimum 512 event bagi satu trek.",
+      "A track can contain up to 512 events."
+    ],
+    [
+      "Data event tidak sah.",
+      "Invalid event data."
+    ],
+    [
+      "Identiti event mesti sah dan unik dalam projek.",
+      "Event IDs must be valid and unique within the project."
+    ],
+    [
+      "Event mesti berada sepenuhnya dalam panjang projek.",
+      "Events must fit entirely within the project length."
+    ],
+    [
+      "Kekuatan event mesti dalam julat 0–1.",
+      "Event velocity must be between 0 and 1."
+    ],
+    [
+      "Not rekoder mesti MIDI 72–98 tanpa tindakan perkusi.",
+      "Recorder notes must use MIDI 72–98 without percussion actions."
+    ],
+    [
+      "Not melodi mesti MIDI 1–127 tanpa tindakan perkusi.",
+      "Melody notes must use MIDI 1–127 without percussion actions."
+    ],
+    [
+      "Event perkusi mesti menggunakan tindakan instrumen tanpa pitch MIDI.",
+      "Percussion events must use instrument actions without a MIDI pitch."
+    ],
+    [
+      "Medan projek baharu tidak sah.",
+      "Invalid new project field."
+    ],
+    [
+      "Medan gelung tidak sah.",
+      "Invalid loop field."
+    ],
+    [
+      "Medan induk tidak sah.",
+      "Invalid master field."
+    ],
+    [
+      "Medan projek tidak sah.",
+      "Invalid project field."
+    ],
+    [
+      "Medan trek tidak sah.",
+      "Invalid track field."
+    ],
+    [
+      "Medan event tidak sah.",
+      "Invalid event field."
+    ],
+    [
+      "Medan sejarah tidak sah.",
+      "Invalid history field."
+    ],
+    [
+      "Trek tidak ditemui.",
+      "Track not found."
+    ],
+    [
+      "Event tidak ditemui.",
+      "Event not found."
+    ],
+    [
+      "Projek baharu",
+      "New project"
+    ],
+    [
+      "Pilih instrumen yang sah.",
+      "Choose a valid instrument."
+    ],
+    [
+      "Grid dan kekuatan kuantisasi tidak sah.",
+      "Invalid quantization grid or strength."
+    ],
+    [
+      "Transposisi hanya untuk trek melodi.",
+      "Transposition is only available for melody tracks."
+    ],
+    [
+      "Transposisi mesti bilangan semiton bulat dalam julat −127 hingga 127.",
+      "Transposition must be a whole number of semitones from −127 to 127."
+    ],
+    [
+      "Saiz fail projek tidak sah.",
+      "Invalid project file size."
+    ],
+    [
+      "Saiz fail rakaman tidak sah.",
+      "Invalid recording file size."
+    ],
+    [
+      "Fail JSON projek tidak sah.",
+      "Invalid project JSON file."
+    ],
+    [
+      "Fail JSON rakaman tidak sah.",
+      "Invalid recording JSON file."
+    ],
+    [
+      "Data rakaman sumber tidak sah.",
+      "Invalid source recording data."
+    ],
+    [
+      "Tempo rakaman sumber mesti integer 40–200 BPM.",
+      "Source recording tempo must be an integer from 40 to 200 BPM."
+    ],
+    [
+      "Bukti input asal tidak sah.",
+      "Invalid original input evidence."
+    ],
+    [
+      "Tempo tangkapan sumber tidak sah.",
+      "Invalid source capture tempo."
+    ],
+    [
+      "Instrumen atau PPQ rakaman melodi tidak disokong.",
+      "The melody recording instrument or PPQ is unsupported."
+    ],
+    [
+      "Akhir rakaman melodi tidak sah.",
+      "Invalid melody recording end position."
+    ],
+    [
+      "Masa not sumber tidak sah.",
+      "Invalid source note timing."
+    ],
+    [
+      "Masa input asal tidak sah.",
+      "Invalid original input timing."
+    ],
+    [
+      "Tempoh tahan not sumber tidak sah.",
+      "Invalid source note gate duration."
+    ],
+    [
+      "Tempoh input asal tidak sah.",
+      "Invalid original input duration."
+    ],
+    [
+      "Semak not sumber yang belum diketahui sebelum mengimport.",
+      "Review unknown source notes before importing."
+    ],
+    [
+      "Pitch not sumber tidak sah.",
+      "Invalid source note pitch."
+    ],
+    [
+      "Not sumber di luar julat instrumen.",
+      "Source notes are outside the instrument range."
+    ],
+    [
+      "Semak dan sahkan not anggaran mikrofon sebelum mengimport.",
+      "Review and confirm estimated microphone notes before importing."
+    ],
+    [
+      "Akhir rakaman sumber tidak meliputi semua not.",
+      "The source recording end does not include every note."
+    ],
+    [
+      "Rakaman sumber melebihi 180 saat.",
+      "The source recording exceeds 180 seconds."
+    ],
+    [
+      "Rakaman perkusi sumber tidak disokong.",
+      "Unsupported source percussion recording."
+    ],
+    [
+      "Bukti input perkusi asal tidak sah.",
+      "Invalid original percussion input evidence."
+    ],
+    [
+      "Ketukan perkusi sumber tidak sah.",
+      "Invalid source percussion hits."
+    ],
+    [
+      "Format rakaman sumber tidak dikenali.",
+      "Unrecognized source recording format."
+    ],
+    [
+      "Rakaman sumber melebihi panjang maksimum 32 bar.",
+      "The source recording exceeds the maximum length of 32 bars."
+    ],
+    [
+      "Fail projek melebihi had 4 MiB.",
+      "The project file exceeds the 4 MiB limit."
+    ],
+    [
+      "Had sejarah mesti integer 1–1000.",
+      "History limit must be an integer from 1 to 1000."
+    ],
+    [
+      "Pilihan sejarah tidak sah.",
+      "Invalid history options."
+    ],
+    [
+      "Projek studio tidak sah.",
+      "Invalid studio project."
+    ],
+    [
+      "Web Audio tidak tersedia dalam pelayar ini.",
+      "Web Audio is unavailable in this browser."
+    ],
+    [
+      "Had bunyi serentak dicapai; kurangkan not yang bertindih.",
+      "The simultaneous sound limit was reached; reduce overlapping notes."
+    ],
+    [
+      "Playback selesai.",
+      "Playback complete."
+    ],
+    [
+      "Audio tidak dapat dimainkan.",
+      "Audio could not be played."
+    ],
+    [
+      "Benarkan audio kemudian tekan Main semula.",
+      "Allow audio, then press Play again."
+    ],
+    [
+      "Audio tidak tersedia.",
+      "Audio is unavailable."
+    ],
+    [
+      "Projek berubah; tekan Main untuk menyambung.",
+      "The project changed; press Play to resume."
+    ],
+    [
+      "Projek terakhir dimuatkan dari pelayar.",
+      "The last project was loaded from this browser."
+    ],
+    [
+      "Simpanan pelayar tidak tersedia. Eksport JSON untuk menyimpan projek.",
+      "Browser storage is unavailable. Export JSON to save your project."
+    ],
+    [
+      "Membuka audio…",
+      "Opening audio…"
+    ],
+    [
+      "Sedang main",
+      "Playing"
+    ],
+    [
+      "Dijeda",
+      "Paused"
+    ],
+    [
+      "Audio ditutup",
+      "Audio closed"
+    ],
+    [
+      "Had 8 trek telah dicapai.",
+      "The 8-track limit has been reached."
+    ],
+    [
+      "Tambah instrumen yang dipilih",
+      "Add the selected instrument"
+    ],
+    [
+      "Menyimpan…",
+      "Saving…"
+    ],
+    [
+      "Projek belum disimpan. Eksport JSON melalui tab Projek.",
+      "The project has not been saved. Export JSON in the Projects tab."
+    ],
+    [
+      "Projek aktif belum disimpan. Eksport JSON melalui tab Projek.",
+      "The active project has not been saved. Export JSON in the Projects tab."
+    ],
+    [
+      "Disimpan dalam pelayar.",
+      "Saved in this browser."
+    ],
+    [
+      "Perubahan tidak dapat digunakan.",
+      "The change could not be applied."
+    ],
+    [
+      "Projek tidak sah.",
+      "Invalid project."
+    ],
+    [
+      "Isi beberapa langkah dalam Susunan dahulu.",
+      "Add some steps in Arrangement first."
+    ],
+    [
+      "Main semula dijeda. Tekan Sambung apabila bersedia.",
+      "Playback paused. Press Resume when ready."
+    ],
+    [
+      "Rakaman ditambah ke Studio Pro. Masa input asal dikekalkan.",
+      "Recording added to Studio Pro. Original input times are preserved."
+    ],
+    [
+      "Enjin audio tidak tersedia.",
+      "The audio engine is unavailable."
+    ],
+    [
+      "Main semula dijeda.",
+      "Playback paused."
+    ],
+    [
+      "Main semula dihentikan.",
+      "Playback stopped."
+    ],
+    [
+      "Nama projek tidak boleh kosong.",
+      "Project name cannot be empty."
+    ],
+    [
+      "Susunan memerlukan bekas dan projek studio.",
+      "Arrangement requires a container and a studio project."
+    ],
+    [
+      "Model Studio Pro belum tersedia.",
+      "The Studio Pro model is not available yet."
+    ],
+    [
+      "Susunan berbilang trek",
+      "Multitrack arrangement"
+    ],
+    [
+      "Garis masa semua trek; tatal mendatar untuk melihat bar lain",
+      "Timeline for all tracks; scroll horizontally to see other bars"
+    ],
+    [
+      "Trek / bar",
+      "Track / bar"
+    ],
+    [
+      "Nama trek terpilih",
+      "Selected track name"
+    ],
+    [
+      "Gandakan trek",
+      "Duplicate track"
+    ],
+    [
+      "Buang trek",
+      "Remove track"
+    ],
+    [
+      "Editor not",
+      "Note editor"
+    ],
+    [
+      "Editor ketukan",
+      "Hit editor"
+    ],
+    [
+      "Sebelum",
+      "Previous"
+    ],
+    [
+      "Bar sebelumnya",
+      "Previous bar"
+    ],
+    [
+      "Bar yang disunting",
+      "Bar being edited"
+    ],
+    [
+      "Selepas",
+      "Next"
+    ],
+    [
+      "Bar seterusnya",
+      "Next bar"
+    ],
+    [
+      "16 langkah / bar · 6 tick / langkah",
+      "16 steps / bar · 6 ticks / step"
+    ],
+    [
+      "Julat nada editor",
+      "Editor pitch range"
+    ],
+    [
+      "Julat nada",
+      "Pitch range"
+    ],
+    [
+      "Klik ruang kosong untuk tambah; pilih not untuk sunting. Anak panah: gerak fokus. Delete: buang not pada ruang itu.",
+      "Click an empty cell to add; select a note to edit. Arrow keys move focus. Delete removes a note from that cell."
+    ],
+    [
+      "Grid satu bar; tatal mendatar untuk semua 16 langkah",
+      "One-bar grid; scroll horizontally for all 16 steps"
+    ],
+    [
+      "Nada",
+      "Pitch"
+    ],
+    [
+      "Tindakan",
+      "Action"
+    ],
+    [
+      "Pilih not atau tambah pada grid",
+      "Select a note or add one on the grid"
+    ],
+    [
+      "Not terpilih",
+      "Selected note"
+    ],
+    [
+      "Ketukan terpilih",
+      "Selected hit"
+    ],
+    [
+      "Bar ini belum mempunyai not terpilih. Tambah melalui grid atau pilih not daripada senarai.",
+      "No note is selected in this bar. Add one on the grid or choose a note from the list."
+    ],
+    [
+      "Mula (tick)",
+      "Start (tick)"
+    ],
+    [
+      "Tempoh (tick)",
+      "Duration (ticks)"
+    ],
+    [
+      "Kekuatan (%)",
+      "Velocity (%)"
+    ],
+    [
+      "Simpan not",
+      "Save note"
+    ],
+    [
+      "Dengar not",
+      "Hear note"
+    ],
+    [
+      "Buang not",
+      "Remove note"
+    ],
+    [
+      "Not mesti tamat dalam panjang projek.",
+      "The note must end within the project length."
+    ],
+    [
+      "Kekuatan kuantisasi",
+      "Quantization strength"
+    ],
+    [
+      "Grid kuantisasi",
+      "Quantization grid"
+    ],
+    [
+      "Kekuatan",
+      "Strength"
+    ],
+    [
+      "Kemas masa trek",
+      "Quantize track timing"
+    ],
+    [
+      "Nada −1",
+      "Pitch −1"
+    ],
+    [
+      "Nada +1",
+      "Pitch +1"
+    ],
+    [
+      "Turunkan semua not trek satu semiton",
+      "Lower all track notes by one semitone"
+    ],
+    [
+      "Naikkan semua not trek satu semiton",
+      "Raise all track notes by one semitone"
+    ],
+    [
+      "Bekas mixer diperlukan.",
+      "A mixer container is required."
+    ],
+    [
+      "Teras Pro Studio belum tersedia.",
+      "The Studio Pro core is not available yet."
+    ],
+    [
+      "Perubahan mixer tidak dapat disimpan.",
+      "Mixer changes could not be saved."
+    ],
+    [
+      "Imbang tahap setiap trek dan bentuk ruang bunyinya. Pilih trek untuk menyunting kesan.",
+      "Balance each track's level and shape its sound space. Select a track to edit effects."
+    ],
+    [
+      "Kawalan trek",
+      "Track controls"
+    ],
+    [
+      "Belum ada trek. Tambah instrumen untuk mula mengadun.",
+      "No tracks yet. Add an instrument to start mixing."
+    ],
+    [
+      "Kesan trek",
+      "Track effects"
+    ],
+    [
+      "Tentang Reverb dan Delay",
+      "About Reverb and Delay"
+    ],
+    [
+      "Reverb menambah ekor gema ruang. Delay mengulang bunyi selepas jeda mengikut tempo projek. Nilai 0% mematikan kesan; naikkan sedikit demi sedikit untuk mengekalkan kejelasan.",
+      "Reverb adds a room-like decay. Delay repeats sound after an interval based on the project tempo. At 0%, the effect is off; increase it gradually to keep the mix clear."
+    ],
+    [
+      "Kesan ini ialah sintesis digital setempat. Bisu dan Solo menentukan trek yang kedengaran; Bisu tetap mematikan trek walaupun Solo dihidupkan.",
+      "These effects use local digital synthesis. Mute and Solo determine which tracks are heard; Mute silences a track even when Solo is on."
+    ],
+    [
+      "Reset kesan",
+      "Reset effects"
+    ],
+    [
+      "Output utama",
+      "Master output"
+    ],
+    [
+      "Tahap output",
+      "Output level"
+    ],
+    [
+      "Tahap isyarat projek. Kelantangan pembesar suara dilaras pada peranti.",
+      "Project signal level. Adjust speaker volume on your device."
+    ],
+    [
+      "Kiri",
+      "Left"
+    ],
+    [
+      "Kanan",
+      "Right"
+    ],
+    [
+      "Dipilih",
+      "Selected"
+    ],
+    [
+      "Bisu",
+      "Mute"
+    ],
+    [
+      "Solo",
+      "Solo"
+    ],
+    [
+      "Tahap",
+      "Level"
+    ],
+    [
+      "Pan",
+      "Pan"
+    ],
+    [
+      "Reverb",
+      "Reverb"
+    ],
+    [
+      "Delay",
+      "Delay"
+    ],
+    [
+      "Tahap utama",
+      "Master level"
+    ],
+    [
+      "Bisu aktif",
+      "Mute on"
+    ],
+    [
+      "Solo aktif",
+      "Solo on"
+    ],
+    [
+      "Dibisukan",
+      "Muted"
+    ],
+    [
+      "Senyap: trek lain dalam Solo",
+      "Silent: another track is soloed"
+    ],
+    [
+      "Dalam adunan",
+      "In the mix"
+    ],
+    [
+      "Pilih trek selepas menambah instrumen.",
+      "Select a track after adding an instrument."
+    ],
+    [
+      "Simpanan projek tersedia.",
+      "Project storage is available."
+    ],
+    [
+      "Projek melebihi had fail JSON 4 MB.",
+      "The project exceeds the 4 MB JSON file limit."
+    ],
+    [
+      "Simpanan pelayar tidak tersedia. Eksport JSON sebelum menutup halaman.",
+      "Browser storage is unavailable. Export JSON before closing the page."
+    ],
+    [
+      "Simpanan berubah dalam tab lain. Eksport JSON projek semasa dan muat semula halaman sebelum menyimpan.",
+      "Storage changed in another tab. Export the current project as JSON and reload the page before saving."
+    ],
+    [
+      "Had simpanan tidak sah.",
+      "Invalid storage size limit."
+    ],
+    [
+      "Format simpanan tidak sah.",
+      "Invalid storage format."
+    ],
+    [
+      "Tarikh simpanan tidak sah.",
+      "Invalid save date."
+    ],
+    [
+      "Identiti projek berulang.",
+      "Duplicate project ID."
+    ],
+    [
+      "Projek aktif tidak sah.",
+      "Invalid active project."
+    ],
+    [
+      "Simpanan projek rosak atau versinya tidak disokong. Data asal dikekalkan; eksport JSON projek semasa sebelum memuat semula.",
+      "Project storage is corrupt or its version is unsupported. The original data is preserved; export the current project as JSON before reloading."
+    ],
+    [
+      "Had semakan simpanan dicapai. Eksport JSON untuk sandaran.",
+      "The storage revision limit has been reached. Export JSON for a backup."
+    ],
+    [
+      "Had saiz simpanan projek dicapai. Eksport JSON dan padam projek lama sebelum mencuba lagi.",
+      "The project storage size limit has been reached. Export JSON and delete old projects before trying again."
+    ],
+    [
+      "Simpanan pelayar penuh. Eksport JSON; padam projek lama atau kosongkan ruang sebelum mencuba lagi.",
+      "Browser storage is full. Export JSON; delete old projects or free up space before trying again."
+    ],
+    [
+      "Projek belum disimpan kerana simpanan pelayar tidak tersedia. Eksport JSON sebelum menutup halaman.",
+      "The project has not been saved because browser storage is unavailable. Export JSON before closing the page."
+    ],
+    [
+      "Had 20 projek dicapai. Eksport JSON dan padam projek lama sebelum menyimpan projek baharu.",
+      "The 20-project limit has been reached. Export JSON and delete old projects before saving a new one."
+    ],
+    [
+      "Projek disimpan di pelayar ini. Eksport JSON untuk sandaran.",
+      "Project saved in this browser. Export JSON for a backup."
+    ],
+    [
+      "Projek tersimpan tidak ditemui.",
+      "Saved project not found."
+    ],
+    [
+      "Salinan projek dipadam daripada pelayar ini.",
+      "The project copy was deleted from this browser."
+    ],
+    [
+      "Simpan projek dahulu sebelum menjadikannya projek aktif.",
+      "Save the project before making it active."
+    ],
+    [
+      "Projek aktif dikemas kini.",
+      "Active project updated."
+    ],
+    [
+      "Panel projek memerlukan bekas dan aplikasi Studio Pro.",
+      "The Projects panel requires a container and the Studio Pro app."
+    ],
+    [
+      "Projek & fail",
+      "Projects & files"
+    ],
+    [
+      "Simpan susunan berbilang trek di pelayar ini. Eksport JSON untuk salinan sandaran.",
+      "Save multitrack arrangements in this browser. Export JSON for a backup copy."
+    ],
+    [
+      "1–100 aksara. Nama digunakan pada fail eksport.",
+      "1–100 characters. The name is used for exported files."
+    ],
+    [
+      "Simpan sekarang",
+      "Save now"
+    ],
+    [
+      "Gandakan",
+      "Duplicate"
+    ],
+    [
+      "Projek dalam pelayar",
+      "Projects in this browser"
+    ],
+    [
+      "Buka projek",
+      "Open project"
+    ],
+    [
+      "Padam salinan",
+      "Delete copy"
+    ],
+    [
+      "Sandaran & data",
+      "Backups & data"
+    ],
+    [
+      "Eksport JSON",
+      "Export JSON"
+    ],
+    [
+      "Eksport CSV",
+      "Export CSV"
+    ],
+    [
+      "Import projek JSON",
+      "Import project JSON"
+    ],
+    [
+      "Fail projek e-instru-project/v1, maksimum 4 MB. CSV mengeksport seluruh susunan; import CSV tidak disediakan.",
+      "An e-instru-project/v1 project file, up to 4 MB. CSV exports the entire arrangement; CSV import is unavailable."
+    ],
+    [
+      "Fail dan projek kekal pada peranti anda. Tiada akaun, pelayan atau audio mikrofon mentah disimpan.",
+      "Files and projects stay on your device. No account, server or raw microphone audio is stored."
+    ],
+    [
+      "Projek tidak dapat dibuka. Semak data projek.",
+      "The project could not be opened. Check the project data."
+    ],
+    [
+      "Pengesahan diperlukan sebelum mengganti projek semasa.",
+      "Confirmation is required before replacing the current project."
+    ],
+    [
+      "Ganti projek semasa?",
+      "Replace the current project?"
+    ],
+    [
+      "Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya.",
+      "Current edits have not been saved. Export JSON or save first if you want to keep them."
+    ],
+    [
+      "Projek yang dipilih akan dibuka.",
+      "The selected project will be opened."
+    ],
+    [
+      "Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya. Projek yang dipilih akan dibuka.",
+      "Current edits have not been saved. Export JSON or save first if you want to keep them. The selected project will be opened."
+    ],
+    [
+      "Ganti projek",
+      "Replace project"
+    ],
+    [
+      "Nama projek mestilah 1–100 aksara tanpa aksara kawalan.",
+      "Project name must contain 1–100 characters without control characters."
+    ],
+    [
+      "Nama projek tidak dapat dikemas kini.",
+      "Project name could not be updated."
+    ],
+    [
+      "Tindakan tidak dapat diselesaikan.",
+      "The action could not be completed."
+    ],
+    [
+      "Projek belum disimpan. Eksport JSON untuk sandaran.",
+      "The project has not been saved. Export JSON for a backup."
+    ],
+    [
+      "Had 20 projek dicapai. Eksport JSON dan padam projek lama dahulu.",
+      "The 20-project limit has been reached. Export JSON and delete old projects first."
+    ],
+    [
+      "Salinan projek belum disimpan.",
+      "The project copy has not been saved."
+    ],
+    [
+      "Salinan disimpan tetapi belum dibuka.",
+      "The copy was saved but has not been opened."
+    ],
+    [
+      "Salinan projek disimpan dan dibuka.",
+      "The project copy was saved and opened."
+    ],
+    [
+      "Pilih projek tersimpan untuk dibuka.",
+      "Choose a saved project to open."
+    ],
+    [
+      "Pilih salinan projek untuk dipadam.",
+      "Choose a project copy to delete."
+    ],
+    [
+      "Pengesahan diperlukan sebelum memadam projek.",
+      "Confirmation is required before deleting a project."
+    ],
+    [
+      "Padam salinan projek?",
+      "Delete the project copy?"
+    ],
+    [
+      "Projek semasa akan diganti dengan projek kosong.",
+      "The current project will be replaced with an empty project."
+    ],
+    [
+      "Salinan projek tidak dapat dipadam.",
+      "The project copy could not be deleted."
+    ],
+    [
+      "Muat turun fail tidak tersedia dalam pelayar ini.",
+      "File downloads are unavailable in this browser."
+    ],
+    [
+      "JSON dimuat turun. Simpan fail ini sebagai sandaran.",
+      "JSON downloaded. Keep this file as a backup."
+    ],
+    [
+      "CSV seluruh susunan dimuat turun.",
+      "The entire arrangement was downloaded as CSV."
+    ],
+    [
+      "Pilih fail .json projek Studio Pro, bukan fail audio atau CSV.",
+      "Choose a Studio Pro project .json file rather than an audio or CSV file."
+    ],
+    [
+      "Fail JSON mestilah berisi dan tidak melebihi 4 MB.",
+      "The JSON file must contain data and be no larger than 4 MB."
+    ],
+    [
+      "Fail JSON melebihi had 4 MB.",
+      "The JSON file exceeds the 4 MB limit."
+    ],
+    [
+      "Identiti fail ini sepadan dengan projek tersimpan. Simpanan projek itu akan diganti oleh susunan yang diimport.",
+      "This file has the same ID as a saved project. That saved project will be replaced by the imported arrangement."
+    ],
+    [
+      "Suntingan semasa belum disimpan. Eksport JSON atau simpan dahulu jika anda mahu mengekalkannya. Identiti fail ini sepadan dengan projek tersimpan. Simpanan projek itu akan diganti oleh susunan yang diimport.",
+      "Current edits have not been saved. Export JSON or save first if you want to keep them. This file has the same ID as a saved project. That saved project will be replaced by the imported arrangement."
+    ],
+    [
+      "Fail tidak dapat dibaca.",
+      "The file could not be read."
+    ],
+    [
+      "Pilih projek tersimpan",
+      "Choose a saved project"
+    ],
+    [
+      "Belum ada projek tersimpan",
+      "No saved projects yet"
+    ],
+    [
+      "Projek semasa telah disimpan.",
+      "The current project is saved."
+    ],
+    [
+      "Projek semasa belum disimpan. Autosimpan mengikut status studio.",
+      "The current project is not saved yet. Autosave follows the studio status."
+    ],
+    [
+      "Projek dikemas kini",
+      "Project updated"
+    ],
+    [
+      "Projek dikemas kini.",
+      "Project updated."
+    ],
+    [
+      "Projek dimuatkan",
+      "Project loaded"
+    ],
+    [
+      "Projek dimuatkan.",
+      "Project loaded."
+    ],
+    [
+      "Perubahan diundur",
+      "Change undone"
+    ],
+    [
+      "Perubahan diundur.",
+      "Change undone."
+    ],
+    [
+      "Perubahan diulang",
+      "Change redone"
+    ],
+    [
+      "Perubahan diulang.",
+      "Change redone."
+    ],
+    [
+      "Rakaman ditambah sebagai trek",
+      "Recording added as a track"
+    ],
+    [
+      "Rakaman ditambah sebagai trek.",
+      "Recording added as a track."
+    ],
+    [
+      "Nama projek diubah",
+      "Project name changed"
+    ],
+    [
+      "Nama projek diubah.",
+      "Project name changed."
+    ],
+    [
+      "Tempo diubah",
+      "Tempo changed"
+    ],
+    [
+      "Tempo diubah.",
+      "Tempo changed."
+    ],
+    [
+      "Panjang projek diubah",
+      "Project length changed"
+    ],
+    [
+      "Panjang projek diubah.",
+      "Project length changed."
+    ],
+    [
+      "Mula ulangan diubah",
+      "Loop start changed"
+    ],
+    [
+      "Mula ulangan diubah.",
+      "Loop start changed."
+    ],
+    [
+      "Akhir ulangan diubah",
+      "Loop end changed"
+    ],
+    [
+      "Akhir ulangan diubah.",
+      "Loop end changed."
+    ],
+    [
+      "Ulangan diubah",
+      "Loop changed"
+    ],
+    [
+      "Ulangan diubah.",
+      "Loop changed."
+    ],
+    [
+      "Trek ditambah",
+      "Track added"
+    ],
+    [
+      "Trek ditambah.",
+      "Track added."
+    ],
+    [
+      "Not dibuang",
+      "Note removed"
+    ],
+    [
+      "Not dibuang.",
+      "Note removed."
+    ],
+    [
+      "Not ditambah",
+      "Note added"
+    ],
+    [
+      "Not ditambah.",
+      "Note added."
+    ],
+    [
+      "Ketukan ditambah",
+      "Hit added"
+    ],
+    [
+      "Ketukan ditambah.",
+      "Hit added."
+    ],
+    [
+      "Nama trek dikemas kini",
+      "Track name updated"
+    ],
+    [
+      "Nama trek dikemas kini.",
+      "Track name updated."
+    ],
+    [
+      "Trek digandakan",
+      "Track duplicated"
+    ],
+    [
+      "Trek digandakan.",
+      "Track duplicated."
+    ],
+    [
+      "Trek dibuang",
+      "Track removed"
+    ],
+    [
+      "Trek dibuang.",
+      "Track removed."
+    ],
+    [
+      "Not dikemas kini",
+      "Note updated"
+    ],
+    [
+      "Not dikemas kini.",
+      "Note updated."
+    ],
+    [
+      "Masa trek dikemas kini",
+      "Track timing updated"
+    ],
+    [
+      "Masa trek dikemas kini.",
+      "Track timing updated."
+    ],
+    [
+      "Nada trek diturunkan satu semiton",
+      "Track pitch lowered by one semitone"
+    ],
+    [
+      "Nada trek diturunkan satu semiton.",
+      "Track pitch lowered by one semitone."
+    ],
+    [
+      "Nada trek dinaikkan satu semiton",
+      "Track pitch raised by one semitone"
+    ],
+    [
+      "Nada trek dinaikkan satu semiton.",
+      "Track pitch raised by one semitone."
+    ],
+    [
+      "Projek baharu dibuka",
+      "New project opened"
+    ],
+    [
+      "Projek baharu dibuka.",
+      "New project opened."
+    ],
+    [
+      "Projek digandakan",
+      "Project duplicated"
+    ],
+    [
+      "Projek digandakan.",
+      "Project duplicated."
+    ],
+    [
+      "Projek dibuka",
+      "Project opened"
+    ],
+    [
+      "Projek dibuka.",
+      "Project opened."
+    ],
+    [
+      "Projek kosong dibuka",
+      "Empty project opened"
+    ],
+    [
+      "Projek kosong dibuka.",
+      "Empty project opened."
+    ],
+    [
+      "Projek JSON diimport",
+      "Project JSON imported"
+    ],
+    [
+      "Projek JSON diimport.",
+      "Project JSON imported."
+    ],
+    [
+      "Rakam sekurang-kurangnya satu not atau ketukan sebelum menambah trek.",
+      "Record at least one note or hit before adding a track."
+    ]
+  ],
+  "templates": [
+    {
+      "ms": "{count} / 8 trek",
+      "en": "{count} / 8 tracks",
+      "translate": []
+    },
+    {
+      "ms": "{number} bar · Ulangan dimatikan",
+      "en": "{number} bars · Loop off",
+      "translate": []
+    },
+    {
+      "ms": "{number} bar · Ulang bar {index}–{total}",
+      "en": "{number} bars · Loop bars {index}–{total}",
+      "translate": []
+    },
+    {
+      "ms": "Ulang bar {index}–{total}",
+      "en": "Loop bars {index}–{total}",
+      "translate": []
+    },
+    {
+      "ms": "Bar {number}, beat {beats}, tick {tick}",
+      "en": "Bar {number}, beat {beats}, tick {tick}",
+      "translate": []
+    },
+    {
+      "ms": "Masukkan nombor bulat {number} hingga {total}.",
+      "en": "Enter a whole number from {number} to {total}.",
+      "translate": []
+    },
+    {
+      "ms": "Trek {instrument} ditambah. Isi langkah untuk mula.",
+      "en": "{instrument} track added. Add steps to start.",
+      "translate": [
+        "instrument"
+      ]
+    },
+    {
+      "ms": "{instrument} · {count} not",
+      "en": "{instrument} · {count} notes",
+      "translate": [
+        "instrument"
+      ]
+    },
+    {
+      "ms": "{title} · {action} · tick {tick} · tempoh {duration}",
+      "en": "{title} · {action} · tick {tick} · duration {duration}",
+      "translate": [
+        "action"
+      ]
+    },
+    {
+      "ms": "Bar {number} / {total}",
+      "en": "Bar {number} / {total}",
+      "translate": []
+    },
+    {
+      "ms": "Bar {number}, grid 16 langkah",
+      "en": "Bar {number}, 16-step grid",
+      "translate": []
+    },
+    {
+      "ms": "{action}, bar {number}, langkah {index}, tick {tick}, {count} not; pilih untuk sunting",
+      "en": "{action}, bar {number}, step {index}, tick {tick}, {count} notes; select to edit",
+      "translate": [
+        "action"
+      ]
+    },
+    {
+      "ms": "{action}, bar {number}, langkah {index}, tick {tick}; tambah not",
+      "en": "{action}, bar {number}, step {index}, tick {tick}; add note",
+      "translate": [
+        "action"
+      ]
+    },
+    {
+      "ms": "{action} · tick {tick} · tempoh {duration} · kekuatan {amount}%",
+      "en": "{action} · tick {tick} · duration {duration} · velocity {amount}%",
+      "translate": [
+        "action"
+      ]
+    },
+    {
+      "ms": "{action} · tick {tick}",
+      "en": "{action} · tick {tick}",
+      "translate": [
+        "action"
+      ]
+    },
+    {
+      "ms": "{index}. {action} · bar {number} · tick {tick}",
+      "en": "{index}. {action} · bar {number} · tick {tick}",
+      "translate": [
+        "action"
+      ]
+    },
+    {
+      "ms": "Kiri {amount}%",
+      "en": "Left {amount}%",
+      "translate": []
+    },
+    {
+      "ms": "Kanan {amount}%",
+      "en": "Right {amount}%",
+      "translate": []
+    },
+    {
+      "ms": "Tahap output {amount} peratus",
+      "en": "Output level {amount} percent",
+      "translate": []
+    },
+    {
+      "ms": "Pilih trek {title}",
+      "en": "Select track {title}",
+      "translate": []
+    },
+    {
+      "ms": "Bisu {title}",
+      "en": "Mute {title}",
+      "translate": []
+    },
+    {
+      "ms": "{title} dibunyikan.",
+      "en": "{title} unmuted.",
+      "translate": []
+    },
+    {
+      "ms": "{title} dibisukan.",
+      "en": "{title} muted.",
+      "translate": []
+    },
+    {
+      "ms": "Solo {title} dimatikan.",
+      "en": "Solo {title} off.",
+      "translate": []
+    },
+    {
+      "ms": "Solo {title} dihidupkan.",
+      "en": "Solo {title} on.",
+      "translate": []
+    },
+    {
+      "ms": "Tahap {title}",
+      "en": "Level {title}",
+      "translate": []
+    },
+    {
+      "ms": "Reset kesan {title}",
+      "en": "Reset effects {title}",
+      "translate": []
+    },
+    {
+      "ms": "Reset Reverb dan Delay {title}",
+      "en": "Reset Reverb and Delay {title}",
+      "translate": []
+    },
+    {
+      "ms": "Kesan {title} direset kepada 0%.",
+      "en": "Effects for {title} reset to 0%.",
+      "translate": []
+    },
+    {
+      "ms": "Tahap {title}: {amount}%.",
+      "en": "Level {title}: {amount}%.",
+      "translate": []
+    },
+    {
+      "ms": "Tahap utama: {amount}%.",
+      "en": "Master level: {amount}%.",
+      "translate": []
+    },
+    {
+      "ms": "Pan {title}: Tengah.",
+      "en": "Pan {title}: Center.",
+      "translate": []
+    },
+    {
+      "ms": "Pan {title}: Kiri {amount}%.",
+      "en": "Pan {title}: Left {amount}%.",
+      "translate": []
+    },
+    {
+      "ms": "Pan {title}: Kanan {amount}%.",
+      "en": "Pan {title}: Right {amount}%.",
+      "translate": []
+    },
+    {
+      "ms": "Reverb {title}: {amount}%.",
+      "en": "Reverb {title}: {amount}%.",
+      "translate": []
+    },
+    {
+      "ms": "Delay {title}: {amount}%.",
+      "en": "Delay {title}: {amount}%.",
+      "translate": []
+    },
+    {
+      "ms": "{count} trek · {bpm} BPM",
+      "en": "{count} tracks · {bpm} BPM",
+      "translate": []
+    },
+    {
+      "ms": "{title} · {count} trek · {bpm} BPM",
+      "en": "{title} · {count} tracks · {bpm} BPM",
+      "translate": []
+    },
+    {
+      "ms": "{count} / 20 projek. Simpanan pelayar tidak menggantikan sandaran JSON.",
+      "en": "{count} / 20 projects. Browser storage does not replace JSON backups.",
+      "translate": []
+    },
+    {
+      "ms": "Salinan “{title}” dalam pelayar akan dipadam. Eksport JSON dahulu jika diperlukan.",
+      "en": "The copy “{title}” will be deleted from this browser. Export JSON first if needed.",
+      "translate": []
+    },
+    {
+      "ms": "Salinan “{title}” dalam pelayar akan dipadam. Eksport JSON dahulu jika diperlukan. Projek semasa akan diganti dengan projek kosong.",
+      "en": "The copy “{title}” will be deleted from this browser. Export JSON first if needed. The current project will be replaced with an empty project.",
+      "translate": []
+    },
+    {
+      "ms": "API mixer tidak lengkap: {field}.",
+      "en": "Incomplete mixer API: {field}.",
+      "translate": []
+    },
+    {
+      "ms": "Bukti rakaman sumber tidak sah: {error}",
+      "en": "Invalid source recording evidence: {error}",
+      "translate": [
+        "error"
+      ]
+    },
+    {
+      "ms": "Projek belum disimpan: {error}",
+      "en": "Project not saved: {error}",
+      "translate": [
+        "error"
+      ]
+    },
+    {
+      "ms": "Projek tidak dapat dibuka: {error}",
+      "en": "Project could not be opened: {error}",
+      "translate": [
+        "error"
+      ]
+    },
+    {
+      "ms": "Import gagal: {error}",
+      "en": "Import failed: {error}",
+      "translate": [
+        "error"
+      ]
+    },
+    {
+      "ms": "Panel projek tidak dapat dikemas kini: {error}",
+      "en": "The Projects panel could not be updated: {error}",
+      "translate": [
+        "error"
+      ]
+    },
+    {
+      "ms": "Trek {index} · {action} · tick {tick} · tempoh {duration}",
+      "en": "Track {index} · {action} · tick {tick} · duration {duration}",
+      "translate": [
+        "action"
+      ]
+    }
+  ]
+}

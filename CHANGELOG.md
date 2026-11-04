@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased — Studio Pro and accessible display, ui branch, 2026-11-04
+
+- Add an independent eight-track arrangement workspace with a one-bar piano/percussion step editor, exact event inspector, quantization, transpose, duplication and undo/redo.
+- Add synchronized multi-track transport, loop/metronome, live track/master levels, stereo pan, mute/solo, Reverb/Delay and measured output level.
+- Add bounded local projects, autosave/restore, corruption/quota/conflict recovery, project JSON import/export and whole-arrangement CSV export.
+- Bridge all eight existing studios into Pro while retaining original takes and capture evidence; preserve all ten songs and Game rules.
+- Add independent system/light/dark themes and protanopia/deuteranopia/tritanopia/high-contrast display preferences, patterned bars and non-color state cues.
+- Run six concurrent module workers, then independently review and verify the combined self-contained HTML. Push ui only; accepted version remains v1.04.0.
+
+## Unreleased — BM/BI, ui branch, 2026-11-04
+
+- Add a persistent BM/BI language selector available on the chooser and every studio/game view.
+- Localize visible text, generated feedback, validation, dialogs and accessible labels in place; preserve active controls, user text, recording evidence and exports.
+- Keep translations inside the standalone HTML, including dynamic phrases from all eight instruments and the game. Preserve accepted v1.04.0.
+
 ## Unreleased — overall UI/UX, ui branch, 2026-11-04
 
 - Group eight compact instrument cards by musical family, retain physical artwork and add native keyboard-friendly jump navigation.

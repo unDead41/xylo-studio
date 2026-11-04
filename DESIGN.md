@@ -76,7 +76,7 @@ Retain existing rounded controls and panels. Instrument choices use 24px corners
 
 Keep the recorder visually recognizable and playable, with an accurate separate thumb hole and data-driven fingering. Put sounding MIDI/octave information beside simplified C–C′ labels. Never silently change score pitch to make it fit. Keep game rules and game audio xylophone-based. Reuse the controller/scheduler/export and existing dialogs/status owners for future instruments.
 
-Reconcile drift: original docs described the xylophone-only entry; the multi-instrument entry extends that identity. The overall UI pass retains the established palette, fonts and physical instruments while improving the shared reading scale, grouping and control geometry. Runtime `:root` in index.html remains the token owner; `ui-polish-style` adds shared state/scrollbar tokens and component recipes, and `ui-chooser-style` owns only compact family/card geometry. The frontmatter mirrors the runtime values. New recording states reuse danger/primary/warning semantic roles. No external font, dark theme or decorative background is introduced.
+Reconcile drift: original docs described the xylophone-only entry; the multi-instrument entry extends that identity. The overall UI pass retains the established palette, fonts and physical instruments while improving the shared reading scale, grouping and control geometry. Runtime `:root` in index.html remains the token owner; `ui-polish-style` adds shared state/scrollbar tokens and component recipes, and `ui-chooser-style` owns only compact family/card geometry. The frontmatter mirrors the runtime values. New recording states reuse danger/primary/warning semantic roles. The original overall UI pass introduced no external font or decorative background; the subsequent Studio Pro display preference extension below adds the maintained dark theme.
 
 ## Tamborin extension
 
@@ -105,3 +105,15 @@ Game presents its selected challenge and phase before the arena. Setup guidance 
 | Equivalent action names | Pitched play used a generic score label | Main lagu/Main rakaman names follow the current take |
 | Shared modal owner | Edited rows could lose focus after rebuilding | Native modal semantics plus explicit editor focus recovery |
 | Stable record context | Practice and saved percussion trace could mix | Shared trace-source state and separate temporary practice trace |
+
+## Studio Pro and display preferences
+
+Studio Pro is a separate workspace with three tabs: Susunan, Mixer and Projek. Shared transport and project timing stay above the active panel; a one-bar step editor bounds the piano/percussion grid. Track overviews and note grids own their horizontal scrolling, while the page and project forms keep natural document height. The chooser offers one compact Pro entry, and each legacy inspector has one send-to-Pro action.
+
+Keep the blue-gray/mint/white identity. Existing index.html tokens remain the canonical light palette. `studio-pro/display.css` owns dark semantic overrides and color-vision variants; `--on-primary` changes with the theme to maintain readable filled controls. Fonts, spacing and physical SVG materials stay shared. The display module runs before the body to restore system/light/dark and independent color-vision preferences.
+
+Protanopia/deuteranopia use blue/orange/purple separation; tritanopia uses teal/rose separation; high contrast uses explicit light/dark boundaries. Alternative xylophone bars have independent stripe/dot patterns. All notes keep names/keyboard labels, tracks have numbered names, and mute/solo/recording/error states have text and outlines. Avoid color-only meaning. The application does not claim clinical personalization or physical-device accessibility certification.
+
+Native selects remain intentional, and native dialogs retain modal focus/Escape/return behavior. Mixer ranges preserve their DOM nodes while values change. Pro styles use `--surface`, `--surface-subtle`, `--background`, `--ink`, `--muted`, `--primary`, `--on-primary` and `--border`; no separate copied theme system is introduced.
+
+BM/BI uses a compact native select beside the mode navigation, outside its hidden chooser state. The header may wrap on narrow widths; controls retain a 44px target and use the existing colour/focus tokens. One inline translation owner passively updates known text and accessible attributes, preserving live controls and form contents. The corpus is bundled with the standalone HTML; no translation service, font, dependency or network request is added.

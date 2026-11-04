@@ -1,0 +1,23 @@
+/* Local project management shares the studio's existing colour and type tokens. */
+.pro-projects{display:grid;gap:16px;min-width:0;color:var(--ink);font-family:var(--sans)}
+.pro-projects h2{font-size:20px;line-height:1.3}
+.pro-projects h3{font-size:16px;line-height:1.4}
+.pro-projects-intro,.pro-projects-help,.pro-projects-privacy{color:var(--muted);font-size:12px;line-height:1.65;overflow-wrap:anywhere}
+.pro-projects-intro{margin-top:-8px}
+.pro-projects-field,.pro-projects-library,.pro-projects-files{display:grid;gap:8px;min-width:0}
+.pro-projects label{font-size:13px;line-height:1.5}
+.pro-projects input,.pro-projects select{width:100%;max-width:100%;min-width:0;min-height:44px;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:9px 10px;font:inherit}
+.pro-projects input[aria-invalid=true]{border-color:var(--danger)}
+.pro-projects-actions{display:flex;gap:8px;flex-wrap:wrap;min-width:0}
+.pro-projects-actions button{flex:1 1 125px;min-width:0;min-height:44px;white-space:normal;overflow-wrap:anywhere;font-size:13px}
+.pro-projects-actions .pro-projects-delete{color:var(--danger)}
+.pro-projects-library,.pro-projects-files{border-top:1px solid var(--border);padding-top:16px}
+.pro-projects-state{padding:10px 12px;border-radius:var(--radius);background:var(--soft);color:var(--primary);font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.pro-projects-import{font-size:12px!important;padding:8px!important;overflow:hidden}
+.pro-projects-import::file-selector-button{min-height:34px;max-width:100%;margin-right:8px;border:1px solid var(--border);border-radius:6px;background:var(--surface-subtle,var(--background));color:var(--ink);padding:5px 9px;font:inherit;cursor:pointer}
+.pro-projects-message{min-height:1.6em;font-size:12px;line-height:1.65;color:var(--primary);overflow-wrap:anywhere}
+.pro-projects-message:empty{display:none}
+.pro-projects-message.is-error{padding:10px 12px;background:var(--danger-bg,#FFF1F2);color:var(--danger);border:1px solid var(--danger);border-radius:var(--radius)}
+.pro-projects-privacy{font-size:11px;border-top:1px solid var(--border);padding-top:12px}
+@media(max-width:420px){.pro-projects{gap:14px}.pro-projects-actions button{flex-basis:100%}.pro-projects-import::file-selector-button{display:block;margin:0 0 6px}.pro-projects select{font-size:12px}}
+@media(forced-colors:active){.pro-projects-state,.pro-projects-message.is-error{border:1px solid CanvasText}.pro-projects-actions .pro-projects-delete{color:ButtonText}}
