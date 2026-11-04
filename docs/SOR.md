@@ -10,7 +10,7 @@ The preference-change event repaints existing bar styles/timeline fills and draw
 
 Version 1.0, approved branch workflow 2 November 2026. Owner: Ijamm.
 
-Self-contained BM digital instrument, recorder and four-lane rhythm game in index.html. No build, external assets, backend or companion runtime is required. Digital exports: JSON full data and CSV timing.
+Self-contained BM/BI digital instrument, recorder and four-lane rhythm game in index.html. No build, external assets, backend or companion runtime is required. Digital exports: JSON full data and CSV timing.
 
 Ten arrangements have short (10–15s) and long versions; exact pitches/onsets/rests are retained. Video-title provenance is labelled, with unverified note/timestamp transcription clearly stated. Eight manual keys A S D F G H J K; game lanes A S D F. Score limits: 512 events and 180s. MIDI 0 means rest.
 
@@ -49,3 +49,9 @@ The eight-instrument chooser uses native family fragment links and retains exist
 UI changes affect the pitched, percussion, Game and instrument-navigation adapters. Core catalog/pitch/game rules, percussion model/audio and instrument configurations remain the existing owners. Percussion practice traces now begin a separate temporary timeline; saved takes/raw evidence are untouched and replay restores the saved trace. Dialog validation/focus recovery and source-aware accessible playback names improve interaction correctness without changing recording schemas or timing.
 
 This task's deliverable is branch ui with accepted VERSION v1.04.0 and an Unreleased candidate record. See `docs/handoffs/ui/LATEST.md` for six-worker provenance, actual test counts, source hashes, browser coverage and limits.
+
+## BM/BI presentation — 4 November 2026
+
+The inline `studio-i18n` owner precedes the instrument controllers. Its exact phrase pairs and anchored parameter templates cover the chooser, eight studios, Game, dialogs, help, validation and accessible attributes. A bounded cache and changed-subtree observer avoid whole-document work on each clock update. Language refresh changes text nodes and display attributes only; it calls no transport/navigation/render action. The separate `e-instru-language` preference defaults to `ms` and accepts `ms`/`en`, with storage-denial and cross-tab fallback handling.
+
+Opaque parameters retain user titles and filenames. Input/textarea values, machine identifiers and exports stay literal; the existing UI owners mark custom imported arrangement/section display text with `data-i18n-ignore`. Known catalog prose is translated for display only. Existing core catalog, validation, timing, game and audio contracts remain unchanged. New default titles are localized only at their creation. See `docs/handoffs/ui-bilingual/LATEST.md` for source identity and verification limits.

@@ -17,7 +17,11 @@ const styles=['display'];
 html=place(html,'styles','<style id="display-styles">\n'+styles.map(name=>read('studio-pro/'+name+'.css')).join('\n')+'\n</style>','</head>');
 html=place(html,'dialog',read('studio-pro/display.html'),'</main>');
 const button='<button type="button" id="displaySettingsBtn" class="display-trigger" aria-haspopup="dialog" aria-controls="displayDialog" aria-expanded="false">Paparan</button>';
-if(!html.includes('id="displaySettingsBtn"'))html=html.replace('</nav></div></header>','</nav>'+button+'</div></header>');
+if(!html.includes('id="displaySettingsBtn"')){
+ const header=html.indexOf('<header class="header">'),navEnd=html.indexOf('</nav>',header);
+ if(header<0||navEnd<0)throw Error('Missing shared header navigation');
+ html=html.slice(0,navEnd+6)+button+html.slice(navEnd+6);
+}
 if(process.argv.includes('--check')){
  if(html!==fs.readFileSync(path.join(root,'index.html'),'utf8')){console.error('Embedded display sources are stale. Run node scripts/embed-display.cjs.');process.exitCode=1;}
  else console.log('Embedded display sources match.');

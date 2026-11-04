@@ -5,9 +5,10 @@ Date: 4 November 2026. Delivery branch: `ui-themes`. Accepted VERSION remains `v
 ## Source boundary
 
 - Repository: https://github.com/unDead41/xylo-studio
-- Base: remote `ui`, `27df2fadadf66cee3f2be26aeafff765e33e515e`.
+- Initial base: remote `ui`, `27df2fadadf66cee3f2be26aeafff765e33e515e`.
+- Integrated current bilingual ui input: `71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c`; both its source and separate language storage are retained.
 - Isolated worktree: `/workspace/scratch/101ad735a109/xylo-studio-themes`.
-- Tested `index.html` SHA-256: `29a633410d127292e68b1472d6986f15e3e1271fb83fd2c22d11227a7093b3a4`.
+- Tested `index.html` SHA-256: `d21f71e94fde4e19e54486dfd5e7a94c7eb98c3dd6f3e886c771a5e45c17483f`.
 - Main/Pages remains `c0ba48bb9c35244354779cc227ecb7c999bff5dd`; this task does not promote main, ui, share or tutorial.
 
 Read AGENTS.md, SOR, branch policy, README, DESIGN, UX contract, VERSION, actual code and UI/layout handoffs before changes. The initial remote UI had only its accepted light palette. A concurrent Studio Pro checkout already contained in-flight `studio-pro/display.js`, `display.css` and `display.html`; those files were copied as the common display seed, preserving `StudioDisplay`, its IDs and `e-instru-display-v1`. The concurrent checkout was not edited, switched, committed or pushed by this task. Auth worker checkouts were audited read-only; this appearance branch is based on ui and does not claim integration of pending account work.
@@ -37,12 +38,18 @@ Workers owned separate source regions/files. Coordinator consolidated CSS into o
 
 ## Actual checks
 
-- `node --test tests/*.test.cjs`: **247 passed, 0 failed, 0 skipped**. UI base had 207; 40 controller/render cases cover preference validation, blocked storage, metadata timing, source sync, modal focus/Escape, cross-tab/system behavior, held/pending recorder input, timeline identity/selection, Game overdue judgment isolation, held pointer/key deduplication and deliberate modal pause. [Full output](verification/node-tests.txt).
-- `node scripts/embed-display.cjs --check`, JavaScript syntax compilation and `git diff --check` pass. All 12 inline scripts compile. 582 unique static markup IDs; no duplicate IDs or unresolved static label/ARIA references. [Script/hash evidence](verification/source-checks.json).
-- Nine existing script owners are byte-identical to ui base, including music/game cores, percussion model/audio/controller/adapters and navigation. Only xylo-ui and xylo-game-ui add visual hooks; studio-display is new. Recording schemas, arrangements, pitches, scoring thresholds and synthesis are unchanged.
+- `node --test tests/*.test.cjs`: **262 passed, 0 failed, 0 skipped**. UI base had 207; 40 controller/render cases cover preference validation, blocked storage, metadata timing, source sync, modal focus/Escape, cross-tab/system behavior, held/pending recorder input, timeline identity/selection, Game overdue judgment isolation, held pointer/key deduplication and deliberate modal pause. [Full output](verification/node-tests.txt).
+- `node scripts/embed-display.cjs --check`, JavaScript syntax compilation and `git diff --check` pass. All 13 inline scripts compile. 585 unique static markup IDs; no duplicate IDs or unresolved static label/ARIA references. [Script/hash evidence](verification/source-checks.json).
+- Nine existing script owners are byte-identical to the bilingual ui input, including music/game cores, percussion model/audio/controller/adapters and navigation. Relative to the current bilingual ui input, only xylo-ui and xylo-game-ui add visual hooks, studio-i18n adds appearance phrases, and studio-display is new. Recording schemas, arrangements, pitches, scoring thresholds and synthesis are unchanged.
 - Supported CUA cloud Chrome checks: desktop light/standard and dark/protanopia; actual eight note textures and matching melody-trace fills; 10 theme/vision combinations fitting a nominal 320px settings iframe; all eight routes without document overflow at nominal 320/390px in dark high contrast; deliberate native Game settings pause/close; readable tritanopia Game pad/key colors; native Escape; saved light/tritanopia settings restored after reload. [Exact observations and limits](verification/browser-checks.json).
 
 Phone frames had client widths 310/380px because of scrollbars; these were not physical touch-device or screen-reader sessions. No microphone, acoustic/speaker, Safari/Firefox or hosted Pages deployment verification is claimed. Some workers ran intermediate standalone render experiments before coordination; the combined browser evidence above uses the supported CUA surface and is the authority for this handoff.
+
+## Bilingual input compatibility
+
+The remote ui branch advanced to the BM/BI candidate during delivery. The final theme branch integrates that commit as a second parent. Shared HTML/header/style conflicts were composed without replacing either owner; custom metadata guards remain. Twenty-eight appearance phrases extend the existing translator, and a new actual-inline regression checks display labels, all save statuses and Game-settings pause text BM to English to BM while preserving native select values, option/control identity and listeners. The combined total is 262 passing tests (including all 15 localization tests). Accepted version and publishing target stay unchanged.
+
+Supported CUA checks also verified all ten appearance combinations in the English modal at nominal 320px, all eight English studio headings/widths at nominal 320/390px, and the translated deliberate Game pause message. Combined header heights were about 160/108px; the narrow anchor-focus offset is 180px so headings clear the wrapped controls. English low-life text has its own CSS content override.
 
 ## Concurrent Studio Pro integration
 

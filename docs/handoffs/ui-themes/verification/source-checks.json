@@ -1,8 +1,9 @@
 {
-  "base": "27df2fadadf66cee3f2be26aeafff765e33e515e",
-  "index_sha256": "29a633410d127292e68b1472d6986f15e3e1271fb83fd2c22d11227a7093b3a4",
-  "inline_scripts": 12,
+  "base": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c",
+  "index_sha256": "d21f71e94fde4e19e54486dfd5e7a94c7eb98c3dd6f3e886c771a5e45c17483f",
+  "inline_scripts": 13,
   "changed": [
+    "studio-i18n",
     "xylo-ui",
     "xylo-game-ui"
   ],

@@ -367,3 +367,7 @@ html[data-vision=contrast] .display-notes span{border-color:#142632}
  html:not([data-vision=standard]) :is(.bar:focus-visible,.recorder-pad:focus-visible,.studio-action-pad:focus-visible,.game-pads button:focus-visible){outline:3px solid Highlight}
  html:not([data-vision=standard]) :is(.perc-event,.perc-event[data-secondary=true],.display-state){color:CanvasText;border-color:CanvasText}
 }
+
+html[lang=en]:not([data-vision=standard]) .game-life.is-low label:after{content:" · Low"}
+
+@media(max-width:360px){html:root{--focus-offset:180px}}

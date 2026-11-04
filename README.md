@@ -1,10 +1,13 @@
 # e-Instru Studio
 
+Versi **v1.04.0**. Alat muzik digital dan permainan rentak BM/BI dalam satu HTML kendiri.
+
+Pilihan **BM / BI** pada header menukar bahasa antara Bahasa Melayu dan English untuk pemilih instrumen, semua studio, permainan, panduan, dialog serta mesej ralat. Pilihan disimpan pada pelayar ini. Bahasa boleh ditukar ketika sesi sedang berjalan; teks dikemas kini tanpa memuat semula aplikasi. Nama rakaman, data asal dan eksport JSON/CSV dikekalkan.
+
 Gunakan **Paparan** di bahagian atas untuk memilih **Cerah**, **Gelap** atau **Ikut peranti**. Pilihan warna boleh ditetapkan berasingan kepada warna asal, protanopia, deuteranopia, tritanopia atau kontras tinggi. Mod bantuan menggunakan label not/kekunci, corak bar, garisan tindakan dan tanda keadaan bersama warna. Pilihan disimpan dalam pelayar; jika simpanan disekat, pilihan masih berfungsi untuk sesi semasa.
 
 Paparan tersedia pada pemilih instrumen, semua lapan studio dan Permainan. Membuka tetapan menjeda Permainan yang sedang berjalan; gunakan Sambung selepas selesai. Perubahan tema sendiri hanya mengecat semula paparan. Sumber paparan ialah `studio-pro/display.js`, `display.css` dan `display.html`; jalankan `node scripts/embed-display.cjs` selepas menyuntingnya, kemudian `node scripts/embed-display.cjs --check` dan `node --test tests/*.test.cjs`.
 
-Versi **v1.04.0**. Alat muzik digital dan permainan rentak BM dalam satu HTML kendiri.
 
 Buka [laman](https://undead41.github.io/xylo-studio/) atau muat turun ZIP branch [share](https://github.com/unDead41/xylo-studio/tree/share), extract dan buka index.html dalam Chrome/Edge. Tiada pemasangan, akaun atau backend diperlukan. Mikrofon pilihan memerlukan HTTPS/localhost serta kebenaran pengguna.
 

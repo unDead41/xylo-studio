@@ -1,6 +1,5 @@
 {
   "date": "2026-11-04",
-  "source_sha256": "29a633410d127292e68b1472d6986f15e3e1271fb83fd2c22d11227a7093b3a4",
   "surface": "Supported CUA cloud Chrome (CDP), managed preview",
   "desktop": {
     "client_width": 1353,
@@ -113,5 +112,36 @@
     "Browser preview is shared with concurrent work; source title/controls were checked after reclaiming it.",
     "Two responsive locator issues were corrected using actual source IDs and native keyboard activation; no product code workaround was added.",
     "Screenshots were visually inspected through CUA; no screenshot file is attached to this handoff."
-  ]
+  ],
+  "initial_source_sha256": "29a633410d127292e68b1472d6986f15e3e1271fb83fd2c22d11227a7093b3a4",
+  "final_source_sha256": "d21f71e94fde4e19e54486dfd5e7a94c7eb98c3dd6f3e886c771a5e45c17483f",
+  "combined_bilingual": {
+    "ui_input": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c",
+    "language": "en",
+    "dialog_combinations_at_320": 10,
+    "dialog_outer_width": 292,
+    "dialog_client_and_scroll": 290,
+    "routes_at_320_and_390": [
+      "Xylophone",
+      "Soprano Recorder",
+      "Tambourine",
+      "Kompang",
+      "Snare Drum",
+      "Bass Drum",
+      "Cymbals",
+      "Triangle"
+    ],
+    "all_document_widths_match": true,
+    "client_widths": [
+      310,
+      380
+    ],
+    "header_heights": [
+      159.796875,
+      107.796875
+    ],
+    "game_settings_pause_message": "The game is paused for appearance settings. Press Resume when you are done.",
+    "game_phase": "paused",
+    "appearance_heading": "Comfortable display"
+  }
 }

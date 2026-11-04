@@ -1,0 +1,20 @@
+{
+  "source_sha256": "51afd08175344aed184d1cc8ac123cf6c5fd69c04e535dd99770596a504751ab",
+  "base_ui": "27df2fa",
+  "inline_scripts_compiled": 12,
+  "protected_script_bodies_unchanged": {
+    "xylo-core": true,
+    "xylo-game-core": true,
+    "xylo-game-ui": true,
+    "percussion-core": true,
+    "percussion-audio": true,
+    "tamborin-ui": true,
+    "kompang-ui": true,
+    "school-band-ui": true,
+    "instrument-navigation": true
+  },
+  "external_script_sources": [],
+  "html_ids": 571,
+  "duplicate_ids": [],
+  "missing_label_or_aria_references": []
+}

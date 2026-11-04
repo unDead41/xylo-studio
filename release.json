@@ -2,22 +2,22 @@
   "version": "v1.04.0",
   "repository": "unDead41/xylo-studio",
   "date": "2026-11-04",
-  "status": "ui_candidate",
+  "status": "ui_themes_candidate",
   "publishing": {
     "branch": "main",
     "directory": "/"
   },
-  "index_sha256": "46d1afe230d520223456231f86d2a1b9d8d04a04f96d8fbca5ba810bab3c5ebd",
+  "index_sha256": "d21f71e94fde4e19e54486dfd5e7a94c7eb98c3dd6f3e886c771a5e45c17483f",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
-    "passed": 207,
+    "passed": 262,
     "failed": 0
   },
-  "source_base": "c0ba48bb9c35244354779cc227ecb7c999bff5dd",
+  "source_base": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c",
   "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
   "integrated_tamborin_sha": "7cf77b7e275b94717748cb80aed73f6680daa59e",
   "previous_release_audit": "docs/audits/main/LATEST.md",
-  "integration_handoff": "docs/handoffs/ui/LATEST.md",
+  "integration_handoff": "docs/handoffs/ui-themes/LATEST.md",
   "previous_browser_verification": {
     "commands": [
       "node tests/browser-layout.cjs",
@@ -42,9 +42,10 @@
     "triangle"
   ],
   "browser_tests": {
-    "method": "Manual supported CUA cloud Chromium UI checks through managed preview",
-    "evidence": "docs/handoffs/ui/verification/browser-verification.json",
-    "scope": "Manual eight-route narrow layout, native dialog/focus/export, percussion session/trace and Game phase/result checks; see evidence for exact limits."
+    "status": "manually_verified_with_limits",
+    "method": "Supported CUA cloud Chrome through managed preview",
+    "evidence": "docs/handoffs/ui-themes/verification/browser-checks.json",
+    "scope": "Desktop theme/vision, narrow modal combinations, eight routes, English display compatibility, persistence and deliberate Game pause. Iframe widths; no physical touch/audio or screen-reader claim."
   },
   "previous_integration_handoff": "https://github.com/unDead41/xylo-studio/blob/e84a0ca767858582d3faf240c62376b6e2574419/docs/handoffs/ui/LATEST.md",
   "integrated_ui_layout_sha": "e84a0ca767858582d3faf240c62376b6e2574419",
@@ -53,6 +54,45 @@
     "index_sha256": "14b40fd23038ae64008755fee015e64740cb0c8945f551e4d5541503963cda7b",
     "handoff": "docs/handoffs/instrument-pancaragam/LATEST.md"
   },
-  "candidate_branch": "ui",
-  "previous_ui_head": "115e54d87b10804ae6f94ff0efe895099d035e20"
+  "candidate_branch": "ui-themes",
+  "previous_ui_head": "27df2fadadf66cee3f2be26aeafff765e33e515e",
+  "previous_ui_integration_handoff": "docs/handoffs/ui/LATEST.md",
+  "previous_ui_browser_tests": {
+    "method": "Manual supported CUA cloud Chromium UI checks through managed preview",
+    "evidence": "docs/handoffs/ui/verification/browser-verification.json",
+    "scope": "Manual eight-route narrow layout, native dialog/focus/export, percussion session/trace and Game phase/result checks; see evidence for exact limits."
+  },
+  "localization": {
+    "languages": [
+      "ms",
+      "en"
+    ],
+    "default": "ms",
+    "preference_key": "e-instru-language",
+    "exact_phrase_pairs": 1054,
+    "anchored_templates": 89,
+    "tests": 15
+  },
+  "previous_ui_bilingual_candidate": {
+    "sha": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c",
+    "index_sha256": "51afd08175344aed184d1cc8ac123cf6c5fd69c04e535dd99770596a504751ab",
+    "handoff": "docs/handoffs/ui-bilingual/LATEST.md"
+  },
+  "appearance": {
+    "preference_key": "e-instru-display-v1",
+    "themes": [
+      "system",
+      "light",
+      "dark"
+    ],
+    "vision_modes": [
+      "standard",
+      "protanopia",
+      "deuteranopia",
+      "tritanopia",
+      "contrast"
+    ],
+    "source": "studio-pro/display.js",
+    "embed_check": "node scripts/embed-display.cjs --check"
+  }
 }

@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased — appearance, ui-themes branch, 2026-11-04
+
+- Add persistent Cerah/Gelap/Ikut peranti and independent color-vision/high-contrast preferences through one shared appearance dialog.
+- Pair note palettes with textures, clear labels and state/action boundaries; theme the shared studios, timeline and Game without changing recording or Game judgments.
+- Pause a running Game deliberately while its appearance modal is open. Preserve current BM/BI UI and translate the new controls/statuses in place.
+- Verify 262 host tests, source sync and supported Chrome desktop/narrow checks. Preserve accepted v1.04.0 and main/Pages.
+
+## Unreleased — BM/BI, ui branch, 2026-11-04
+
+- Add a persistent BM/BI language selector available on the chooser and every studio/game view.
+- Localize visible text, generated feedback, validation, dialogs and accessible labels in place; preserve active controls, user text, recording evidence and exports.
+- Keep translations inside the standalone HTML, including dynamic phrases from all eight instruments and the game. Preserve accepted v1.04.0.
+
 ## Unreleased — overall UI/UX, ui branch, 2026-11-04
 
 - Group eight compact instrument cards by musical family, retain physical artwork and add native keyboard-friendly jump navigation.
