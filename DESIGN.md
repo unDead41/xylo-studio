@@ -105,3 +105,5 @@ Game presents its selected challenge and phase before the arena. Setup guidance 
 | Equivalent action names | Pitched play used a generic score label | Main lagu/Main rakaman names follow the current take |
 | Shared modal owner | Edited rows could lose focus after rebuilding | Native modal semantics plus explicit editor focus recovery |
 | Stable record context | Practice and saved percussion trace could mix | Shared trace-source state and separate temporary practice trace |
+
+BM/BI uses a compact native select beside the mode navigation, outside its hidden chooser state. The header may wrap on narrow widths; controls retain a 44px target and use the existing colour/focus tokens. One inline translation owner passively updates known text and accessible attributes, preserving live controls and form contents. The corpus is bundled with the standalone HTML; no translation service, font, dependency or network request is added.

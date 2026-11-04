@@ -298,12 +298,15 @@ dialog{width:min(640px,calc(100vw - 28px));max-width:640px;max-height:calc(100dv
 #instrumentChooser .choice-copy>.eyebrow{font-size:10px}#instrumentChooser .choose-family>p{font-size:13px}
 .password-field{display:flex;align-items:center;gap:8px}.password-field input{flex:1;min-width:0}.password-field button{min-width:90px;font-size:13px;min-height:44px}
 </style>
+<style id="language-style">
+.header{height:auto;min-height:72px}.header-inner{min-height:72px;flex-wrap:wrap;padding-block:10px;gap:10px}.header-tools{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto;min-width:0}.language-control{display:flex;align-items:center;gap:6px;flex-shrink:0}.language-control select{width:70px;min-height:44px;padding:7px 9px;font-weight:650;background:var(--surface);color:var(--ink);border:1px solid var(--border);border-radius:10px}.language-control select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}@media(max-width:540px){:root{--focus-offset:150px}.header-inner{gap:8px}.header-tools{gap:8px}.header-tools .mode-switch button{font-size:12px;padding:7px 10px}.language-control select{width:66px}.brand-name{font-size:21px}}@media(max-width:360px){.header-tools{flex-wrap:wrap}.brand-name{font-size:20px}}
+</style>
 </head>
 <body>
 <svg aria-hidden="true" style="display:none"><defs>
 <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol><symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-5 5 5-5 5 5M4 16v4h16v-4"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="m8 4-5 5 5 5M3 9h10a7 7 0 0 1 0 14"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/></symbol><symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.7 8.5a2.5 2.5 0 1 1 4.4 1.6c-1.3 1-2.1 1.2-2.1 3M12 17h.01"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></symbol><symbol id="i-edit" viewBox="0 0 24 24"><path d="m14 4 6 6M3 21l5-1L21 7a3 3 0 0 0-5-5L3 15Z"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V3h8v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
 </defs></svg>
-<header class="header"><div class="header-inner"><div class="brand"><div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div><div class="brand-name">e-Instru <span>Studio</span></div><span class="app-version" id="appVersion" aria-label="Versi 1.04.0">V1.04.0</span></div><nav id="modeSwitch" class="mode-switch" hidden aria-label="Mod e-Instru Studio"><button id="studioModeBtn" aria-pressed="true">Studio</button><button id="gameModeBtn" aria-pressed="false">Permainan</button></nav></div></header>
+<header class="header"><div class="header-inner"><div class="brand"><div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div><div class="brand-name">e-Instru <span>Studio</span></div><span class="app-version" id="appVersion" aria-label="Versi 1.04.0">V1.04.0</span></div><div class="header-tools"><nav id="modeSwitch" class="mode-switch" hidden aria-label="Mod e-Instru Studio"><button id="studioModeBtn" aria-pressed="true">Studio</button><button id="gameModeBtn" aria-pressed="false">Permainan</button></nav><label class="language-control"><select id="languageSelect" aria-label="Pilih bahasa"><option value="ms" lang="ms">BM</option><option value="en" lang="en">BI</option></select></label></div></div></header>
 <main>
 
 <section id="instrumentChooser" class="instrument-chooser" aria-labelledby="chooseHeading">
@@ -574,6 +577,1466 @@ dialog{width:min(640px,calc(100vw - 28px));max-width:640px;max-height:calc(100dv
 <dialog id="cymReplaceDialog" aria-labelledby="cymReplaceHeading" aria-describedby="cymReplaceText"><div class="dialog-head"><h2 id="cymReplaceHeading">Mulakan rakaman Simbal baharu?</h2></div><div class="dialog-body"><p id="cymReplaceText">Rakaman semasa akan diganti. Simpan JSON dahulu jika anda mahu menyimpannya.</p></div><div class="dialog-actions"><button id="cymCancelRecord" autofocus>Batal</button><button id="cymConfirmRecord" class="danger">Mula rakaman baharu</button></div></dialog>
 <dialog id="triReplaceDialog" aria-labelledby="triReplaceHeading" aria-describedby="triReplaceText"><div class="dialog-head"><h2 id="triReplaceHeading">Mulakan rakaman Segi Tiga baharu?</h2></div><div class="dialog-body"><p id="triReplaceText">Rakaman semasa akan diganti. Simpan JSON dahulu jika anda mahu menyimpannya.</p></div><div class="dialog-actions"><button id="triCancelRecord" autofocus>Batal</button><button id="triConfirmRecord" class="danger">Mula rakaman baharu</button></div></dialog>
 
+<script id="studio-i18n">
+(function (root) {
+  'use strict';
+
+  // Insert comma-separated dictionary members at these markers. No fetched data
+  // or external runtime is needed; an empty corpus is a safe no-op.
+  const entries = [["e-Instru Studio — Pilih instrumen anda", "e-Instru Studio — Choose your instrument"],
+    ["e-Instru Studio: main lapan instrumen sekolah termasuk xylophone, rekoder dan perkusi pancaragam, rakam melodi atau rentak, cuba 10 lagu dan eksport JSON/CSV. HTML kendiri tanpa akaun.", "e-Instru Studio: play eight school instruments including xylophone, recorder and band percussion, record melodies or rhythms, try 10 songs and export JSON/CSV. A standalone HTML app with no account required."],
+    ["Versi 1.04.0", "Version 1.04.0"],
+    ["Mod e-Instru Studio", "e-Instru Studio mode"],
+    ["Permainan", "Game"],
+    ["STUDIO MUZIK DIGITAL", "DIGITAL MUSIC STUDIO"],
+    ["Pilih instrumen anda", "Choose your instrument"],
+    ["Mulakan dengan melodi atau rentak.", "Start with a melody or a rhythm."],
+    ["Pilih instrumen untuk bermain, merakam dan meneroka bunyi.", "Choose an instrument to play, record and explore sound."],
+    ["Terus ke kumpulan instrumen", "Jump to an instrument group"],
+    ["Melodi", "Melody"],
+    ["2 instrumen", "2 instruments"],
+    ["Rentak & tradisi", "Rhythm & tradition"],
+    ["Pancaragam", "School band"],
+    ["4 instrumen", "4 instruments"],
+    ["Klik atau sentuh kad untuk masuk. Dengan papan kekunci, gunakan", "Click or tap a card to enter. On a keyboard, use"],
+    ["kemudian", "then"],
+    ["Melodi & nada", "Melody & pitch"],
+    ["Ikut lagu dan kenali tinggi rendah bunyi.", "Follow a song and explore high and low sounds."],
+    ["Pilih Xylophone", "Choose Xylophone"],
+    ["PERKUSI BERPIC", "PITCHED PERCUSSION"],
+    ["Lapan bar berwarna untuk lagu dan melodi pertama anda.", "Eight colourful bars for your first songs and melodies."],
+    ["Di studio", "In the studio"],
+    ["Buka studio", "Open studio"],
+    ["Pilih Rekoder Soprano", "Choose Soprano Recorder"],
+    ["ALAT TIUP KAYU", "WOODWIND"],
+    ["Rekoder Soprano", "Soprano Recorder"],
+    ["Tahan nada dan teroka panduan penjarian Baroque.", "Hold a note and explore the Baroque fingering guide."],
+    ["Teroka ketukan tangan dan corak rentak.", "Explore hand percussion and rhythm patterns."],
+    ["Pilih Tamborin", "Choose Tambourine"],
+    ["PERKUSI TIDAK BERPIC", "UNPITCHED PERCUSSION"],
+    ["Tamborin", "Tambourine"],
+    ["Ketuk kulit atau goncang untuk rentak dan deringan.", "Tap the head or shake for rhythms and jingles."],
+    ["Ruang / G", "Space / G"],
+    ["Pilih Kompang", "Choose Kompang"],
+    ["Bezakan bunyi tengah yang rendah dan tepi yang tajam.", "Compare the low centre tone with the crisp edge tone."],
+    ["Perkusi sekolah & pancaragam", "School & band percussion"],
+    ["Gabungkan detik, aksen dan tekstur bunyi.", "Combine beats, accents and sound textures."],
+    ["Pilih Dram Sisi", "Choose Snare Drum"],
+    ["PERKUSI PANCARAGAM", "BAND PERCUSSION"],
+    ["Dram Sisi", "Snare Drum"],
+    ["Ketuk kulit dan rim untuk rentak kawad yang rangup.", "Tap the head and rim for crisp marching rhythms."],
+    ["Pilih Dram Bes", "Choose Bass Drum"],
+    ["Dram Bes", "Bass Drum"],
+    ["Latih detik kuat dan lembut dengan hentakan rendah.", "Practise strong and soft beats with a deep drum tone."],
+    ["Pilih Simbal", "Choose Cymbals"],
+    ["Simbal", "Cymbals"],
+    ["Laga kuat atau lembut untuk menandakan aksen.", "Crash strongly or softly to mark accents."],
+    ["Pilih Segi Tiga", "Choose Triangle"],
+    ["PERKUSI BILIK DARJAH", "CLASSROOM PERCUSSION"],
+    ["Segi Tiga", "Triangle"],
+    ["Bandingkan deringan terbuka dengan ketukan tertahan.", "Compare an open ring with a muted strike."],
+    ["Ruang untuk mencuba, tanpa akaun.", "A space to explore, with no account required."],
+    ["Semua instrumen menggunakan bunyi sintesis digital.", "All instruments use digitally synthesised sound."],
+    ["Rakaman setiap instrumen disimpan dalam pelayar ini. Eksport JSON di studio untuk menyimpan salinan.", "Each instrument's recordings are saved in this browser. Export JSON in the studio to keep a backup."],
+    ["Kembali ke atas", "Back to top"],
+    ["STUDIO ANDA", "YOUR STUDIO"],
+    ["Tukar instrumen", "Change instrument"],
+    ["Papan xylophone anda", "Your xylophone"],
+    ["Ketuk bar atau tekan A S D F G H J K untuk terus bermain.", "Tap a bar or press A S D F G H J K to play."],
+    ["Untuk menyimpan: tekan Rakam, mainkan not, kemudian Henti.", "To save: press Record, play your notes, then Stop."],
+    ["Lapan bar xylophone", "Eight xylophone bars"],
+    ["Sedia untuk diketuk", "Ready to play"],
+    ["Bunyi sintetik", "Synthesised sound"],
+    ["SOPRANO DALAM C · BAROQUE", "SOPRANO IN C · BAROQUE"],
+    ["Penjarian C5", "C5 fingering"],
+    ["○ Terbuka", "○ Open"],
+    ["⊗ Tertutup", "⊗ Closed"],
+    ["◐ Separa", "◐ Partly open"],
+    ["Lapan pad rekoder soprano", "Eight soprano recorder pads"],
+    ["Label C–C′ berbunyi C5–C6. Tahan pad atau kekunci untuk memanjangkan nada; lepaskan untuk berhenti.", "Labels C–C′ sound at C5–C6. Hold a pad or key to sustain a note; release to stop."],
+    ["Rakam rekoder melalui pad atau papan kekunci. Pengesan mikrofon belum menyokong rekoder.", "Record the recorder using pads or the keyboard. Microphone detection does not yet support the recorder."],
+    ["Not tambahan score", "Additional score notes"],
+    ["Rujukan penjarian & julat bunyi", "Fingering & pitch range reference"],
+    ["Sistem Baroque sahaja. T ialah lubang ibu jari di belakang; 1–7 di hadapan. Lubang 6 dan 7 ialah lubang berkembar. Rajah menunjukkan pola asas Yamaha; variasi model boleh berbeza. Julat soprano C5–D7 (MIDI 72–98); pad asas C5–C6. Bunyi sintesis, bukan sampel rakaman alat sebenar.", "Baroque system only. T is the thumb hole at the back; 1–7 are on the front. Holes 6 and 7 are double holes. The diagram shows Yamaha's basic patterns; instrument models may vary. Soprano range: C5–D7 (MIDI 72–98); basic pads: C5–C6. Sound is synthesised rather than sampled from an acoustic instrument."],
+    ["Carta Yamaha (Baroque)", "Yamaha chart (Baroque)"],
+    ["Julat AULOS soprano", "AULOS soprano range"],
+    ["Rakaman dan main semula", "Recording and playback"],
+    ["Rakam", "Record"],
+    ["Main score", "Play score"],
+    ["Henti bunyi, main semula atau rakaman", "Stop sound, playback or recording"],
+    ["Henti", "Stop"],
+    ["Mikrofon", "Microphone"],
+    ["Klik Rakam untuk menyimpan ketukan anda.", "Press Record to save your notes."],
+    ["Tap tempo: ketuk untuk menganggar BPM", "Tap tempo: tap to estimate BPM"],
+    ["Ketuk sekurang-kurangnya tiga kali mengikut beat", "Tap at least three times to the beat"],
+    ["Oktav", "Octave"],
+    ["Metronom", "Metronome"],
+    ["Kembali ke awal dan tempo asal; semua not dikekalkan", "Return to the start and original tempo; keep all notes"],
+    ["Seret tempo 40–200 BPM untuk mengubah playback dan masa score serta-merta. Masa input asal dikekalkan. Tempo dikunci semasa rakaman.", "Drag the tempo from 40–200 BPM to update playback and score timing immediately. Original input times are preserved. Tempo is locked while recording."],
+    ["Panduan papan kekunci & rakaman", "Keyboard & recording guide"],
+    ["A S D F G H J K memainkan lapan not. Gunakan Tab untuk memilih kawalan; Enter atau Ruang membunyikan bar yang difokuskan.", "A S D F G H J K play eight notes. Use Tab to focus a control; Enter or Space plays the focused bar."],
+    ["Tekan Rakam sebelum bermain dan Henti apabila selesai. Ketukan pertama menjadi masa sifar. Main semula, metronom dan dengar not dalam jejak tidak menambah ketukan pada rakaman.", "Press Record before playing and Stop when finished. The first note sets time zero. Playback, the metronome and previewing timeline notes do not add notes to your recording."],
+    ["Sepuluh lagu dalam video rujukan", "Ten songs from the reference video"],
+    ["10 lagu untuk latihan", "10 songs to practise"],
+    ["Versi lagu", "Song version"],
+    ["Panjang", "Full version"],
+    ["Petikan pendek", "Short excerpt"],
+    ["Jejak melodi", "Melody timeline"],
+    ["Klik not untuk dengar bunyinya.", "Click a note to hear it."],
+    ["Not", "Note"],
+    ["Anggaran mikrofon", "Microphone estimate"],
+    ["Jejak melodi yang boleh ditatal", "Scrollable melody timeline"],
+    ["Jejak not mengikut masa", "Notes over time"],
+    ["Data ketukan", "Tap data"],
+    ["Undur", "Undo"],
+    ["Kosongkan", "Clear"],
+    ["Not, masa score, tempoh beat dan masa input asal. Gunakan butang Sunting pada setiap baris untuk mengubah score.", "Notes, score time, beat duration and original input time. Use each row's Edit button to change the score."],
+    ["Masa score", "Score time"],
+    ["Asal / bukti", "Source / evidence"],
+    ["Sunting not", "Edit note"],
+    ["Score semasa", "Current score"],
+    ["Cadangan", "Suggested"],
+    ["Nama lagu atau rakaman", "Song or recording name"],
+    ["NOT", "NOTES"],
+    ["DURASI SCORE", "SCORE DURATION"],
+    ["Sasaran 10–15 saat", "Target: 10–15 seconds"],
+    ["Lead-in dan resonans tidak dikira.", "Count-in and resonance are excluded."],
+    ["Kemas rentak (quantize)", "Quantize rhythm"],
+    ["Halus — 1 tick", "Fine — 1 tick"],
+    ["Not 1/16 — ¼ beat", "1/16 note — ¼ beat"],
+    ["Not 1/8 — ½ beat", "1/8 note — ½ beat"],
+    ["Not 1/4 — 1 beat", "1/4 note — 1 beat"],
+    ["Panjang not terakhir", "Final note length"],
+    ["Tetapan ini mengemas score main semula. Masa input asal kekal dalam rakaman dan JSON.", "These settings adjust the playback score. Original input times remain in the recording and JSON."],
+    ["Saya telah semak semua not anggaran mikrofon.", "I have reviewed all estimated microphone notes."],
+    ["Eksport JSON / CSV", "Export JSON / CSV"],
+    ["Eksport JSON terus", "Export JSON directly"],
+    ["Score cadangan projek. Not dan timestamp video rujukan belum disahkan.", "Suggested project arrangement. Reference video notes and timestamps have not been verified."],
+    ["Disimpan di pelayar ini", "Saved in this browser"],
+    ["8 not maya · 24 tick/quarter · HTML: 512 event / 180 saat", "8 virtual notes · 24 ticks/quarter · HTML: 512 events / 180 seconds"],
+    ["Rakaman input disimpan mengikut masa pelayar.", "Input recordings use the browser clock."],
+    ["Bahasa", "Language"],
+    ["Pilih bahasa", "Choose language"],
+    ["Rekoder Soprano · e-Instru Studio", "Soprano Recorder · e-Instru Studio"],
+    ["Studio Rekoder Soprano · Tahan pad untuk memanjangkan nada.", "Soprano Recorder studio · Hold a pad to sustain a note."],
+    ["Studio Xylophone · Ketuk satu bar untuk bermula.", "Xylophone studio · Tap a bar to begin."],
+    ["Rekoder Soprano anda", "Your soprano recorder"],
+    ["Rekoder Soprano maya", "Virtual soprano recorder"],
+    ["Xylophone maya", "Virtual xylophone"],
+    ["Rekoder soprano Baroque, lubang hadapan 1 hingga 7 dan ibu jari belakang T", "Baroque soprano recorder, front holes 1–7 and rear thumb hole T"],
+    ["T · belakang", "T · rear"],
+    ["1–7 · lubang hadapan", "1–7 · front holes"],
+    ["T belakang", "Rear T"],
+    ["not tambahan", "additional note"],
+    ["Tambahan", "Additional"],
+    ["Rehat", "Rest"],
+    ["Sedia", "Ready"],
+    ["Rehat · tiada tiupan", "Rest · no blowing"],
+    ["Penjarian not ini belum disediakan", "Fingering is not available for this note"],
+    ["Tutup", "Closed"],
+    ["Separa", "Partly open"],
+    ["Buka", "Open"],
+    ["Tahan pad atau kekunci A S D F G H J K. Lepaskan untuk berhenti.", "Hold a pad or the A S D F G H J K keys. Release to stop."],
+    ["Tahan A S D F G H J K untuk memanjangkan nada; lepaskan untuk berhenti. Gunakan Tab untuk memilih kawalan. Enter atau Ruang pada pad yang difokuskan memainkan nada pendek.", "Hold A S D F G H J K to sustain notes; release to stop. Use Tab to choose a control. Enter or Space on a focused pad plays a short note."],
+    ["Instrumen rakaman: Rekoder Soprano", "Recording instrument: Soprano Recorder"],
+    ["Instrumen rakaman: Xylophone", "Recording instrument: Xylophone"],
+    ["Hentikan score sebelum memainkan pad.", "Stop the score before playing the pads."],
+    ["Simpanan pelayar tidak tersedia — eksport JSON untuk simpan", "Browser storage is unavailable — export JSON to save a copy"],
+    ["Hentikan playback atau rakaman dahulu.", "Stop playback or recording first."],
+    ["Not tidak pasti", "Uncertain note"],
+    ["Audio dijeda pelayar. Tekan Main atau Rakam untuk sambung.", "The browser paused the audio. Press Play or Record to continue."],
+    ["Bunyi tidak tersedia. Rakaman mouse dan eksport masih boleh digunakan.", "Sound is unavailable. You can still record taps with the mouse and export data."],
+    ["Hentikan score untuk merakam melodi sendiri.", "Stop the score to record your own melody."],
+    ["Mikrofon aktif — ketuk satu bar pada satu masa.", "Microphone active — strike one bar at a time."],
+    ["Sedia merakam. Ketuk not pertama untuk memulakan masa.", "Ready to record. Tap the first note to start timing."],
+    ["Had512event dicapai. Rakaman sudah disimpan.", "The 512-event limit has been reached. Your recording is saved."],
+    ["Had180s dicapai. Semak hujung score sebelum eksport.", "The 180-second limit has been reached. Check the end of the score before exporting."],
+    ["Had512event dicapai. Semak rakaman anda.", "The 512-event limit has been reached. Check your recording."],
+    ["Mula dengar & rakam", "Start listening & recording"],
+    ["Dihentikan", "Stopped"],
+    ["Rakaman disimpan. Semak not dan rentak sebelum eksport.", "Recording saved. Check the notes and rhythm before exporting."],
+    ["Tiada ketukan direkod. Cuba rakam semula.", "No taps were recorded. Try recording again."],
+    ["Sedia. Klik bar atau pilih lagu untuk cuba.", "Ready. Click a bar or choose a song to try."],
+    ["Menyiapkan bunyi…", "Preparing sound…"],
+    ["Audio tidak tersedia. Anda masih boleh rakam ketukan atau eksport data.", "Audio is unavailable. You can still record taps or export data."],
+    ["Playback dihentikan kerana pelayar terlewat. Main semula dari awal.", "Playback stopped because the browser fell behind. Play again from the start."],
+    ["Score tamat. Pilih Rakam untuk cuba melodi anda sendiri.", "Score finished. Choose Record to try your own melody."],
+    ["Hentikan rakaman sebelum mengubah tempo.", "Stop recording before changing tempo."],
+    ["Tempo mesti40–200 BPM dan score tidak melebihi180s.", "Tempo must be 40–200 BPM and the score must stay within 180 seconds."],
+    ["Rakaman dihentikan pada had180s. Semak hujung score sebelum eksport.", "Recording stopped at the 180-second limit. Check the end of the score before exporting."],
+    ["Henti rakaman", "Stop recording"],
+    ["Rakam not anda", "Record your notes"],
+    ["Henti score", "Stop score"],
+    ["Main lagu", "Play song"],
+    ["Main rakaman", "Play recording"],
+    ["Pengesan mikrofon hanya untuk xylophone; rekoder belum disokong.", "Microphone detection supports xylophone only; recorder is not supported yet."],
+    ["Analisis xylophone secara tempatan", "Analyse xylophone locally"],
+    ["Jejak melodi. Pilih not dengan Tab, kemudian Enter atau Ruang untuk dengar; pitch di luar lapan bar turut ditunjukkan.", "Melody timeline. Select a note with Tab, then press Enter or Space to hear it; pitches outside the eight bars are also shown."],
+    ["Tekan Rakam dan mainkan not untuk mengisi jejak.", "Press Record and play notes to fill the timeline."],
+    ["Belum ada ketukan. Tekan Rakam, mainkan not, kemudian Henti. Data dan masa input akan muncul di sini.", "No taps yet. Press Record, play notes, then Stop. Your data and input times will appear here."],
+    ["Anggaran · disemak", "Estimate · checked"],
+    ["Anggaran · perlu semak", "Estimate · needs review"],
+    ["Score cadangan", "Suggested score"],
+    ["belum diketahui", "not identified"],
+    ["Sedia untuk rakaman pertama", "Ready for your first recording"],
+    ["Dalam sasaran 10–15 saat", "Within the 10–15 second target"],
+    ["Tekan Rakam, mainkan not dan Henti. Anda juga boleh memilih lagu latihan.", "Press Record, play notes, then Stop. You can also choose a practice song."],
+    ["Lead-in dan ekor resonans tidak dikira.", "Lead-in time and the resonance tail are not counted."],
+    ["Score kosong", "Empty score"],
+    ["Cadangan · panjang", "Suggested · long"],
+    ["Mikrofon · anggaran", "Microphone · estimate"],
+    ["Rakaman sendiri", "Your recording"],
+    ["Pitch dan onset mikrofon ialah anggaran. Semakan manual tidak menggantikan pengesahan akustik berkalibrasi.", "Microphone pitch and onset readings are estimates. Manual checks do not establish calibrated acoustic verification."],
+    ["JSON mengekalkan masa input asal. Score grid boleh disunting tanpa mengubah log input.", "JSON keeps the original input times. The score grid can be edited without changing the input log."],
+    ["Klik not atau pilih dengan Tab, kemudian Enter / Ruang untuk dengar. Sunting melalui ikon pensel dalam Data ketukan.", "Click a note, or select it with Tab and press Enter / Space to hear it. Use the pencil icon in Tap data to edit it."],
+    ["Tekan Rakam, mainkan not dan Henti. Jejak melodi akan terisi bersama Data ketukan.", "Press Record, play notes, then Stop. The Melody timeline and Tap data will fill together."],
+    ["Pilih not…", "Choose a note…"],
+    ["Not belum diketahui. Sunting not melalui ikon pensel dalam Data ketukan.", "The note has not been identified. Use the pencil icon in Tap data to edit it."],
+    ["Mikrofon rekoder belum disokong. Gunakan pad atau papan kekunci.", "Recorder microphone input is not supported yet. Use the pads or keyboard."],
+    ["Rakaman mikrofon dihentikan. Semak setiap not anggaran.", "Microphone recording stopped. Check every estimated note."],
+    ["Hentikan playback dahulu.", "Stop playback first."],
+    ["Mikrofon tidak tersedia dalam konteks ini. Gunakan pautan HTTPS atau pelayar Chrome/Edge yang menyokong izin mikrofon.", "The microphone is unavailable here. Use an HTTPS link or a Chrome/Edge browser that supports microphone access."],
+    ["Tidak tersedia", "Unavailable"],
+    ["Meminta izin…", "Requesting access…"],
+    ["Benarkan mikrofon dalam dialog pelayar. Tutup panel ini untuk membatalkan.", "Allow microphone access in the browser dialog. Close this panel to cancel."],
+    ["Henti & semak rakaman", "Stop & check recording"],
+    ["Tutup & henti", "Close & stop"],
+    ["Ukur latar1s", "Measuring background · 1s"],
+    ["Diam sebentar. Pengesan sedang mengukur aras bunyi latar.", "Stay quiet briefly while the detector measures the background sound level."],
+    ["Sedang dengar", "Listening"],
+    ["Not tidak pasti. Ketukan disimpan sebagai? untuk disunting.", "Uncertain note. The tap is saved as ? for editing."],
+    ["Gagal bermula", "Could not start"],
+    ["Izin mikrofon tidak diberi. Benarkan mikrofon pada pelayar atau gunakan rakaman mouse.", "Microphone access was not granted. Allow it in the browser or record using the mouse."],
+    ["Mikrofon tidak aktif. Rakaman sedia ada dikekalkan.", "Microphone inactive. Existing recordings are kept."],
+    ["Versi panjang dipilih. Klik lagu untuk muatkan.", "Long version selected. Click a song to load it."],
+    ["Petikan pendek dipilih. Klik lagu untuk muatkan.", "Short excerpt selected. Click a song to load it."],
+    ["Belum bermula", "Not started"],
+    ["Tiada audio dirakam atau dihantar. Data not sahaja disimpan.", "No audio is recorded or sent. Only note data is saved."],
+    ["Mikrofon ditutup. Semak not yang direkod.", "Microphone closed. Check the recorded notes."],
+    ["Grid dikemas daripada onset mutlak. Masa input asal masih disimpan.", "The grid was quantized from absolute onsets. Original input times are still kept."],
+    ["Hentikan rakaman dahulu.", "Stop recording first."],
+    ["Perubahan terakhir diundur.", "The last change was undone."],
+    ["Rakaman sendiri dimuatkan semula.", "Your recording was reloaded."],
+    ["Kosongkan score semasa?", "Clear the current score?"],
+    ["Not dalam score semasa akan dibuang. Anda boleh menekan Undur selepas ini. Rakaman sendiri terakhir masih disimpan.", "Notes in the current score will be deleted. You can press Undo afterwards. Your latest recording is still saved."],
+    ["Kosongkan score", "Clear score"],
+    ["Score kosong. Tekan Rakam untuk bermula.", "The score is empty. Press Record to begin."],
+    ["Status semakan dikemas kini. Bukti asal masih berlabel anggaran.", "Review status updated. Original evidence remains labelled as estimated."],
+    ["Data disalin.", "Data copied."],
+    ["Pilih teks disediakan. Tekan Ctrl+C untuk menyalin.", "The text is selected. Press Ctrl+C to copy."],
+    ["Not dikemas kini. Masa input asal tidak dipadam.", "Note updated. Original input times are kept."],
+    ["Not dibuang. Tekan Undur untuk memulihkan.", "Note deleted. Press Undo to restore it."],
+    ["Dihentikan kerana tetingkap hilang fokus.", "Stopped because the window lost focus."],
+    ["Dihentikan kerana tab disembunyikan. Rakaman yang ada dikekalkan.", "Stopped because the tab was hidden. Existing recordings are kept."],
+    ["Tab lain mengubah simpanan — eksport JSON untuk menyimpan versi ini", "Another tab changed the saved data — export JSON to save this version"],
+    ["Simpanan berubah di tab lain. Versi skrin ini dikekalkan; eksport JSON untuk simpan.", "Saved data changed in another tab. This version is kept; export JSON to save a copy."],
+    ["Mulakan baharu; import JSON jika ada salinan rakaman.", "Start again; import JSON if you have a recording backup."],
+    ["Rakaman/playback dihentikan untuk mod permainan. Data yang ada dikekalkan.", "Recording/playback stopped for Game mode. Existing data is kept."],
+    ["Sesi dihentikan semasa bertukar instrumen. Rakaman dikekalkan.", "Session stopped while changing instruments. Recordings are kept."],
+    ["Rehat antara pusingan", "Rest between repeats"],
+    ["C3, Do, kekunci A", "C3, Do, key A"],
+    ["D3, Re, kekunci S", "D3, Re, key S"],
+    ["E3, Mi, kekunci D", "E3, Mi, key D"],
+    ["F3, Fa, kekunci F", "F3, Fa, key F"],
+    ["G3, Sol, kekunci G", "G3, Sol, key G"],
+    ["A3, La, kekunci H", "A3, La, key H"],
+    ["B3, Ti, kekunci J", "B3, Ti, key J"],
+    ["C4, Do, kekunci K", "C4, Do, key K"],
+    ["C4, Do, kekunci A", "C4, Do, key A"],
+    ["D4, Re, kekunci S", "D4, Re, key S"],
+    ["E4, Mi, kekunci D", "E4, Mi, key D"],
+    ["F4, Fa, kekunci F", "F4, Fa, key F"],
+    ["G4, Sol, kekunci G", "G4, Sol, key G"],
+    ["A4, La, kekunci H", "A4, La, key H"],
+    ["B4, Ti, kekunci J", "B4, Ti, key J"],
+    ["C5, Do, kekunci K", "C5, Do, key K"],
+    ["C5, Do, kekunci A", "C5, Do, key A"],
+    ["C5, Do, kekunci A, tahan untuk bunyi", "C5, Do, key A, hold to sustain"],
+    ["D5, Re, kekunci S", "D5, Re, key S"],
+    ["D5, Re, kekunci S, tahan untuk bunyi", "D5, Re, key S, hold to sustain"],
+    ["E5, Mi, kekunci D", "E5, Mi, key D"],
+    ["E5, Mi, kekunci D, tahan untuk bunyi", "E5, Mi, key D, hold to sustain"],
+    ["F5, Fa, kekunci F", "F5, Fa, key F"],
+    ["F5, Fa, kekunci F, tahan untuk bunyi", "F5, Fa, key F, hold to sustain"],
+    ["G5, Sol, kekunci G", "G5, Sol, key G"],
+    ["G5, Sol, kekunci G, tahan untuk bunyi", "G5, Sol, key G, hold to sustain"],
+    ["A5, La, kekunci H", "A5, La, key H"],
+    ["A5, La, kekunci H, tahan untuk bunyi", "A5, La, key H, hold to sustain"],
+    ["B5, Ti, kekunci J", "B5, Ti, key J"],
+    ["B5, Ti, kekunci J, tahan untuk bunyi", "B5, Ti, key J, hold to sustain"],
+    ["C6, Do, kekunci K", "C6, Do, key K"],
+    ["C6, Do, kekunci K, tahan untuk bunyi", "C6, Do, key K, hold to sustain"],
+    ["C5 · not tambahan", "C5 · additional note"],
+    ["C5, not tambahan, tahan untuk bunyi", "C5, additional note, hold to sustain"],
+    ["Penjarian C5 · Baroque", "C5 fingering · Baroque"],
+    ["C#5 · not tambahan", "C#5 · additional note"],
+    ["C#5, not tambahan, tahan untuk bunyi", "C#5, additional note, hold to sustain"],
+    ["Penjarian C#5 · Baroque", "C#5 fingering · Baroque"],
+    ["D5 · not tambahan", "D5 · additional note"],
+    ["D5, not tambahan, tahan untuk bunyi", "D5, additional note, hold to sustain"],
+    ["Penjarian D5 · Baroque", "D5 fingering · Baroque"],
+    ["D#5 · not tambahan", "D#5 · additional note"],
+    ["D#5, not tambahan, tahan untuk bunyi", "D#5, additional note, hold to sustain"],
+    ["Penjarian D#5 · Baroque", "D#5 fingering · Baroque"],
+    ["E5 · not tambahan", "E5 · additional note"],
+    ["E5, not tambahan, tahan untuk bunyi", "E5, additional note, hold to sustain"],
+    ["Penjarian E5 · Baroque", "E5 fingering · Baroque"],
+    ["F5 · not tambahan", "F5 · additional note"],
+    ["F5, not tambahan, tahan untuk bunyi", "F5, additional note, hold to sustain"],
+    ["Penjarian F5 · Baroque", "F5 fingering · Baroque"],
+    ["F#5 · not tambahan", "F#5 · additional note"],
+    ["F#5, not tambahan, tahan untuk bunyi", "F#5, additional note, hold to sustain"],
+    ["Penjarian F#5 · Baroque", "F#5 fingering · Baroque"],
+    ["G5 · not tambahan", "G5 · additional note"],
+    ["G5, not tambahan, tahan untuk bunyi", "G5, additional note, hold to sustain"],
+    ["Penjarian G5 · Baroque", "G5 fingering · Baroque"],
+    ["G#5 · not tambahan", "G#5 · additional note"],
+    ["G#5, not tambahan, tahan untuk bunyi", "G#5, additional note, hold to sustain"],
+    ["Penjarian G#5 · Baroque", "G#5 fingering · Baroque"],
+    ["A5 · not tambahan", "A5 · additional note"],
+    ["A5, not tambahan, tahan untuk bunyi", "A5, additional note, hold to sustain"],
+    ["Penjarian A5 · Baroque", "A5 fingering · Baroque"],
+    ["Bb5 · not tambahan", "Bb5 · additional note"],
+    ["Bb5, not tambahan, tahan untuk bunyi", "Bb5, additional note, hold to sustain"],
+    ["Penjarian Bb5 · Baroque", "Bb5 fingering · Baroque"],
+    ["B5 · not tambahan", "B5 · additional note"],
+    ["B5, not tambahan, tahan untuk bunyi", "B5, additional note, hold to sustain"],
+    ["Penjarian B5 · Baroque", "B5 fingering · Baroque"],
+    ["C6 · not tambahan", "C6 · additional note"],
+    ["C6, not tambahan, tahan untuk bunyi", "C6, additional note, hold to sustain"],
+    ["Penjarian C6 · Baroque", "C6 fingering · Baroque"],
+    ["C#6 · not tambahan", "C#6 · additional note"],
+    ["C#6, not tambahan, tahan untuk bunyi", "C#6, additional note, hold to sustain"],
+    ["Penjarian C#6 · Baroque", "C#6 fingering · Baroque"],
+    ["D6 · not tambahan", "D6 · additional note"],
+    ["D6, not tambahan, tahan untuk bunyi", "D6, additional note, hold to sustain"],
+    ["Penjarian D6 · Baroque", "D6 fingering · Baroque"],
+    ["D#6 · not tambahan", "D#6 · additional note"],
+    ["D#6, not tambahan, tahan untuk bunyi", "D#6, additional note, hold to sustain"],
+    ["Penjarian D#6 · Baroque", "D#6 fingering · Baroque"],
+    ["E6 · not tambahan", "E6 · additional note"],
+    ["E6, not tambahan, tahan untuk bunyi", "E6, additional note, hold to sustain"],
+    ["Penjarian E6 · Baroque", "E6 fingering · Baroque"],
+    ["F6 · not tambahan", "F6 · additional note"],
+    ["F6, not tambahan, tahan untuk bunyi", "F6, additional note, hold to sustain"],
+    ["Penjarian F6 · Baroque", "F6 fingering · Baroque"],
+    ["F#6 · not tambahan", "F#6 · additional note"],
+    ["F#6, not tambahan, tahan untuk bunyi", "F#6, additional note, hold to sustain"],
+    ["Penjarian F#6 · Baroque", "F#6 fingering · Baroque"],
+    ["G6 · not tambahan", "G6 · additional note"],
+    ["G6, not tambahan, tahan untuk bunyi", "G6, additional note, hold to sustain"],
+    ["Penjarian G6 · Baroque", "G6 fingering · Baroque"],
+    ["G#6 · not tambahan", "G#6 · additional note"],
+    ["G#6, not tambahan, tahan untuk bunyi", "G#6, additional note, hold to sustain"],
+    ["Penjarian G#6 · Baroque", "G#6 fingering · Baroque"],
+    ["A6 · not tambahan", "A6 · additional note"],
+    ["A6, not tambahan, tahan untuk bunyi", "A6, additional note, hold to sustain"],
+    ["Penjarian A6 · Baroque", "A6 fingering · Baroque"],
+    ["Bb6 · not tambahan", "Bb6 · additional note"],
+    ["Bb6, not tambahan, tahan untuk bunyi", "Bb6, additional note, hold to sustain"],
+    ["Penjarian Bb6 · Baroque", "Bb6 fingering · Baroque"],
+    ["B6 · not tambahan", "B6 · additional note"],
+    ["B6, not tambahan, tahan untuk bunyi", "B6, additional note, hold to sustain"],
+    ["Penjarian B6 · Baroque", "B6 fingering · Baroque"],
+    ["C7 · not tambahan", "C7 · additional note"],
+    ["C7, not tambahan, tahan untuk bunyi", "C7, additional note, hold to sustain"],
+    ["Penjarian C7 · Baroque", "C7 fingering · Baroque"],
+    ["C#7 · not tambahan", "C#7 · additional note"],
+    ["C#7, not tambahan, tahan untuk bunyi", "C#7, additional note, hold to sustain"],
+    ["Penjarian C#7 · Baroque", "C#7 fingering · Baroque"],
+    ["D7 · not tambahan", "D7 · additional note"],
+    ["D7, not tambahan, tahan untuk bunyi", "D7, additional note, hold to sustain"],
+    ["Penjarian D7 · Baroque", "D7 fingering · Baroque"],
+    ["T belakang ⊗ Tutup", "Rear T ⊗ Closed"],
+    ["T belakang ◐ Separa", "Rear T ◐ Partly open"],
+    ["T belakang ○ Buka", "Rear T ○ Open"],
+    ["T belakang —", "Rear T —"],
+    ["1 ⊗ Tutup", "1 ⊗ Closed"],
+    ["1 ◐ Separa", "1 ◐ Partly open"],
+    ["1 ○ Buka", "1 ○ Open"],
+    ["2 ⊗ Tutup", "2 ⊗ Closed"],
+    ["2 ◐ Separa", "2 ◐ Partly open"],
+    ["2 ○ Buka", "2 ○ Open"],
+    ["3 ⊗ Tutup", "3 ⊗ Closed"],
+    ["3 ◐ Separa", "3 ◐ Partly open"],
+    ["3 ○ Buka", "3 ○ Open"],
+    ["4 ⊗ Tutup", "4 ⊗ Closed"],
+    ["4 ◐ Separa", "4 ◐ Partly open"],
+    ["4 ○ Buka", "4 ○ Open"],
+    ["5 ⊗ Tutup", "5 ⊗ Closed"],
+    ["5 ◐ Separa", "5 ◐ Partly open"],
+    ["5 ○ Buka", "5 ○ Open"],
+    ["6 ⊗ Tutup", "6 ⊗ Closed"],
+    ["6 ◐ Separa", "6 ◐ Partly open"],
+    ["6 ○ Buka", "6 ○ Open"],
+    ["7 ⊗ Tutup", "7 ⊗ Closed"],
+    ["7 ◐ Separa", "7 ◐ Partly open"],
+    ["7 ○ Buka", "7 ○ Open"],
+    ["1 event", "1 event"],
+    ["Petikan katalog sedia ada dikekalkan. Not dan timestamp video belum disahkan.", "The existing catalog excerpt is retained. Video notes and timestamps have not been verified."],
+    ["Petikan katalog sedia ada dikekalkan. Not dan timestamp video belum disahkan. Transposisi -12 semitone.", "The existing catalog excerpt is retained. Video notes and timestamps have not been verified. Transposed -12 semitones."],
+    ["Petikan katalog sedia ada dikekalkan. Not dan timestamp video belum disahkan. Transposisi +12 semitone.", "The existing catalog excerpt is retained. Video notes and timestamps have not been verified. Transposed +12 semitones."],
+    ["Motif awal enam not diulang dua kali. Melodi This Old Man diandaikan untuk tajuk I Love You; identiti melodi versi video belum disahkan.", "The opening six-note motif is repeated twice. The melody of This Old Man is assumed for the title I Love You; the melody used in the video has not been verified."],
+    ["Motif awal enam not diulang dua kali. Melodi This Old Man diandaikan untuk tajuk I Love You; identiti melodi versi video belum disahkan. Transposisi -12 semitone.", "The opening six-note motif is repeated twice. The melody of This Old Man is assumed for the title I Love You; the melody used in the video has not been verified. Transposed -12 semitones."],
+    ["Motif awal enam not diulang dua kali. Melodi This Old Man diandaikan untuk tajuk I Love You; identiti melodi versi video belum disahkan. Transposisi +12 semitone.", "The opening six-note motif is repeated twice. The melody of This Old Man is assumed for the title I Love You; the melody used in the video has not been verified. Transposed +12 semitones."],
+    ["Petikan satu rangkap dalam F major, C4–C5. Rentak penutup disusun semula; versi dan tempo video belum disahkan.", "An excerpt of one verse in F major, C4–C5. The ending rhythm was rearranged; the video version and tempo have not been verified."],
+    ["Petikan satu rangkap dalam F major, C4–C5. Rentak penutup disusun semula; versi dan tempo video belum disahkan. Transposisi -12 semitone.", "An excerpt of one verse in F major, C4–C5. The ending rhythm was rearranged; the video version and tempo have not been verified. Transposed -12 semitones."],
+    ["Petikan satu rangkap dalam F major, C4–C5. Rentak penutup disusun semula; versi dan tempo video belum disahkan. Transposisi +12 semitone.", "An excerpt of one verse in F major, C4–C5. The ending rhythm was rearranged; the video version and tempo have not been verified. Transposed +12 semitones."],
+    ["Dua frasa awal dalam F major, 72 BPM. Petikan dipilih untuk muat lapan bar; frasa kemudian tidak disertakan. Versi video belum disahkan.", "The opening two phrases in F major, 72 BPM. The excerpt was chosen to fit eight bars; later phrases are omitted. The video version has not been verified."],
+    ["Dua frasa awal dalam F major, 72 BPM. Petikan dipilih untuk muat lapan bar; frasa kemudian tidak disertakan. Versi video belum disahkan. Transposisi -12 semitone.", "The opening two phrases in F major, 72 BPM. The excerpt was chosen to fit eight bars; later phrases are omitted. The video version has not been verified. Transposed -12 semitones."],
+    ["Dua frasa awal dalam F major, 72 BPM. Petikan dipilih untuk muat lapan bar; frasa kemudian tidak disertakan. Versi video belum disahkan. Transposisi +12 semitone.", "The opening two phrases in F major, 72 BPM. The excerpt was chosen to fit eight bars; later phrases are omitted. The video version has not been verified. Transposed +12 semitones."],
+    ["Motif frasa awal G E C D E F G diulang dua kali dengan rentak cadangan. Versi video belum disahkan.", "The opening G E C D E F G phrase motif is repeated twice with a suggested rhythm. The video version has not been verified."],
+    ["Motif frasa awal G E C D E F G diulang dua kali dengan rentak cadangan. Versi video belum disahkan. Transposisi -12 semitone.", "The opening G E C D E F G phrase motif is repeated twice with a suggested rhythm. The video version has not been verified. Transposed -12 semitones."],
+    ["Motif frasa awal G E C D E F G diulang dua kali dengan rentak cadangan. Versi video belum disahkan. Transposisi +12 semitone.", "The opening G E C D E F G phrase motif is repeated twice with a suggested rhythm. The video version has not been verified. Transposed +12 semitones."],
+    ["Dua frasa awal dalam F major; frasa kemudian yang memerlukan B-flat tidak disertakan. Tiada bunyi tepuk ditambah sebagai not. Versi video belum disahkan.", "The opening two phrases in F major; later phrases requiring B-flat are omitted. No clapping sound is added as a note. The video version has not been verified."],
+    ["Dua frasa awal dalam F major; frasa kemudian yang memerlukan B-flat tidak disertakan. Tiada bunyi tepuk ditambah sebagai not. Versi video belum disahkan. Transposisi -12 semitone.", "The opening two phrases in F major; later phrases requiring B-flat are omitted. No clapping sound is added as a note. The video version has not been verified. Transposed -12 semitones."],
+    ["Dua frasa awal dalam F major; frasa kemudian yang memerlukan B-flat tidak disertakan. Tiada bunyi tepuk ditambah sebagai not. Versi video belum disahkan. Transposisi +12 semitone.", "The opening two phrases in F major; later phrases requiring B-flat are omitted. No clapping sound is added as a note. The video version has not been verified. Transposed +12 semitones."],
+    ["Motif diulang tiga kali dengan penutup dipanjangkan. Transposisi -2 semitone daripada pola D E G / F-sharp kepada C D F / E supaya semua pitch muat lapan bar. Versi video belum disahkan.", "The motif is repeated three times with an extended ending. The D E G / F-sharp pattern is transposed uniformly down 2 semitones to C D F / E so every pitch fits the eight bars. The video version has not been verified."],
+    ["Motif diulang tiga kali dengan penutup dipanjangkan. Transposisi -2 semitone daripada pola D E G / F-sharp kepada C D F / E supaya semua pitch muat lapan bar. Versi video belum disahkan. Transposisi -12 semitone.", "The motif is repeated three times with an extended ending. The D E G / F-sharp pattern is transposed uniformly down 2 semitones to C D F / E so every pitch fits the eight bars. The video version has not been verified. Transposed -12 semitones."],
+    ["Motif diulang tiga kali dengan penutup dipanjangkan. Transposisi -2 semitone daripada pola D E G / F-sharp kepada C D F / E supaya semua pitch muat lapan bar. Versi video belum disahkan. Transposisi +12 semitone.", "The motif is repeated three times with an extended ending. The D E G / F-sharp pattern is transposed uniformly down 2 semitones to C D F / E so every pitch fits the eight bars. The video version has not been verified. Transposed +12 semitones."],
+    ["Melodi satu rangkap Mary dengan frasa sambungan dan kadens akhir dalam C major. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "One verse of Mary with continuation phrases and a final cadence in C major. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Melodi satu rangkap Mary dengan frasa sambungan dan kadens akhir dalam C major. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "One verse of Mary with continuation phrases and a final cadence in C major. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Melodi satu rangkap Mary dengan frasa sambungan dan kadens akhir dalam C major. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "One verse of Mary with continuation phrases and a final cadence in C major. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Dua frasa Rain versi petikan sedia ada dimainkan dalam empat pusingan; bukan keseluruhan rakaman video. 4 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "The two phrases from the existing Rain excerpt are played four times; this is not the entire video recording. 4 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Dua frasa Rain versi petikan sedia ada dimainkan dalam empat pusingan; bukan keseluruhan rakaman video. 4 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "The two phrases from the existing Rain excerpt are played four times; this is not the entire video recording. 4 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Dua frasa Rain versi petikan sedia ada dimainkan dalam empat pusingan; bukan keseluruhan rakaman video. 4 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "The two phrases from the existing Rain excerpt are played four times; this is not the entire video recording. 4 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Empat bahagian melodi Are You Sleeping? dalam C major. G3 rendah dikekalkan; ia di luar lapan bar maya C4–C5. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "Four sections of Are You Sleeping? in C major. The low G3 is retained; it is outside the eight virtual C4–C5 bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Empat bahagian melodi Are You Sleeping? dalam C major. G3 rendah dikekalkan; ia di luar lapan bar maya C4–C5. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "Four sections of Are You Sleeping? in C major. The low G3 is retained; it is outside the eight virtual C4–C5 bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Empat bahagian melodi Are You Sleeping? dalam C major. G3 rendah dikekalkan; ia di luar lapan bar maya C4–C5. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "Four sections of Are You Sleeping? in C major. The low G3 is retained; it is outside the eight virtual C4–C5 bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Korus Jingle Bells dengan bahagian jawapan dan penutup dalam C major. 1 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "The Jingle Bells chorus with an answering section and ending in C major. 1 repeat of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Korus Jingle Bells dengan bahagian jawapan dan penutup dalam C major. 1 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "The Jingle Bells chorus with an answering section and ending in C major. 1 repeat of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Korus Jingle Bells dengan bahagian jawapan dan penutup dalam C major. 1 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "The Jingle Bells chorus with an answering section and ending in C major. 1 repeat of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Versi I Love You menggunakan melodi This Old Man yang diandaikan; identiti melodi video masih belum disahkan. Bentuk melodi diteruskan melepasi motif enam not. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "This I Love You version assumes the melody of This Old Man; the video melody has not been verified. The melody continues beyond the six-note motif. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Versi I Love You menggunakan melodi This Old Man yang diandaikan; identiti melodi video masih belum disahkan. Bentuk melodi diteruskan melepasi motif enam not. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "This I Love You version assumes the melody of This Old Man; the video melody has not been verified. The melody continues beyond the six-note motif. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Versi I Love You menggunakan melodi This Old Man yang diandaikan; identiti melodi video masih belum disahkan. Bentuk melodi diteruskan melepasi motif enam not. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "This I Love You version assumes the melody of This Old Man; the video melody has not been verified. The melody continues beyond the six-note motif. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Melodi satu rangkap The Wheels on the Bus versi F major, diulang tiga kali. 3 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "One verse of The Wheels on the Bus in F major, repeated three times. 3 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Melodi satu rangkap The Wheels on the Bus versi F major, diulang tiga kali. 3 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "One verse of The Wheels on the Bus in F major, repeated three times. 3 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Melodi satu rangkap The Wheels on the Bus versi F major, diulang tiga kali. 3 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "One verse of The Wheels on the Bus in F major, repeated three times. 3 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Empat frasa Happy Birthday dalam F major. Bb4 sebenar dikekalkan, tanpa menggantikannya dengan B4; tiada pertukaran not untuk memuatkan lapan bar.  2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "Four phrases of Happy Birthday in F major. The actual Bb4 is retained rather than replaced with B4; no notes are changed to fit the eight bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Empat frasa Happy Birthday dalam F major. Bb4 sebenar dikekalkan, tanpa menggantikannya dengan B4; tiada pertukaran not untuk memuatkan lapan bar.  2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "Four phrases of Happy Birthday in F major. The actual Bb4 is retained rather than replaced with B4; no notes are changed to fit the eight bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Empat frasa Happy Birthday dalam F major. Bb4 sebenar dikekalkan, tanpa menggantikannya dengan B4; tiada pertukaran not untuk memuatkan lapan bar.  2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "Four phrases of Happy Birthday in F major. The actual Bb4 is retained rather than replaced with B4; no notes are changed to fit the eight bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Empat frasa Happy Birthday dalam F major. Bb4 sebenar dikekalkan, tanpa menggantikannya dengan B4; tiada pertukaran not untuk memuatkan lapan bar. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "Four phrases of Happy Birthday in F major. The actual Bb4 is retained rather than replaced with B4; no notes are changed to fit the eight bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Empat frasa Happy Birthday dalam F major. Bb4 sebenar dikekalkan, tanpa menggantikannya dengan B4; tiada pertukaran not untuk memuatkan lapan bar. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "Four phrases of Happy Birthday in F major. The actual Bb4 is retained rather than replaced with B4; no notes are changed to fit the eight bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Empat frasa Happy Birthday dalam F major. Bb4 sebenar dikekalkan, tanpa menggantikannya dengan B4; tiada pertukaran not untuk memuatkan lapan bar. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "Four phrases of Happy Birthday in F major. The actual Bb4 is retained rather than replaced with B4; no notes are changed to fit the eight bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Humpty Dumpty menggunakan varian melodi penuh KidsPlayMusic (E G F A…), berbeza daripada motif pendek sedia ada. Pitch C5–F5 dikekalkan; rentak ialah susunan cadangan sendiri. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "Humpty Dumpty uses the full KidsPlayMusic melody variant (E G F A…), which differs from the existing short motif. Pitches C5–F5 are retained; the rhythm is a suggested project arrangement. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Humpty Dumpty menggunakan varian melodi penuh KidsPlayMusic (E G F A…), berbeza daripada motif pendek sedia ada. Pitch C5–F5 dikekalkan; rentak ialah susunan cadangan sendiri. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "Humpty Dumpty uses the full KidsPlayMusic melody variant (E G F A…), which differs from the existing short motif. Pitches C5–F5 are retained; the rhythm is a suggested project arrangement. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Humpty Dumpty menggunakan varian melodi penuh KidsPlayMusic (E G F A…), berbeza daripada motif pendek sedia ada. Pitch C5–F5 dikekalkan; rentak ialah susunan cadangan sendiri. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "Humpty Dumpty uses the full KidsPlayMusic melody variant (E G F A…), which differs from the existing short motif. Pitches C5–F5 are retained; the rhythm is a suggested project arrangement. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Empat frasa If You're Happy and You Know It dalam F major, termasuk bahagian Bb4. Ruang tepukan diwakili rehat, tanpa audio tepuk atau lirik. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "Four phrases of If You're Happy and You Know It in F major, including the Bb4 section. Clapping gaps are represented by rests, without clap audio or lyrics. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Empat frasa If You're Happy and You Know It dalam F major, termasuk bahagian Bb4. Ruang tepukan diwakili rehat, tanpa audio tepuk atau lirik. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "Four phrases of If You're Happy and You Know It in F major, including the Bb4 section. Clapping gaps are represented by rests, without clap audio or lyrics. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Empat frasa If You're Happy and You Know It dalam F major, termasuk bahagian Bb4. Ruang tepukan diwakili rehat, tanpa audio tepuk atau lirik. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "Four phrases of If You're Happy and You Know It in F major, including the Bb4 section. Clapping gaps are represented by rests, without clap audio or lyrics. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Empat rangkap instrumental Baby Shark. Pola D E G / F-sharp ditransposisi seragam -2 semitone kepada C D F / E, sama seperti versi pendek. 4 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan.", "Four instrumental verses of Baby Shark. The D E G / F-sharp pattern is transposed uniformly down 2 semitones to C D F / E, as in the short version. 4 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified."],
+    ["Empat rangkap instrumental Baby Shark. Pola D E G / F-sharp ditransposisi seragam -2 semitone kepada C D F / E, sama seperti versi pendek. 4 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi -12 semitone.", "Four instrumental verses of Baby Shark. The D E G / F-sharp pattern is transposed uniformly down 2 semitones to C D F / E, as in the short version. 4 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed -12 semitones."],
+    ["Empat rangkap instrumental Baby Shark. Pola D E G / F-sharp ditransposisi seragam -2 semitone kepada C D F / E, sama seperti versi pendek. 4 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi +12 semitone.", "Four instrumental verses of Baby Shark. The D E G / F-sharp pattern is transposed uniformly down 2 semitones to C D F / E, as in the short version. 4 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed +12 semitones."],
+    ["Score cadangan projek. Not dan timestamp video rujukan belum disahkan. Transposisi -12 semitone.", "Suggested project score. Notes and timestamps from the reference video have not been verified. Transposed -12 semitones."],
+    ["Score cadangan projek. Not dan timestamp video rujukan belum disahkan. Transposisi +12 semitone.", "Suggested project score. Notes and timestamps from the reference video have not been verified. Transposed +12 semitones."],
+    ["Pusingan 1 · Frasa 1", "Repeat 1 · Phrase 1"],
+    ["Pusingan 1 · Frasa 2", "Repeat 1 · Phrase 2"],
+    ["Pusingan 1 · Frasa 3", "Repeat 1 · Phrase 3"],
+    ["Pusingan 1 · Frasa 4", "Repeat 1 · Phrase 4"],
+    ["Pusingan 1 · Frasa 5", "Repeat 1 · Phrase 5"],
+    ["Pusingan 1 · Frasa 6", "Repeat 1 · Phrase 6"],
+    ["Pusingan 2 · Frasa 1", "Repeat 2 · Phrase 1"],
+    ["Pusingan 2 · Frasa 2", "Repeat 2 · Phrase 2"],
+    ["Pusingan 2 · Frasa 3", "Repeat 2 · Phrase 3"],
+    ["Pusingan 2 · Frasa 4", "Repeat 2 · Phrase 4"],
+    ["Pusingan 2 · Frasa 5", "Repeat 2 · Phrase 5"],
+    ["Pusingan 2 · Frasa 6", "Repeat 2 · Phrase 6"],
+    ["Pusingan 3 · Frasa 1", "Repeat 3 · Phrase 1"],
+    ["Pusingan 3 · Frasa 2", "Repeat 3 · Phrase 2"],
+    ["Pusingan 3 · Frasa 3", "Repeat 3 · Phrase 3"],
+    ["Pusingan 3 · Frasa 4", "Repeat 3 · Phrase 4"],
+    ["Pusingan 4 · Frasa 1", "Repeat 4 · Phrase 1"],
+    ["Pusingan 4 · Frasa 2", "Repeat 4 · Phrase 2"],
+    ["Pusingan 4 · Frasa 3", "Repeat 4 · Phrase 3"],
+    ["Pusingan 4 · Frasa 4", "Repeat 4 · Phrase 4"],
+    ["Perkusi tidak berpic", "Unpitched percussion"],
+    ["Sintesis digital", "Digital synthesis"],
+    ["F / J", "F / J"],
+    ["Sedia untuk dimainkan", "Ready to play"],
+    ["Ketuk permukaan tamborin", "Tap the tambourine surface"],
+    ["Tamborin dengan bingkai kayu dan kepingan logam berpasangan", "Tambourine with a wooden frame and paired metal jingles"],
+    ["Permukaan kulit cerah untuk diketuk, dikelilingi lapan pasangan kepingan logam.", "A light drumhead for tapping, surrounded by eight pairs of metal jingles."],
+    ["Ketuk permukaan", "Tap the surface"],
+    ["Ruang", "Space"],
+    ["Klik atau sentuh permukaan. Ruang = ketuk · G = goncang.", "Click or touch the surface. Space = tap · G = shake."],
+    ["Panduan bermain & bunyi", "Playing & sound guide"],
+    ["Cuba rentak ini", "Try this rhythm"],
+    ["Dengar dua tekstur", "Hear two sound textures"],
+    ["Ketuk pada 1 dan 3. Goncang pada 2 dan 4. Mulakan perlahan, kemudian ubah tempo.", "Tap on 1 and 3. Shake on 2 and 4. Start slowly, then change the tempo."],
+    ["Ketuk:", "Tap:"],
+    ["hentakan kulit yang pendek.", "a short drumhead strike."],
+    ["Goncang:", "Shake:"],
+    ["deringan logam berlapis.", "layered metallic jingles."],
+    ["Bunyi dihasilkan melalui sintesis digital; bukan rakaman tamborin sebenar.", "Sounds are digitally synthesised, rather than recordings of a real tambourine."],
+    ["Hentikan main atau rakaman", "Stop playback or recording"],
+    ["Main bebas", "Free play"],
+    ["Menunggu ketukan", "Waiting for a hit"],
+    ["Merakam", "Recording"],
+    ["Menyiapkan bunyi", "Preparing sound"],
+    ["Main contoh", "Play example"],
+    ["Tempo", "Tempo"],
+    ["BPM", "BPM"],
+    ["Reset", "Reset"],
+    ["Bersedia", "Ready"],
+    ["Belum dirakam", "Not recorded"],
+    ["Menunggu ketukan pertama", "Waiting for the first hit"],
+    ["Rakam rentak anda", "Record your rhythm"],
+    ["Ketuk alat atau pad untuk bermula pada 0.00s. Tekan Henti apabila selesai.", "Tap the instrument or a pad to start at 0.00s. Press Stop when finished."],
+    ["Tekan Rakam, mainkan rentak, kemudian Henti. Ketukan pertama bermula pada 0.00s.", "Press Record, play your rhythm, then Stop. The first hit starts at 0.00s."],
+    ["Contoh dua bar sedang dimainkan. Jejak anda tidak berubah.", "A two-bar example is playing. Your trace stays unchanged."],
+    ["Rakaman bersedia. Ketukan pertama bermula pada 0.00s.", "Ready to record. The first hit starts at 0.00s."],
+    ["Jejak rakaman semasa. Hanya ketukan anda dirakam; contoh dan metronom tidak dirakam.", "Current recording trace. Only your hits are recorded; examples and metronome clicks are excluded."],
+    ["Jejak rakaman anda. Klik ketukan untuk dengar; sunting masa main dalam Data ketukan.", "Your recording trace. Click a hit to hear it; edit playback times in Beat data."],
+    ["Rakaman ini belum mempunyai ketukan. Tekan Rakam untuk bermula.", "This recording has no hits yet. Press Record to begin."],
+    ["Jejak main bebas sementara. Tekan Rakam untuk menyimpan rentak baharu.", "Temporary free-play trace. Press Record to save a new rhythm."],
+    ["Jejak main bebas belum dirakam. Tekan Rakam untuk menyimpan rentak.", "The free-play trace has not been recorded. Press Record to save your rhythm."],
+    ["Main bebas tidak disimpan. Tekan Rakam untuk menyimpan rentak.", "Free play is not saved. Press Record to save your rhythm."],
+    ["Main bebas · rakaman anda dikekalkan. Main rakaman untuk dengar semula.", "Free play · your recording is preserved. Choose Play recording to hear it again."],
+    ["Henti dan pulihkan tempo asal tanpa memadam rakaman atau suntingan", "Stop and restore the original tempo without deleting the recording or edits"],
+    ["Tempo dikunci semasa rakaman. Perubahan tempo menghentikan main semula. Masa input asal sentiasa dikekalkan.", "Tempo is locked while recording. Changing tempo stops playback. Original input times are always preserved."],
+    ["Corak rentak", "Rhythm pattern"],
+    ["4/4 · 4 detik setiap bar", "4/4 · 4 beats per bar"],
+    ["Dengar contoh, kemudian rakam rentak anda sendiri.", "Listen to an example, then record your own rhythm."],
+    ["Corak rentak · 4/4", "Rhythm pattern · 4/4"],
+    ["Asas · ketuk setiap detik", "Basic · tap every beat"],
+    ["Selang-seli · ketuk & goncang", "Alternating · tap & shake"],
+    ["Rentak ceria · sela separuh detik", "Lively rhythm · half-beat offbeats"],
+    ["Rentak kawad · dua ketukan", "March rhythm · double taps"],
+    ["Asas · tengah setiap detik", "Basic · centre on every beat"],
+    ["Selang-seli · tengah & tepi", "Alternating · centre & edge"],
+    ["Sela rentak · tepi separuh detik", "Offbeat · edge on half beats"],
+    ["Rentak berbalas · tengah & dua tepi", "Call and response · centre & double edge hits"],
+    ["Asas · kulit setiap detik", "Basic · head on every beat"],
+    ["Selang-seli · kulit & rim", "Alternating · head & rim"],
+    ["Sela rentak · rim separuh detik", "Offbeat · rim on half beats"],
+    ["Kawad · detik & dua ketukan rim", "March · beats & double rim hits"],
+    ["Asas · denyut setiap detik", "Basic · pulse on every beat"],
+    ["Kuat & lembut · detik berselang", "Strong & soft · alternating beats"],
+    ["Sela rentak · denyut tambahan", "Offbeat · extra pulses"],
+    ["Kawad · kuat pada 1 & 3", "March · strong on 1 & 3"],
+    ["Asas · aksen awal bar", "Basic · accent at the start of each bar"],
+    ["Aksen & lembut · detik berselang", "Accent & soft · alternating beats"],
+    ["Sela rentak · aksen separuh detik", "Offbeat · half-beat accents"],
+    ["Kawad · aksen pada 1 & 3", "March · accents on 1 & 3"],
+    ["Asas · deringan setiap detik", "Basic · ring on every beat"],
+    ["Terbuka & tertahan · berselang", "Open & muted · alternating"],
+    ["Sela rentak · ketukan pendek", "Offbeat · short strikes"],
+    ["Rentak kumpulan · dua ketukan pendek", "Group rhythm · double short strikes"],
+    ["Jejak rentak", "Rhythm trace"],
+    ["0 ketukan", "0 hits"],
+    ["1 ketukan", "1 hit"],
+    ["Belum ada ketukan. Cuba ketuk atau goncang tamborin.", "No hits yet. Try tapping or shaking the tambourine."],
+    ["Belum ada ketukan. Cuba ketuk tengah atau tepi kompang.", "No hits yet. Try tapping the Kompang centre or edge."],
+    ["Masa dari ketukan pertama", "Time from the first hit"],
+    ["Sunting tindakan dan masa main semula (ms). Bukti masa input asal dikekalkan.", "Edit the action and playback time (ms). Original input timing evidence is preserved."],
+    ["Sunting jenis ketukan dan masa main semula (ms). Bukti masa input asal dikekalkan.", "Edit the hit type and playback time (ms). Original input timing evidence is preserved."],
+    ["Tindakan", "Action"],
+    ["Ketukan", "Hit"],
+    ["Masa main (ms)", "Playback time (ms)"],
+    ["Input asal (ms)", "Original input (ms)"],
+    ["Rakaman semasa", "Current recording"],
+    ["TINDAKAN", "ACTIONS"],
+    ["KETUKAN", "HITS"],
+    ["DURASI", "DURATION"],
+    ["Rakaman tindakan, bukan audio", "Action recording, not audio"],
+    ["Jenis ketukan dan masa input sebenar disimpan. Main contoh dan metronom tidak masuk ke rakaman.", "Hit types and actual input times are saved. Examples and metronome clicks are excluded from the recording."],
+    ["Identiti Kompang, jenis ketukan dan masa input sebenar disimpan. Main contoh dan metronom tidak masuk ke rakaman.", "The Kompang identity, hit types and actual input times are saved. Examples and metronome clicks are excluded from the recording."],
+    ["Simpan JSON", "Save JSON"],
+    ["Eksport CSV ketukan", "Export beat CSV"],
+    ["Rakaman belum bermula. Data disimpan pada pelayar ini.", "Recording has not started. Data is saved in this browser."],
+    ["Import rakaman perkusi JSON", "Import percussion JSON recording"],
+    ["Data JSON perkusi", "Percussion JSON data"],
+    ["Semak & import", "Check & import"],
+    ["Sintesis digital · 512 tindakan / 180 saat", "Digital synthesis · 512 actions / 180 seconds"],
+    ["Sintesis digital · 512 ketukan / 180 saat", "Digital synthesis · 512 hits / 180 seconds"],
+    ["Reset mengekalkan rakaman dan suntingan.", "Reset preserves the recording and edits."],
+    ["Bingkai kayu · permukaan kulit · kepingan logam berlapis", "Wooden frame · drumhead · layered metal jingles"],
+    ["Bingkai kayu · permukaan kulit · dua kawasan ketukan", "Wooden frame · drumhead · two striking areas"],
+    ["Badan dram · kulit tegang · rim logam", "Drum shell · taut drumhead · metal rim"],
+    ["Dram besar · kulit lebar · pemukul berlapik", "Large drum · broad drumhead · padded beater"],
+    ["Sepasang simbal · aloi logam · pemegang kulit", "Paired cymbals · metal alloy · leather straps"],
+    ["Rangka logam terbuka · tali gantung · pemukul", "Open metal frame · suspension cord · beater"],
+    ["Kompang kayu dengan kawasan tengah dan tepi yang boleh diketuk", "Wooden kompang with playable centre and edge areas"],
+    ["Ketuk tengah untuk tekstur rendah dan berisi, atau gelang tepi untuk tekstur tajam dan pendek. Setiap kawasan boleh difokuskan dengan Tab dan dimainkan dengan Enter atau Ruang.", "Tap the centre for a low, full texture, or the edge ring for a sharp, short texture. Use Tab to focus each area and Enter or Space to play it."],
+    ["Ketuk tepi Kompang, pintasan J", "Tap the Kompang edge, shortcut J"],
+    ["Ketuk tengah Kompang, pintasan F", "Tap the Kompang centre, shortcut F"],
+    ["Tengah · rendah & berisi", "Centre · low & full"],
+    ["Tepi · tajam & pendek", "Edge · sharp & short"],
+    ["Ketuk tengah", "Tap centre"],
+    ["Ketuk tepi", "Tap edge"],
+    ["Klik atau sentuh kawasan kulit. F = tengah · J = tepi. Tab dan Enter juga boleh digunakan.", "Click or touch the drumhead areas. F = centre · J = edge. Tab and Enter also work."],
+    ["Tengah pada 1 dan 3. Tepi pada 2 dan 4. Mulakan perlahan, kemudian ubah tempo.", "Centre on 1 and 3. Edge on 2 and 4. Start slowly, then change the tempo."],
+    ["Tengah:", "Centre:"],
+    ["rendah dan berisi.", "low and full."],
+    ["Tepi:", "Edge:"],
+    ["tajam dan pendek.", "sharp and short."],
+    ["Bunyi ialah sintesis digital; bukan rakaman kompang sebenar.", "Sounds are digitally synthesised, rather than recordings of a real kompang."],
+    ["Kulit Dram Sisi, pintasan F", "Snare Drum head, shortcut F"],
+    ["Rim Dram Sisi, pintasan J", "Snare Drum rim, shortcut J"],
+    ["Ketuk kulit", "Hit head"],
+    ["Ketuk rim", "Hit rim"],
+    ["Sentuh kulit di tengah atau gelang rim. F = kulit · J = rim. Tab dan Enter juga boleh digunakan.", "Touch the central drumhead or the rim ring. F = head · J = rim. Tab and Enter also work."],
+    ["Sentuh kulit di tengah atau gelang rim. F = kulit · J = rim. Tab dan Enter atau Ruang juga boleh digunakan.", "Touch the central drumhead or the rim ring. F = head · J = rim. Tab and Enter or Space also work."],
+    ["Kulit pada setiap detik. Tambah dua ketukan rim pada detik 2 dan 4.", "Hit the head on every beat. Add two rim hits on beats 2 and 4."],
+    ["Kulit menghasilkan hentakan dengan desiran wayar snare. Ketukan rim lebih tajam dan pendek.", "The head produces a strike with a snare-wire rattle. Rim hits are sharper and shorter."],
+    ["Bunyi ialah sintesis digital.", "Sounds are digitally synthesised."],
+    ["Kuat Dram Bes, pintasan F", "Bass Drum strong hit, shortcut F"],
+    ["Lembut Dram Bes, pintasan J", "Bass Drum soft hit, shortcut J"],
+    ["Ketuk kuat", "Strong hit"],
+    ["Ketuk lembut", "Soft hit"],
+    ["Sentuh tengah untuk ketukan kuat atau gelang luar untuk lembut. F = kuat · J = lembut. Tab dan Enter juga boleh digunakan.", "Touch the centre for a strong hit or the outer ring for a soft hit. F = strong · J = soft. Tab and Enter also work."],
+    ["Sentuh tengah untuk ketukan kuat atau gelang luar untuk lembut. F = kuat · J = lembut. Tab dan Enter atau Ruang juga boleh digunakan.", "Touch the centre for a strong hit or the outer ring for a soft hit. F = strong · J = soft. Tab and Enter or Space also work."],
+    ["Ketuk kuat pada 1 dan 3. Ketuk lembut pada 2 dan 4 untuk mengekalkan detik.", "Play strong hits on 1 and 3. Play soft hits on 2 and 4 to keep the beat."],
+    ["Ketukan kuat lebih berisi dan lama. Ketukan lembut menghasilkan denyut rendah yang lebih ringan.", "Strong hits are fuller and longer. Soft hits produce a gentler low pulse."],
+    ["Kuat Simbal, pintasan F", "Cymbals strong clash, shortcut F"],
+    ["Lembut Simbal, pintasan J", "Cymbals soft clash, shortcut J"],
+    ["Laga kuat", "Strong clash"],
+    ["Laga lembut", "Soft clash"],
+    ["Sentuh simbal kiri untuk laga kuat, kanan untuk laga lembut. F = kuat · J = lembut. Tab dan Enter juga boleh digunakan.", "Touch the left cymbal for a strong clash and the right cymbal for a soft clash. F = strong · J = soft. Tab and Enter also work."],
+    ["Sentuh simbal kiri untuk laga kuat, kanan untuk laga lembut. F = kuat · J = lembut. Tab dan Enter atau Ruang juga boleh digunakan.", "Touch the left cymbal for a strong clash and the right cymbal for a soft clash. F = strong · J = soft. Tab and Enter or Space also work."],
+    ["Tandakan detik 1 dengan laga kuat. Isi detik seterusnya dengan laga lembut.", "Mark beat 1 with a strong clash. Fill the remaining beats with soft clashes."],
+    ["Laga kuat menghasilkan deringan panjang dan berlapis. Laga lembut menghasilkan aksen yang lebih pendek.", "Strong clashes produce long, layered ringing. Soft clashes produce shorter accents."],
+    ["Terbuka Segi Tiga, pintasan F", "Triangle open strike, shortcut F"],
+    ["Tertahan Segi Tiga, pintasan J", "Triangle muted strike, shortcut J"],
+    ["Ketuk terbuka", "Open strike"],
+    ["Ketuk tertahan", "Muted strike"],
+    ["Sentuh bahagian kiri untuk terbuka, kanan untuk tertahan. F = terbuka · J = tertahan. Tab dan Enter juga boleh digunakan.", "Touch the left side for an open strike and the right side for a muted strike. F = open · J = muted. Tab and Enter also work."],
+    ["Sentuh bahagian kiri untuk terbuka, kanan untuk tertahan. F = terbuka · J = tertahan. Tab dan Enter atau Ruang juga boleh digunakan.", "Touch the left side for an open strike and the right side for a muted strike. F = open · J = muted. Tab and Enter or Space also work."],
+    ["Ketuk terbuka pada 1 dan 3. Cuba ketukan tertahan pada 2 dan 4.", "Play open strikes on 1 and 3. Try muted strikes on 2 and 4."],
+    ["Terbuka meniru rangka yang dibiarkan bergetar. Tertahan meniru ketukan sambil memegang rangka; bunyinya lebih pendek.", "Open strikes simulate a freely vibrating frame. Muted strikes simulate striking while holding the frame, producing a shorter sound."],
+    ["Mulakan rakaman baharu?", "Start a new recording?"],
+    ["Rakaman semasa akan diganti. Simpan JSON dahulu jika anda mahu menyimpannya.", "The current recording will be replaced. Save JSON first if you want to keep it."],
+    ["Batal", "Cancel"],
+    ["Rakam baharu", "New recording"],
+    ["Mula rakaman baharu", "Start new recording"],
+    ["Disimpan di pelayar ini. Simpan JSON untuk salinan sandaran.", "Saved in this browser. Save JSON for a backup copy."],
+    ["Simpanan pelayar tidak tersedia. Simpan JSON sebelum menutup halaman.", "Browser storage is unavailable. Save JSON before closing the page."],
+    ["Belum ada rakaman. Tekan Rakam untuk bermula.", "No recording yet. Press Record to begin."],
+    ["Masukkan masa ketukan.", "Enter the hit time."],
+    ["Suntingan disimpan. Masa input asal dikekalkan.", "Edits saved. Original input times are preserved."],
+    ["Sesi dihentikan. Rakaman dan suntingan dikekalkan.", "Session stopped. Recording and edits are preserved."],
+    ["Audio dijeda oleh pelayar. Tekan kawalan sekali lagi untuk menyambung.", "Audio was paused by the browser. Press a control again to continue."],
+    ["Had 180 saat dicapai. Rakaman disimpan.", "The 180-second limit was reached. Recording saved."],
+    ["Contoh tamat. Tekan Rakam untuk cuba sendiri.", "Example finished. Press Record to try it yourself."],
+    ["Rakaman tamat. Masa input asal dikekalkan.", "Recording finished. Original input times are preserved."],
+    ["Audio tidak tersedia. Anda masih boleh merakam tindakan dan menyimpan JSON.", "Audio is unavailable. You can still record actions and save JSON."],
+    ["Tetapan metronom diubah. Tekan Main untuk bermula semula.", "Metronome settings changed. Press Play to restart."],
+    ["Main dihentikan untuk ketukan anda.", "Playback stopped for your hit."],
+    ["Merakam · 1 tindakan. Tekan Henti apabila selesai.", "Recording · 1 action. Press Stop when finished."],
+    ["Had 512 tindakan dicapai. Rakaman disimpan.", "The 512-action limit was reached. Recording saved."],
+    ["Sedia merakam. Ketukan pertama menjadi masa sifar.", "Ready to record. The first hit becomes time zero."],
+    ["Bunyi tidak tersedia. Tindakan anda masih boleh dirakam.", "Sound is unavailable. Your actions can still be recorded."],
+    ["Memainkan contoh dua bar · tiada input direkod.", "Playing a two-bar example · no input is recorded."],
+    ["Memainkan rakaman anda · bunyi sintesis digital.", "Playing your recording · digitally synthesised sound."],
+    ["Hentikan rakaman dahulu untuk mengubah tempo.", "Stop recording before changing the tempo."],
+    ["Metronom diubah. Tekan Main untuk bermula semula.", "Metronome changed. Press Play to restart."],
+    ["Tab disembunyikan. Sesi dihentikan dan rakaman dikekalkan.", "Tab hidden. Session stopped and recording preserved."],
+    ["Tetingkap tidak aktif. Sesi dihentikan dan rakaman dikekalkan.", "Window inactive. Session stopped and recording preserved."],
+    ["Tab lain mengubah rakaman. Versi ini dikekalkan; simpan JSON untuk sandaran.", "Another tab changed the recording. This version is preserved; save JSON for a backup."],
+    ["Identiti simpanan instrumen tidak sepadan.", "The saved instrument identity does not match."],
+    ["Ruang kerja dipulihkan. Simpan JSON untuk salinan sandaran.", "Workspace restored. Save JSON for a backup copy."],
+    ["Simpanan tidak dapat dibaca. Import JSON untuk memulihkan rakaman.", "Saved data could not be read. Import JSON to restore the recording."],
+    ["Data JSON tidak sah.", "Invalid JSON data."],
+    ["tamborin", "tambourine"],
+    ["Tamborin interaktif", "Interactive Tambourine"],
+    ["Tamborin anda", "Your Tambourine"],
+    ["Jejak rentak Tamborin", "Tambourine rhythm trace"],
+    ["Nama rakaman Tamborin", "Tambourine recording name"],
+    ["Import rakaman Tamborin JSON", "Import Tambourine JSON recording"],
+    ["Data JSON rakaman Tamborin", "Tambourine recording JSON data"],
+    ["Tampal JSON rakaman Tamborin", "Paste Tambourine recording JSON"],
+    ["e-Instru Studio · Tamborin", "e-Instru Studio · Tambourine"],
+    ["Mulakan rakaman Tamborin baharu?", "Start a new Tambourine recording?"],
+    ["Rakaman Tamborin semasa akan diganti. Simpan JSON dahulu jika mahu menyimpannya. Reset tidak memadam rakaman.", "The current Tambourine recording will be replaced. Save JSON first if you want to keep it. Reset does not delete recordings."],
+    ["Belum ada ketukan. Cuba mainkan tamborin.", "No hits yet. Try playing the tambourine."],
+    ["Kompang", "Kompang"],
+    ["kompang", "kompang"],
+    ["Kompang interaktif", "Interactive Kompang"],
+    ["Kompang anda", "Your Kompang"],
+    ["Jejak rentak Kompang", "Kompang rhythm trace"],
+    ["Nama rakaman Kompang", "Kompang recording name"],
+    ["Import rakaman Kompang JSON", "Import Kompang JSON recording"],
+    ["Data JSON rakaman Kompang", "Kompang recording JSON data"],
+    ["Tampal JSON rakaman Kompang", "Paste Kompang recording JSON"],
+    ["e-Instru Studio · Kompang", "e-Instru Studio · Kompang"],
+    ["Mulakan rakaman Kompang baharu?", "Start a new Kompang recording?"],
+    ["Rakaman Kompang semasa akan diganti. Simpan JSON dahulu jika mahu menyimpannya. Reset tidak memadam rakaman.", "The current Kompang recording will be replaced. Save JSON first if you want to keep it. Reset does not delete recordings."],
+    ["Belum ada ketukan. Cuba mainkan kompang.", "No hits yet. Try playing the kompang."],
+    ["dram sisi", "snare drum"],
+    ["Dram Sisi interaktif", "Interactive Snare Drum"],
+    ["Dram Sisi anda", "Your Snare Drum"],
+    ["Jejak rentak Dram Sisi", "Snare Drum rhythm trace"],
+    ["Nama rakaman Dram Sisi", "Snare Drum recording name"],
+    ["Import rakaman Dram Sisi JSON", "Import Snare Drum JSON recording"],
+    ["Data JSON rakaman Dram Sisi", "Snare Drum recording JSON data"],
+    ["Tampal JSON rakaman Dram Sisi", "Paste Snare Drum recording JSON"],
+    ["e-Instru Studio · Dram Sisi", "e-Instru Studio · Snare Drum"],
+    ["Mulakan rakaman Dram Sisi baharu?", "Start a new Snare Drum recording?"],
+    ["Rakaman Dram Sisi semasa akan diganti. Simpan JSON dahulu jika mahu menyimpannya. Reset tidak memadam rakaman.", "The current Snare Drum recording will be replaced. Save JSON first if you want to keep it. Reset does not delete recordings."],
+    ["Belum ada ketukan. Cuba mainkan dram sisi.", "No hits yet. Try playing the snare drum."],
+    ["dram bes", "bass drum"],
+    ["Dram Bes interaktif", "Interactive Bass Drum"],
+    ["Dram Bes anda", "Your Bass Drum"],
+    ["Jejak rentak Dram Bes", "Bass Drum rhythm trace"],
+    ["Nama rakaman Dram Bes", "Bass Drum recording name"],
+    ["Import rakaman Dram Bes JSON", "Import Bass Drum JSON recording"],
+    ["Data JSON rakaman Dram Bes", "Bass Drum recording JSON data"],
+    ["Tampal JSON rakaman Dram Bes", "Paste Bass Drum recording JSON"],
+    ["e-Instru Studio · Dram Bes", "e-Instru Studio · Bass Drum"],
+    ["Mulakan rakaman Dram Bes baharu?", "Start a new Bass Drum recording?"],
+    ["Rakaman Dram Bes semasa akan diganti. Simpan JSON dahulu jika mahu menyimpannya. Reset tidak memadam rakaman.", "The current Bass Drum recording will be replaced. Save JSON first if you want to keep it. Reset does not delete recordings."],
+    ["Belum ada ketukan. Cuba mainkan dram bes.", "No hits yet. Try playing the bass drum."],
+    ["simbal", "cymbals"],
+    ["Simbal interaktif", "Interactive Cymbals"],
+    ["Simbal anda", "Your Cymbals"],
+    ["Jejak rentak Simbal", "Cymbals rhythm trace"],
+    ["Nama rakaman Simbal", "Cymbals recording name"],
+    ["Import rakaman Simbal JSON", "Import Cymbals JSON recording"],
+    ["Data JSON rakaman Simbal", "Cymbals recording JSON data"],
+    ["Tampal JSON rakaman Simbal", "Paste Cymbals recording JSON"],
+    ["e-Instru Studio · Simbal", "e-Instru Studio · Cymbals"],
+    ["Mulakan rakaman Simbal baharu?", "Start a new Cymbals recording?"],
+    ["Rakaman Simbal semasa akan diganti. Simpan JSON dahulu jika mahu menyimpannya. Reset tidak memadam rakaman.", "The current Cymbals recording will be replaced. Save JSON first if you want to keep it. Reset does not delete recordings."],
+    ["Belum ada ketukan. Cuba mainkan simbal.", "No hits yet. Try playing the cymbals."],
+    ["segi tiga", "triangle"],
+    ["Segi Tiga interaktif", "Interactive Triangle"],
+    ["Segi Tiga anda", "Your Triangle"],
+    ["Jejak rentak Segi Tiga", "Triangle rhythm trace"],
+    ["Nama rakaman Segi Tiga", "Triangle recording name"],
+    ["Import rakaman Segi Tiga JSON", "Import Triangle JSON recording"],
+    ["Data JSON rakaman Segi Tiga", "Triangle recording JSON data"],
+    ["Tampal JSON rakaman Segi Tiga", "Paste Triangle recording JSON"],
+    ["e-Instru Studio · Segi Tiga", "e-Instru Studio · Triangle"],
+    ["Mulakan rakaman Segi Tiga baharu?", "Start a new Triangle recording?"],
+    ["Rakaman Segi Tiga semasa akan diganti. Simpan JSON dahulu jika mahu menyimpannya. Reset tidak memadam rakaman.", "The current Triangle recording will be replaced. Save JSON first if you want to keep it. Reset does not delete recordings."],
+    ["Belum ada ketukan. Cuba mainkan segi tiga.", "No hits yet. Try playing the triangle."],
+    ["Ketuk", "Tap"],
+    ["ketuk", "tap"],
+    ["Goncang", "Shake"],
+    ["goncang", "shake"],
+    ["Tengah", "Centre"],
+    ["tengah", "centre"],
+    ["Tepi", "Edge"],
+    ["tepi", "edge"],
+    ["Kulit", "Head"],
+    ["kulit", "head"],
+    ["Rim", "Rim"],
+    ["rim", "rim"],
+    ["Kuat", "Strong"],
+    ["kuat", "strong"],
+    ["Lembut", "Soft"],
+    ["lembut", "soft"],
+    ["Terbuka", "Open"],
+    ["terbuka", "open"],
+    ["Tertahan", "Muted"],
+    ["tertahan", "muted"],
+    ["hentakan kulit", "drumhead strike"],
+    ["Ketuk · hentakan kulit", "Tap · drumhead strike"],
+    ["deringan kepingan logam", "metal jingle rattle"],
+    ["Goncang · deringan kepingan logam", "Shake · metal jingle rattle"],
+    ["rendah dan berisi", "low and full"],
+    ["Tengah · rendah dan berisi", "Centre · low and full"],
+    ["tajam dan pendek", "sharp and short"],
+    ["Tepi · tajam dan pendek", "Edge · sharp and short"],
+    ["hentakan rangup", "crisp strike"],
+    ["Kulit · hentakan rangup", "Head · crisp strike"],
+    ["Rim · tajam dan pendek", "Rim · sharp and short"],
+    ["denyut rendah dan berisi", "low, full pulse"],
+    ["Kuat · denyut rendah dan berisi", "Strong · low, full pulse"],
+    ["denyut rendah yang ringan", "gentle low pulse"],
+    ["Lembut · denyut rendah yang ringan", "Soft · gentle low pulse"],
+    ["deringan logam panjang", "long metallic ring"],
+    ["Kuat · deringan logam panjang", "Strong · long metallic ring"],
+    ["aksen logam pendek", "short metallic accent"],
+    ["Lembut · aksen logam pendek", "Soft · short metallic accent"],
+    ["deringan cerah dan panjang", "bright, long ring"],
+    ["Terbuka · deringan cerah dan panjang", "Open · bright, long ring"],
+    ["ketukan dengan getaran tertahan", "strike with damped vibration"],
+    ["Tertahan · ketukan dengan getaran tertahan", "Muted · strike with damped vibration"],
+    ["Keadaan sesi: Main bebas", "Session state: Free play"],
+    ["Keadaan sesi: Menunggu ketukan", "Session state: Waiting for a hit"],
+    ["Keadaan sesi: Merakam", "Session state: Recording"],
+    ["Keadaan sesi: Menyiapkan bunyi", "Session state: Preparing sound"],
+    ["Keadaan sesi: Main contoh", "Session state: Play example"],
+    ["Keadaan sesi: Main rakaman", "Session state: Play recording"],
+    ["Keadaan sesi: Metronom", "Session state: Metronome"],
+    ["Kata laluan eksport", "Export password"],
+    ["Tutup kata laluan", "Close password dialog"],
+    ["Masukkan kata laluan untuk membuka eksport score.", "Enter the password to unlock score export."],
+    ["Kata laluan", "Password"],
+    ["Tunjukkan kata laluan", "Show password"],
+    ["Sembunyikan kata laluan", "Hide password"],
+    ["Tunjuk", "Show"],
+    ["Sembunyi", "Hide"],
+    ["Kata laluan salah. Cuba lagi.", "Incorrect password. Try again."],
+    ["Buka eksport", "Unlock export"],
+    ["Bawa melodi anda ke projek", "Bring your melody to a project"],
+    ["Eksport score", "Export score"],
+    ["Tutup eksport", "Close export"],
+    ["JSON lengkap", "Full JSON"],
+    ["CSV ketukan", "Hit CSV"],
+    ["Data eksport", "Export data"],
+    ["Salin", "Copy"],
+    ["Muat turun", "Download"],
+    ["Teruskan", "Continue"],
+    ["Sunting ketukan", "Edit note"],
+    ["Tutup suntingan", "Close editor"],
+    ["Onset (tick dari mula)", "Onset (ticks from start)"],
+    ["Tempoh bunyi rekoder (tick)", "Recorder sound duration (ticks)"],
+    ["24 tick = 1 beat. Bukti tempoh input asal dikekalkan.", "24 ticks = 1 beat. Original input duration evidence is preserved."],
+    ["24 tick = 1 beat. Pada 80 BPM, 24 tick = 750 ms. Masa input asal dikekalkan apabila score disunting.", "24 ticks = 1 beat. At 80 BPM, 24 ticks = 750 ms. Original input timing is preserved when editing the score."],
+    ["Buang not", "Delete note"],
+    ["Simpan perubahan", "Save changes"],
+    ["Bacaan anggaran", "Estimated readings"],
+    ["Dengar xylophone sebenar", "Listen to a real xylophone"],
+    ["Tutup mikrofon", "Close microphone"],
+    ["Pilih oktav yang sepadan dengan bar anda. Benarkan mikrofon, diam sebentar untuk ukur bunyi latar, kemudian ketuk satu bar pada satu masa.", "Choose the octave that matches your bars. Allow microphone access, stay quiet briefly to measure background noise, then strike one bar at a time."],
+    ["Kepekaan ketukan", "Hit sensitivity"],
+    ["Rendah mengurangkan ketukan palsu; tinggi menangkap ketukan lebih perlahan.", "Lower sensitivity reduces false hits; higher sensitivity detects softer hits."],
+    ["Ini pengesan percubaan, bukan ukuran akustik berkalibrasi. Onset termasuk ketidakpastian mikrofon/pelayar. Ringing, chord dan pertindihan not boleh menyebabkan bacaan salah. Ketukan tidak pasti kekal sebagai “?” untuk disunting.", "This experimental detector is not a calibrated acoustic measurement. Onset timing includes microphone and browser uncertainty. Ringing, chords and overlapping notes may cause incorrect readings. Uncertain hits remain “?” for editing."],
+    ["Pilih not sebelum menyimpan.", "Choose a note before saving."],
+    ["Onset mesti integer 0–65535 tick.", "Onset must be an integer from 0 to 65535 ticks."],
+    ["Tempoh bunyi mesti integer 1–65535 tick.", "Sound duration must be an integer from 1 to 65535 ticks."],
+    ["Belum ada not.", "No notes yet."],
+    ["Fail lengkap menyimpan source, raw_ms, onset_tick, duration_tick, tempo dan status bukti. Tiada raw audio disimpan.", "The complete file saves source, raw_ms, onset_tick, duration_tick, tempo and evidence status. No raw audio is saved."],
+    ["Masa score dan masa input asal ditunjukkan berasingan. Bacaan mikrofon kekal dilabel anggaran.", "Score timing and original input timing are shown separately. Microphone readings remain labelled as estimates."],
+    ["Not susunan tidak sah:", "Invalid arrangement note:"],
+    ["Tick susunan tidak sah.", "Invalid arrangement ticks."],
+    ["Versi lagu tidak sah.", "Invalid song version."],
+    ["Lagu tidak ditemui.", "Song not found."],
+    ["Instrumen tidak sah.", "Invalid instrument."],
+    ["Tempo mesti integer 40–200 BPM.", "Tempo must be an integer from 40 to 200 BPM."],
+    ["Score memerlukan 24 tick per quarter.", "The score requires 24 ticks per quarter note."],
+    ["Pilih oktav3,4 atau5.", "Choose octave 3, 4 or 5."],
+    ["Belum ada not untuk dieksport.", "There are no notes to export yet."],
+    ["Maksimum 512 event untuk pemain HTML.", "The HTML player supports a maximum of 512 events."],
+    ["Not pertama mesti bermula pada tick 0.", "The first note must start at tick 0."],
+    ["Grid not tidak bersambung atau bertindih.", "The note grid has gaps or overlaps."],
+    ["Tempoh bunyi tidak sah.", "Invalid sound duration."],
+    ["Semak dan sahkan not anggaran mikrofon dahulu.", "Review and confirm the estimated microphone notes first."],
+    ["Akhir score tidak sepadan.", "The score ending does not match."],
+    ["Score melebihi had HTML 180 saat.", "The score exceeds the HTML limit of 180 seconds."],
+    ["Pilih not dan onset integer 0–65535.", "Choose a note and an integer onset from 0 to 65535."],
+    ["Pilih not dan onset integer0–65535.", "Choose a note and an integer onset from 0 to 65535."],
+    ["Instrumen event tidak sah.", "Invalid event instrument."],
+    ["Tempoh input tidak sah.", "Invalid input duration."],
+    ["Fail terlalu besar. Had512KB.", "The file is too large. The limit is 512 KB."],
+    ["Fail bukan rakaman e-Instru Studio yang disokong.", "This file is not a supported e-Instru Studio recording."],
+    ["Instrumen import tidak disokong.", "The imported instrument is not supported."],
+    ["Versi score tidak sah.", "Invalid score version."],
+    ["Metadata masa rakaman tidak sah.", "Invalid recording timing metadata."],
+    ["Metadata score tidak sah.", "Invalid score metadata."],
+    ["Pitch MIDI import tidak sah.", "Invalid imported MIDI pitch."],
+    ["Onset import tidak sah.", "Invalid imported onset."],
+    ["Akhir import tidak sah.", "Invalid imported ending."],
+    ["Bahagian score tidak sah.", "Invalid score sections."],
+    ["Log input asal tidak sah.", "Invalid original input log."],
+    ["Masa mentah tidak sah.", "Invalid raw timing."],
+    ["Score atau tahap permainan tidak sah.", "Invalid score or game difficulty."],
+    ["Score memerlukan sekurang-kurangnya satu not.", "The score requires at least one note."],
+    ["Pelayar tidak menyokong Web Audio.", "This browser does not support Web Audio."],
+    ["Audio belum diizinkan pelayar.", "Audio has not been allowed by the browser yet."],
+    ["AudioContext belum tersedia. Cuba tekan bar dahulu.", "AudioContext is not available yet. Try striking a bar first."],
+    ["Instrumen perkusi belum tersedia.", "This percussion instrument is not available yet."],
+    ["Tempo mestilah integer 40–200 BPM.", "Tempo must be an integer from 40 to 200 BPM."],
+    ["Data rakaman perkusi tidak sah.", "Invalid percussion recording data."],
+    ["Format rakaman perkusi tidak dikenali.", "Unrecognized percussion recording format."],
+    ["Instrumen perkusi tidak dikenali.", "Unrecognized percussion instrument."],
+    ["Bukti bunyi mestilah sintesis digital.", "Sound evidence must be digital synthesis."],
+    ["Tajuk rakaman mestilah 1–60 aksara.", "The recording title must contain 1 to 60 characters."],
+    ["Senarai ketukan dan bukti masa diperlukan.", "A hit list and timing evidence are required."],
+    ["Had 512 ketukan bagi satu rakaman.", "Each recording is limited to 512 hits."],
+    ["Bukti input tidak sah.", "Invalid input evidence."],
+    ["Identiti bukti input tidak sah.", "Invalid input evidence identity."],
+    ["Jenis input perkusi tidak sah.", "Invalid percussion input type."],
+    ["Bukti masa asal tidak sah atau tidak mengikut urutan.", "Original timing evidence is invalid or out of order."],
+    ["Ketukan tidak sah.", "Invalid hit."],
+    ["Identiti ketukan tidak sepadan dengan bukti.", "The hit identity does not match the evidence."],
+    ["Jenis ketukan perkusi tidak sah.", "Invalid percussion hit type."],
+    ["Masa ketukan mesti dalam urutan dan julat 0–180 saat.", "Hit times must be in order and within 0 to 180 seconds."],
+    ["Bukti masa asal telah berubah.", "Original timing evidence has changed."],
+    ["Hanya input perkusi pengguna boleh dirakam.", "Only user percussion input can be recorded."],
+    ["Jam input tidak sah.", "Invalid input clock."],
+    ["Had 512 ketukan telah dicapai.", "The limit of 512 hits has been reached."],
+    ["Mulakan rakaman baharu sebelum menambah input.", "Start a new recording before adding input."],
+    ["Masa input mesti mengikut urutan dalam had 180 saat.", "Input times must be in order and within the 180-second limit."],
+    ["Tempoh ketukan melebihi 180 saat pada tempo ini.", "The hit duration exceeds 180 seconds at this tempo."],
+    ["Ketukan tidak ditemui.", "Hit not found."],
+    ["Pilih ketukan dan masa dalam julat 0–180 saat.", "Choose a hit and a time within 0 to 180 seconds."],
+    ["Saiz data rakaman tidak sah.", "Invalid recording data size."],
+    ["Jam dan fungsi bunyi diperlukan.", "A clock and sound function are required."],
+    ["Jam penjadual tidak sah.", "Invalid scheduler clock."],
+    ["Tetapan penjadual rentak tidak sah.", "Invalid rhythm scheduler settings."],
+    ["Tekstur bunyi tidak dikenali.", "Unrecognized sound texture."],
+    ["Ketukan Kompang tidak dikenali.", "Unrecognized Kompang hit."],
+    ["Ketukan instrumen tidak dikenali.", "Unrecognized instrument hit."],
+    ["JSON tidak sah. Semak kandungan rakaman dan cuba lagi.", "Invalid JSON. Check the recording data and try again."],
+    ["Rakaman saya", "My recording"],
+    ["Rakaman mikrofon", "Microphone recording"],
+    ["Rakaman import", "Imported recording"],
+    ["Simpan rakaman JSON", "Save recording JSON"],
+    ["Pilih fail rakaman Tamborin.", "Choose a Tambourine recording file."],
+    ["Rakaman Tamborin diimport. Masa input asal dikekalkan.", "Tambourine recording imported. Original input timing is preserved."],
+    ["Rentak Tamborin saya", "My Tambourine rhythm"],
+    ["Rakaman Tamborin saya", "My Tambourine recording"],
+    ["Pilih fail rakaman Kompang.", "Choose a Kompang recording file."],
+    ["Rakaman Kompang diimport. Masa input asal dikekalkan.", "Kompang recording imported. Original input timing is preserved."],
+    ["Rentak Kompang saya", "My Kompang rhythm"],
+    ["Rakaman Kompang saya", "My Kompang recording"],
+    ["Pilih fail rakaman Dram Sisi.", "Choose a Snare Drum recording file."],
+    ["Rakaman Dram Sisi diimport. Masa input asal dikekalkan.", "Snare Drum recording imported. Original input timing is preserved."],
+    ["Rentak Dram Sisi saya", "My Snare Drum rhythm"],
+    ["Rakaman Dram Sisi saya", "My Snare Drum recording"],
+    ["Pilih fail rakaman Dram Bes.", "Choose a Bass Drum recording file."],
+    ["Rakaman Dram Bes diimport. Masa input asal dikekalkan.", "Bass Drum recording imported. Original input timing is preserved."],
+    ["Rentak Dram Bes saya", "My Bass Drum rhythm"],
+    ["Rakaman Dram Bes saya", "My Bass Drum recording"],
+    ["Pilih fail rakaman Simbal.", "Choose a Cymbals recording file."],
+    ["Rakaman Simbal diimport. Masa input asal dikekalkan.", "Cymbals recording imported. Original input timing is preserved."],
+    ["Rentak Simbal saya", "My Cymbals rhythm"],
+    ["Rakaman Simbal saya", "My Cymbals recording"],
+    ["Pilih fail rakaman Segi Tiga.", "Choose a Triangle recording file."],
+    ["Rakaman Segi Tiga diimport. Masa input asal dikekalkan.", "Triangle recording imported. Original input timing is preserved."],
+    ["Rentak Segi Tiga saya", "My Triangle rhythm"],
+    ["Rakaman Segi Tiga saya", "My Triangle recording"],
+    ["KETUK IKUT RENTAK", "TAP TO THE BEAT"],
+    ["Xylo Tiles", "Xylo Tiles"],
+    ["Ketuk sekali apabila jubin tiba di garis. Main dengan papan kekunci, tetikus atau sentuhan.", "Tap once when a tile reaches the line. Play with a keyboard, mouse or touch."],
+    ["10 lagu · 3 tahap", "10 songs · 3 difficulties"],
+    ["Pilih cabaran", "Choose a challenge"],
+    ["Baru bermula? Cuba", "Just starting? Try"],
+    ["dan", "and"],
+    ["Easy", "Easy"],
+    ["Medium", "Medium"],
+    ["Hard", "Hard"],
+    ["Excellent", "Excellent"],
+    ["Excellent!", "Excellent!"],
+    ["Good", "Good"],
+    ["Miss", "Miss"],
+    ["Lagu", "Song"],
+    ["Tahap / tempo", "Difficulty / tempo"],
+    ["JUBIN", "TILES"],
+    ["Mula permainan", "Start game"],
+    ["Mula semula", "Restart"],
+    ["Jeda", "Pause"],
+    ["Sambung", "Resume"],
+    ["Sambung permainan", "Resume game"],
+    ["Batalkan permainan dan buka semula tetapan", "Cancel the game and unlock the settings"],
+    ["Empat beat persediaan sebelum jubin pertama.", "Four lead-in beats before the first tile."],
+    ["Tetapan dikunci. Reset untuk memilih cabaran lain.", "Settings are locked. Reset to choose another challenge."],
+    ["Cara bermain & pemarkahan", "How to play & scoring"],
+    ["Satu jubin, satu ketukan.", "One tile, one tap."],
+    ["Ketuk lorong pada garis menggunakan A S D F atau sentuhan. Lepaskan sebelum ketukan seterusnya; menahan kekunci tidak menambah mata. Ruang menjeda permainan. Sambung memberi dua beat persediaan.", "Tap a lane at the line using A S D F or touch. Release before the next tap; holding a key does not earn extra points. Space pauses the game. Resuming gives two lead-in beats."],
+    ["+3 nyawa", "+3 life"],
+    ["Kekal", "Unchanged"],
+    ["−15 nyawa", "−15 life"],
+    ["Lorong salah / masa tersasar", "Wrong lane / timing"],
+    ["−8 nyawa", "−8 life"],
+    ["Excellent 100 mata · Good 60 mata · bonus kombo sehingga +50. Nyawa maksimum 100. Hanya jubin yang tepat membunyikan not.", "Excellent 100 points · Good 60 points · combo bonus up to +50. Maximum life: 100. Only successful tile hits sound a note."],
+    ["Rekod terbaik mengikut lagu, versi dan tahap pada pelayar ini. Tab tersembunyi atau tetingkap tidak aktif menjeda permainan secara automatik.", "Best scores are saved by song, version and difficulty in this browser. Hiding the tab or leaving the window pauses the game automatically."],
+    ["Score cadangan daripada katalog yang sama. Versi audio/video rujukan belum ditranskripsi.", "Proposed arrangements from the same catalog. The reference audio/video versions have not been transcribed."],
+    ["Papan rentak", "Rhythm board"],
+    ["Menyiapkan audio", "Preparing audio"],
+    ["Dijeda", "Paused"],
+    ["Tamat", "Finished"],
+    ["Sedang bermain", "Playing"],
+    ["Selesai", "Complete"],
+    ["Nyawa habis", "Out of life"],
+    ["Pilih lagu dan tahap, kemudian tekan Mula permainan.", "Choose a song and difficulty, then press Start game."],
+    ["Skor dan nyawa", "Score and life"],
+    ["SKOR", "SCORE"],
+    ["KOMBO", "COMBO"],
+    ["TERBAIK PELAYAR", "BROWSER BEST"],
+    ["NYAWA", "LIFE"],
+    ["Jeda di papan permainan", "Pause in the game arena"],
+    ["Sambung di papan permainan", "Resume in the game arena"],
+    ["Jubin not bergerak ke garis ketukan melalui empat lorong A S D F. Tekan lorong apabila jubin sampai pada garis.", "Note tiles move toward the hit line through four lanes: A S D F. Tap a lane when its tile reaches the line."],
+    ["Empat lorong A S D F. Gunakan empat butang lorong di bawah apabila jubin sampai pada garis ketukan.", "Four lanes: A S D F. Use the four lane buttons below when a tile reaches the hit line."],
+    ["ANDA SUDAH BERSEDIA?", "ARE YOU READY?"],
+    ["Empat lorong.", "Four lanes."],
+    ["Satu melodi.", "One melody."],
+    ["Empat lorong. Satu melodi.", "Four lanes. One melody."],
+    ["Ketuk A S D F, klik atau sentuh lorong apabila jubin tiba di garis.", "Tap A S D F, click or touch a lane when its tile reaches the line."],
+    ["Letakkan jari pada A S D F, atau sentuh lorong. Ketuk sekali apabila jubin tiba di garis.", "Place your fingers on A S D F, or touch a lane. Tap once when a tile reaches the line."],
+    ["Lihat keputusan", "View results"],
+    ["GARIS KETUKAN", "HIT LINE"],
+    ["atau sentuh lorong", "or tap a lane"],
+    ["untuk jeda / sambung", "to pause / resume"],
+    ["Kemajuan lagu", "Song progress"],
+    ["LAGU SELESAI", "SONG COMPLETE"],
+    ["NYAWA HABIS", "OUT OF LIFE"],
+    ["Rentak yang hebat.", "Great rhythm."],
+    ["Peratus not tepat", "Percentage of notes hit"],
+    ["mata", "points"],
+    ["Ketukan salah", "Wrong taps"],
+    ["Kombo terbaik", "Best combo"],
+    ["Main sekali lagi", "Play again"],
+    ["Tukar cabaran", "Change challenge"],
+    ["Lorong / masa salah", "Wrong lane / timing"],
+    ["Melodi sampai ke penghujung.", "The melody reached its end."],
+    ["Satu lagi peluang untuk rentak anda.", "Another chance to find your rhythm."],
+    ["Terbaik baharu untuk cabaran ini.", "New best for this challenge."],
+    ["Cuba tingkatkan kombo anda.", "Try to improve your combo."],
+    ["Cuba Easy atau Petikan pendek untuk berlatih.", "Try Easy or a Short excerpt to practice."],
+    ["Syabas!", "Well done!"],
+    ["Cuba lagi.", "Try again."],
+    ["Permainan tamat", "Game over"],
+    ["Audio dijeda oleh pelayar. Tekan Sambung apabila sedia.", "Audio was paused by the browser. Press Resume when ready."],
+    ["SAMBUNG SELEPAS DUA BEAT", "RESUME AFTER TWO BEATS"],
+    ["IKUT EMPAT BEAT INI", "FOLLOW THESE FOUR BEATS"],
+    ["Bersedia pada A S D F. Tunggu jubin tiba di garis.", "Get ready on A S D F. Wait for the tiles to reach the line."],
+    ["BERSIAP", "GET READY"],
+    ["Sebentar lagi. Empat beat persediaan sebelum permainan bermula.", "Almost ready. Four lead-in beats before the game starts."],
+    ["Menyiapkan permainan…", "Preparing the game…"],
+    ["Pelayar ini tidak menyokong paparan permainan. Cuba Chrome atau Edge.", "This browser does not support the game display. Try Chrome or Edge."],
+    ["Audio belum tersedia. Cuba tekan Mula permainan semula.", "Audio is not available yet. Try pressing Start game again."],
+    ["Audio dijeda. Tekan Sambung apabila sedia.", "Audio is paused. Press Resume when ready."],
+    ["Kemajuan anda dikekalkan. Tekan Sambung atau Ruang; dua beat persediaan akan diberikan.", "Your progress is saved. Press Resume or Space; you will get two lead-in beats."],
+    ["AMBIL NAFAS", "TAKE A BREATH"],
+    ["PERMAINAN DIJEDA", "GAME PAUSED"],
+    ["Audio belum tersedia", "Audio not available yet"],
+    ["Tekan Sambung permainan sekali lagi apabila sedia.", "Press Resume game again when ready."],
+    ["Audio belum tersedia. Cuba Sambung permainan sekali lagi.", "Audio is not available yet. Try Resume game again."],
+    ["Pilih lagu, versi atau tahap untuk cabaran seterusnya.", "Choose a song, version or difficulty for your next challenge."],
+    ["Tab disembunyikan. Tekan Sambung untuk meneruskan tanpa kehilangan nyawa.", "The tab was hidden. Press Resume to continue without losing life."],
+    ["Tetingkap tidak aktif. Tekan Sambung apabila sedia.", "The window is inactive. Press Resume when ready."],
+    ["Permainan rentak · e-Instru Studio", "Rhythm game · e-Instru Studio"],
+    ["Lorong 1", "Lane 1"],
+    ["Ketuk lorong 1, A", "Tap lane 1, A"],
+    ["Lorong 2", "Lane 2"],
+    ["Ketuk lorong 2, S", "Tap lane 2, S"],
+    ["Lorong 3", "Lane 3"],
+    ["Ketuk lorong 3, D", "Tap lane 3, D"],
+    ["Lorong 4", "Lane 4"],
+    ["Ketuk lorong 4, F", "Tap lane 4, F"]];
+  const templates = [{"ms": "Score mengandungi {notes} di luar julat soprano C5–D7. Playback rekoder dihentikan. Pitch asal kekal dalam score dan eksport; pilih lagu lain atau sunting not secara jelas.", "en": "The score contains {notes} outside the soprano range C5–D7. Recorder playback is disabled. Original pitches remain in the score and exports; choose another song or edit the notes explicitly."},
+    {"ms": "{note} di luar julat soprano C5–D7. Pitch asal dikekalkan; sunting not untuk memainkannya pada rekoder.", "en": "{note} is outside the soprano range C5–D7. Its original pitch is kept; edit the note to play it on the recorder."},
+    {"ms": "{note} · {frequency} Hz · luar 8 bar", "en": "{note} · {frequency} Hz · outside the eight bars"},
+    {"ms": "Memainkan {title} · bunyi sintetik.", "en": "Playing {title} · synthesized sound."},
+    {"ms": "Sedang main · {elapsed} / {duration}s · {title}", "en": "Playing · {elapsed} / {duration}s · {title}"},
+    {"ms": "Reset · {bpm} BPM · kembali ke awal. Semua not dikekalkan.", "en": "Reset · {bpm} BPM · back to the start. All notes are kept."},
+    {"ms": "Merakam · {seconds}s · {count} ketukan", "en": "Recording · {seconds}s · taps: {count}"},
+    {"ms": "Main lagu: {title}", "en": "Play song: {title}"},
+    {"ms": "Main rakaman: {title}", "en": "Play recording: {title}"},
+    {"ms": "{bpm} BPM · {seconds}s · cadangan", "en": "{bpm} BPM · {seconds}s · suggested"},
+    {"ms": "Dimuatkan: {title} · versi panjang. Tekan Main lagu untuk dengar.", "en": "Loaded: {title} · long version. Press Play song to listen."},
+    {"ms": "Dimuatkan: {title} · petikan pendek. Tekan Main lagu untuk dengar.", "en": "Loaded: {title} · short excerpt. Press Play song to listen."},
+    {"ms": "Dengar not {index}: {label}", "en": "Hear note {index}: {label}"},
+    {"ms": "Rehat {index}: Rehat", "en": "Rest {index}: Rest"},
+    {"ms": "{label} · tick {tick} · di luar 8 bar", "en": "{label} · tick {tick} · outside the eight bars", "translate": ["label"]},
+    {"ms": "{label} · tick {tick}", "en": "{label} · tick {tick}", "translate": ["label"]},
+    {"ms": "Sunting not {index}: {label}", "en": "Edit note {index}: {label}", "translate": ["label"]},
+    {"ms": "Sunting not {index}", "en": "Edit note {index}"},
+    {"ms": "{count} event", "en": "{count} events"},
+    {"ms": "Versi panjang · {seconds}s", "en": "Long version · {seconds}s"},
+    {"ms": "Petikan pendek · {seconds}s", "en": "Short excerpt · {seconds}s"},
+    {"ms": "Rakaman anda · {seconds}s", "en": "Your recording · {seconds}s"},
+    {"ms": "Pitch luar 8 bar: {notes}. Pitch asal dikekalkan.", "en": "Pitches outside the eight bars: {notes}. Original pitches are kept."},
+    {"ms": "{count} pusingan bentuk melodi. Lead-in dan resonans tidak dikira.", "en": "Melody repeats: {count}. Lead-in time and resonance are not counted."},
+    {"ms": "{note} · luar 8 bar", "en": "{note} · outside the eight bars"},
+    {"ms": "Rehat · {beats} beat · tiada bunyi.", "en": "Rest · {beats} beats · no sound."},
+    {"ms": "Not {index} · {note} · {frequency} Hz · bunyi sintetik.", "en": "Note {index} · {note} · {frequency} Hz · synthesized sound."},
+    {"ms": "Fail {filename} disediakan.", "en": "File {filename} is ready."},
+    {"ms": "Ketuk satu not. Julat semasa {range}.", "en": "Strike one note. Current range: {range}."},
+    {"ms": "{frequency} Hz · keyakinan {confidence}% · semak bacaan.", "en": "{frequency} Hz · confidence {confidence}% · check the reading."},
+    {"ms": "Score ditransposisi seragam ke julat {range}.", "en": "The score was transposed uniformly to {range}."},
+    {"ms": "Anggaran {bpm} BPM — satu ketukan Tap dianggap satu beat.", "en": "Estimated {bpm} BPM — each Tap is treated as one beat."},
+    {"ms": "Tap {count} direkod. Ketuk lagi mengikut beat.", "en": "Taps recorded: {count}. Keep tapping to the beat."},
+    {"ms": "Dimuatkan: {title}. Tekan Main lagu atau Rakam melodi anda.", "en": "Loaded: {title}. Press Play song or record your own melody."},
+    {"ms": "Petikan katalog sedia ada dikekalkan. Not dan timestamp video belum disahkan. Transposisi {semitones} semitone.", "en": "The existing catalog excerpt is retained. Video notes and timestamps have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Motif awal enam not diulang dua kali. Melodi This Old Man diandaikan untuk tajuk I Love You; identiti melodi versi video belum disahkan. Transposisi {semitones} semitone.", "en": "The opening six-note motif is repeated twice. The melody of This Old Man is assumed for the title I Love You; the melody used in the video has not been verified. Transposed {semitones} semitones."},
+    {"ms": "Petikan satu rangkap dalam F major, C4–C5. Rentak penutup disusun semula; versi dan tempo video belum disahkan. Transposisi {semitones} semitone.", "en": "An excerpt of one verse in F major, C4–C5. The ending rhythm was rearranged; the video version and tempo have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Dua frasa awal dalam F major, 72 BPM. Petikan dipilih untuk muat lapan bar; frasa kemudian tidak disertakan. Versi video belum disahkan. Transposisi {semitones} semitone.", "en": "The opening two phrases in F major, 72 BPM. The excerpt was chosen to fit eight bars; later phrases are omitted. The video version has not been verified. Transposed {semitones} semitones."},
+    {"ms": "Motif frasa awal G E C D E F G diulang dua kali dengan rentak cadangan. Versi video belum disahkan. Transposisi {semitones} semitone.", "en": "The opening G E C D E F G phrase motif is repeated twice with a suggested rhythm. The video version has not been verified. Transposed {semitones} semitones."},
+    {"ms": "Dua frasa awal dalam F major; frasa kemudian yang memerlukan B-flat tidak disertakan. Tiada bunyi tepuk ditambah sebagai not. Versi video belum disahkan. Transposisi {semitones} semitone.", "en": "The opening two phrases in F major; later phrases requiring B-flat are omitted. No clapping sound is added as a note. The video version has not been verified. Transposed {semitones} semitones."},
+    {"ms": "Motif diulang tiga kali dengan penutup dipanjangkan. Transposisi -2 semitone daripada pola D E G / F-sharp kepada C D F / E supaya semua pitch muat lapan bar. Versi video belum disahkan. Transposisi {semitones} semitone.", "en": "The motif is repeated three times with an extended ending. The D E G / F-sharp pattern is transposed uniformly down 2 semitones to C D F / E so every pitch fits the eight bars. The video version has not been verified. Transposed {semitones} semitones."},
+    {"ms": "Melodi satu rangkap Mary dengan frasa sambungan dan kadens akhir dalam C major. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "One verse of Mary with continuation phrases and a final cadence in C major. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Dua frasa Rain versi petikan sedia ada dimainkan dalam empat pusingan; bukan keseluruhan rakaman video. 4 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "The two phrases from the existing Rain excerpt are played four times; this is not the entire video recording. 4 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Empat bahagian melodi Are You Sleeping? dalam C major. G3 rendah dikekalkan; ia di luar lapan bar maya C4–C5. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "Four sections of Are You Sleeping? in C major. The low G3 is retained; it is outside the eight virtual C4–C5 bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Korus Jingle Bells dengan bahagian jawapan dan penutup dalam C major. 1 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "The Jingle Bells chorus with an answering section and ending in C major. 1 repeat of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Versi I Love You menggunakan melodi This Old Man yang diandaikan; identiti melodi video masih belum disahkan. Bentuk melodi diteruskan melepasi motif enam not. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "This I Love You version assumes the melody of This Old Man; the video melody has not been verified. The melody continues beyond the six-note motif. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Melodi satu rangkap The Wheels on the Bus versi F major, diulang tiga kali. 3 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "One verse of The Wheels on the Bus in F major, repeated three times. 3 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Empat frasa Happy Birthday dalam F major. Bb4 sebenar dikekalkan, tanpa menggantikannya dengan B4; tiada pertukaran not untuk memuatkan lapan bar.  2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "Four phrases of Happy Birthday in F major. The actual Bb4 is retained rather than replaced with B4; no notes are changed to fit the eight bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Empat frasa Happy Birthday dalam F major. Bb4 sebenar dikekalkan, tanpa menggantikannya dengan B4; tiada pertukaran not untuk memuatkan lapan bar. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "Four phrases of Happy Birthday in F major. The actual Bb4 is retained rather than replaced with B4; no notes are changed to fit the eight bars. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Humpty Dumpty menggunakan varian melodi penuh KidsPlayMusic (E G F A…), berbeza daripada motif pendek sedia ada. Pitch C5–F5 dikekalkan; rentak ialah susunan cadangan sendiri. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "Humpty Dumpty uses the full KidsPlayMusic melody variant (E G F A…), which differs from the existing short motif. Pitches C5–F5 are retained; the rhythm is a suggested project arrangement. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Empat frasa If You're Happy and You Know It dalam F major, termasuk bahagian Bb4. Ruang tepukan diwakili rehat, tanpa audio tepuk atau lirik. 2 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "Four phrases of If You're Happy and You Know It in F major, including the Bb4 section. Clapping gaps are represented by rests, without clap audio or lyrics. 2 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Empat rangkap instrumental Baby Shark. Pola D E G / F-sharp ditransposisi seragam -2 semitone kepada C D F / E, sama seperti versi pendek. 4 pusingan bentuk melodi; rehat 1 beat antara pusingan. Not/audio/timestamp video Aazis belum disahkan. Transposisi {semitones} semitone.", "en": "Four instrumental verses of Baby Shark. The D E G / F-sharp pattern is transposed uniformly down 2 semitones to C D F / E, as in the short version. 4 repeats of the melody form, with a one-beat rest between repeats. Notes, audio and timestamps from the Aazis video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Score cadangan projek. Not dan timestamp video rujukan belum disahkan. Transposisi {semitones} semitone.", "en": "Suggested project score. Notes and timestamps from the reference video have not been verified. Transposed {semitones} semitones."},
+    {"ms": "Merakam · {count} tindakan. Tekan Henti apabila selesai.", "en": "Recording · {count} actions. Press Stop when finished."},
+    {"ms": "Merakam · {seconds}s", "en": "Recording · {seconds}s"},
+    {"ms": "{count} ketukan", "en": "{count} hits"},
+    {"ms": "Belum ada ketukan. Cuba mainkan {name}.", "en": "No hits yet. Try playing the {name}.", "translate": ["name"]},
+    {"ms": "Dengar {action} {number} pada {seconds} saat", "en": "Hear {action} {number} at {seconds} seconds", "translate": ["action"]},
+    {"ms": "Tindakan ketukan {number}", "en": "Action for hit {number}"},
+    {"ms": "Masa main ketukan {number} dalam ms", "en": "Playback time for hit {number} in ms"},
+    {"ms": "Reset · {bpm} BPM · rakaman dan suntingan dikekalkan. Masa suntingan dikekalkan untuk mematuhi had 180 saat.", "en": "Reset · {bpm} BPM · recording and edits are preserved. Edited times are preserved to stay within the 180-second limit."},
+    {"ms": "Reset · {bpm} BPM · rakaman dan suntingan dikekalkan.", "en": "Reset · {bpm} BPM · recording and edits are preserved."},
+    {"ms": "Tempo {bpm} BPM. Masa input asal dikekalkan; tekan Main untuk dengar.", "en": "Tempo {bpm} BPM. Original input times are preserved; press Play to listen."},
+    {"ms": "Pilih fail rakaman {name}.", "en": "Choose a {name} recording file.", "translate": ["name"]},
+    {"ms": "Rakaman {name} diimport. Masa input asal dikekalkan.", "en": "{name} recording imported. Original input times are preserved.", "translate": ["name"]},
+    {"ms": "Rentak {name} saya", "en": "My {name} rhythm", "translate": ["name"]},
+    {"ms": "Rakaman {name} saya", "en": "My {name} recording", "translate": ["name"]},
+    {"ms": "Not susunan tidak sah: {token}", "en": "Invalid arrangement note: {token}"},
+    {"ms": "Not {index} belum diketahui atau pitch MIDI tidak sah.", "en": "Note {index} is unknown or has an invalid MIDI pitch."},
+    {"ms": "Onset not{index} tidak sah.", "en": "Note {index} has an invalid onset."},
+    {"ms": "Not {index} berkongsi onset selepas grid; gunakan grid lebih halus atau sunting masa.", "en": "Note {index} shares an onset after quantization; use a finer grid or edit the timing."},
+    {"ms": "• {error}", "en": "• {error}", "translate": ["error"]},
+    {"ms": "Pusingan {round} · Frasa {phrase}", "en": "Round {round} · Phrase {phrase}"},
+    {"ms": "{note} Transposisi {amount} semitone.", "en": "{note} Transposition {amount} semitones.", "translate": ["note"]},
+    {"ms": "{title} · Petikan pendek · {level}", "en": "{title} · Short excerpt · {level}"},
+    {"ms": "{title} · Panjang · {level}", "en": "{title} · Full version · {level}"},
+    {"ms": "{title} · {hit} / {total} not tepat · {life} nyawa berbaki · {level} · {bpm} BPM. Cuba tingkatkan kombo anda.", "en": "{title} · {hit} / {total} notes hit · {life} life remaining · {level} · {bpm} BPM. Try to improve your combo."},
+    {"ms": "{title} · {hit} / {total} not tepat · {life} nyawa berbaki · {level} · {bpm} BPM. Cuba Easy atau Petikan pendek untuk berlatih.", "en": "{title} · {hit} / {total} notes hit · {life} life remaining · {level} · {bpm} BPM. Try Easy or a Short excerpt to practice."},
+    {"ms": "Terbaik cabaran ini: {n} mata.", "en": "Best for this challenge: {n} points."},
+    {"ms": "{accuracy}% not tepat", "en": "{accuracy}% notes hit"},
+    {"ms": "{n} mata · {accuracy}% not tepat. Main lagi atau pilih cabaran lain di keputusan.", "en": "{n} points · {accuracy}% notes hit. Play again or choose another challenge in the results."},
+    {"ms": "{n} mata · {accuracy}% not tepat", "en": "{n} points · {accuracy}% notes hit"},
+    {"ms": "Selesai · {n} mata · {excellent} Excellent · {miss} Miss.", "en": "Complete · {n} points · {excellent} Excellent · {miss} Miss."},
+    {"ms": "Permainan tamat · {n} mata · {excellent} Excellent · {miss} Miss.", "en": "Game over · {n} points · {excellent} Excellent · {miss} Miss."},
+    {"ms": "Bersedia · {beats}", "en": "Get ready · {beats}"},
+    {"ms": "Ketuk A S D F atau sentuh lorong pada garis · Ruang untuk jeda · {bpm} BPM.", "en": "Tap A S D F or touch a lane at the line · Space to pause · {bpm} BPM."},
+    {"ms": "Sambung selepas dua beat · {bpm} BPM.", "en": "Resume after two beats · {bpm} BPM."},
+    {"ms": "Lorong / masa salah · {error} ms", "en": "Wrong lane / timing · {error} ms"},
+    {"ms": "{name} · e-Instru Studio", "en": "{name} · e-Instru Studio", "translate": ["name"]}];
+  const STORAGE_KEY = 'e-instru-language';
+  const ATTRIBUTES = ['aria-label', 'title', 'placeholder', 'aria-valuetext'];
+  const OBSERVED_ATTRIBUTES = [...ATTRIBUTES, 'content', 'name', 'data-i18n-ignore'];
+  const MAX_TEXT_LENGTH = 32768, MAX_CACHE_ENTRIES = 512, MAX_TEMPLATE_DEPTH = 4;
+  const NUMERIC_CAPTURES = new Set(['count', 'number', 'index', 'n', 'bpm', 'time', 'seconds', 'elapsed', 'duration', 'frequency', 'confidence', 'semitones', 'tick', 'beats', 'accuracy', 'total', 'excellent', 'hit', 'life', 'miss', 'round', 'amount']);
+  const doc = typeof document === 'object' ? document : root.document;
+  const exactMs = new Map(), exactEn = new Map(), rules = [], resultCache = new Map();
+  const textSources = new WeakMap(), attributeSources = new WeakMap(), boundSelectors = new WeakSet();
+  const listeners = new Set();
+  let observer = null, transaction = null;
+
+  function validLanguage(value) { return value === 'ms' || value === 'en'; }
+  function storedLanguage(value) { return value === 'en' ? 'en' : 'ms'; }
+  function storage() {
+    return typeof localStorage === 'object' ? localStorage : root.localStorage;
+  }
+  function readLanguage() {
+    try { return storedLanguage(storage()?.getItem(STORAGE_KEY)); } catch { return 'ms'; }
+  }
+  let language = readLanguage();
+
+  for (const entry of entries) {
+    if (!Array.isArray(entry) || typeof entry[0] !== 'string' || typeof entry[1] !== 'string') continue;
+    const pair = { ms: entry[0].trim(), en: entry[1].trim() };
+    if (!pair.ms || !pair.en) continue;
+    // The first exact definition wins; a node's original pair remains in its
+    // WeakMap even if two English labels happen to share the same spelling.
+    if (!exactMs.has(pair.ms)) exactMs.set(pair.ms, pair);
+    if (!exactEn.has(pair.en)) exactEn.set(pair.en, pair);
+  }
+
+  function escapePattern(value) { return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function compilePattern(value) {
+    if (typeof value !== 'string' || !value.trim()) return null;
+    const source = value.trim(), names = [], parts = [];
+    const matcher = /\{([A-Za-z_][A-Za-z0-9_]*)\}/g;
+    let previous = 0, match;
+    while ((match = matcher.exec(source))) {
+      parts.push(source.slice(previous, match.index)); names.push(match[1]);
+      previous = match.index + match[0].length;
+    }
+    parts.push(source.slice(previous));
+    const literalLength = parts.reduce((sum, part) => sum + part.length, 0);
+    // A placeholder alone is not a known phrase. Reject it instead of matching
+    // every user string. Captures never span lines.
+    if (!literalLength || names.length > 24) return null;
+    let expression = escapePattern(parts[0]);
+    for (let index = 0; index < names.length; index++) {
+      // Distinguish a multiword label from an adjacent numeric capture; e.g.
+      // "Dram Sisi 7" must not become name="Dram", count="Sisi 7".
+      expression += NUMERIC_CAPTURES.has(names[index]) ? '([+−-]?(?:\\d+(?:[.,]\\d+)?|[.,]\\d+))' : '([^\\r\\n]*?)';
+      expression += escapePattern(parts[index + 1]);
+    }
+    return {
+      source, names, prefix: parts[0], suffix: parts[parts.length - 1], literalLength,
+      expression: new RegExp('^' + expression + '$', 'u')
+    };
+  }
+  for (const template of templates) {
+    if (!template || typeof template !== 'object') continue;
+    const ms = compilePattern(template.ms), en = compilePattern(template.en);
+    if (!ms || !en) continue;
+    const msNames = new Set(ms.names), enNames = new Set(en.names);
+    if (msNames.size !== enNames.size || [...msNames].some(name => !enNames.has(name))) continue;
+    rules.push({ ms, en, translate: new Set(Array.isArray(template.translate) ? template.translate : []) });
+  }
+  rules.sort((a, b) => Math.max(b.ms.literalLength, b.en.literalLength) - Math.max(a.ms.literalLength, a.en.literalLength));
+
+  function capture(pattern, source) {
+    if (pattern.prefix && !source.startsWith(pattern.prefix) || pattern.suffix && !source.endsWith(pattern.suffix)) return null;
+    const match = pattern.expression.exec(source);
+    if (!match) return null;
+    const values = Object.create(null);
+    for (let index = 0; index < pattern.names.length; index++) {
+      const name = pattern.names[index], value = match[index + 1];
+      if (Object.hasOwn(values, name) && values[name] !== value) return null;
+      values[name] = value;
+    }
+    return values;
+  }
+  function fill(pattern, values) {
+    return pattern.source.replace(/\{([A-Za-z_][A-Za-z0-9_]*)\}/g, (_, name) => values[name] ?? '');
+  }
+  function resolveCore(source, depth) {
+    const exact = exactMs.get(source) || exactEn.get(source);
+    if (exact) return exact;
+    if (depth >= MAX_TEMPLATE_DEPTH) return { ms: source, en: source };
+    // Prefer all canonical-source patterns before trying their reverse forms.
+    // Raw captures are copied literally; only named opt-in captures translate.
+    for (const form of ['ms', 'en']) for (const rule of rules) {
+      const values = capture(rule[form], source);
+      if (!values) continue;
+      const msValues = Object.create(null), enValues = Object.create(null);
+      for (const [name, value] of Object.entries(values)) {
+        const pair = rule.translate.has(name) ? resolveText(value, depth + 1) : { ms: value, en: value };
+        msValues[name] = pair.ms; enValues[name] = pair.en;
+      }
+      return { ms: fill(rule.ms, msValues), en: fill(rule.en, enValues) };
+    }
+    return { ms: source, en: source };
+  }
+  function resolveLine(source, depth) {
+    const surrounded = /^([^\S\r\n]*)([\s\S]*?)([^\S\r\n]*)$/.exec(source);
+    const leading = surrounded[1], core = surrounded[2], trailing = surrounded[3];
+    if (!core) return { ms: source, en: source };
+    const direct = resolveCore(core, depth);
+    if (direct.ms !== core || direct.en !== core) return { ms: leading + direct.ms + trailing, en: leading + direct.en + trailing };
+    const bullet = /^((?:[•●▪◦‣∙]|[-*]|\d+[.)])\s+)([\s\S]+)$/.exec(core);
+    const pair = bullet ? resolveCore(bullet[2], depth) : direct;
+    const prefix = leading + (bullet ? bullet[1] : '');
+    return { ms: prefix + pair.ms + trailing, en: prefix + pair.en + trailing };
+  }
+  function resolveText(source, depth = 0) {
+    if (source.length > MAX_TEXT_LENGTH) return { ms: source, en: source };
+    const parts = source.split(/(\r\n|\r|\n)/), ms = [], en = [];
+    for (let index = 0; index < parts.length; index++) {
+      const pair = index % 2 ? { ms: parts[index], en: parts[index] } : resolveLine(parts[index], depth);
+      ms.push(pair.ms); en.push(pair.en);
+    }
+    return { ms: ms.join(''), en: en.join('') };
+  }
+  function pairFor(source) {
+    // HUD clocks and numeric SVG labels change frequently. Their vocabulary
+    // has no locale phrase, so skip regex rules and cache churn altogether.
+    if (/^[\d\s.,:;\/%×+−\-–—()[\]{}'′″"·=≤≥]*$/u.test(source.replace(/BPM|Hz|ms|s/g, ''))) return { ms: source, en: source };
+    const cached = resultCache.get(source);
+    if (cached) return cached;
+    const pair = resolveText(source);
+    if (source.length <= MAX_TEXT_LENGTH) {
+      if (resultCache.size >= MAX_CACHE_ENTRIES) resultCache.delete(resultCache.keys().next().value);
+      resultCache.set(source, pair);
+    }
+    return pair;
+  }
+  function t(source, targetLanguage = language) {
+    const text = source == null ? '' : String(source);
+    return pairFor(text)[validLanguage(targetLanguage) ? targetLanguage : language];
+  }
+
+  function parentElement(node) { return node?.parentElement || node?.parentNode || null; }
+  function ignored(node, text = false) {
+    let element = node?.nodeType === 1 ? node : parentElement(node);
+    while (element && element.nodeType !== 9) {
+      const tag = String(element.tagName || '').toUpperCase();
+      if (element.hasAttribute?.('data-i18n-ignore') || tag === 'SCRIPT' || tag === 'STYLE' || element.isContentEditable) return true;
+      if ((text || element !== node) && (tag === 'TEXTAREA' || tag === 'INPUT')) return true;
+      element = parentElement(element);
+    }
+    return false;
+  }
+  function selectionSnapshot() {
+    try {
+      const selection = doc?.getSelection?.() || root.getSelection?.();
+      if (!selection || !selection.rangeCount) return null;
+      const ranges = [];
+      for (let index = 0; index < selection.rangeCount; index++) {
+        const range = selection.getRangeAt(index);
+        ranges.push({ start: range.startContainer, startOffset: range.startOffset, end: range.endContainer, endOffset: range.endOffset });
+      }
+      return { selection, ranges, anchor: selection.anchorNode, anchorOffset: selection.anchorOffset, focus: selection.focusNode, focusOffset: selection.focusOffset, touched: false };
+    } catch { return null; }
+  }
+  function safeOffset(node, offset) {
+    const length = node?.nodeType === 3 ? node.data.length : node?.childNodes?.length || 0;
+    return Math.max(0, Math.min(length, offset));
+  }
+  function restoreSelection(snapshot) {
+    if (!snapshot?.touched) return;
+    try {
+      const { selection, ranges, anchor, anchorOffset, focus, focusOffset } = snapshot;
+      if (ranges.length === 1 && typeof selection.setBaseAndExtent === 'function') {
+        selection.setBaseAndExtent(anchor, safeOffset(anchor, anchorOffset), focus, safeOffset(focus, focusOffset));
+      } else if (typeof doc?.createRange === 'function') {
+        selection.removeAllRanges();
+        for (const saved of ranges) {
+          const range = doc.createRange();
+          range.setStart(saved.start, safeOffset(saved.start, saved.startOffset));
+          range.setEnd(saved.end, safeOffset(saved.end, saved.endOffset));
+          selection.addRange(range);
+        }
+      }
+    } catch { /* A selection that the browser removed needs no reconstruction. */ }
+  }
+  function updatingDOM(action) {
+    if (transaction) return action();
+    transaction = { selection: selectionSnapshot() };
+    try { return action(); }
+    finally {
+      const snapshot = transaction.selection;
+      transaction = null;
+      restoreSelection(snapshot);
+    }
+  }
+  function updateText(node) {
+    if (node?.nodeType !== 3 || ignored(node, true)) return;
+    // Implicit option values derive from their text. Leave these labels alone
+    // instead of changing a controller's selection value as a side effect.
+    const parent = parentElement(node);
+    if (String(parent?.tagName || '').toUpperCase() === 'OPTION' && !parent.hasAttribute?.('value')) return;
+    const current = node.data, previous = textSources.get(node);
+    if (previous?.rendered === current && previous.language === language) return;
+    const pair = previous?.rendered === current ? previous.pair : pairFor(current);
+    const rendered = pair[language];
+    textSources.set(node, { pair, rendered, language });
+    if (current === rendered) return;
+    const selection = transaction?.selection;
+    if (selection && selection.ranges.some(range => range.start === node || range.end === node)) selection.touched = true;
+    node.data = rendered;
+  }
+  function isDescription(element) {
+    return String(element?.tagName || '').toUpperCase() === 'META' && element.getAttribute?.('name')?.toLowerCase() === 'description';
+  }
+  function updateAttribute(element, name) {
+    if (element?.nodeType !== 1 || ignored(element) || name === 'content' && !isDescription(element)) return;
+    if (!element.hasAttribute?.(name)) return;
+    const current = element.getAttribute(name);
+    let records = attributeSources.get(element);
+    if (!records) { records = new Map(); attributeSources.set(element, records); }
+    const previous = records.get(name);
+    if (previous?.rendered === current && previous.language === language) return;
+    const pair = previous?.rendered === current ? previous.pair : pairFor(current);
+    const rendered = pair[language];
+    records.set(name, { pair, rendered, language });
+    if (current !== rendered) element.setAttribute(name, rendered);
+  }
+  function bindSelector(element) {
+    if (!element || boundSelectors.has(element)) return;
+    if (typeof element.addEventListener === 'function') {
+      element.addEventListener('change', () => {
+        if (!setLanguage(element.value)) element.value = language;
+      });
+      boundSelectors.add(element);
+    }
+    element.value = language;
+  }
+  function syncLanguage() {
+    const html = doc?.documentElement;
+    if (html?.setAttribute && html.getAttribute?.('lang') !== language) html.setAttribute('lang', language);
+    const selector = doc?.getElementById?.('languageSelect');
+    if (selector) { bindSelector(selector); if (selector.value !== language) selector.value = language; }
+  }
+  function scan(start) {
+    if (!start || typeof start.nodeType !== 'number') return;
+    const pending = [start];
+    while (pending.length) {
+      const node = pending.pop();
+      if (node.nodeType === 3) { updateText(node); continue; }
+      if (node.nodeType === 1) {
+        if (ignored(node)) continue;
+        for (const name of ATTRIBUTES) updateAttribute(node, name);
+        if (isDescription(node)) updateAttribute(node, 'content');
+        if (node.id === 'languageSelect') bindSelector(node);
+        const tag = String(node.tagName || '').toUpperCase();
+        if (tag === 'TEXTAREA' || tag === 'INPUT') continue;
+      } else if (node.nodeType !== 9 && node.nodeType !== 11) continue;
+      for (let child = node.lastChild; child; child = child.previousSibling) pending.push(child);
+    }
+  }
+  function refresh(start = doc?.documentElement) {
+    updatingDOM(() => { syncLanguage(); scan(start); });
+  }
+  function applyLanguage(next, persist) {
+    const previous = language;
+    language = next;
+    if (persist) try { storage()?.setItem(STORAGE_KEY, next); } catch { /* The in-memory choice still works. */ }
+    refresh();
+    if (previous !== next) for (const listener of [...listeners]) {
+      try { listener(next, previous); } catch (error) { root.console?.warn?.('Language listener failed.', error); }
+    }
+    return true;
+  }
+  function setLanguage(next) {
+    return validLanguage(next) ? applyLanguage(next, true) : false;
+  }
+  function onChange(listener) {
+    if (typeof listener !== 'function') return () => {};
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  }
+  function processMutations(mutations) {
+    const subtrees = new Set(), attributes = new Map();
+    for (const mutation of mutations) {
+      if (mutation.type === 'characterData') subtrees.add(mutation.target);
+      else if (mutation.type === 'childList') {
+        for (const node of mutation.addedNodes || []) subtrees.add(node);
+      } else if (mutation.type === 'attributes') {
+        if (mutation.attributeName === 'data-i18n-ignore') subtrees.add(mutation.target);
+        else {
+          const names = attributes.get(mutation.target) || new Set();
+          names.add(mutation.attributeName === 'name' ? 'content' : mutation.attributeName);
+          attributes.set(mutation.target, names);
+        }
+      }
+    }
+    updatingDOM(() => {
+      for (const [element, names] of attributes) {
+        if (element.isConnected === false) continue;
+        for (const name of names) updateAttribute(element, name);
+      }
+      for (const node of subtrees) {
+        if (node.isConnected === false) continue;
+        let covered = false;
+        for (let ancestor = node.parentNode; ancestor; ancestor = ancestor.parentNode) {
+          if (subtrees.has(ancestor)) { covered = true; break; }
+        }
+        if (!covered) scan(node);
+      }
+    });
+    // Own writes produce at most one further observer delivery: the canonical
+    // WeakMap records already equal the rendered value, so that pass writes
+    // nothing. Never disconnect/takeRecords here: external updates can coexist.
+  }
+
+  root.StudioI18n = Object.freeze({ t, setLanguage, get language() { return language; }, refresh, onChange });
+  root.addEventListener?.('storage', event => {
+    if (event.key !== STORAGE_KEY && event.key !== null) return;
+    try { if (event.storageArea && event.storageArea !== storage()) return; } catch { /* Storage may be blocked. */ }
+    applyLanguage(storedLanguage(event.newValue), false);
+  });
+  function start() {
+    refresh();
+    const Observer = root.MutationObserver || (typeof MutationObserver === 'function' ? MutationObserver : null);
+    if (!observer && Observer && doc?.documentElement) {
+      observer = new Observer(processMutations);
+      observer.observe(doc.documentElement, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: OBSERVED_ATTRIBUTES });
+    }
+  }
+  if (doc?.documentElement) start();
+  else doc?.addEventListener?.('DOMContentLoaded', start, { once: true });
+
+  // Limits: only dictionary phrases/full templates translate. Unknown content,
+  // raw template captures, editable content and all form values are preserved.
+  // Raw/imported display content must be marked data-i18n-ignore by its owner.
+  // Text >32 KiB, implicit-valued option labels and missing real DOM APIs are
+  // deliberately left alone. Canvas-drawn text needs its own t() call. English
+  // reverse-label collisions resolve to the first corpus entry for new nodes.
+})(typeof window === 'object' ? window : globalThis);
+
+</script>
 <script id="xylo-core">
 (function(root){'use strict';
 const PPQ=24, LIMIT=512, MAX_DURATION_MS=180000, KEYS=['A','S','D','F','G','H','J','K'], OFFSETS=[0,2,4,5,7,9,11,12], SOL=['Do','Re','Mi','Fa','Sol','La','Ti','Do'], NAMES=['C','D','E','F','G','A','B','C'];
@@ -759,6 +2222,20 @@ const instance=window.crypto?.randomUUID?.()||String(Math.random()), STORAGE='xy
 const heldInputs=new Map(),scheduledVoices=new Set();
 let instrumentId='xylophone',chooserOpen=true,instrumentSessions={},recordInstrument='xylophone',recorderBuilt=false;
 const currentInstrument=()=>C.INSTRUMENTS[instrumentId];
+// Catalog prose can be localized; imported custom metadata remains literal.
+function matchingCatalogPreset(){
+ if(take.source!=='preset_proposal'||!['short','long'].includes(take.score_variant))return null;
+ return(take.score_variant==='long'?C.LONG_PRESETS:C.PRESETS).find(p=>p.id===Number(take.song_id))||null;
+}
+function knownCatalogArrangement(){
+ if(take.source!=='preset_proposal'||!take.arrangement_note)return true;
+ const preset=matchingCatalogPreset();
+ return!!preset&&take.arrangement_note===(preset.arrangement_note||'Petikan katalog sedia ada dikekalkan. Not dan timestamp video belum disahkan.');
+}
+function knownCatalogSection(section){
+ const preset=matchingCatalogPreset();
+ return!!preset&&(preset.sections||[]).some(item=>item.label===section.label&&item.onset_tick===section.onset_tick&&item.end_tick===section.end_tick);
+}
 const manualNotes=()=>C.instrumentNotes(instrumentId,take.octave);
 function sessionSnapshot(){return{take,lastCustom,history,selectedVariant};}
 function rememberSession(){instrumentSessions[instrumentId]=sessionSnapshot();}
@@ -857,7 +2334,7 @@ function tone(midi,at,metro=false,gateSeconds=.5,voiceInstrument=instrumentId){i
 function silence(){for(const voice of [...scheduledVoices])voice.cancel();for(const n of activeOsc){try{n.stop();n.disconnect();}catch{}}activeOsc.clear();}
 function hit(midi){if(workspaceMode!=='studio'||mode.startsWith('mic'))return;flash(midi);const now=performance.now();if(mode==='armed'||mode==='recording')appendTap(midi,now,{source:'manual',reviewed:true});if(mode!=='playing'){const epoch=playEpoch;ensureAudio().then(a=>{if(a&&epoch===playEpoch&&!mode.startsWith('mic'))tone(midi);});}else announce('Hentikan score untuk merakam melodi sendiri.');}
 function syncTakeFromTaps(){const oldTitle=recordTitle;take=C.fromTaps(taps,recordBpm,recordGrid,recordTail/24,recordOctave,recordInstrument);take.title=oldTitle;take.clock_source=recordSource==='microphone_estimate'?'performance.now() at browser RMS onset (estimated, input latency unknown)':'performance.now() at pointerdown/keydown';take.source=recordSource;lastCustom=C.clone(take);}
-function beginTake(source){releaseInputs();playEpoch++;silence();recordInstrument=instrumentId;snapshot();taps=[];recordFirst=null;recordBpm=take.bpm;recordOctave=take.octave;recordTitle=source==='microphone_estimate'?'Rakaman mikrofon':'Rakaman saya';recordSource=source;recordGrid=take.grid_tick;recordTail=take.tail_tick;take=C.empty(recordBpm,recordOctave,recordInstrument);take.grid_tick=recordGrid;take.tail_tick=recordTail;take.title=recordTitle;take.source=source;mode=source==='microphone_estimate'?'mic':'armed';metroNext=0;metroOrigin=0;render();status(source==='microphone_estimate'?'Mikrofon aktif — ketuk satu bar pada satu masa.':'Sedia merakam. Ketuk not pertama untuk memulakan masa.',true);}
+function beginTake(source){releaseInputs();playEpoch++;silence();recordInstrument=instrumentId;snapshot();taps=[];recordFirst=null;recordBpm=take.bpm;recordOctave=take.octave;recordTitle=source==='microphone_estimate'?'Rakaman mikrofon':'Rakaman saya';recordTitle=window.StudioI18n?.t(recordTitle)||recordTitle;recordSource=source;recordGrid=take.grid_tick;recordTail=take.tail_tick;take=C.empty(recordBpm,recordOctave,recordInstrument);take.grid_tick=recordGrid;take.tail_tick=recordTail;take.title=recordTitle;take.source=source;mode=source==='microphone_estimate'?'mic':'armed';metroNext=0;metroOrigin=0;render();status(source==='microphone_estimate'?'Mikrofon aktif — ketuk satu bar pada satu masa.':'Sedia merakam. Ketuk not pertama untuk memulakan masa.',true);}
 function appendTap(midi,stamp,details={}){if(!['armed','recording','mic'].includes(mode))return;if(taps.length>=C.LIMIT){stopAll();announce('Had512event dicapai. Rakaman sudah disimpan.');return;}if(recordFirst===null){recordFirst=stamp;if(mode==='armed')mode='recording';if(audio?.state==='running'){metroOrigin=audio.currentTime+.03;metroNext=0;}}const elapsed=stamp-recordFirst;if(elapsed>C.MAX_DURATION_MS){stopAll();announce('Had180s dicapai. Semak hujung score sebelum eksport.');return;}taps.push({midi,raw_ms:Math.max(0,elapsed),...details});const index=taps.length-1;syncTakeFromTaps();render();save();if(taps.length>=C.LIMIT){stopAll();announce('Had512event dicapai. Semak rakaman anda.');}return index;}
 function stopMic(){micEpoch++;cancelAnimationFrame(micFrame);clearTimeout(micPendingTimeout);micFrame=0;micPendingTimeout=0;for(const track of micStream?.getTracks()||[])track.stop();micStream=null;for(const n of[micSource,micAnalyser,micZero])try{n?.disconnect();}catch{}micSource=micAnalyser=micZero=null;$('startMicBtn').disabled=false;$('startMicBtn').textContent='Mula dengar & rakam';$('micPhase').textContent='Dihentikan';$('micLevel').style.width='0%';}
 function stopAll(message){releaseInputs();const was=mode;playEpoch++;clearInterval(playTimer);playTimer=0;if(mode.startsWith('mic')||micStream)stopMic();mode='idle';silence();for(const id of ['recorderPads','extendedPads'])for(const b of $(id).querySelectorAll('button')){b.classList.remove('down');b.setAttribute('aria-pressed','false');}playSnapshot=null;lastVisual=-1;for(const b of $('instrument').querySelectorAll('.down'))b.classList.remove('down');const line=$('playHead');if(line)line.setAttribute('visibility','hidden');if(['armed','recording','mic'].includes(was)&&taps.length){syncTakeFromTaps();lastCustom=C.clone(take);}render();save();status(message||(['armed','recording','mic'].includes(was)?(take.events.length?'Rakaman disimpan. Semak not dan rentak sebelum eksport.':'Tiada ketukan direkod. Cuba rakam semula.'):'Sedia. Klik bar atau pilih lagu untuk cuba.'));}
@@ -880,11 +2357,11 @@ function recMetronome(){if(!audio||!$('metronome').checked||!metroOrigin||mode!=
 function clock(){if(mode==='playing')updatePlaybackUI();else if(['recording','mic'].includes(mode)&&recordFirst!==null){const elapsed=performance.now()-recordFirst;status('Merakam · '+(elapsed/1000).toFixed(1)+'s · '+taps.length+' ketukan',true);recMetronome();if(elapsed>C.MAX_DURATION_MS)stopAll('Rakaman dihentikan pada had180s. Semak hujung score sebelum eksport.');}clockFrame=requestAnimationFrame(clock);}
 function paintDots(beat){[...$('beatDots').children].forEach((x,i)=>x.classList.toggle('on',i===beat));}
 function renderControls(){const active=mode!=='idle',recording=['armed','recording','mic','mic_pending'].includes(mode);$('recordLabel').textContent=recording?'Henti':'Rakam';$('recordBtn').setAttribute('aria-label',recording?'Henti rakaman':'Rakam not anda');$('recordBtn').classList.toggle('danger',recording);$('recordBtn').disabled=mode==='play_pending';$('playLabel').textContent=mode==='playing'?'Henti score':take.source==='preset_proposal'?'Main lagu':'Main rakaman';$('playBtn').setAttribute('aria-label',mode==='playing'?'Henti score':(take.source==='preset_proposal'?'Main lagu: ':'Main rakaman: ')+(take.title||'score semasa'));$('playBtn').disabled=recording||mode==='play_pending'||!take.events.length||C.validate(take).length>0||C.unsupportedPitches(take,instrumentId).length>0;$('stopBtn').disabled=!active&&!activeOsc.size;$('micBtn').disabled=active||instrumentId==='recorder';$('micBtn').title=instrumentId==='recorder'?'Pengesan mikrofon hanya untuk xylophone; rekoder belum disokong.':'Analisis xylophone secara tempatan';if(instrumentId==='recorder')$('micBtn').setAttribute('aria-describedby','recorderMicHint');else $('micBtn').removeAttribute('aria-describedby');$('bpm').disabled=!tempoAllowed();$('tapTempoBtn').disabled=!tempoAllowed();$('octave').disabled=active||instrumentId==='recorder';$('grid').disabled=active;$('tail').disabled=active;$('undoBtn').disabled=active||!history.length;$('clearBtn').disabled=active||!take.events.length;$('restoreBtn').disabled=active||!lastCustom?.events.length;$('exportBtn').disabled=active||!take.events.length;$('quickJsonBtn').disabled=active||!take.events.length;$('scoreVariant').disabled=active;$('takeTitle').disabled=active;$('reviewMic').disabled=active;for(const x of $('songGrid').querySelectorAll('button'))x.disabled=active;for(const b of $('instrument').querySelectorAll('.bar'))b.disabled=mode.startsWith('mic');for(const b of $('eventRows').querySelectorAll('button'))b.disabled=active;}
-function renderSongs(){const g=$('songGrid');g.replaceChildren();for(const p of C.PRESETS){const b=document.createElement('button');b.className='song';b.dataset.song=String(p.id);const active=take.source==='preset_proposal'&&take.song_id===p.id&&(take.score_variant||'short')===selectedVariant;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));const ic=document.createElement('span');ic.className='song-icon';ic.innerHTML='<svg class="icon"><use href="#i-music"/></svg>';const text=document.createElement('span'),name=document.createElement('strong'),small=document.createElement('small');name.textContent=p.title;const proposal=C.preset(p.id,4,selectedVariant);small.textContent=proposal.bpm+' BPM · '+(C.durationMs(proposal)/1000).toFixed(1)+'s · cadangan';text.append(name,small);b.append(ic,text);b.addEventListener('click',()=>{if(guardActive())return;snapshot();take=C.preset(p.id,take.octave,selectedVariant,instrumentId);render();save();status('Dimuatkan: '+p.title+' · '+(selectedVariant==='long'?'versi panjang':'petikan pendek')+'. Tekan Main lagu untuk dengar.');});g.append(b);}}
-function drawTimeline(){timelineNodes=[];axisTimeNodes=[];const svg=$('timeline');svg.replaceChildren();const end=Math.max(96,take.end_tick||384),rows=[...(take.events.some(e=>e.midi===null)?[null]:[]),...(take.events.some(e=>e.midi===0)?[0]:[]),...C.scorePitches(take)],ns=C.notes(take.octave);timelineWidth=Math.max(780,Math.ceil(end/6)*9+68);timelineHeight=Math.max(155,rows.length*13+51);const right=timelineWidth-30,plot=timelineWidth-68,bottom=timelineHeight-29,y=n=>n===null?bottom:bottom-Math.max(0,rows.indexOf(n))*13;svg.setAttribute('viewBox','0 0 '+timelineWidth+' '+timelineHeight);svg.style.width=timelineWidth+'px';svg.style.minWidth='100%';svg.style.height=timelineHeight+'px';const label=document.createElementNS(SVG,'title');label.textContent='Jejak melodi. Pilih not dengan Tab, kemudian Enter atau Ruang untuk dengar; pitch di luar lapan bar turut ditunjukkan.';svg.append(label);rows.forEach((m,i)=>{const line=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({x1:38,x2:right,y1:bottom-i*13,y2:bottom-i*13,stroke:'#E9EFF3'}))line.setAttribute(k,v);svg.append(line);const tx=document.createElementNS(SVG,'text');tx.textContent=noteFor(m)?.label||'?';for(const[k,v]of Object.entries({x:5,y:bottom+3-i*13,fill:'#617A8C','font-size':8,'font-family':'Consolas,monospace'}))tx.setAttribute(k,v);svg.append(tx);});const step=end>768?96:48;for(let tick=0;tick<=end;tick+=step){const x=38+tick/end*plot,line=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({x1:x,x2:x,y1:20,y2:timelineHeight-21,stroke:'#DFE8EE','stroke-dasharray':'2 4'}))line.setAttribute(k,v);svg.append(line);const tx=document.createElementNS(SVG,'text');tx.textContent=(tick*60000/(take.bpm*24)/1000).toFixed(1)+'s';axisTimeNodes.push({node:tx,tick});for(const[k,v]of Object.entries({x:x-5,y:timelineHeight-7,fill:'#617A8C','font-size':8,'font-family':'Consolas,monospace'}))tx.setAttribute(k,v);svg.append(tx);}for(const section of take.sections||[]){const x=38+section.onset_tick/end*plot,text=document.createElementNS(SVG,'text');text.textContent=section.label;for(const[k,v]of Object.entries({x,y:13,fill:'#526879','font-size':8}))text.setAttribute(k,v);svg.append(text);}if(!take.events.length){const text=document.createElementNS(SVG,'text');text.textContent='Tekan Rakam dan mainkan not untuk mengisi jejak.';for(const[k,v]of Object.entries({x:timelineWidth/2,y:76,'text-anchor':'middle',class:'timeline-empty'}))text.setAttribute(k,v);svg.append(text);}take.events.forEach((e,i)=>{const r=document.createElementNS(SVG,'rect'),x=38+e.onset_tick/end*plot,w=Math.max(5,e.duration_tick/end*plot-3),bar=ns.findIndex(n=>n.midi===e.midi),color=e.midi===0?'#AAB6BE':e.estimated?'#D49747':bar>=0?COLORS[bar]:'#8499B3',name=noteFor(e.midi)?.label||'?';for(const[k,v]of Object.entries({x,y:y(e.midi)-7,width:w,height:10,rx:3,fill:color,class:'event',tabindex:0,role:'button','aria-label':(e.midi===0?'Rehat ':'Dengar not ')+(i+1)+': '+name}))r.setAttribute(k,v);timelineNodes.push(r);r.addEventListener('click',()=>previewEvent(i));r.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();previewEvent(i);}});const title=document.createElementNS(SVG,'title');title.textContent=name+' · tick '+e.onset_tick+(e.midi>0&&bar<0?' · di luar 8 bar':'');r.append(title);svg.append(r);});const head=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({id:'playHead',x1:38,x2:38,y1:17,y2:timelineHeight-20,stroke:'#126B66','stroke-width':2,visibility:'hidden'}))head.setAttribute(k,v);svg.append(head);}
+function renderSongs(){const g=$('songGrid');g.replaceChildren();for(const p of C.PRESETS){const b=document.createElement('button');b.className='song';b.dataset.song=String(p.id);const active=take.source==='preset_proposal'&&take.song_id===p.id&&(take.score_variant||'short')===selectedVariant;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));const ic=document.createElement('span');ic.className='song-icon';ic.innerHTML='<svg class="icon"><use href="#i-music"/></svg>';const text=document.createElement('span'),name=document.createElement('strong'),small=document.createElement('small');name.setAttribute('data-i18n-ignore','');name.textContent=p.title;const proposal=C.preset(p.id,4,selectedVariant);small.textContent=proposal.bpm+' BPM · '+(C.durationMs(proposal)/1000).toFixed(1)+'s · cadangan';text.append(name,small);b.append(ic,text);b.addEventListener('click',()=>{if(guardActive())return;snapshot();take=C.preset(p.id,take.octave,selectedVariant,instrumentId);render();save();status('Dimuatkan: '+p.title+' · '+(selectedVariant==='long'?'versi panjang':'petikan pendek')+'. Tekan Main lagu untuk dengar.');});g.append(b);}}
+function drawTimeline(){timelineNodes=[];axisTimeNodes=[];const svg=$('timeline');svg.replaceChildren();const end=Math.max(96,take.end_tick||384),rows=[...(take.events.some(e=>e.midi===null)?[null]:[]),...(take.events.some(e=>e.midi===0)?[0]:[]),...C.scorePitches(take)],ns=C.notes(take.octave);timelineWidth=Math.max(780,Math.ceil(end/6)*9+68);timelineHeight=Math.max(155,rows.length*13+51);const right=timelineWidth-30,plot=timelineWidth-68,bottom=timelineHeight-29,y=n=>n===null?bottom:bottom-Math.max(0,rows.indexOf(n))*13;svg.setAttribute('viewBox','0 0 '+timelineWidth+' '+timelineHeight);svg.style.width=timelineWidth+'px';svg.style.minWidth='100%';svg.style.height=timelineHeight+'px';const label=document.createElementNS(SVG,'title');label.textContent='Jejak melodi. Pilih not dengan Tab, kemudian Enter atau Ruang untuk dengar; pitch di luar lapan bar turut ditunjukkan.';svg.append(label);rows.forEach((m,i)=>{const line=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({x1:38,x2:right,y1:bottom-i*13,y2:bottom-i*13,stroke:'#E9EFF3'}))line.setAttribute(k,v);svg.append(line);const tx=document.createElementNS(SVG,'text');tx.textContent=noteFor(m)?.label||'?';for(const[k,v]of Object.entries({x:5,y:bottom+3-i*13,fill:'#617A8C','font-size':8,'font-family':'Consolas,monospace'}))tx.setAttribute(k,v);svg.append(tx);});const step=end>768?96:48;for(let tick=0;tick<=end;tick+=step){const x=38+tick/end*plot,line=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({x1:x,x2:x,y1:20,y2:timelineHeight-21,stroke:'#DFE8EE','stroke-dasharray':'2 4'}))line.setAttribute(k,v);svg.append(line);const tx=document.createElementNS(SVG,'text');tx.textContent=(tick*60000/(take.bpm*24)/1000).toFixed(1)+'s';axisTimeNodes.push({node:tx,tick});for(const[k,v]of Object.entries({x:x-5,y:timelineHeight-7,fill:'#617A8C','font-size':8,'font-family':'Consolas,monospace'}))tx.setAttribute(k,v);svg.append(tx);}for(const section of take.sections||[]){const x=38+section.onset_tick/end*plot,text=document.createElementNS(SVG,'text');if(!knownCatalogSection(section))text.setAttribute('data-i18n-ignore','');text.textContent=section.label;for(const[k,v]of Object.entries({x,y:13,fill:'#526879','font-size':8}))text.setAttribute(k,v);svg.append(text);}if(!take.events.length){const text=document.createElementNS(SVG,'text');text.textContent='Tekan Rakam dan mainkan not untuk mengisi jejak.';for(const[k,v]of Object.entries({x:timelineWidth/2,y:76,'text-anchor':'middle',class:'timeline-empty'}))text.setAttribute(k,v);svg.append(text);}take.events.forEach((e,i)=>{const r=document.createElementNS(SVG,'rect'),x=38+e.onset_tick/end*plot,w=Math.max(5,e.duration_tick/end*plot-3),bar=ns.findIndex(n=>n.midi===e.midi),color=e.midi===0?'#AAB6BE':e.estimated?'#D49747':bar>=0?COLORS[bar]:'#8499B3',name=noteFor(e.midi)?.label||'?';for(const[k,v]of Object.entries({x,y:y(e.midi)-7,width:w,height:10,rx:3,fill:color,class:'event',tabindex:0,role:'button','aria-label':(e.midi===0?'Rehat ':'Dengar not ')+(i+1)+': '+name}))r.setAttribute(k,v);timelineNodes.push(r);r.addEventListener('click',()=>previewEvent(i));r.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();previewEvent(i);}});const title=document.createElementNS(SVG,'title');title.textContent=name+' · tick '+e.onset_tick+(e.midi>0&&bar<0?' · di luar 8 bar':'');r.append(title);svg.append(r);});const head=document.createElementNS(SVG,'line');for(const[k,v]of Object.entries({id:'playHead',x1:38,x2:38,y1:17,y2:timelineHeight-20,stroke:'#126B66','stroke-width':2,visibility:'hidden'}))head.setAttribute(k,v);svg.append(head);}
 function renderRows(){rowNodes=[];timeCells=[];const tbody=$('eventRows');tbody.replaceChildren();if(!take.events.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.className='empty-cell';td.textContent='Belum ada ketukan. Tekan Rakam, mainkan not, kemudian Henti. Data dan masa input akan muncul di sini.';tr.append(td);tbody.append(tr);return;}take.events.forEach((e,i)=>{const tr=document.createElement('tr');tr.className='event-row';tr.dataset.eventIndex=String(i);rowNodes.push(tr);for(let k=0;k<6;k++)tr.append(document.createElement('td'));tr.children[0].textContent=String(i+1).padStart(2,'0');const p=document.createElement('span');p.className='pitch-pill mono';p.textContent=noteFor(e.midi)?.label||'?';tr.children[1].append(p);timeCells.push(tr.children[2]);tr.children[2].className='mono';tr.children[2].textContent=(e.onset_tick*60000/(take.bpm*24)/1000).toFixed(3)+'s';tr.children[3].className='mono';tr.children[3].textContent=(e.duration_tick/24).toFixed(e.duration_tick%24?2:0);const source=document.createElement('span');source.textContent=e.estimated?(e.reviewed?'Anggaran · disemak':'Anggaran · perlu semak'):e.source==='preset_proposal'?'Score cadangan':(e.raw_ms??0).toFixed(1)+'ms input';source.style.fontSize='10px';if(e.estimated)source.style.color='var(--warning)';tr.children[4].append(source);const btn=document.createElement('button');btn.className='small ghost';btn.setAttribute('aria-label','Sunting not '+(i+1)+': '+(noteFor(e.midi)?.label||'belum diketahui'));btn.title='Sunting not '+(i+1);btn.innerHTML='<svg class="icon"><use href="#i-edit"/></svg>';btn.addEventListener('click',()=>edit(i));tr.children[5].append(btn);tbody.append(tr);});}
 function renderTiming(){$('bpm').value=take.bpm;$('bpmValue').textContent=String(take.bpm);$('bpm').setAttribute('aria-valuetext',take.bpm+' BPM');$('statNotes').textContent=take.events.filter(e=>e.midi!==0).length;$('statDuration').replaceChildren(document.createTextNode((C.durationMs(take)/1000).toFixed(1)));const unit=document.createElement('span');unit.textContent='s';unit.style.fontSize='12px';$('statDuration').append(unit);$('statBpm').textContent=take.bpm;$('eventCount').textContent=take.events.length+' event';const errors=C.validate(take),duration=C.durationMs(take)/1000,long=take.score_variant==='long',short=take.score_variant==='short',good=errors.length===0&&(long||!short||duration>=10&&duration<=15),bars=C.notes(take.octave).map(n=>n.midi),extra=[...new Set(take.events.filter(e=>e.midi>0&&!bars.includes(e.midi)).map(e=>noteFor(e.midi)?.label))];$('goal').className='goal'+(take.events.length&&good?' good':errors.length&&take.events.length?' warn':'');$('goalTitle').textContent=!take.events.length?'Sedia untuk rakaman pertama':long?'Versi panjang · '+duration.toFixed(1)+'s':short?(good?'Dalam sasaran 10–15 saat':'Petikan pendek · '+duration.toFixed(1)+'s'):'Rakaman anda · '+duration.toFixed(1)+'s';$('goalText').textContent=!take.events.length?'Tekan Rakam, mainkan not dan Henti. Anda juga boleh memilih lagu latihan.':errors.length?errors[0]:extra.length?'Pitch luar 8 bar: '+extra.join(', ')+'. Pitch asal dikekalkan.':long?(take.form_repeats||1)+' pusingan bentuk melodi. Lead-in dan resonans tidak dikira.':'Lead-in dan ekor resonans tidak dikira.';timeCells.forEach((cell,i)=>cell.textContent=(take.events[i].onset_tick*60000/(take.bpm*24)/1000).toFixed(3)+'s');for(const item of axisTimeNodes)item.node.textContent=(item.tick*60000/(take.bpm*24)/1000).toFixed(1)+'s';}
-function render(){if(renderedEvents!==take.events){currentEvent=-1;tempoGesture=false;renderedEvents=take.events;if(mode==='idle'){$('eventTableScroll').scrollTop=0;$('timelineScroll').scrollLeft=0;}}if(take.source==='preset_proposal')selectedVariant=take.score_variant||'short';$('scoreVariant').value=selectedVariant;rebuildInstrument();renderSongs();$('octave').value=take.octave;$('grid').value=take.grid_tick;$('tail').value=take.tail_tick;$('takeTitle').value=take.title;renderRows();drawTimeline();renderTiming();const mic=countMic();$('sourceTag').textContent=!take.events.length?'Score kosong':take.source==='preset_proposal'?(take.score_variant==='long'?'Cadangan · panjang':'Cadangan'):mic?'Mikrofon · anggaran':'Rakaman sendiri';$('sourceTag').className='tag'+(mic?' amber':take.source==='preset_proposal'?'':' green');$('sourceNote').textContent=take.source==='preset_proposal'?(take.arrangement_note||'Score cadangan projek. Not dan timestamp video rujukan belum disahkan.')+(take.transpose_semitones?' Transposisi '+(take.transpose_semitones>0?'+':'')+take.transpose_semitones+' semitone.':''):mic?'Pitch dan onset mikrofon ialah anggaran. Semakan manual tidak menggantikan pengesahan akustik berkalibrasi.':'JSON mengekalkan masa input asal. Score grid boleh disunting tanpa mengubah log input.';$('reviewWrap').hidden=!mic;$('reviewMic').checked=mic>0&&take.events.filter(e=>e.estimated).every(e=>e.reviewed);$('timelineCaption').textContent=take.events.length?'Klik not atau pilih dengan Tab, kemudian Enter / Ruang untuk dengar. Sunting melalui ikon pensel dalam Data ketukan.':'Tekan Rakam, mainkan not dan Henti. Jejak melodi akan terisi bersama Data ketukan.';renderControls();markEvent(currentEvent,true);}
+function render(){if(renderedEvents!==take.events){currentEvent=-1;tempoGesture=false;renderedEvents=take.events;if(mode==='idle'){$('eventTableScroll').scrollTop=0;$('timelineScroll').scrollLeft=0;}}if(take.source==='preset_proposal')selectedVariant=take.score_variant||'short';$('scoreVariant').value=selectedVariant;rebuildInstrument();renderSongs();$('octave').value=take.octave;$('grid').value=take.grid_tick;$('tail').value=take.tail_tick;$('takeTitle').value=take.title;renderRows();drawTimeline();renderTiming();const mic=countMic();$('sourceTag').textContent=!take.events.length?'Score kosong':take.source==='preset_proposal'?(take.score_variant==='long'?'Cadangan · panjang':'Cadangan'):mic?'Mikrofon · anggaran':'Rakaman sendiri';$('sourceTag').className='tag'+(mic?' amber':take.source==='preset_proposal'?'':' green');if(knownCatalogArrangement())$('sourceNote').removeAttribute('data-i18n-ignore');else $('sourceNote').setAttribute('data-i18n-ignore','');$('sourceNote').textContent=take.source==='preset_proposal'?(take.arrangement_note||'Score cadangan projek. Not dan timestamp video rujukan belum disahkan.')+(take.transpose_semitones?' Transposisi '+(take.transpose_semitones>0?'+':'')+take.transpose_semitones+' semitone.':''):mic?'Pitch dan onset mikrofon ialah anggaran. Semakan manual tidak menggantikan pengesahan akustik berkalibrasi.':'JSON mengekalkan masa input asal. Score grid boleh disunting tanpa mengubah log input.';$('reviewWrap').hidden=!mic;$('reviewMic').checked=mic>0&&take.events.filter(e=>e.estimated).every(e=>e.reviewed);$('timelineCaption').textContent=take.events.length?'Klik not atau pilih dengan Tab, kemudian Enter / Ruang untuk dengar. Sunting melalui ikon pensel dalam Data ketukan.':'Tekan Rakam, mainkan not dan Henti. Jejak melodi akan terisi bersama Data ketukan.';renderControls();markEvent(currentEvent,true);}
 
 function edit(index){if(guardActive())return;editing=index;const e=take.events[index];$('editPitch').replaceChildren();const blank=document.createElement('option');blank.value='';blank.textContent='Pilih not…';$('editPitch').append(blank);const ns=C.scorePitches(take),choices=[0,...Array.from({length:ns[ns.length-1]-ns[0]+1},(_,i)=>ns[0]+i)],bars=C.notes(take.octave).map(n=>n.midi);for(const midi of choices){const n=noteFor(midi),o=document.createElement('option');o.value=midi;o.textContent=n.label+(midi&&!bars.includes(midi)?' · luar 8 bar':'');$('editPitch').append(o);}$('editPitch').value=e.midi??'';$('editTick').value=e.onset_tick;$('gateField').hidden=instrumentId!=='recorder';$('editGate').value=e.gate_tick??e.duration_tick;clearEditErrors();openDialog('editDialog');}
 // Kunci UI tempatan untuk HTML kendiri; bukan pengesahan pelayan.
@@ -908,11 +2385,11 @@ $('resetBtn').addEventListener('click',resetTransport);
 $('octave').addEventListener('change',()=>{if(guardActive())return;snapshot();take=C.transpose(take,Number($('octave').value));render();save();announce('Score ditransposisi seragam ke julat '+$('pitchRange').textContent+'.');});
 $('grid').addEventListener('change',()=>{if(guardActive())return;snapshot();take=C.requantize(take,Number($('grid').value));render();save();status('Grid dikemas daripada onset mutlak. Masa input asal masih disimpan.');});
 $('tail').addEventListener('change',()=>{if(guardActive())return;snapshot();take.tail_tick=Number($('tail').value);C.reflow(take);render();save();});
-$('takeTitle').addEventListener('change',()=>{take.title=$('takeTitle').value.trim().slice(0,60)||'Rakaman saya';save();renderControls();});
+$('takeTitle').addEventListener('change',()=>{take.title=$('takeTitle').value.trim().slice(0,60)||(window.StudioI18n?.t('Rakaman saya')||'Rakaman saya');save();renderControls();});
 $('tapTempoBtn').addEventListener('click',()=>{if(!tempoAllowed()){announce('Hentikan rakaman dahulu.');return;}const now=performance.now();if(tapTimes.length&&now-tapTimes[tapTimes.length-1]>2000)tapTimes=[];tapTimes.push(now);tapTimes=tapTimes.slice(-8);const tempo=C.estimateTempo(tapTimes);if(tempo){snapshot();if(applyTempo(tempo.bpm)){save();announce('Anggaran '+tempo.bpm+' BPM — satu ketukan Tap dianggap satu beat.');}}else announce('Tap '+tapTimes.length+' direkod. Ketuk lagi mengikut beat.');});
 $('undoBtn').addEventListener('click',()=>{if(guardActive()||!history.length)return;take=history.pop();render();save();announce('Perubahan terakhir diundur.');});
 $('restoreBtn').addEventListener('click',()=>{if(guardActive()||!lastCustom)return;snapshot();take=C.clone(lastCustom);render();save();status('Rakaman sendiri dimuatkan semula.');});
-$('clearBtn').addEventListener('click',()=>{if(guardActive())return;confirmReplace('Kosongkan score semasa?','Not dalam score semasa akan dibuang. Anda boleh menekan Undur selepas ini. Rakaman sendiri terakhir masih disimpan.','Kosongkan score',()=>{snapshot();take=C.empty(take.bpm,take.octave,instrumentId);render();save();status('Score kosong. Tekan Rakam untuk bermula.');});});
+$('clearBtn').addEventListener('click',()=>{if(guardActive())return;confirmReplace('Kosongkan score semasa?','Not dalam score semasa akan dibuang. Anda boleh menekan Undur selepas ini. Rakaman sendiri terakhir masih disimpan.','Kosongkan score',()=>{snapshot();take=C.empty(take.bpm,take.octave,instrumentId);take.title=window.StudioI18n?.t(take.title)||take.title;render();save();status('Score kosong. Tekan Rakam untuk bermula.');});});
 $('reviewMic').addEventListener('change',()=>{snapshot();for(const e of take.events)if(e.estimated)e.reviewed=$('reviewMic').checked;render();save();announce('Status semakan dikemas kini. Bukti asal masih berlabel anggaran.');});
 $('exportBtn').addEventListener('click',()=>requestExport(showExport));$('quickJsonBtn').addEventListener('click',()=>requestExport(()=>download(JSON.stringify(take,null,2),'json','application/json')));
 $('exportPasswordToggle').addEventListener('click',()=>{const input=$('exportPassword'),reveal=input.type!=='text';input.type=reveal?'text':'password';$('exportPasswordToggle').textContent=reveal?'Sembunyi':'Tunjuk';$('exportPasswordToggle').setAttribute('aria-label',reveal?'Sembunyikan kata laluan':'Tunjukkan kata laluan');$('exportPasswordToggle').setAttribute('aria-pressed',String(reveal));input.focus({preventScroll:true});});
@@ -1290,7 +2767,7 @@ function createStudio({instrument,name,labels,descriptions={},voice:makeVoice,pa
 const C=root.PercussionCore,B=root.XyloStudioBridge,$=id=>document.getElementById(id.startsWith('perc')?prefix+id.slice(4):id),KEY='e-instru-percussion-v1:'+instrument;
 const [primaryAction,secondaryAction]=C.INSTRUMENTS[instrument].actions,defaultTitle='Rentak '+name+' saya';
 let take=C.createTake(instrument,defaultBpm),active=false,mode='idle',epoch=0,pendingAudio=0,audio=null,scheduler=null,sessionTimer=0,feedbackTimer=0,firstCapture=null,liveOrigin=null,trace=[],traceSource='live',held=new Set(),voices=new Set(),visuals=[],traceNodes=[],conflict=false;
-take.title=defaultTitle;
+take.title=window.StudioI18n?.t(defaultTitle)||defaultTitle;
 function message(text){$('percStatus').textContent=text;$('percStatus').classList.toggle('recording',mode==='recording');}
 function save(){if(conflict)return;try{localStorage.setItem(KEY,JSON.stringify(take));$('percSave').textContent='Disimpan di pelayar ini. Simpan JSON untuk salinan sandaran.';}catch{$('percSave').textContent='Simpanan pelayar tidak tersedia. Simpan JSON sebelum menutup halaman.';}}
 function sound(action,at,accent=false){if(!audio||audio.state!=='running')return()=>{};const voice=makeVoice(audio,action,at,accent);voices.add(voice);const cancel=()=>{voice.cancel();voices.delete(voice);};cancel.endAtMs=voice.endAt*1000;return cancel;}
@@ -1340,7 +2817,7 @@ async function hit(action){
  const a=await activate(token,false);if(!a||token!==epoch||!active)return;audio=a;sound(action,a.currentTime);clock();controls();
 }
 async function beginRecording(){
- if(!active)return;stop();take=C.createTake(instrument,take.bpm);take.title=defaultTitle;firstCapture=null;liveOrigin=null;trace=[];traceSource='take';mode='recording';render();save();message('Sedia merakam. Ketukan pertama menjadi masa sifar.');const token=epoch;
+ if(!active)return;stop();take=C.createTake(instrument,take.bpm);take.title=window.StudioI18n?.t(defaultTitle)||defaultTitle;firstCapture=null;liveOrigin=null;trace=[];traceSource='take';mode='recording';render();save();message('Sedia merakam. Ketukan pertama menjadi masa sifar.');const token=epoch;
  const a=await B.audio();if(token!==epoch||!active||mode!=='recording')return;if(a){audio=a;clock();if($('percMetro').checked)await metronome();}else message('Bunyi tidak tersedia. Tindakan anda masih boleh dirakam.');
 }
 function patterns(){return patternEvents({bpm:take.bpm,kind:$('percPattern').value||'basic'});}
@@ -1372,10 +2849,10 @@ $('percConfirmRecord').addEventListener('click',()=>{$('percReplaceDialog').clos
 $('percReset').addEventListener('click',()=>{stop();const fits=take.events.every(e=>e.at_ms*take.bpm/take.capture_bpm<=C.MAX_DURATION_MS);if(fits)take=C.setTempo(take,take.capture_bpm);else take.bpm=take.capture_bpm;showTakeTrace();$('percMetro').checked=false;firstCapture=null;liveOrigin=null;render();save();$('percFeedback').textContent='Sedia untuk dimainkan';message('Reset · '+take.bpm+' BPM · rakaman dan suntingan dikekalkan.'+(fits?'':' Masa suntingan dikekalkan untuk mematuhi had 180 saat.'));});
 $('percTempo').addEventListener('input',()=>{const bpm=Number($('percTempo').value);if(mode==='recording'){render();message('Hentikan rakaman dahulu untuk mengubah tempo.');return;}if(!C.validTempo(bpm)){render();return;}stop();try{take=C.setTempo(take,bpm);if(take.events.length)showTakeTrace();render();save();message('Tempo '+bpm+' BPM. Masa input asal dikekalkan; tekan Main untuk dengar.');if($('percMetro').checked)return metronome();}catch(error){render();message(error.message);}});
 $('percMetro').addEventListener('change',()=>{if(!$('percMetro').checked){if(mode==='example'||mode==='replay')stop('Metronom diubah. Tekan Main untuk bermula semula.');else{scheduler?.stop();scheduler=null;visuals=[];clearSounds();for(const dot of $('percBeatDots').children)dot.classList.remove('on');controls();}return;}return metronome();});
-$('percTitle').addEventListener('change',()=>{take.title=$('percTitle').value.trim().slice(0,60)||defaultTitle;$('percTitle').value=take.title;save();});
+$('percTitle').addEventListener('change',()=>{take.title=$('percTitle').value.trim().slice(0,60)||(window.StudioI18n?.t(defaultTitle)||defaultTitle);$('percTitle').value=take.title;save();});
 function download(format){if(mode!=='idle'||!take.events.length)return;const text=format==='json'?JSON.stringify(take,null,2):C.csv(take),blob=new Blob([text],{type:format==='json'?'application/json':'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=instrument+'-rakaman.'+format;link.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
 $('percExportJson').addEventListener('click',()=>download('json'));$('percExportCsv').addEventListener('click',()=>download('csv'));
-$('percImportBtn').addEventListener('click',()=>{if(mode!=='idle')return;try{const imported=C.importTake($('percImportText').value);if(imported.instrument!==instrument)throw Error('Pilih fail rakaman '+name+'.');stop();take=imported;showTakeTrace();firstCapture=null;liveOrigin=null;render();save();$('percImportError').hidden=true;$('percImportText').value='';message('Rakaman '+name+' diimport. Masa input asal dikekalkan.');}catch(error){$('percImportError').textContent=error.message;$('percImportError').hidden=false;}});
+$('percImportBtn').addEventListener('click',()=>{if(mode!=='idle')return;try{const imported=C.importTake($('percImportText').value);if(imported.instrument!==instrument)throw Error('Pilih fail rakaman '+name+'.');stop();take=imported;showTakeTrace();firstCapture=null;liveOrigin=null;render();save();$('percImportError').hidden=true;$('percImportText').value='';message('Rakaman '+name+' diimport. Masa input asal dikekalkan.');}catch(error){$('percImportError').textContent=error instanceof SyntaxError?'JSON tidak sah. Semak kandungan rakaman dan cuba lagi.':error.message;$('percImportError').hidden=false;}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&active)stop('Tab disembunyikan. Sesi dihentikan dan rakaman dikekalkan.');});
 window.addEventListener('blur',()=>{if(active)stop('Tetingkap tidak aktif. Sesi dihentikan dan rakaman dikekalkan.');});window.addEventListener('pagehide',()=>stop());
 window.addEventListener('storage',e=>{if(e.key===KEY){conflict=true;$('percSave').textContent='Tab lain mengubah rakaman. Versi ini dikekalkan; simpan JSON untuk sandaran.';}});

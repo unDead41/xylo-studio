@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — BM/BI, ui branch, 2026-11-04
+
+- Add a persistent BM/BI language selector available on the chooser and every studio/game view.
+- Localize visible text, generated feedback, validation, dialogs and accessible labels in place; preserve active controls, user text, recording evidence and exports.
+- Keep translations inside the standalone HTML, including dynamic phrases from all eight instruments and the game. Preserve accepted v1.04.0.
+
 ## Unreleased — overall UI/UX, ui branch, 2026-11-04
 
 - Group eight compact instrument cards by musical family, retain physical artwork and add native keyboard-friendly jump navigation.
