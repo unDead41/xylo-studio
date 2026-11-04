@@ -4,7 +4,7 @@ Versi **v1.04.0**. Alat muzik digital dan permainan rentak BM/BI dalam satu HTML
 
 Pilihan **BM / BI** pada header menukar bahasa antara Bahasa Melayu dan English untuk pemilih instrumen, semua studio, permainan, panduan, dialog serta mesej ralat. Pilihan disimpan pada pelayar ini. Bahasa boleh ditukar ketika sesi sedang berjalan; teks dikemas kini tanpa memuat semula aplikasi. Nama rakaman, data asal dan eksport JSON/CSV dikekalkan.
 
-## Calon Studio Pro — branch ui
+## Studio Pro
 
 **Studio Pro** menambah ruang susunan berbilang trek tanpa memenuhi studio instrumen dengan kawalan lanjutan. Buka dari pemilih instrumen atau navigasi atas; tiga tab **Susunan**, **Mixer** dan **Projek** berkongsi transport, tempo, ulangan dan kursor.
 
@@ -17,7 +17,7 @@ Pilihan **BM / BI** pada header menukar bahasa antara Bahasa Melayu dan English 
 
 BM/BI turut tersedia untuk Studio Pro dan tetapan paparan; nama projek dan rakaman tersuai kekal literal. Butang **Paparan** sentiasa tersedia. Tema **Ikut peranti / Cerah / Gelap** berasingan daripada **Warna asal / Protanopia / Deuteranopia / Tritanopia / Kontras tinggi**. Mod warna menambah palet alternatif, corak bar, tanda keadaan dan label; pilihan disimpan pada peranti. Bentuk dan penjarian sebenar alat tidak ditukar.
 
-Sumber modular berada dalam `studio-pro/`; jalankan `node scripts/embed-studio-pro.cjs` selepas menyuntingnya. `index.html` yang disimpan kekal HTML kendiri tanpa muatan modul luar. Semak dengan `node scripts/embed-studio-pro.cjs --check` dan `node --test tests/*.test.cjs`. Calon ini berada di `ui`; penerbitan main/Pages tidak diubah. [Handoff Studio Pro terkini](docs/handoffs/ui/STUDIO_PRO_RESUME.md).
+Sumber modular berada dalam `studio-pro/`; jalankan `node scripts/embed-studio-pro.cjs` selepas menyuntingnya. `index.html` yang disimpan kekal HTML kendiri tanpa muatan modul luar. Semak dengan `node scripts/embed-studio-pro.cjs --check` dan `node --test tests/*.test.cjs`. Studio Pro digabungkan ke `main` atas arahan Ijamm untuk penerbitan GitHub Pages. [Audit penerbitan main](docs/audits/main/LATEST.md) dan [handoff implementasi](docs/handoffs/ui/STUDIO_PRO_RESUME.md).
 
 Buka [laman](https://undead41.github.io/xylo-studio/) atau muat turun ZIP branch [share](https://github.com/unDead41/xylo-studio/tree/share), extract dan buka index.html dalam Chrome/Edge. Tiada pemasangan, akaun atau backend diperlukan. Mikrofon pilihan memerlukan HTTPS/localhost serta kebenaran pengguna.
 
@@ -72,10 +72,10 @@ Keempat-empat studio menggunakan rakaman, jejak, jadual suntingan, tempo 40–20
 
 Identiti simpanan berasingan ialah `snare`, `bass_drum`, `cymbals` dan `triangle`. Import menolak fail milik instrumen lain. Semua alat baharu ialah perkusi tidak berpic dengan bunyi sintesis; tiada MIDI palsu atau audio mentah disimpan. Bukti ujian dan batasan: [handoff pancaragam](docs/handoffs/instrument-pancaragam/LATEST.md).
 
-## Calon UI/UX keseluruhan — branch ui
+## UI/UX keseluruhan
 
-Penambahbaikan semasa dibangunkan di `ui` daripada main lapan instrumen terkini. Teks dan kawalan dikongsi lebih mudah dibaca, navigasi Studio/Permainan kekal tersedia semasa menatal, dan butang Rakam/Main/Henti menyusun semula pada telefon. Main lagu dan Main rakaman mengikut sumber semasa; bantuan papan kekunci, keadaan kosong dan panduan rakaman lebih jelas.
+Penambahbaikan UI/UX daripada `ui` kini digabungkan ke main lapan instrumen. Teks dan kawalan dikongsi lebih mudah dibaca, navigasi Studio/Permainan kekal tersedia semasa menatal, dan butang Rakam/Main/Henti menyusun semula pada telefon. Main lagu dan Main rakaman mengikut sumber semasa; bantuan papan kekunci, keadaan kosong dan panduan rakaman lebih jelas.
 
 Studio perkusi membezakan latihan bebas, rakaman, contoh dan main semula. Latihan baharu menggunakan jejak sementara; rakaman tersimpan dan masa input asal kekal. Dialog memberikan fokus awal dan ralat pada medan yang betul, kemudian memulihkan fokus selepas suntingan; kata laluan eksport setempat mempunyai butang Tunjuk/Sembunyi.
 
-Permainan mempunyai ringkasan cabaran/keadaan, panduan ringkas, peraturan terperinci dalam panel boleh buka, serta butang mula/sambung/main lagi pada arena dan keputusan. Peraturan skor, nyawa dan masa kekal sama. Versi diterima kekal v1.04.0; calon ini dipush ke `ui` untuk semakan. Penerbitan Pages masih daripada main. [Bukti dan handoff UI terkini](docs/handoffs/ui/LATEST.md).
+Permainan mempunyai ringkasan cabaran/keadaan, panduan ringkas, peraturan terperinci dalam panel boleh buka, serta butang mula/sambung/main lagi pada arena dan keputusan. Peraturan skor, nyawa dan masa kekal sama. Versi diterima kekal v1.04.0; hasil UI/UX dan Studio Pro kini diterima ke `main`, sumber penerbitan Pages. [Bukti dan handoff UI terkini](docs/handoffs/ui/LATEST.md).

@@ -2,7 +2,7 @@
   "version": "v1.04.0",
   "repository": "unDead41/xylo-studio",
   "date": "2026-11-04",
-  "status": "ui_pro_candidate",
+  "status": "digital_release",
   "publishing": {
     "branch": "main",
     "directory": "/"
@@ -14,11 +14,11 @@
     "failed": 0,
     "clean_tracked_export_passed": 375
   },
-  "source_base": "906d8fa040dc18b13d8a9cb74ea448b023091a94",
-  "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
+  "source_base": "c0ba48bb9c35244354779cc227ecb7c999bff5dd",
+  "integrated_ui_sha": "5701bec6c62fc0b314a62d4c0150004ff18a1ba9",
   "integrated_tamborin_sha": "7cf77b7e275b94717748cb80aed73f6680daa59e",
-  "previous_release_audit": "docs/audits/main/LATEST.md",
-  "integration_handoff": "docs/handoffs/ui/STUDIO_PRO_RESUME.md",
+  "previous_release_audit": "docs/handoffs/instrument-pancaragam/LATEST.md",
+  "integration_handoff": "docs/audits/main/LATEST.md",
   "previous_browser_verification": {
     "commands": [
       "node tests/browser-layout.cjs",
@@ -54,7 +54,6 @@
     "index_sha256": "14b40fd23038ae64008755fee015e64740cb0c8945f551e4d5541503963cda7b",
     "handoff": "docs/handoffs/instrument-pancaragam/LATEST.md"
   },
-  "candidate_branch": "ui",
   "previous_ui_head": "906d8fa040dc18b13d8a9cb74ea448b023091a94",
   "studio_pro": {
     "schema": "e-instru-project/v1",
@@ -100,5 +99,15 @@
     "scope": "Manual eight-route narrow layout, native dialog/focus/export, percussion session/trace and Game phase/result checks; see evidence for exact limits."
   },
   "concurrent_ui_commit": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c",
-  "initial_studio_pro_local_commit": "3327473"
+  "initial_studio_pro_local_commit": "3327473",
+  "previous_integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
+  "source_branch": "ui",
+  "implementation_handoff": "docs/handoffs/ui/STUDIO_PRO_RESUME.md",
+  "publication": {
+    "provider": "GitHub Pages",
+    "branch": "main",
+    "directory": "/",
+    "url": "https://undead41.github.io/xylo-studio/",
+    "runtime_matches_integrated_ui": true
+  }
 }

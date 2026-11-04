@@ -1,5 +1,11 @@
 # Changelog
 
+## Main publication — Studio Pro, 2026-11-04
+
+- Promote verified ui 5701bec into main for the existing GitHub Pages site on Ijamm's instruction.
+- Include the shared UI, BM/English and complete Studio Pro work, retaining its exact tested runtime and existing theme modules.
+- Preserve eight instruments, ten songs, source evidence, JSON/CSV and accepted v1.04.0. Verify all 375 tests and embedding from the final tracked tree before publication.
+
 ## Unreleased — Studio Pro continuation, ui branch, 2026-11-04
 
 - Add validated copy/paste/clear bar workflows, an optional replace mode and undo through a closed Bar tools disclosure.

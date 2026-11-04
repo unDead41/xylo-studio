@@ -1,48 +1,30 @@
-# Main integration audit — v1.04.0
+# Main publication — Studio Pro
 
-4 November 2026. Ijamm explicitly instructed direct promotion to main and requested two subagents. This supersedes the earlier ui-only/no-main restriction for this integration. Share and tutorial remain unchanged.
+4 November 2026. Ijamm explicitly requested pushing the completed Studio Pro work to the branch used by GitHub Pages and verifying that all changes appear on the public website. This supersedes the historical ui-only restrictions for this publication. Accepted VERSION remains **v1.04.0**.
 
-## Source and scope
+## Source and integration
 
-- Main base SHA: 46338fe646408c758232eec9ba7b5f876ff1f9e4.
-- Integrated ui SHA: 115e54d87b10804ae6f94ff0efe895099d035e20.
-- Worktree: /workspace/scratch/977575ac93c3/e-instru-main; separate from the preserved ui workspace.
-- Merge preserves both main and ui ancestry; the combined source was checked before ref update. Latest branch inspection found no additional main/index changes to integrate.
-- Final tested index.html SHA-256: 45b1ddb7677e75923680f0cc11095c6c7e588651ae068496b85d129fcd7e2e89.
-- Browser test SHA-256: 3186ee5040b782913c7c4ba5f54f3275e4e87bfd9c779b61dc77f89d9836ef1d.
-- Accepted release version: v1.04.0, synchronized across VERSION, application meta/visible/accessible version, README, changelog and release.json.
-- The release commit is the merge commit carrying this report; its exact SHA is supplied in the delivery response and can be resolved with git rev-parse origin/main. The source hashes above identify the verified bytes without a self-referential commit hash.
+- Main base: `c0ba48bb9c35244354779cc227ecb7c999bff5dd`.
+- Integrated ui head: `5701bec6c62fc0b314a62d4c0150004ff18a1ba9`.
+- Main is an ancestor of that ui head. Publish a descendant carrying the complete reviewed ui tree and these documentation/metadata updates; preserve all existing main and ui history. Use an expected-head check and no force.
+- Runtime index.html SHA-256: `91ad5adacd358703d8024efc79104f253fa35eb44c98308ce5e931a9229ae5c5`.
+- The runtime is byte-identical to the reviewed ui source. Theme modules remain unchanged. Eight instruments, ten songs, original recordings/evidence, BM/English and JSON/CSV remain available.
+- Existing GitHub Pages publishing target is main, root directory; no new hosting service or audience change is required. Share, tutorial and other branch refs are excluded.
 
-The integration includes the complete e-Instru Studio branding, chooser and soprano recorder from ui. Runtime remains one self-contained HTML file; no backend, external assets or dependency is introduced. Original schema/storage/API names remain compatibility identifiers. Two audited defects were fixed before release:
+## Included behavior
 
-1. **P1, workspace data loss on reload.** An empty active recorder take was skipped at startup, causing fallback xylophone data to overwrite a saved xylophone workspace. Valid empty takes now import normally; invalid/missing active data adopts a separately valid stored workspace instead of overwriting it.
-2. **P2, long audition cancellation.** Recorder timeline auditions retained idle transport state, leaving Stop disabled and their sound active when recording/playback began. Active idle recorder voices now enable Stop; transitions and replacement previews cancel prior voices/pending epochs. Cleanup refreshes controls when the audition finishes.
+Studio Pro provides an eight-track arrangement/editor, bar copy/paste/replace/clear with Undo, synchronized transport/loop/metronome, track/master Mixer with pan/mute/solo/Reverb/Delay, local projects/autosave/import/export and three original playable four-bar examples. This publication also brings the previously reviewed shared UI and BM/English changes into main. Advanced tools remain within the established three-tab/disclosure layout.
 
-Five regression tests reproduced these failures before the fixes and passed afterward. Shared capture/edit/export/timeline and game behavior remain intact; source review directly compared all 60 xylophone arrangements and 180 difficulty charts with the original main and found their pitch/timing/chart data unchanged.
+Implementation, exact source hashes and browser observations: [Studio Pro continuation](../../handoffs/ui/STUDIO_PRO_RESUME.md). Its 24 BM/English panel/width checks and actual-module storage/audio/mixer regressions apply to the identical runtime.
 
-## Independent reviews and verification
+## Verification
 
-Exactly two subagents were used; both remained read-only:
+- `node scripts/embed-studio-pro.cjs --check`: required to pass against the final tracked-tree archive.
+- `node --test tests/*.test.cjs`: **375 passed, 0 failed**, from that archive before updating main.
+- `git diff --check`: passes. Core source is tracked and no untracked local runtime source is required.
+- The ui push workflow for the integrated source completed successfully: [Digital studio run 41793602698](https://github.com/unDead41/xylo-studio/actions/runs/41793602698).
+- Generic strict static findings remain the previously reviewed native-listener/global-resize scanner limitations, not a passing strict audit; see the continuation evidence.
 
-- Code/release reviewer found P1/P2, independently reviewed their fixes and reported no remaining blockers. Recorder suite15/15 plus additional preview race/held-key cancellation checks passed.
-- Independent verifier reran the full candidate: **79 Node tests passed, 0 failed** and **17 Chromium workflow groups passed**, 0 recorded page errors. It verified the final product/test hashes and merge ancestry. Source/test files remained unchanged during validation.
+After the main ref update, verify both its GitHub workflow/deployment outcome and the public page's exact index bytes and Studio Pro controls before reporting that the changes are live. Those post-update outcomes are supplied in the delivery response, since their commit/workflow identifiers do not exist while this report is being created.
 
-Commands and evidence:
-
-- node --test tests/*.test.cjs — 79/79 PASS; node-tests.txt.
-- BROWSER_OUTPUT set to an isolated scratch output, BROWSER_EXECUTABLE set to the local Chromium executable, then node tests/browser-recorder.cjs — Chromium133.0.6943.0; browser-results.json.
-- Browser coverage includes manual mouse/key/touch sustain/release, raw duration evidence, edits, tempo/metronome, JSON/CSV download, per-instrument persistence/reload, legacy v1 data, out-of-range notes, extended pitches, game return, cancellation/blur, reduced motion, offline file use, plus the new empty/malformed active workspace and long-audition regressions.
-- One initial browser attempt timed out taking the desktop screenshot during a host stall, after eight functional groups. An exact-command retry completed all17 groups without code changes. No application assertion failed in the timed-out attempt.
-- npx --yes -p @google/design.md designmd lint DESIGN.md — 0 errors, 0 warnings.
-- Version/metadata/changelog/README synchronization assertions — PASS.
-- git diff --check — PASS.
-- Static audit rerun: exit1, 36 actionless-button scanner flags, 0 unresolved ownership findings. Existing/new handlers are bound using addEventListener, which that static scanner does not infer. The findings are reviewed false positives; this is not reported as a passing static audit. See ../../handoffs/ui/STATIC_REVIEW.md and current static-audit.json.
-- Actual final-source screenshots: screenshots/recorder-desktop.png (1440×1000), screenshots/recorder-phone.png (390×844). Chooser/xylophone historical screenshots remain in the ui handoff.
-
-## Delivery and continuation
-
-Push only the authorized main ref with an expected-head check and no force. ui and all other branch refs remain intact. Existing main/root Pages configuration automatically builds from main; confirm the GitHub Actions result and live page after the update before claiming deployment. The delivery response records those outcomes because they happen after this commit is created. No share/tutorial snapshot or repository URL is changed.
-
-Other instrument workers should incorporate the new main initialization and audition fixes before their later integration because index.html is shared. Do not rebuild or replace the recorder implementation from older snapshots.
-
-Web Audio signal checks are not speaker/acoustic tuning, physical phone testing, microphone validation, Safari/Firefox or assistive-technology certification. Recorder microphone detection remains deliberately unsupported; missing fingering rows and score range limits remain explicit in the interface.
+No physical speaker/latency, microphone or participant accessibility measurement is implied. The earlier recorder integration audit is retained in [RECORDER_INTEGRATION_2026-11-04.md](RECORDER_INTEGRATION_2026-11-04.md).
