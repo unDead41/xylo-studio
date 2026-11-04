@@ -11,7 +11,8 @@
     "gameplay": "Peraturan permainan, kesukaran, skor, kombo, nyawa dan penilaian.",
     "ui": "Susun atur, akses papan kekunci, sentuhan dan paparan responsif.",
     "instrument-tamborin": "Studio Tamborin dan komponen perkusi bersama; snapshot worker.",
-    "instrument-kompang": "Studio Kompang daripada instrument-tamborin; integrasi main dibenarkan untuk tugasan 4 November 2026."
+    "instrument-kompang": "Studio Kompang daripada instrument-tamborin; integrasi main dibenarkan untuk tugasan 4 November 2026.",
+    "instrument-pancaragam": "Susulan empat instrumen perkusi sekolah/pancaragam dalam worktree tersendiri daripada main."
   },
   "manual_update": [
     "share",

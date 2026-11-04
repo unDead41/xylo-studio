@@ -1,0 +1,61 @@
+{
+  "source_sha256": "14b40fd23038ae64008755fee015e64740cb0c8945f551e4d5541503963cda7b",
+  "integrated_ui_layout_sha": "e84a0ca767858582d3faf240c62376b6e2574419",
+  "method": "Manual UI operations with CUA in cloud Chromium",
+  "canonical_desktop": {
+    "viewport_css_px": 1363,
+    "panel_width": 886,
+    "inspector_width": 314,
+    "grid": "886px 314px"
+  },
+  "results": {
+    "all_eight_chooser_cards": true,
+    "recorded_event_counts": {
+      "snare": 2,
+      "bass_drum": 2,
+      "cymbals": 2,
+      "triangle": 2
+    },
+    "all_new_studios_match_canonical_columns": true,
+    "all_new_studios_have_visible_data_table": true,
+    "triangle_edited_onset_ms_at_200bpm": 51.2,
+    "triangle_raw_onset_ms": 128,
+    "triangle_reset_bpm": 80,
+    "triangle_reload_event_count": 2,
+    "triangle_game_roundtrip": true,
+    "restored_save_status": "Ruang kerja dipulihkan. Simpan JSON untuk salinan sandaran."
+  },
+  "narrow_layouts": [
+    {
+      "iframe_width": 390,
+      "document_client_width": 380,
+      "document_scroll_width": 380,
+      "inspector_stacked": true,
+      "instruments": [
+        "snare",
+        "bass_drum",
+        "cymbals",
+        "triangle"
+      ]
+    },
+    {
+      "iframe_width": 320,
+      "document_client_width": 310,
+      "document_scroll_width": 310,
+      "inspector_stacked": true,
+      "instruments": [
+        "snare",
+        "bass_drum",
+        "cymbals",
+        "triangle"
+      ]
+    }
+  ],
+  "prior_pointer_and_example_checks": "pre-layout-browser-verification.json",
+  "limits": [
+    "Narrow viewport checks use real browser iframes, not mobile device emulation.",
+    "No microphone permission or raw audio capture was used.",
+    "No speaker listening, physical phone timing, acoustic fidelity or Safari/Firefox claims.",
+    "Browser extension metadata errors were observed; they originate from chrome-extension URLs, not application code."
+  ]
+}

@@ -45,7 +45,7 @@ Use the existing display face for instrument names and note letters, body face f
 
 ## Layout
 
-Chooser: four instrument cards in two columns and two rows on desktop, stacked on phones. All four studios use the same `.studio-heading`, `.workspace`, `.main-work`, `.instrument-panel` and `.inspector` geometry. The main area contains the playable instrument, Rakam/Main/Henti transport, persistent status, tempo/metronome/Reset row, song catalog or percussion patterns, trace, then a visible Data ketukan table. JSON/CSV exports live in the inspector. The 314px inspector narrows to 282px at 1050px and stacks below the main area at 850px. Document scrolling owns the page; traces and event tables retain their own scroll bounds.
+Chooser: eight instrument cards in two columns on desktop, stacked on phones. The first four choices retain their positions; a Perkusi sekolah & pancaragam heading introduces the other four. All eight studios use the same `.studio-heading`, `.workspace`, `.main-work`, `.instrument-panel` and `.inspector` geometry. The main area contains the playable instrument, Rakam/Main/Henti transport, persistent status, tempo/metronome/Reset row, song catalog or percussion patterns, trace, then a visible Data ketukan table. JSON/CSV exports live in the inspector. The 314px inspector narrows to 282px at 1050px and stacks below the main area at 850px. Document scrolling owns the page; traces and event tables retain their own scroll bounds.
 
 ## Elevation & Depth
 
@@ -80,3 +80,9 @@ The Tamborin view uses the canonical studio shell and inspector, including the s
 ## Kompang extension
 
 Reuse the same canonical shell as the other three studios, with the percussion pattern/trace variant used by Tamborin. A wooden inline SVG shell, pale textured membrane and stitched rim provide depth without metal jingles. The center ellipse and edge annulus are disjoint focusable hit shapes, with subtle tone/line labels and localized teal/lilac feedback. F/J action buttons remain large; reduced motion retains outlines and text while removing movement. All four chooser cards use the existing card geometry and Buka studio action, with Cadangan baharu badges on the two unpitched instruments. Geometry and flow are compared across all four views at 1440, 1050, 850, 540, 390 and 320px in `tests/browser-layout.cjs`.
+
+## School percussion extension
+
+Dram Sisi uses a teal cylindrical shell, steel rim, tension rods and two drumsticks. Dram Bes has a broad upright skin, deep shell, steel rods and a padded mallet. Simbal shows two grooved brass plates with leather handles. Segi Tiga shows a suspended open steel frame and beater. Chooser previews reuse these actual vector materials with separate paint IDs; there are no external assets.
+
+The new studios use the existing Studio heading and main/inspector arrangement, plus the shared percussion transport, settings, trace and table. Two focusable SVG regions and F/J buttons distinguish the actions using text, outline and color. Button labels wrap on narrow screens; reduced motion disables the brief strike translation. Long metal decays are bounded and cancelled by Stop/navigation. No continuous decorative animation is added.

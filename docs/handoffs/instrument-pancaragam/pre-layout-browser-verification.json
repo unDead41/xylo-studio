@@ -1,0 +1,66 @@
+{
+  "source_sha256": "c67d26c8bc23160d91be3ca48ac6879709f81084543551acbe2f7a3e85077aad",
+  "method": "Manual UI operations with CUA in cloud Chromium",
+  "desktop_viewport_css_px": 1363,
+  "results": {
+    "all_eight_chooser_cards": true,
+    "snare_capture": [
+      "hit",
+      "rim"
+    ],
+    "bass_capture": [
+      "hit",
+      "soft"
+    ],
+    "cymbals_capture": [
+      "crash",
+      "soft"
+    ],
+    "triangle_capture": [
+      "open",
+      "muted"
+    ],
+    "triangle_tempo_bpm": 200,
+    "triangle_second_edited_onset_ms": 245.8,
+    "triangle_second_raw_onset_ms": 614.5,
+    "triangle_reset_bpm": 80,
+    "reload_recorded_event_counts": {
+      "snare": 2,
+      "bass_drum": 2,
+      "cymbals": 2,
+      "triangle": 2
+    },
+    "triangle_game_roundtrip": true,
+    "cymbals_example_did_not_add_manual_events": true
+  },
+  "narrow_layouts": [
+    {
+      "iframe_width": 390,
+      "document_client_width": 380,
+      "document_scroll_width": 380,
+      "instruments": [
+        "snare",
+        "bass_drum",
+        "cymbals",
+        "triangle"
+      ]
+    },
+    {
+      "iframe_width": 320,
+      "document_client_width": 310,
+      "document_scroll_width": 310,
+      "instruments": [
+        "snare",
+        "bass_drum",
+        "cymbals",
+        "triangle"
+      ]
+    }
+  ],
+  "limits": [
+    "Narrow viewport checks use real browser iframes, not mobile device emulation.",
+    "No microphone permission or raw audio capture was used.",
+    "No speaker listening, physical phone timing, acoustic fidelity or Safari/Firefox claims.",
+    "Browser extension metadata errors were observed; they originate from chrome-extension URLs, not application code."
+  ]
+}

@@ -13,3 +13,5 @@ This is a self-contained digital music studio and browser game. Read docs/SOR.md
 - The approved 2 November 2026 migration may retire old branch names only after their commits are preserved in main ancestry.
 
 - Ijamm additionally authorized instrument-kompang on 4 November 2026, based on the completed/pushed instrument-tamborin. The latest direct request authorizes integrating this tested digital module into this repository's main. This task exception does not authorize pushes to ui, instrument-tamborin, share or tutorial. Preserve accepted VERSION v1.04.0 unless a separate release version is requested.
+
+- The follow-up school/pancaragam instrument work is isolated on instrument-pancaragam from main SHA 3a2bc106c8885b81334e1dd34ce5810f05dfad8e. Preserve concurrent ui/layout changes when integrating the four new percussion instruments. Do not write another worker's branch or update share/tutorial snapshots.

@@ -27,3 +27,9 @@ Inline percussion-core owns unpitched action takes, immutable raw_capture, score
 All four views reuse the canonical studio heading, workspace grid, panel, transport, settings and inspector CSS owners. Percussion varies only its physical playing area, action pads and pattern/trace content. Playback sits with recording below the instrument; exports sit in the inspector; Data ketukan is always expanded. This layout reconciliation changes no controller, scheduler, audio, storage or capture code. See docs/handoffs/ui/LATEST.md and tests/browser-layout.cjs for the current layout evidence.
 
 Percussion JSON schema e-instru-percussion-take/v1 and per-instrument e-instru-percussion-v1:<id> storage coexist with unchanged pitched schemas and storage. Raw input is performance.now() relative to the first manual input; at_ms is separately editable. Only manual events enter recording. Data limits are 512 actions / 180000 ms onset; a playback tail of at most 1000 ms may extend the scheduler past the final legal onset. All sounds remain digital synthesis.
+
+## School percussion extension — 4 November 2026
+
+The same unpitched core and Studio factory now support `snare` (hit/rim), `bass_drum` (hit/soft), `cymbals` (crash/soft) and `triangle` (open/muted). `school-band-ui` constructs these four thin configuration adapters once. Each supplies its own SVG, labels, patterns, synthesis function and storage identity. `instrument-navigation` incorporates the resulting route descriptors; the pitched registry and Game remain unchanged.
+
+The shared factory accepts `voiceTailMs`, defaulting to the previous 650ms behavior. The school instruments use 1000ms so the final long cymbal/triangle strike can decay before normal completion. Stop and lifecycle cancellation remain immediate. Muted triangle is an independent short strike, not a global damping command. See `docs/handoffs/instrument-pancaragam/LATEST.md` for source identity and actual checks.

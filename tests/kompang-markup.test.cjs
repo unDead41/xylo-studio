@@ -2,7 +2,7 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),vm=require('node:vm');
 const html=fs.readFileSync('index.html','utf8');
-const view=()=>html.match(/<section id="kompangView"[\s\S]*?(?=\n<\/main>)/)?.[0]||'';
+const view=()=>html.match(/<section id="kompangView"[\s\S]*?(?=\n<section id="snareView"|\n<\/main>)/)?.[0]||'';
 
 test('four enabled instrument cards retain real routes, categories and Buka studio actions',()=>{
  for(const id of ['chooseXylophone','chooseRecorder','chooseTamborin','chooseKompang']){
@@ -11,7 +11,7 @@ test('four enabled instrument cards retain real routes, categories and Buka stud
   assert.match(button,/Buka studio/);assert.match(button,/(?:choice-art|recorderPreview)/);
  }
  for(const id of ['chooseTamborin','chooseKompang'])assert.match(html.match(new RegExp('<button[^>]*id="'+id+'"[\\s\\S]*?</button>'))[0],/Cadangan baharu/);
- assert.match(html,/Empat instrumen/);
+ assert.match(html,/Lapan instrumen/);
 });
 
 test('Kompang exposes two separate focusable SVG hit regions on one unpitched membrane',()=>{

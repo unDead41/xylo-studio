@@ -14,6 +14,7 @@ Keputusan Ijamm pada 2 November 2026. Nama branch tepat ialah nama dalam jadual.
 | `ui` | e-instru studio - ui | Susun atur, akses papan kekunci, sentuhan dan paparan responsif. |
 | `instrument-kompang` | e-instru studio - instrument-kompang | Studio Kompang menggunakan asas Tamborin sebenar; permintaan terkini 4 November 2026 membenarkan integrasi hasil diuji ke main repositori digital ini. |
 | `instrument-tamborin` | e-instru studio - instrument-tamborin | Branch tambahan dibenarkan Ijamm pada 4 November 2026; Studio Tamborin dan asas perkusi. Asas ui terkini, push branch ini sahaja. |
+| `instrument-pancaragam` | e-instru studio - instrument-pancaragam | Susulan instrumen sekolah: Dram Sisi, Dram Bes, Simbal dan Segi Tiga; worktree sendiri daripada main. Kekalkan perubahan ui/layout serentak ketika integrasi. |
 
 `main` bukan chat pekerja. Setiap chat semak branch/ref, working tree, SHA asas, SOR dan handoff sebelum bekerja. Gunakan folder sendiri. Jangan menukar checkout chat lain.
 

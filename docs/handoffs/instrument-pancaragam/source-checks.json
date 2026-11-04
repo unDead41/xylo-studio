@@ -1,0 +1,24 @@
+{
+  "index_sha256": "14b40fd23038ae64008755fee015e64740cb0c8945f551e4d5541503963cda7b",
+  "unchanged_runtime_blocks": {
+    "xylo-core": "04f07c02540a63fdd0ce71be4a0f2232ea7297fbe987f3b5d12d8940231e0677",
+    "xylo-game-core": "e2374085e14d5faec4a0f6ca9f6ee7f0127b3e5ff89db388faecf87dfcfa368d",
+    "xylo-ui": "79314b9ab990962381326076e337499583792ac52286a7104df7262d27a67a8c",
+    "xylo-game-ui": "a172a6f48240bfc5d1b6aed294746f7402c101e950f0c33e234cc382882056d3",
+    "tamborin-ui": "756f1da41c52a7f7c0b849be2500a1e0212c65adf494fda0cad09ed49cffe4fd",
+    "kompang-ui": "7fb5abfd81ab18f5ff6e349fd4d49359724f0836f18ce678aaaf5bb4f03264ef"
+  },
+  "unique_ids": 498,
+  "external_script_urls": [],
+  "version": "v1.04.0",
+  "node_tests": {
+    "passed": 180,
+    "failed": 0
+  },
+  "diff_check": "passed",
+  "integrated_ui_layout_sha": "e84a0ca767858582d3faf240c62376b6e2574419",
+  "accepted_percussion_markup_preserved": [
+    "tamborin",
+    "kompang"
+  ]
+}

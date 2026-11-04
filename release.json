@@ -7,14 +7,18 @@
     "branch": "main",
     "directory": "/"
   },
-  "index_sha256": "9fa02ee7cbd6b5a73b9ae6c5bb1129da184c211631ec5fd749d49f5f5b67e6c3",
+  "index_sha256": "14b40fd23038ae64008755fee015e64740cb0c8945f551e4d5541503963cda7b",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
-    "passed": 154,
+    "passed": 180,
     "failed": 0
   },
-  "source_base": "3a2bc106c8885b81334e1dd34ce5810f05dfad8e",
-  "browser_tests": {
+  "source_base": "e84a0ca767858582d3faf240c62376b6e2574419",
+  "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
+  "integrated_tamborin_sha": "7cf77b7e275b94717748cb80aed73f6680daa59e",
+  "previous_release_audit": "docs/audits/main/LATEST.md",
+  "integration_handoff": "docs/handoffs/instrument-pancaragam/LATEST.md",
+  "previous_browser_verification": {
     "commands": [
       "node tests/browser-layout.cjs",
       "node tests/browser-kompang.cjs",
@@ -27,9 +31,21 @@
     "evidence": "docs/handoffs/ui-layout/browser-verification.json",
     "scope": "Shared layout at six widths; headless Web Audio signals and OfflineAudioContext synthesis; emulated touch. No speaker listening or physical acoustic/device verification."
   },
-  "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
-  "integrated_tamborin_sha": "7cf77b7e275b94717748cb80aed73f6680daa59e",
-  "previous_release_audit": "docs/audits/main/LATEST.md",
-  "integration_handoff": "docs/handoffs/ui/LATEST.md",
-  "previous_integration_handoff": "docs/handoffs/instrument-kompang/LATEST.md"
+  "instruments": [
+    "xylophone",
+    "recorder",
+    "tamborin",
+    "kompang",
+    "snare",
+    "bass_drum",
+    "cymbals",
+    "triangle"
+  ],
+  "browser_tests": {
+    "method": "CUA cloud Chromium through managed Sites preview; manual UI workflows",
+    "evidence": "docs/handoffs/instrument-pancaragam/browser-verification.json",
+    "scope": "All four new instrument routes and two-action captures, SVG pointer hit testing, examples without capture, tempo/raw-time separation, Reset, reload retention, Game return and 390/320px iframe layout checks. No physical device or acoustic listening measurement."
+  },
+  "previous_integration_handoff": "docs/handoffs/ui/LATEST.md",
+  "integrated_ui_layout_sha": "e84a0ca767858582d3faf240c62376b6e2574419"
 }

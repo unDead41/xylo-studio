@@ -1,5 +1,12 @@
 # Changelog
 
+## School percussion extension — 2026-11-04 (version unchanged)
+
+- Add playable Dram Sisi, Dram Bes, Simbal and Segi Tiga, bringing the chooser to eight instruments.
+- Give every new instrument its own vector art, two action zones/F/J controls, four patterns, synthesized timbres and independent saved recordings.
+- Reuse percussion capture, timing/editing, trace, metronome and JSON/CSV. Allow one second for long final metal-ring decays before normal playback completion.
+- Preserve existing pitched workspaces, all ten songs, Game, shared percussion behavior and accepted v1.04.0.
+
 ## Shared studio layout — 2026-11-04 (version unchanged)
 
 - Align Tamborin and Kompang with the Xylophone/Recorder header, main instrument panel, transport, tempo/metronome row and recording inspector.

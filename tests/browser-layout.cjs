@@ -3,7 +3,8 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),crypto=require('node:crypto');
 const {chromium}=require('playwright');
 const source=fs.readFileSync('index.html'),output=path.resolve(process.env.BROWSER_OUTPUT||'docs/handoffs/ui-layout/screenshots');
-const routes=[['xylophone','chooseXylophone','studioView','changeInstrumentBtn'],['recorder','chooseRecorder','studioView','changeInstrumentBtn'],['tamborin','chooseTamborin','tamborinView','percBack'],['kompang','chooseKompang','kompangView','kompBack']];
+const routes=[['xylophone','chooseXylophone','studioView','changeInstrumentBtn'],['recorder','chooseRecorder','studioView','changeInstrumentBtn'],['tamborin','chooseTamborin','tamborinView','percBack'],['kompang','chooseKompang','kompangView','kompBack'],['snare','chooseSnare','snareView','snareBack'],['bass_drum','chooseBassDrum','bass_drumView','bassBack'],['cymbals','chooseCymbals','cymbalsView','cymBack'],['triangle','chooseTriangle','triangleView','triBack']];
+const prefixes={tamborin:'perc',kompang:'komp',snare:'snare',bass_drum:'bass',cymbals:'cym',triangle:'tri'};
 const checks=[],errors=[],measurements=[];
 const check=name=>{checks.push(name);console.log('PASS '+name);};
 async function metrics(page,view){return page.locator('#'+view).evaluate(el=>{
@@ -28,8 +29,8 @@ async function metrics(page,view){return page.locator('#'+view).evaluate(el=>{
     if(width>850){assert.equal(m.inspector.y,m.panel.y);assert.equal(m.panel.y,canonical.panel.y);}
     else assert.ok(m.inspector.y>m.panel.y+m.panel.height,name+' inspector stacks after work area');
     assert.ok(m.transport.y>m.panel.y);assert.ok(m.settings.y>m.transport.y+m.transport.height-1);
-    if(name==='tamborin'||name==='kompang'){
-     const prefix=name==='tamborin'?'perc':'komp';
+    if(prefixes[name]){
+     const prefix=prefixes[name];
      assert.deepEqual(await page.locator('#'+view+' .transport button').evaluateAll(nodes=>nodes.map(n=>n.id)),[prefix+'Record',prefix+'Replay',prefix+'Stop']);
      assert.equal(await page.locator('#'+view+' .perc-data table').isVisible(),true);
      assert.equal(await page.locator('#'+view+' .perc-data h2').innerText(),'Data ketukan');
@@ -38,11 +39,11 @@ async function metrics(page,view){return page.locator('#'+view).evaluate(el=>{
     }
     await page.locator('#'+back).click();assert.equal(await page.locator('#chooseHeading').isVisible(),true);
    }
-   check(width+'px: all four studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place');
+   check(width+'px: all eight studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place');
   }
   await page.setViewportSize({width:390,height:844});
   for(const [name,choose,view,back]of routes.slice(2)){
-   const prefix=name==='tamborin'?'perc':'komp';await page.locator('#'+choose).click();
+   const prefix=prefixes[name];await page.locator('#'+choose).click();
    const button=page.locator('#'+prefix+'Tap');await button.focus();await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');assert.equal(await button.evaluate(el=>el.matches(':focus-visible')),true);
    await page.keyboard.press('Enter');await page.waitForTimeout(60);assert.match(await page.locator('#'+prefix+'Surface').getAttribute('class'),/is-tap/);
    await page.locator('#'+view+' .percussion-guide summary').tap();assert.equal(await page.locator('#'+view+' .percussion-guide').getAttribute('open'),'');assert.match(await page.locator('#'+view+' .percussion-guide').innerText(),/sintesis digital/);
@@ -50,7 +51,7 @@ async function metrics(page,view){return page.locator('#'+view).evaluate(el=>{
    await page.locator('#'+back).click();
   }
   check('phone: action focus, Enter feedback, touch guide disclosure and reduced motion remain usable');
-  assert.deepEqual(errors,[]);check('no uncaught browser errors across four studios and six widths');
+  assert.deepEqual(errors,[]);check('no uncaught browser errors across eight studios and six widths');
   fs.writeFileSync(path.join(output,'browser-results.json'),JSON.stringify({source_sha256:crypto.createHash('sha256').update(source).digest('hex'),browser:await browser.version(),passed:checks.length,checks,measurements,pageErrors:errors,limits:'Headless Chromium geometry and emulated touch; no physical-device, Safari/Firefox or screen-reader evaluation.'},null,2)+'\n');
  }finally{await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;setTimeout(()=>process.exit(1),1000).unref();});
