@@ -1,4 +1,4 @@
-# SOR — Xylo Studio
+# SOR — e-Instru Studio
 
 Version 1.0, approved branch workflow 2 November 2026. Owner: Ijamm.
 
@@ -11,3 +11,9 @@ Studio keeps raw input timestamps separate from edited/quantized score. Tempo sl
 Game supports 10 songs, both variants, tempo factors 75/100/135%, score/combo/life, Excellent/Good/Miss, pause/resume and local best records. Use the actual source/tests for exact constants. Browser AudioContext is the timing origin; no claim of physical acoustic latency calibration.
 
 Branch roles and manual-update policy: docs/BRANCH_POLICY.md. Architecture follows this SOR. Audit reviews the actual combined HTML, runs all tests and publishes main on user instruction. Share/tutorial do not update automatically. Versions follow vX.XX.X independently for this project.
+
+## Instrument extension — ui candidate, 4 November 2026
+
+The first view is an instrument chooser. The inline INSTRUMENTS registry owns pitch bounds, default octave and sustain capability; a recorder view adapter owns raised pads, inline SVG and verified Baroque data. Both instruments reuse the existing Studio controller, timeline, editor, catalog, transport, metronome, scheduler and JSON/CSV export. Per-instrument workspace snapshots preserve takes/edits on switching. Game rules and game audio remain unchanged. Recorder microphone detection is not implemented.
+
+Additive instrument_id, gate_tick, raw_duration_ms and release_ms keep old data readable. Legacy takes default to xylophone; no raw evidence is rewritten. Physical recorder range and honest catalog handling are documented in docs/RECORDER.md. The v1.03.2 release number remains pending audit acceptance of the candidate.

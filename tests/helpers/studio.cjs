@@ -3,8 +3,8 @@ const html=fs.readFileSync('index.html','utf8');
 
 // Execute the actual inline UI with a small DOM/audio test double. No real
 // microphone, speaker or browser timing is measured by these host tests.
-function studio({variant='short',legacy=null,game=false,storage={}}={}){
- const elements=[],ids=new Map(),downloads=[],oscillators=[],copies=[],saved=new Map(),contexts=[],intervals=new Map();const frames=new Map();let timerId=0;for(const [k,v]of Object.entries(storage))saved.set(k,v);
+function studio({variant='short',legacy=null,game=false,storage={},chooser=false}={}){
+ const elements=[],ids=new Map(),downloads=[],oscillators=[],copies=[],saved=new Map(),contexts=[],intervals=new Map();const frames=new Map();let timerId=0,now=1000;for(const [k,v]of Object.entries(storage))saved.set(k,v);
  if(legacy)saved.set('xylo-studio-v1',JSON.stringify({take:legacy,lastCustom:legacy,version:1}));
  class Element{
   constructor(tag='div'){this.tagName=tag.toUpperCase();this.children=[];this.listeners={};this.attrs={};this.dataset={};this._text='';this.value='';this.open=false;this.disabled=false;this.hidden=false;this.className='';this.scrollTop=0;this.scrollLeft=0;this.clientWidth=780;this.style={setProperty(){}};elements.push(this);const el=this;this.classList={add(c){const s=new Set(el.className.split(' ').filter(Boolean));s.add(c);el.className=[...s].join(' ');},remove(c){el.className=el.className.split(' ').filter(x=>x!==c).join(' ');},toggle(c,on){if(on===undefined)on=!el.className.split(' ').includes(c);this[on?'add':'remove'](c);}};}
@@ -37,13 +37,14 @@ function studio({variant='short',legacy=null,game=false,storage={}}={}){
   resume(){this.state='running';return Promise.resolve();}
   addEventListener(){}
   createGain(){return{gain:parameter(),connect(){},disconnect(){}};}
-  createOscillator(){const context=this,o={frequency:parameter(),connect(){},disconnect(){},start(at){this.started=at;},stop(at){this.stopped=at;if(at===undefined&&this.started>context.currentTime+.000001)this.cancelled=true;}};oscillators.push(o);return o;}
+  createOscillator(){const context=this,o={frequency:parameter(),connect(){},disconnect(){},start(at){this.started=at;},stop(at){this.stopCalled=true;this.stopped=at;if(at===undefined&&this.started>context.currentTime+.000001)this.cancelled=true;}};oscillators.push(o);return o;}
  }
- const window={AudioContext,crypto:{randomUUID:()=> 'ui-test'},addEventListener(){}};
- const box={window,document,navigator:{clipboard:{writeText:async text=>copies.push(text)}},localStorage:{getItem:k=>saved.get(k)||null,setItem:(k,v)=>saved.set(k,v)},performance:{now:()=>1000},Blob,URL:{createObjectURL:()=> 'blob:test',revokeObjectURL(){}},setTimeout:()=>1,clearTimeout(){},setInterval:fn=>{const id=++timerId;intervals.set(id,fn);return id;},clearInterval:id=>intervals.delete(id),requestAnimationFrame:fn=>{const id=++timerId;frames.set(id,fn);return id;},cancelAnimationFrame:id=>frames.delete(id),console};
+ const windowListeners={};const window={AudioContext,crypto:{randomUUID:()=> 'ui-test'},addEventListener(k,fn){(windowListeners[k]??=[]).push(fn);}};
+ const box={window,document,navigator:{clipboard:{writeText:async text=>copies.push(text)}},localStorage:{getItem:k=>saved.get(k)||null,setItem:(k,v)=>saved.set(k,v)},performance:{now:()=>now},Blob,URL:{createObjectURL:()=> 'blob:test',revokeObjectURL(){}},setTimeout:()=>1,clearTimeout(){},setInterval:fn=>{const id=++timerId;intervals.set(id,fn);return id;},clearInterval:id=>intervals.delete(id),requestAnimationFrame:fn=>{const id=++timerId;frames.set(id,fn);return id;},cancelAnimationFrame:id=>frames.delete(id),console};
  vm.createContext(box);for(const id of (game?['xylo-core','xylo-game-core','xylo-ui','xylo-game-ui']:['xylo-core','xylo-ui']))vm.runInContext(html.match(new RegExp('<script id="'+id+'">([\\s\\S]*?)<\\/script>'))[1],box);
+ if(!chooser){for(const fn of ids.get('chooseXylophone').listeners.click||[])fn({target:ids.get('chooseXylophone')});}
  if(variant){ids.get('scoreVariant').value=variant;for(const fn of ids.get('scoreVariant').listeners.change||[])fn({target:ids.get('scoreVariant')});}
- return{ids,downloads,oscillators,copies,saved,document,contexts,C:window.XyloCore,G:window.XyloGameCore,async dispatch(k,extra={}){const e={target:new Element('div'),preventDefault(){},...extra};for(const fn of documentListeners[k]||[])await fn(e);},advance(ms){for(let elapsed=0;elapsed<ms;elapsed+=25){for(const a of contexts)a.currentTime+=.025;for(const fn of [...intervals.values()])fn();for(const [id,fn]of [...frames]){frames.delete(id);fn();}}},async settle(){for(let i=0;i<5;i++)await Promise.resolve();}};
+ return{setNow:value=>now=value,async dispatchWindow(k,extra={}){for(const fn of windowListeners[k]||[])await fn(extra);},ids,downloads,oscillators,copies,saved,document,contexts,C:window.XyloCore,G:window.XyloGameCore,async dispatch(k,extra={}){const e={target:new Element('div'),preventDefault(){},...extra};for(const fn of documentListeners[k]||[])await fn(e);},advance(ms){for(let elapsed=0;elapsed<ms;elapsed+=25){for(const a of contexts)a.currentTime+=.025;for(const fn of [...intervals.values()])fn();for(const [id,fn]of [...frames]){frames.delete(id);fn();}}},async settle(){for(let i=0;i<5;i++)await Promise.resolve();}};
 }
 
 
