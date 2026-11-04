@@ -15,7 +15,7 @@ test('four enabled instrument cards retain real routes, categories and Buka stud
 });
 
 test('Kompang exposes two separate focusable SVG hit regions on one unpitched membrane',()=>{
- const s=view();assert.match(s,/Studio Kompang/);assert.match(s,/<div id="kompSurface"/);
+ const s=view();assert.match(s,/<h1[^>]*>Kompang<\/h1>/);assert.match(s,/<div id="kompSurface"/);
  for(const [id,action,label]of [['kompCenter','center','tengah'],['kompEdge','edge','tepi']]){
   const tag=s.match(new RegExp('<g[^>]*id="'+id+'"[^>]*>'))?.[0]||'';
   assert.match(tag,/role="button"/);assert.match(tag,/tabindex="0"/);assert.match(tag,new RegExp('data-action="'+action+'"'));assert.match(tag,new RegExp('aria-label="Ketuk '+label));

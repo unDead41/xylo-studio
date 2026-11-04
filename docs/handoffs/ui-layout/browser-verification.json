@@ -1,0 +1,1042 @@
+{
+  "source_base": "3a2bc106c8885b81334e1dd34ce5810f05dfad8e",
+  "index_sha256": "9fa02ee7cbd6b5a73b9ae6c5bb1129da184c211631ec5fd749d49f5f5b67e6c3",
+  "software_tests": {
+    "command": "node --test tests/*.test.cjs",
+    "passed": 154,
+    "failed": 0
+  },
+  "browser_tests": {
+    "commands": [
+      "node tests/browser-layout.cjs",
+      "node tests/browser-kompang.cjs",
+      "node tests/browser-recorder.cjs",
+      "node tests/browser-tamborin.cjs"
+    ],
+    "passed": 46,
+    "failed": 0,
+    "execution": "Final-source browser runs; functional suites run serially to avoid concurrent Chromium resource contention.",
+    "reports": {
+      "layout": {
+        "source_sha256": "9fa02ee7cbd6b5a73b9ae6c5bb1129da184c211631ec5fd749d49f5f5b67e6c3",
+        "browser": "133.0.6943.0",
+        "passed": 8,
+        "checks": [
+          "1440px: all four studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place",
+          "1050px: all four studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place",
+          "850px: all four studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place",
+          "540px: all four studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place",
+          "390px: all four studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place",
+          "320px: all four studios share header type, columns, panel/inspector geometry and responsive flow; percussion transport/data are in place",
+          "phone: action focus, Enter feedback, touch guide disclosure and reduced motion remain usable",
+          "no uncaught browser errors across four studios and six widths"
+        ],
+        "measurements": [
+          {
+            "width": 1440,
+            "instrument": "xylophone",
+            "heading": {
+              "x": 110,
+              "y": 98,
+              "width": 1220,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "886px 314px",
+            "panel": {
+              "x": 110,
+              "y": 185.1875,
+              "width": 886,
+              "height": 564.5
+            },
+            "inspector": {
+              "x": 1016,
+              "y": 185.1875,
+              "width": 314,
+              "height": 652.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 133,
+              "y": 568.1875,
+              "width": 840,
+              "height": 81
+            },
+            "settings": {
+              "x": 111,
+              "y": 681.6875,
+              "width": 884,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 1440,
+            "instrument": "recorder",
+            "heading": {
+              "x": 110,
+              "y": 98,
+              "width": 1220,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "886px 314px",
+            "panel": {
+              "x": 110,
+              "y": 185.1875,
+              "width": 886,
+              "height": 824.171875
+            },
+            "inspector": {
+              "x": 1016,
+              "y": 185.1875,
+              "width": 314,
+              "height": 669
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 133,
+              "y": 827.859375,
+              "width": 840,
+              "height": 81
+            },
+            "settings": {
+              "x": 111,
+              "y": 941.359375,
+              "width": 884,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 1440,
+            "instrument": "tamborin",
+            "heading": {
+              "x": 110,
+              "y": 98,
+              "width": 1220,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "886px 314px",
+            "panel": {
+              "x": 110,
+              "y": 185.1875,
+              "width": 886,
+              "height": 811.875
+            },
+            "inspector": {
+              "x": 1016,
+              "y": 185.1875,
+              "width": 314,
+              "height": 595.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 133,
+              "y": 815.5625,
+              "width": 840,
+              "height": 81
+            },
+            "settings": {
+              "x": 111,
+              "y": 929.0625,
+              "width": 884,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 1440,
+            "instrument": "kompang",
+            "heading": {
+              "x": 110,
+              "y": 98,
+              "width": 1220,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "886px 314px",
+            "panel": {
+              "x": 110,
+              "y": 185.1875,
+              "width": 886,
+              "height": 842.375
+            },
+            "inspector": {
+              "x": 1016,
+              "y": 185.1875,
+              "width": 314,
+              "height": 595.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 133,
+              "y": 846.0625,
+              "width": 840,
+              "height": 81
+            },
+            "settings": {
+              "x": 111,
+              "y": 959.5625,
+              "width": 884,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 1050,
+            "instrument": "xylophone",
+            "heading": {
+              "x": 30,
+              "y": 98,
+              "width": 990,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "688px 282px",
+            "panel": {
+              "x": 30,
+              "y": 185.1875,
+              "width": 688,
+              "height": 609.5
+            },
+            "inspector": {
+              "x": 738,
+              "y": 185.1875,
+              "width": 282,
+              "height": 676
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 53,
+              "y": 565.1875,
+              "width": 642,
+              "height": 81
+            },
+            "settings": {
+              "x": 31,
+              "y": 678.6875,
+              "width": 686,
+              "height": 115
+            },
+            "overflow": false
+          },
+          {
+            "width": 1050,
+            "instrument": "recorder",
+            "heading": {
+              "x": 30,
+              "y": 98,
+              "width": 990,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "688px 282px",
+            "panel": {
+              "x": 30,
+              "y": 185.1875,
+              "width": 688,
+              "height": 768.9375
+            },
+            "inspector": {
+              "x": 738,
+              "y": 185.1875,
+              "width": 282,
+              "height": 692.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 53,
+              "y": 772.625,
+              "width": 642,
+              "height": 81
+            },
+            "settings": {
+              "x": 31,
+              "y": 886.125,
+              "width": 686,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 1050,
+            "instrument": "tamborin",
+            "heading": {
+              "x": 30,
+              "y": 98,
+              "width": 990,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "688px 282px",
+            "panel": {
+              "x": 30,
+              "y": 185.1875,
+              "width": 688,
+              "height": 811.875
+            },
+            "inspector": {
+              "x": 738,
+              "y": 185.1875,
+              "width": 282,
+              "height": 631
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 53,
+              "y": 815.5625,
+              "width": 642,
+              "height": 81
+            },
+            "settings": {
+              "x": 31,
+              "y": 929.0625,
+              "width": 686,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 1050,
+            "instrument": "kompang",
+            "heading": {
+              "x": 30,
+              "y": 98,
+              "width": 990,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "688px 282px",
+            "panel": {
+              "x": 30,
+              "y": 185.1875,
+              "width": 688,
+              "height": 842.375
+            },
+            "inspector": {
+              "x": 738,
+              "y": 185.1875,
+              "width": 282,
+              "height": 647.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 53,
+              "y": 846.0625,
+              "width": 642,
+              "height": 81
+            },
+            "settings": {
+              "x": 31,
+              "y": 959.5625,
+              "width": 686,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 850,
+            "instrument": "xylophone",
+            "heading": {
+              "x": 20,
+              "y": 96,
+              "width": 810,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "810px",
+            "panel": {
+              "x": 20,
+              "y": 183.1875,
+              "width": 810,
+              "height": 561.5
+            },
+            "inspector": {
+              "x": 20,
+              "y": 1872.921875,
+              "width": 810,
+              "height": 603
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 43,
+              "y": 563.1875,
+              "width": 764,
+              "height": 81
+            },
+            "settings": {
+              "x": 21,
+              "y": 676.6875,
+              "width": 808,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 850,
+            "instrument": "recorder",
+            "heading": {
+              "x": 20,
+              "y": 96,
+              "width": 810,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "810px",
+            "panel": {
+              "x": 20,
+              "y": 183.1875,
+              "width": 810,
+              "height": 805.640625
+            },
+            "inspector": {
+              "x": 20,
+              "y": 2117.0625,
+              "width": 810,
+              "height": 603
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 43,
+              "y": 807.328125,
+              "width": 764,
+              "height": 81
+            },
+            "settings": {
+              "x": 21,
+              "y": 920.828125,
+              "width": 808,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 850,
+            "instrument": "tamborin",
+            "heading": {
+              "x": 20,
+              "y": 96,
+              "width": 810,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "810px",
+            "panel": {
+              "x": 20,
+              "y": 183.1875,
+              "width": 810,
+              "height": 812.875
+            },
+            "inspector": {
+              "x": 20,
+              "y": 1660.953125,
+              "width": 810,
+              "height": 529.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 43,
+              "y": 814.5625,
+              "width": 764,
+              "height": 81
+            },
+            "settings": {
+              "x": 21,
+              "y": 928.0625,
+              "width": 808,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 850,
+            "instrument": "kompang",
+            "heading": {
+              "x": 20,
+              "y": 96,
+              "width": 810,
+              "height": 63.1875
+            },
+            "font": "31px",
+            "grid": "810px",
+            "panel": {
+              "x": 20,
+              "y": 183.1875,
+              "width": 810,
+              "height": 843.375
+            },
+            "inspector": {
+              "x": 20,
+              "y": 1691.453125,
+              "width": 810,
+              "height": 529.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 43,
+              "y": 845.0625,
+              "width": 764,
+              "height": 81
+            },
+            "settings": {
+              "x": 21,
+              "y": 958.5625,
+              "width": 808,
+              "height": 67
+            },
+            "overflow": false
+          },
+          {
+            "width": 540,
+            "instrument": "xylophone",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 512,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "512px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 512,
+              "height": 566.5
+            },
+            "inspector": {
+              "x": 14,
+              "y": 1841.515625,
+              "width": 512,
+              "height": 612
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 517.1875,
+              "width": 482,
+              "height": 81
+            },
+            "settings": {
+              "x": 15,
+              "y": 630.6875,
+              "width": 510,
+              "height": 112
+            },
+            "overflow": false
+          },
+          {
+            "width": 540,
+            "instrument": "recorder",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 512,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "512px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 512,
+              "height": 869.96875
+            },
+            "inspector": {
+              "x": 14,
+              "y": 2144.984375,
+              "width": 512,
+              "height": 612
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 820.65625,
+              "width": 482,
+              "height": 81
+            },
+            "settings": {
+              "x": 15,
+              "y": 934.15625,
+              "width": 510,
+              "height": 112
+            },
+            "overflow": false
+          },
+          {
+            "width": 540,
+            "instrument": "tamborin",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 512,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "512px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 512,
+              "height": 785.375
+            },
+            "inspector": {
+              "x": 14,
+              "y": 1649.84375,
+              "width": 512,
+              "height": 538.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 783.0625,
+              "width": 482,
+              "height": 81
+            },
+            "settings": {
+              "x": 15,
+              "y": 896.5625,
+              "width": 510,
+              "height": 65
+            },
+            "overflow": false
+          },
+          {
+            "width": 540,
+            "instrument": "kompang",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 512,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "512px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 512,
+              "height": 815.875
+            },
+            "inspector": {
+              "x": 14,
+              "y": 1680.34375,
+              "width": 512,
+              "height": 555
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 813.5625,
+              "width": 482,
+              "height": 81
+            },
+            "settings": {
+              "x": 15,
+              "y": 927.0625,
+              "width": 510,
+              "height": 65
+            },
+            "overflow": false
+          },
+          {
+            "width": 390,
+            "instrument": "xylophone",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 362,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "362px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 362,
+              "height": 655.5
+            },
+            "inspector": {
+              "x": 14,
+              "y": 2028.578125,
+              "width": 362,
+              "height": 645
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 517.1875,
+              "width": 332,
+              "height": 127
+            },
+            "settings": {
+              "x": 15,
+              "y": 676.6875,
+              "width": 360,
+              "height": 155
+            },
+            "overflow": false
+          },
+          {
+            "width": 390,
+            "instrument": "recorder",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 362,
+              "height": 88.375
+            },
+            "font": "26px",
+            "grid": "362px",
+            "panel": {
+              "x": 14,
+              "y": 208.375,
+              "width": 362,
+              "height": 922.8125
+            },
+            "inspector": {
+              "x": 14,
+              "y": 2327.078125,
+              "width": 362,
+              "height": 645
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 842.1875,
+              "width": 332,
+              "height": 127
+            },
+            "settings": {
+              "x": 15,
+              "y": 1018.1875,
+              "width": 360,
+              "height": 112
+            },
+            "overflow": false
+          },
+          {
+            "width": 390,
+            "instrument": "tamborin",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 362,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "362px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 362,
+              "height": 769.421875
+            },
+            "inspector": {
+              "x": 14,
+              "y": 1666.890625,
+              "width": 362,
+              "height": 555
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 720.109375,
+              "width": 332,
+              "height": 81
+            },
+            "settings": {
+              "x": 15,
+              "y": 833.609375,
+              "width": 360,
+              "height": 112
+            },
+            "overflow": false
+          },
+          {
+            "width": 390,
+            "instrument": "kompang",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 362,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "362px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 362,
+              "height": 816.921875
+            },
+            "inspector": {
+              "x": 14,
+              "y": 1714.390625,
+              "width": 362,
+              "height": 571.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 767.609375,
+              "width": 332,
+              "height": 81
+            },
+            "settings": {
+              "x": 15,
+              "y": 881.109375,
+              "width": 360,
+              "height": 112
+            },
+            "overflow": false
+          },
+          {
+            "width": 320,
+            "instrument": "xylophone",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 292,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "292px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 292,
+              "height": 719.78125
+            },
+            "inspector": {
+              "x": 14,
+              "y": 2214.046875,
+              "width": 292,
+              "height": 661.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 552.96875,
+              "width": 262,
+              "height": 139
+            },
+            "settings": {
+              "x": 15,
+              "y": 740.96875,
+              "width": 290,
+              "height": 155
+            },
+            "overflow": false
+          },
+          {
+            "width": 320,
+            "instrument": "recorder",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 292,
+              "height": 88.375
+            },
+            "font": "26px",
+            "grid": "292px",
+            "panel": {
+              "x": 14,
+              "y": 208.375,
+              "width": 292,
+              "height": 984.453125
+            },
+            "inspector": {
+              "x": 14,
+              "y": 2509.90625,
+              "width": 292,
+              "height": 661.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 891.828125,
+              "width": 262,
+              "height": 139
+            },
+            "settings": {
+              "x": 15,
+              "y": 1079.828125,
+              "width": 290,
+              "height": 112
+            },
+            "overflow": false
+          },
+          {
+            "width": 320,
+            "instrument": "tamborin",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 292,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "292px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 292,
+              "height": 821.546875
+            },
+            "inspector": {
+              "x": 14,
+              "y": 1788.40625,
+              "width": 292,
+              "height": 604.5
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 701.734375,
+              "width": 262,
+              "height": 135
+            },
+            "settings": {
+              "x": 15,
+              "y": 885.734375,
+              "width": 290,
+              "height": 112
+            },
+            "overflow": false
+          },
+          {
+            "width": 320,
+            "instrument": "kompang",
+            "heading": {
+              "x": 14,
+              "y": 96,
+              "width": 292,
+              "height": 57.1875
+            },
+            "font": "26px",
+            "grid": "292px",
+            "panel": {
+              "x": 14,
+              "y": 177.1875,
+              "width": 292,
+              "height": 870.546875
+            },
+            "inspector": {
+              "x": 14,
+              "y": 1837.40625,
+              "width": 292,
+              "height": 621
+            },
+            "radius": "20px",
+            "transport": {
+              "x": 29,
+              "y": 750.734375,
+              "width": 262,
+              "height": 135
+            },
+            "settings": {
+              "x": 15,
+              "y": 934.734375,
+              "width": 290,
+              "height": 112
+            },
+            "overflow": false
+          }
+        ],
+        "pageErrors": [],
+        "limits": "Headless Chromium geometry and emulated touch; no physical-device, Safari/Firefox or screen-reader evaluation."
+      },
+      "kompang": {
+        "source_sha256": "9fa02ee7cbd6b5a73b9ae6c5bb1129da184c211631ec5fd749d49f5f5b67e6c3",
+        "browser": "133.0.6943.0",
+        "passed": 13,
+        "checks": [
+          "four enabled cards form two desktop rows, preserve badges and defer audio until input",
+          "Kompang opens empty with genuine SVG zones and shared recording controls",
+          "actual disjoint center/edge SVG hit regions capture once each with raw timing",
+          "F/J, focused Space/Enter, held-key dedup and editable-field isolation",
+          "edited action/onset and raw evidence survive tempo and Reset",
+          "both trace types, replay, all four patterns and metronome exclude synthetic input",
+          "real OfflineAudioContext confirms different spectral activity and decay for center/edge",
+          "actual JSON/CSV downloads retain Kompang identity, actions and original evidence",
+          "all four routes preserve independent workspaces, 10 songs and game roundtrip; leaving cancels audio/scheduler",
+          "Kompang reload restores only its own saved workspace",
+          "foreign saved identity cannot crash startup or overwrite stored evidence",
+          "390px emulated touch zones, no overflow and reduced motion",
+          "320px narrow viewport retains readable controls without horizontal overflow"
+        ],
+        "pageErrors": [],
+        "signatures": {
+          "center": {
+            "crossings": 9,
+            "tailRms": 0.0008879698328841988
+          },
+          "edge": {
+            "crossings": 89,
+            "tailRms": 0
+          }
+        },
+        "limits": "Headless Chromium signal rendering and emulated touch only. No human speaker listening, acoustic fidelity, real mobile latency, Safari/Firefox or screen reader evaluation."
+      },
+      "recorder": {
+        "browser": "133.0.6943.0",
+        "checks": [
+          "chooser, branding and gesture-only audio",
+          "mouse hold exceeds 1.2s and release silences actual Web Audio",
+          "keyboard hold recording keeps independent raw onset/release and gate",
+          "note and gate editing preserves original input evidence",
+          "playback, live tempo and metronome retain raw timing",
+          "JSON/CSV exports and actual CSV download",
+          "workspaces preserve recordings/edits across switching and reload",
+          "extended Bb5 shown and below-range G4 blocks playback without changing score",
+          "both catalog variants and synchronized Baroque F guide",
+          "pointer cancellation and window blur stop held voices",
+          "game controller and safe return to recorder studio",
+          "legacy v1 recording opens as xylophone with raw timestamps intact",
+          "empty or malformed active take cannot overwrite another saved instrument workspace",
+          "long recorder audition can be stopped and cannot bleed into recording/playback",
+          "phone 390px: touch hold/release and no horizontal overflow",
+          "reduced motion",
+          "standalone file opens offline without runtime assets"
+        ],
+        "passed": 17,
+        "pageErrors": [],
+        "soundLimit": "Web Audio signal measured in browser; speaker/listening quality and real hardware/touch devices not verified."
+      },
+      "tamborin": {
+        "source_sha256": "9fa02ee7cbd6b5a73b9ae6c5bb1129da184c211631ec5fd749d49f5f5b67e6c3",
+        "browser": "133.0.6943.0",
+        "checks": [
+          "actual chooser, playable Tamborin, empty take and gesture-only audio",
+          "both synthesis textures generate a signal and finish without capture",
+          "mouse and keyboard capture with held-key dedup and metronome exclusion",
+          "editing, tempo and Reset preserve original input evidence",
+          "recording replay, example and Stop preserve take and cancel signal",
+          "JSON and CSV downloads",
+          "recorder workspaces and Tamborin-game roundtrip",
+          "390px touch input, no horizontal overflow and reduced motion"
+        ],
+        "passed": 8,
+        "pageErrors": [],
+        "tapRms": 0.04406866531543247,
+        "shakeRms": 0.014801110537083025,
+        "limits": "Headless digital signal and emulated touch only. Human speaker listening, real phone latency and other browser engines not verified."
+      }
+    }
+  },
+  "source_review": {
+    "base": "3a2bc106c8885b81334e1dd34ce5810f05dfad8e",
+    "index_sha256": "9fa02ee7cbd6b5a73b9ae6c5bb1129da184c211631ec5fd749d49f5f5b67e6c3",
+    "inline_script_count": 10,
+    "all_inline_scripts_byte_identical": true,
+    "physical_surface_svg_byte_identical": true,
+    "surface_svg_sha256": {
+      "perc": "7c5325acf400c0c385acbbc5f5cdea79106397ed5e553201d3259785e26cf171",
+      "komp": "b7cc4593ed97f53c1d5a4be34880acbb2efbe1e0622f980e9abb9e1f674752ea"
+    }
+  },
+  "earlier_attempts": "An earlier concurrent run on the pre-final title/whitespace revision hit a Kompang screenshot timeout and a Recorder phone-release RMS assertion. All functional suites passed serially on the final source. The new layout harness also corrected whitespace normalization and established keyboard modality before checking :focus-visible.",
+  "limits": "Headless Chromium 133.0.6943.0 and emulated mouse/keyboard/touch. No human speaker listening, acoustic fidelity, physical phone latency, Safari/Firefox or screen-reader validation."
+}

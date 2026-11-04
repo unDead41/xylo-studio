@@ -45,7 +45,7 @@ Use the existing display face for instrument names and note letters, body face f
 
 ## Layout
 
-Chooser: four instrument cards in two columns and two rows on desktop, stacked on phones. Studio: retain the existing main instrument/inspector grid, with the playable instrument before the song catalog; the inspector flows below on narrow screens. Document scrolling owns the page. Jejak melodi and Data ketukan keep their own horizontal/internal scroll bounds.
+Chooser: four instrument cards in two columns and two rows on desktop, stacked on phones. All four studios use the same `.studio-heading`, `.workspace`, `.main-work`, `.instrument-panel` and `.inspector` geometry. The main area contains the playable instrument, Rakam/Main/Henti transport, persistent status, tempo/metronome/Reset row, song catalog or percussion patterns, trace, then a visible Data ketukan table. JSON/CSV exports live in the inspector. The 314px inspector narrows to 282px at 1050px and stacks below the main area at 850px. Document scrolling owns the page; traces and event tables retain their own scroll bounds.
 
 ## Elevation & Depth
 
@@ -61,11 +61,11 @@ Retain existing rounded controls and panels. Instrument choices use 24px corners
 | --- | --- | --- |
 | Action / selected state | --primary / --soft | Existing transport buttons, mode switch, pressed pads |
 | Text / supporting text | --ink / --muted | Chooser, instrument heading, guides, inspector |
-| Page / panel / border | --background / --surface / --border | Both instrument workspaces |
+| Page / panel / border | --background / --surface / --border | All four instrument workspaces |
 | Focus | --focus and existing :focus-visible | Existing controls and new native buttons |
 | Type | --display / --sans / --mono | Shared shell, instrument pads, score/timing |
 | Controls / panels | --radius / --panel plus established recipes | Transport, dialogs, panel shells |
-| Instrument state | .bar / .recorder-pad / .hole-state | Percussive and sustained input variants |
+| Instrument state | .bar / .recorder-pad / .hole-state / .studio-action-pad | Pitched and unpitched playing surfaces |
 
 ## Do's and Don'ts
 
@@ -75,8 +75,8 @@ Reconcile drift: original docs described the xylophone-only entry; the approved 
 
 ## Tamborin extension
 
-The Tamborin view uses the same palette, typography, focus rules and white panel geometry. Its inline SVG shows a wooden shell, pale membrane and eight clearly paired metal jingles; brief press/shake feedback has a reduced-motion equivalent. Large Ketuk/Goncang buttons and the instrument precede the transport and settings. The responsive grid places the recording inspector below the instrument on narrow displays. The original ui chooser, recorder object/pads and pitched workspace remain the canonical owners; Tamborin adds a card and an independent unpitched view.
+The Tamborin view uses the canonical studio shell and inspector, including the same header size and Tukar instrumen control as Xylophone/Recorder. Its inline SVG shows a wooden shell, pale membrane and eight clearly paired metal jingles. Ketuk/Goncang pads use raised pale mint surfaces, soft shadows and pressed feedback. The physical object and pads sit in an inset playing area matching the recorder stage. A compact disclosure holds technique and digital-synthesis guidance; it does not displace the main controls. Percussion patterns replace the pitched song catalog, while capture and independent unpitched storage remain unchanged.
 
 ## Kompang extension
 
-Reuse the Tamborin header, control panels, transport, trace and recording inspector. A wooden inline SVG shell, pale textured membrane and stitched rim provide depth without metal jingles. The center ellipse and edge annulus are disjoint focusable hit shapes, with subtle tone/line labels and localized teal/lilac feedback. F/J action buttons remain large; reduced motion retains outlines and text while removing movement. All four chooser cards use the existing card geometry and Buka studio action, with Cadangan baharu badges on the two unpitched instruments.
+Reuse the same canonical shell as the other three studios, with the percussion pattern/trace variant used by Tamborin. A wooden inline SVG shell, pale textured membrane and stitched rim provide depth without metal jingles. The center ellipse and edge annulus are disjoint focusable hit shapes, with subtle tone/line labels and localized teal/lilac feedback. F/J action buttons remain large; reduced motion retains outlines and text while removing movement. All four chooser cards use the existing card geometry and Buka studio action, with Cadangan baharu badges on the two unpitched instruments. Geometry and flow are compared across all four views at 1440, 1050, 850, 540, 390 and 320px in `tests/browser-layout.cjs`.

@@ -7,27 +7,29 @@
     "branch": "main",
     "directory": "/"
   },
-  "index_sha256": "b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236",
+  "index_sha256": "9fa02ee7cbd6b5a73b9ae6c5bb1129da184c211631ec5fd749d49f5f5b67e6c3",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
     "passed": 154,
     "failed": 0
   },
-  "source_base": "38eb0dc1136d2ce6756380633d4a09fe7a247113",
+  "source_base": "3a2bc106c8885b81334e1dd34ce5810f05dfad8e",
   "browser_tests": {
     "commands": [
+      "node tests/browser-layout.cjs",
       "node tests/browser-kompang.cjs",
       "node tests/browser-recorder.cjs",
       "node tests/browser-tamborin.cjs"
     ],
     "chromium": "133.0.6943.0",
-    "passed": 38,
+    "passed": 46,
     "failed": 0,
-    "evidence": "docs/handoffs/instrument-kompang/browser-verification.json",
-    "scope": "headless Web Audio signals, OfflineAudioContext synthesis comparison and phone emulation; no speaker listening or physical acoustic verification"
+    "evidence": "docs/handoffs/ui-layout/browser-verification.json",
+    "scope": "Shared layout at six widths; headless Web Audio signals and OfflineAudioContext synthesis; emulated touch. No speaker listening or physical acoustic/device verification."
   },
   "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
   "integrated_tamborin_sha": "7cf77b7e275b94717748cb80aed73f6680daa59e",
   "previous_release_audit": "docs/audits/main/LATEST.md",
-  "integration_handoff": "docs/handoffs/instrument-kompang/LATEST.md"
+  "integration_handoff": "docs/handoffs/ui/LATEST.md",
+  "previous_integration_handoff": "docs/handoffs/instrument-kompang/LATEST.md"
 }

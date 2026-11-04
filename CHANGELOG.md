@@ -1,5 +1,12 @@
 # Changelog
 
+## Shared studio layout — 2026-11-04 (version unchanged)
+
+- Align Tamborin and Kompang with the Xylophone/Recorder header, main instrument panel, transport, tempo/metronome row and recording inspector.
+- Put playback beside recording, stack JSON/CSV exports in the inspector, and keep the editable Data ketukan table visible below the trace.
+- Preserve both physical SVGs, percussion controls/audio/controllers, independent recordings, original timestamps and accepted v1.04.0.
+- Verify all four studio layouts at six widths with real Chromium screenshots and retain the existing functional browser checks.
+
 ## Kompang integration — 2026-11-04 (version unchanged)
 
 - Enable all four instrument routes and add a playable Kompang SVG with center/edge regions and F/J controls.
