@@ -1,0 +1,11 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": ["index.html"],
+  "locale": "ms-MY",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": ["Select/Listbox", "Form", "Scrollbar", "Toast"],
+  "ownership": {"Select/Listbox": "native"},
+  "requiredCommands": ["unit"],
+  "commands": {"unit": "node --test tests/*.test.cjs"},
+  "evidence": {"browserWorkflows": "tests/browser-recorder.cjs", "regression": "tests/recorder.test.cjs"}
+}

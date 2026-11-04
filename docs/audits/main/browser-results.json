@@ -1,0 +1,25 @@
+{
+  "browser": "133.0.6943.0",
+  "checks": [
+    "chooser, branding and gesture-only audio",
+    "mouse hold exceeds 1.2s and release silences actual Web Audio",
+    "keyboard hold recording keeps independent raw onset/release and gate",
+    "note and gate editing preserves original input evidence",
+    "playback, live tempo and metronome retain raw timing",
+    "JSON/CSV exports and actual CSV download",
+    "workspaces preserve recordings/edits across switching and reload",
+    "extended Bb5 shown and below-range G4 blocks playback without changing score",
+    "both catalog variants and synchronized Baroque F guide",
+    "pointer cancellation and window blur stop held voices",
+    "game controller and safe return to recorder studio",
+    "legacy v1 recording opens as xylophone with raw timestamps intact",
+    "empty or malformed active take cannot overwrite another saved instrument workspace",
+    "long recorder audition can be stopped and cannot bleed into recording/playback",
+    "phone 390px: touch hold/release and no horizontal overflow",
+    "reduced motion",
+    "standalone file opens offline without runtime assets"
+  ],
+  "passed": 17,
+  "pageErrors": [],
+  "soundLimit": "Web Audio signal measured in browser; speaker/listening quality and real hardware/touch devices not verified."
+}

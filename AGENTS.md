@@ -1,8 +1,8 @@
-# Agent instructions — Xylo Studio
+# Agent instructions — e-Instru Studio
 
 This is a self-contained digital music studio and browser game. Read docs/SOR.md, docs/BRANCH_POLICY.md, README.md, VERSION and the actual source before changes.
 
-- Chat names start xylo studio - <branch>. Exact branches: main, share, audit, architecture, tutorial, music, gameplay, ui.
+- Chat names start e-instru studio - <branch>. Exact branches: main, share, audit, architecture, tutorial, music, gameplay, ui.
 - Main is the complete owner source. Audit integrates and pushes main when Ijamm requests it. Workers push their own branch only, with base/head hashes and actual test evidence.
 - Share is a minimal downloadable distribution snapshot. Tutorial and share update only when the user requests; never merge share back into main.
 - Music owns arrangements/data/timing; gameplay owns game rules; ui owns interactions/layout; architecture owns the SOR and structure. index.html is a shared file: coordinate small changes through audit and compile/run the combined source.

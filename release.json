@@ -1,16 +1,26 @@
 {
-  "version": "v1.03.2",
+  "version": "v1.04.0",
   "repository": "unDead41/xylo-studio",
-  "date": "2026-11-02",
+  "date": "2026-11-04",
   "status": "digital_release",
   "publishing": {
     "branch": "main",
     "directory": "/"
   },
-  "index_sha256": "4dfffe75b0cd71794e46f8535a29781c7c7db0c6f8667e788183cf0a4c12274d",
+  "index_sha256": "45b1ddb7677e75923680f0cc11095c6c7e588651ae068496b85d129fcd7e2e89",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
-    "passed": 64,
+    "passed": 79,
     "failed": 0
-  }
+  },
+  "source_base": "46338fe646408c758232eec9ba7b5f876ff1f9e4",
+  "browser_tests": {
+    "command": "node tests/browser-recorder.cjs",
+    "chromium": "133.0.6943.0",
+    "passed": 17,
+    "failed": 0,
+    "scope": "headless Web Audio signal and phone emulation; no acoustic/speaker verification"
+  },
+  "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
+  "release_audit": "docs/audits/main/LATEST.md"
 }

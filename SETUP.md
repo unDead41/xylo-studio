@@ -1,4 +1,4 @@
-# Mula menggunakan Xylo Studio
+# Mula menggunakan e-Instru Studio
 
 Muat turun ZIP branch share, extract dan buka index.html dalam Chrome/Edge. Klik atau tekan bar untuk mengaktifkan audio. Gunakan Studio untuk lagu/rakaman, atau Permainan untuk permainan rentak. Tiada Node.js diperlukan untuk bermain.
 

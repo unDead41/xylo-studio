@@ -4,14 +4,14 @@ Keputusan Ijamm pada 2 November 2026. Nama branch tepat ialah nama dalam jadual.
 
 | Branch | Nama chat | Tugas |
 | --- | --- | --- |
-| `main` | xylo studio - main | Sumber pembangunan lengkap milik Ijamm; penerbitan laman daripada main. |
-| `share` | xylo studio - share | HTML kendiri dan panduan ringkas untuk agihan; kemas kini apabila diminta. |
-| `audit` | xylo studio - audit | Audit branch, regression, integrasi ke main dan versioning. |
-| `architecture` | xylo studio - architecture | Struktur kod dan SOR projek digital. |
-| `tutorial` | xylo studio - tutorial | Panduan setup dan bermain; kemas kini hanya apabila diminta. |
-| `music` | xylo studio - music | Katalog lagu, pitch, tick, tempo dan eksport JSON/CSV. |
-| `gameplay` | xylo studio - gameplay | Peraturan permainan, kesukaran, skor, kombo, nyawa dan penilaian. |
-| `ui` | xylo studio - ui | Susun atur, akses papan kekunci, sentuhan dan paparan responsif. |
+| `main` | e-instru studio - main | Sumber pembangunan lengkap milik Ijamm; penerbitan laman daripada main. |
+| `share` | e-instru studio - share | HTML kendiri dan panduan ringkas untuk agihan; kemas kini apabila diminta. |
+| `audit` | e-instru studio - audit | Audit branch, regression, integrasi ke main dan versioning. |
+| `architecture` | e-instru studio - architecture | Struktur kod dan SOR projek digital. |
+| `tutorial` | e-instru studio - tutorial | Panduan setup dan bermain; kemas kini hanya apabila diminta. |
+| `music` | e-instru studio - music | Katalog lagu, pitch, tick, tempo dan eksport JSON/CSV. |
+| `gameplay` | e-instru studio - gameplay | Peraturan permainan, kesukaran, skor, kombo, nyawa dan penilaian. |
+| `ui` | e-instru studio - ui | Susun atur, akses papan kekunci, sentuhan dan paparan responsif. |
 
 `main` bukan chat pekerja. Setiap chat semak branch/ref, working tree, SHA asas, SOR dan handoff sebelum bekerja. Gunakan folder sendiri. Jangan menukar checkout chat lain.
 
