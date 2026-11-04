@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-04",
+  "project_ref": "ahvyieyojqciohdogsqc",
+  "method": "Visible Supabase Dashboard editor; saved; reload; select/copy source and compare after CRLF normalization",
+  "smtp_observed_enabled": true,
+  "security_notifications_enabled": 7,
+  "results": [
+    {
+      "id": "confirmation",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "c59157f434c93075f547790a467b02a60fbc8f2df8c3aca9592848abee605966"
+    },
+    {
+      "id": "invite",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "4523ae7551a54872cd2c39d824c9169c552510ac090da588d41bd051e5996575"
+    },
+    {
+      "id": "magic_link",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "24fe32dfa96d3bf983f8e76023d73276caa9ec0a15e7bec921d80f7431895c36"
+    },
+    {
+      "id": "email_change",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "3c63f4a6f337222c0b798835d0ba44a06c10093b8f0950b66ec8a843d2290863"
+    },
+    {
+      "id": "recovery",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "9faef06182a77d1133809f2b8facce640078a40e38463cfa5521f5e42321ba57"
+    },
+    {
+      "id": "reauthentication",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "5f2cb739c28bca0172d23cd331fd0e11f4acf7c4f01cc949fcecfd93276deb21"
+    },
+    {
+      "id": "password_changed_notification",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "a61923cfd84b88463894311811ba457dc4c907d698a99dd6490ba55d544b3097"
+    },
+    {
+      "id": "email_changed_notification",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "51855b10395f2ef8345bbb93e6983683d3c41c0c7723b5a5ed9ede0ee2f12dfd"
+    },
+    {
+      "id": "phone_changed_notification",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "d23be4a59ca2177cf6392b5816a524dfa05824c363cde9c430a96c6790208eb3"
+    },
+    {
+      "id": "identity_linked_notification",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "da160a44276c23a763f0efc0c3270d1573f06ef9e5b87845ffd4214ecc22af81"
+    },
+    {
+      "id": "identity_unlinked_notification",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "0470df9ef998343780eb5070db7ea8207a2bdadd322dfd7b5c0e0ec8f2c83c02"
+    },
+    {
+      "id": "mfa_factor_enrolled_notification",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "e588b76a2e27b058538ab2ab24224bb77d46554e337562fab4ed7962228db9fb"
+    },
+    {
+      "id": "mfa_factor_unenrolled_notification",
+      "subject_written_and_saved": true,
+      "body_exact_after_reload": true,
+      "source_sha256": "afd08673804612b1c6590c8257b15815f8b85adaa4d791f5af0af92d15066e01"
+    }
+  ],
+  "real_emails_sent": 0,
+  "inbox_delivery_verified": false,
+  "smtp_credentials_read": false
+}

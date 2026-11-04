@@ -1,0 +1,4 @@
+# The vendored SDK contains significant whitespace inside multiline JS strings.
+# index.html embeds that SDK byte-for-byte; preserve its string contents.
+index.html whitespace=-blank-at-eol
+vendor/supabase/*.js whitespace=-blank-at-eol
