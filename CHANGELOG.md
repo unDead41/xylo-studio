@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — instrument-tamborin candidate, 2026-11-04
+
+- Add a playable Tamborin card/view to the current e-Instru chooser, preserving Xylophone, Rekoder Soprano and the game.
+- Add two unpitched synthetic textures, pointer/Space/G input, example patterns, metronome, recording/editing/trace and independent JSON/CSV data.
+- Expose reusable percussion model, lookahead scheduler and Studio view/transport factory for Kompang; Kompang remains disabled.
+- Cancel delayed activation and completed/scheduled audio on transport/view/lifecycle changes; preserve original manual timing through tempo and Reset.
+- VERSION remains v1.03.2. No Pages or main/ui publication.
+
 ## Unreleased — ui candidate, 2026-11-04
 
 - Rebrand active UI/docs to e-Instru Studio; keep repository, Pages URL and compatibility identifiers.

@@ -72,3 +72,7 @@ Retain existing rounded controls and panels. Instrument choices use 24px corners
 Keep the recorder visually recognizable and playable, with an accurate separate thumb hole and data-driven fingering. Put sounding MIDI/octave information beside simplified C–C′ labels. Never silently change score pitch to make it fit. Keep game rules and game audio xylophone-based. Reuse the controller/scheduler/export and existing dialogs/status owners for future instruments.
 
 Reconcile drift: original docs described the xylophone-only entry; the approved multi-instrument entry extends that identity. Palette, fonts and xylophone physical design match the existing runtime; no global token was changed.
+
+## Tamborin extension
+
+The Tamborin view uses the same palette, typography, focus rules and white panel geometry. Its inline SVG shows a wooden shell, pale membrane and eight clearly paired metal jingles; brief press/shake feedback has a reduced-motion equivalent. Large Ketuk/Goncang buttons and the instrument precede the transport and settings. The responsive grid places the recording inspector below the instrument on narrow displays. The original ui chooser, recorder object/pads and pitched workspace remain the canonical owners; Tamborin adds a card and an independent unpitched view.

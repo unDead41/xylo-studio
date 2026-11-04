@@ -17,3 +17,11 @@ Branch roles and manual-update policy: docs/BRANCH_POLICY.md. Architecture follo
 The first view is an instrument chooser. The inline INSTRUMENTS registry owns pitch bounds, default octave and sustain capability; a recorder view adapter owns raised pads, inline SVG and verified Baroque data. Both instruments reuse the existing Studio controller, timeline, editor, catalog, transport, metronome, scheduler and JSON/CSV export. Per-instrument workspace snapshots preserve takes/edits on switching. Game rules and game audio remain unchanged. Recorder microphone detection is not implemented.
 
 Additive instrument_id, gate_tick, raw_duration_ms and release_ms keep old data readable. Legacy takes default to xylophone; no raw evidence is rewritten. Physical recorder range and honest catalog handling are documented in docs/RECORDER.md. The v1.03.2 release number remains pending audit acceptance of the candidate.
+
+## Unpitched percussion extension — instrument-tamborin candidate
+
+Tamborin uses the actual ui instrument chooser, with a view adapter that suspends the pitched Studio controller and safely returns to Xylophone, Rekoder Soprano or Game. Percussion actions are not added to XyloCore's pitch registry. Kompang remains disabled until implemented.
+
+Inline percussion-core owns unpitched action takes, immutable raw_capture, score editing/tempo and bounded lookahead/metronome scheduling. percussion-ui exposes a configurable Studio factory for transport, capture, trace and persistence; tamborin-ui supplies instrument identity, two action labels, example patterns and its synthesis adapter. No external runtime module is fetched. See the Tamborin handoff for the reusable contract.
+
+Percussion JSON schema e-instru-percussion-take/v1 and per-instrument e-instru-percussion-v1:<id> storage coexist with unchanged pitched schemas and storage. Raw input is performance.now() relative to the first manual input; at_ms is separately editable. Only manual events enter recording. Data limits are 512 actions / 180000 ms onset; a playback tail of at most 1000 ms may extend the scheduler past the final legal onset. All sounds remain digital synthesis.

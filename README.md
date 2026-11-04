@@ -29,3 +29,13 @@ Semua bunyi ialah sintesis digital. Mikrofon dianalisis secara tempatan; raw aud
 Pasang Node.js 20+ kemudian jalankan `node --test tests/*.test.cjs`. Source utama ialah index.html; tiada dist atau checkout luar diperlukan. Host tests menggunakan boundary DOM/audio simulasi. Bukti candidate dalam [handoff ui](docs/handoffs/ui/LATEST.md); audit keluaran terdahulu dalam docs/audits/audit/LATEST.md. Ujian pelayar tambahan: `node tests/browser-recorder.cjs` dengan Playwright/Chromium tersedia.
 
 Branch dan nama chat: docs/BRANCH_POLICY.md. SOR: docs/SOR.md. Tutorial/share hanya diperbaharui apabila diminta. GitHub Pages menggunakan main, folder root.
+
+## Studio Tamborin — branch instrument-tamborin
+
+Pemilih instrumen kini menyediakan Xylophone, Rekoder Soprano dan Tamborin. Kompang kekal sebagai cadangan yang belum boleh dimainkan. Ketuk permukaan SVG Tamborin dengan tetikus/sentuhan, tekan Ruang untuk ketuk atau G untuk goncang. Kedua-dua tekstur ialah sintesis digital, bukan rakaman alat sebenar.
+
+Pilih satu daripada empat corak rentak, tempo 40–200 BPM dan metronom. Main contoh tidak mengisi rakaman. Tekan Rakam, main rentak dan Henti; ketukan pertama menjadi masa sifar. Main rakaman, jejak rentak, suntingan tindakan/masa serta eksport/import JSON dan eksport CSV tersedia. Data perkusi menggunakan schema dan kunci simpanan berasingan; rakaman xylophone/rekoder lama kekal serasi.
+
+Tempo dikunci semasa rakaman. Perubahan tempo retime masa main sahaja dan menghentikan playback; masa input asal tidak berubah. Reset menghentikan sesi dan memulihkan tempo tangkapan tanpa membuang tindakan atau suntingan. Jika retime ke tempo asal akan melebihi had 180 saat, Reset memulihkan BPM sambil mengekalkan masa suntingan yang sah dan memaklumkannya pada status.
+
+Kontrak komponen perkusi boleh guna semula untuk Kompang, bukti ujian dan batasan pengesahan berada dalam docs/handoffs/instrument-tamborin/LATEST.md. Ini calon branch tambahan, bukan keluaran baharu atau penerbitan Pages.

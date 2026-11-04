@@ -12,6 +12,7 @@ Keputusan Ijamm pada 2 November 2026. Nama branch tepat ialah nama dalam jadual.
 | `music` | e-instru studio - music | Katalog lagu, pitch, tick, tempo dan eksport JSON/CSV. |
 | `gameplay` | e-instru studio - gameplay | Peraturan permainan, kesukaran, skor, kombo, nyawa dan penilaian. |
 | `ui` | e-instru studio - ui | Susun atur, akses papan kekunci, sentuhan dan paparan responsif. |
+| `instrument-tamborin` | e-instru studio - instrument-tamborin | Branch tambahan dibenarkan Ijamm pada 4 November 2026; Studio Tamborin dan asas perkusi. Asas ui terkini, push branch ini sahaja. |
 
 `main` bukan chat pekerja. Setiap chat semak branch/ref, working tree, SHA asas, SOR dan handoff sebelum bekerja. Gunakan folder sendiri. Jangan menukar checkout chat lain.
 

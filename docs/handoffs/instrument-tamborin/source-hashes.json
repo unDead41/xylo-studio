@@ -1,0 +1,21 @@
+{
+  "algorithm": "SHA-256",
+  "files": {
+    "index.html": "3cc191dbdd689aeb312ad37b9bc434229ec07fe40a33d5aa5ebb99d40e4c42d5",
+    "tests/browser-recorder.cjs": "36f370eda750a74137810230e3d6e3a23059c8d757ff536b0dfd02ff60522013",
+    "tests/browser-tamborin.cjs": "f453733313556155edc1843163615896c74d91de0c2e3169f42d840c235e712b",
+    "tests/core.test.cjs": "d1147a46d80d9f57462642e328e7aee539afef522e2d024400008be306a2837a",
+    "tests/digital-only.test.cjs": "c0c3a1261728afc1d54f4af938bb10173d80d9c0f83a01b3615b2ecc73568549",
+    "tests/game-ui.test.cjs": "5f31a1c161cab9803fb1675eeee1ef7a72ae3ce4f9a257fb27975cb498f6ee83",
+    "tests/game.test.cjs": "97776befa17b9cf05cb59e0a2e88d2f06d9312711829a822ffee3e7404510a7c",
+    "tests/helpers/studio.cjs": "4f909027e5f24b1e16310c3faf9ddfb71670d01e89836ccf9f2069ab7a1d5939",
+    "tests/long.test.cjs": "dc460b6c81015a7d268b6988fdd60574c4a3e8d005c92c5d2b068623551c478d",
+    "tests/percussion-audio.test.cjs": "5b7d6da2750a165412a4be874ffa8b8ea3bc6444e4dbb6ecde46da449e7fc185",
+    "tests/percussion-core.test.cjs": "d1c99feb69ebbffe2d22a82bff1c7cabbc2ee8375b4cbe2e284f61de40e5a91d",
+    "tests/recorder.test.cjs": "9c223befb3cf914ef294898559c3dc91cf795b4c144fb1af0e4f2a42fbc44bd9",
+    "tests/tamborin-integration.test.cjs": "14bb18da3dab1a6c015319160b585ea6cbded96740a43014d5d56164472b79f9",
+    "tests/tamborin-lifecycle.test.cjs": "453423845dfe1f75cb0219d36d3ce9ecf791a16a9317c704743d135389c30ffd",
+    "tests/tamborin-ui.test.cjs": "ab21d6ea85ca0a21df03756eb32c69148e4927dc6f2ffa32c151476d63066cc1",
+    "tests/ui.test.cjs": "c27098d91ea4681f5781e798f09c35abd41df9195caaf4783140a01bd1b75b8a"
+  }
+}

@@ -2,20 +2,28 @@
   "version": "v1.03.2",
   "repository": "unDead41/xylo-studio",
   "date": "2026-11-04",
-  "status": "ui_candidate_unreleased",
+  "status": "instrument_tamborin_candidate_unreleased",
   "publishing": {
     "branch": "main",
     "directory": "/"
   },
-  "index_sha256": "ce822a38ff6cad0254497e4107068e018b28ca70ac6c09d2fa308574cb451d84",
+  "index_sha256": "3cc191dbdd689aeb312ad37b9bc434229ec07fe40a33d5aa5ebb99d40e4c42d5",
   "software_tests": {
     "command": "node --test tests/*.test.cjs",
-    "passed": 74,
+    "passed": 121,
     "failed": 0
   },
   "source_base": "46338fe646408c758232eec9ba7b5f876ff1f9e4",
   "publication_performed": false,
   "browser_tests": {
+    "status": "not_run_for_tamborin_candidate",
+    "command": "node tests/browser-tamborin.cjs",
+    "reason": "Connected and cloud browsers cannot reach isolated localhost preview. No Tamborin screenshots or acoustic listening evidence were obtained."
+  },
+  "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
+  "previous_ui_browser_tests": {
+    "source_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
+    "index_sha256": "ce822a38ff6cad0254497e4107068e018b28ca70ac6c09d2fa308574cb451d84",
     "command": "node tests/browser-recorder.cjs",
     "chromium": "133.0.6943.0",
     "passed": 15,
