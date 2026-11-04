@@ -13,11 +13,11 @@
 - [x] Add failing tests for identity, sound distinction, SVG regions, capture evidence and cross-instrument lifecycle.
 - [x] Add Kompang identity/audio and thin visual/configuration adapters; extend shared input surfaces and navigation.
 - [x] Run all host tests and actual browser regression harness; capture four-card selector and Kompang desktop/phone.
-- [ ] Review complete combined source, fix material findings, record source hashes/base/head/tests/screenshots/audio limits in handoff.
-- [ ] Commit worker result, recheck main advancement, integrate tested tree and push authorized digital main without force.
+- [x] Review complete combined source, fix material findings, record source hashes/base/head/tests/screenshots/audio limits in handoff.
+- [x] Commit worker result and prepare the byte-verified GitHub integration tree; recheck main and use an expected-head, non-force ref update for delivery.
 
 Review focus: hidden pitched F/J input; focused Space activating the wrong region; delayed AudioContext resume after switching; independent take imports/storage; new main changes during implementation. Raw performance timestamps must survive score edits/tempo/Reset; example/metronome must never enter manual recording.
 
 Progress: delegated disjoint audio/core, visual/config and regression tasks to three agents; parent owns shared input/navigation, combined verification and publication.
 
-Final review: one Important foreign-storage identity finding fixed after two observed failures; 154/154 host regressions and 38 Chromium workflow groups passed on final runtime hash b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236. Source/audio/UI review has no remaining material blocker. No deferred minor findings. Final publication remains pending.
+Final review: one Important foreign-storage identity finding fixed after two observed failures; 154/154 host regressions and 38 Chromium workflow groups passed on final runtime hash b124e0c5da35ec65b0284440811c915befe7d1361df63c0e29ca8ef3cff32236. Source/audio/UI review has no remaining material blocker. No deferred minor findings. GitHub implementation object: 7fc30db184baced92053276694f796298e2caec7; documentation-only delivery wrapper follows.
