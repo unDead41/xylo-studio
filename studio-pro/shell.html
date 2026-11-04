@@ -1,0 +1,114 @@
+<section id="proView" class="pro-studio" hidden aria-labelledby="proHeading">
+  <header class="pro-heading">
+    <div>
+      <p class="eyebrow">Ruang susunan</p>
+      <h1 id="proHeading" tabindex="-1">Studio Pro</h1>
+      <p class="pro-intro">Satukan instrumen, susun corak dan dengar semuanya bersama.</p>
+    </div>
+    <button id="proBack" type="button" class="ghost">← Pilih instrumen</button>
+  </header>
+
+  <div class="pro-workspace">
+    <div class="pro-session-heading">
+      <label class="pro-project-name" for="proProjectTitle">Nama projek
+        <input id="proProjectTitle" type="text" maxlength="100" autocomplete="off" spellcheck="false">
+      </label>
+      <div class="pro-session-meta">
+        <span id="proTrackSummary">0 / 8 trek</span>
+        <span id="proSaveStatus" role="status" aria-live="polite">Belum disimpan.</span>
+      </div>
+    </div>
+
+    <div class="pro-transport" role="group" aria-label="Main semula projek">
+      <div class="pro-transport-buttons">
+        <button id="proPlay" type="button" class="primary" aria-keyshortcuts="Space">▶ Main</button>
+        <button id="proPause" type="button" disabled>Ⅱ Jeda</button>
+        <button id="proStop" type="button">■ Henti</button>
+      </div>
+      <label class="pro-control" for="proBpm">BPM
+        <input id="proBpm" type="number" min="40" max="200" step="1" inputmode="numeric" value="100">
+      </label>
+      <div class="pro-time-signature" aria-label="Metrum empat per empat"><strong>4 / 4</strong><span>Metrum</span></div>
+      <label class="pro-check" for="proMetronome"><input id="proMetronome" type="checkbox">Metronom</label>
+      <span id="proTransportState" class="pro-transport-state">Sedia</span>
+      <div class="pro-history" role="group" aria-label="Sejarah suntingan">
+        <button id="proUndo" type="button" aria-keyshortcuts="Control+Z Meta+Z" disabled>↶ Undur</button>
+        <button id="proRedo" type="button" aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z" disabled>↷ Ulang</button>
+      </div>
+    </div>
+
+    <details class="pro-timing-options"><summary>Panjang &amp; ulangan <span id="proTimingMeta" class="pro-timing-meta">8 bar · Ulangan dimatikan</span></summary>
+    <div class="pro-timing" role="group" aria-label="Panjang, ulangan dan kursor">
+      <label class="pro-control" for="proLength">Panjang bar
+        <input id="proLength" type="number" min="4" max="32" step="1" inputmode="numeric" value="8">
+      </label>
+      <label class="pro-check" for="proLoopEnabled"><input id="proLoopEnabled" type="checkbox">Ulang bahagian</label>
+      <label class="pro-control" for="proLoopStart">Mula bar
+        <input id="proLoopStart" type="number" min="1" max="8" step="1" inputmode="numeric" value="1">
+      </label>
+      <label class="pro-control" for="proLoopEnd">Akhir bar
+        <input id="proLoopEnd" type="number" min="1" max="8" step="1" inputmode="numeric" value="8">
+      </label>
+      <div class="pro-cursor-control">
+        <label for="proCursor">Kursor <output id="proPosition" for="proCursor" aria-live="off">01:1:00</output></label>
+        <input id="proCursor" type="range" min="0" max="767" step="1" value="0" aria-valuetext="Bar 1, beat 1, tick 0">
+      </div>
+    </div>
+
+    </details>
+
+    <p id="proStatus" class="pro-status" role="status" aria-live="polite" aria-atomic="true">Tambah trek untuk mula menyusun.</p>
+
+    <div class="pro-tabs" role="tablist" aria-label="Paparan Studio Pro">
+      <button id="proTabArrangement" type="button" role="tab" aria-selected="true" aria-controls="proPanelArrangement" tabindex="0">Susunan</button>
+      <button id="proTabMixer" type="button" role="tab" aria-selected="false" aria-controls="proPanelMixer" tabindex="-1">Mixer</button>
+      <button id="proTabProjects" type="button" role="tab" aria-selected="false" aria-controls="proPanelProjects" tabindex="-1">Projek</button>
+    </div>
+
+    <section id="proPanelArrangement" class="pro-tab-panel" role="tabpanel" aria-labelledby="proTabArrangement" tabindex="0">
+      <div class="pro-arrangement-toolbar">
+        <div><h2>Susunan trek</h2><p class="pro-subtle">Satu projek, sehingga 8 instrumen.</p></div>
+        <div class="pro-add-track">
+          <label class="pro-sr-only" for="proInstrument">Instrumen untuk trek baharu</label>
+          <select id="proInstrument">
+            <option value="xylophone">Xylophone</option>
+            <option value="recorder">Rekoder Soprano</option>
+            <option value="tamborin">Tamborin</option>
+            <option value="kompang">Kompang</option>
+            <option value="snare">Dram Sisi</option>
+            <option value="bass_drum">Dram Bes</option>
+            <option value="cymbals">Simbal</option>
+            <option value="triangle">Segi Tiga</option>
+          </select>
+          <button id="proAddTrack" type="button">＋ Tambah trek</button>
+        </div>
+      </div>
+      <div id="proEmpty" class="pro-empty">
+        <span class="pro-empty-mark" aria-hidden="true">♫</span>
+        <div><h3>Mulakan dengan satu instrumen</h3><p>Pilih instrumen dan tekan <strong>Tambah trek</strong>. Kemudian isi langkah dalam Susunan. Rakaman studio instrumen juga boleh ditambah ke sini.</p></div>
+      </div>
+      <div id="proArrangement" class="pro-arrangement"></div>
+    </section>
+    <section id="proPanelMixer" class="pro-tab-panel" role="tabpanel" aria-labelledby="proTabMixer" tabindex="0" hidden>
+      <div id="proMixer"></div>
+    </section>
+    <section id="proPanelProjects" class="pro-tab-panel" role="tabpanel" aria-labelledby="proTabProjects" tabindex="0" hidden>
+      <div id="proProjects"></div>
+    </section>
+  </div>
+
+  <details class="pro-shortcuts">
+    <summary>Pintasan dan cara guna</summary>
+    <p><kbd>Ruang</kbd> main atau jeda · <kbd>Ctrl / ⌘</kbd> + <kbd>Z</kbd> undur · tambah <kbd>Shift</kbd> untuk ulang. Pintasan tidak mengambil alih medan suntingan atau dialog.</p>
+    <p>Gunakan anak panah pada tab untuk bertukar paparan. Kursor menggunakan bar:beat:tick; 24 tick bersamaan satu beat. Semua bunyi ialah sintesis digital. Simpan sandaran projek sebagai JSON melalui tab Projek.</p>
+  </details>
+
+  <dialog id="proConfirmDialog" aria-labelledby="proConfirmTitle" aria-describedby="proConfirmMessage">
+    <div class="dialog-head"><h2 id="proConfirmTitle">Sahkan perubahan</h2></div>
+    <div class="dialog-body"><p id="proConfirmMessage"></p></div>
+    <div class="dialog-actions">
+      <button id="proConfirmCancel" type="button" autofocus>Batal</button>
+      <button id="proConfirmAccept" type="button" class="primary">Teruskan</button>
+    </div>
+  </dialog>
+</section>

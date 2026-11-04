@@ -1,0 +1,247 @@
+{
+  "method": "Supported CUA cloud Chromium actions and read-only rendered DOM measurements",
+  "source": "Final self-contained index.html; responsive tests used this same HTML as an iframe srcdoc in an isolated preview fixture",
+  "viewport_checks": [
+    {
+      "language": "ms",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Susunan / Arrangement",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Mixer",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Projek / Projects",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Susunan / Arrangement",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Mixer",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Projek / Projects",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Susunan / Arrangement",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Mixer",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Projek / Projects",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Susunan / Arrangement",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Mixer",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "ms",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Projek / Projects",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Susunan / Arrangement",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Mixer",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 320,
+      "css_viewport_width": 310,
+      "panel": "Projek / Projects",
+      "document_scroll_width": 310,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Susunan / Arrangement",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Mixer",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 390,
+      "css_viewport_width": 380,
+      "panel": "Projek / Projects",
+      "document_scroll_width": 380,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Susunan / Arrangement",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Mixer",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 850,
+      "css_viewport_width": 840,
+      "panel": "Projek / Projects",
+      "document_scroll_width": 840,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Susunan / Arrangement",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Mixer",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    },
+    {
+      "language": "en",
+      "frame_width": 1440,
+      "css_viewport_width": 1430,
+      "panel": "Projek / Projects",
+      "document_scroll_width": 1430,
+      "horizontal_page_overflow": false
+    }
+  ],
+  "display_checks": {
+    "dark_modes_verified": [
+      "protanopia",
+      "deuteranopia",
+      "tritanopia",
+      "contrast"
+    ],
+    "theme_and_vision_reload": {
+      "before": {
+        "theme": "dark",
+        "vision": "deuteranopia"
+      },
+      "after": {
+        "theme": "dark",
+        "vision": "deuteranopia"
+      }
+    },
+    "combined_language_theme_vision_reload": {
+      "before": {
+        "language": "en",
+        "theme": "dark",
+        "vision": "deuteranopia"
+      },
+      "after": {
+        "language": "en",
+        "theme": "dark",
+        "vision": "deuteranopia"
+      }
+    }
+  },
+  "functional_checks": [
+    "Open Pro and create pitched/percussion tracks; add notes/actions with exact inspector visible",
+    "Synchronized playback, pause and native keyboard loop end edit; one-bar loop paused at tick31, within0..96",
+    "Mixer Reverb100% and Delay1% persisted across track selection; Bisu/Solo pressed states change",
+    "Rename, save, duplicate and reload locally saved projects",
+    "Send legacy Xylophone take into new project with source BPM80 and13 sounding events",
+    "Final Pro-to-pitched route has visible Xylophone, correct title and Studio aria-pressed=true",
+    "Final Game route exposes unchanged setup and Start controls",
+    "Display dialog focus, close and all color-vision selections are operable; theme/vision reload persists",
+    "Concurrent71e7b09 BM/English feature preserved; all24 panel/language/width combinations verified after dictionary integration",
+    "English Pro labels, exact event tooltips and Projects panel labels verified in the real browser; custom titles remain literal"
+  ],
+  "limits": [
+    "No physical speaker listening, microphone, acoustic latency or color-vision user study",
+    "Browser export/import byte correctness, cross-tab conflicts, quota and corrupt storage are covered by actual-module Node fixtures rather than browser download or true multi-process races",
+    "Frame width includes its scrollbar; exact measured CSS viewport widths are recorded above",
+    "Browser artifacts from an earlier preview revision are not asserted to represent the final source; final-source route/display/viewport behavior was rechecked"
+  ],
+  "concurrent_ui_commit": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c"
+}

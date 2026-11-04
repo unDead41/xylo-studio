@@ -42,6 +42,16 @@ UI changes affect the pitched, percussion, Game and instrument-navigation adapte
 
 This task's deliverable is branch ui with accepted VERSION v1.04.0 and an Unreleased candidate record. See `docs/handoffs/ui/LATEST.md` for six-worker provenance, actual test counts, source hashes, browser coverage and limits.
 
+## Studio Pro candidate — ui, 4 November 2026
+
+A separate Pro workspace combines up to eight pitched/unpitched tracks using a validated PPQ24/4-4 project schema, bounded 4–32-bar arrangements, independent edited events and unchanged source-take evidence. A one-bar editor, exact event inspector, quantization/transpose, mixer/effects, transport/loop/metronome, undo/redo and local project management are functional. All eight legacy studios expose copy-only getTake adapters and send actions. Ten songs, instrument ranges and Game rules remain intact.
+
+Module sources are maintained under studio-pro/ and deterministically embedded into index.html with scripts/embed-studio-pro.cjs. There is still no external runtime dependency, account or backend. CI verifies embedded-source consistency and actual-source regressions. JSON/CSV remain the digital export contract.
+
+Global display preferences add system/light/dark themes and independent protanopia/deuteranopia/tritanopia/high-contrast modes with patterns, labels and state outlines. Existing tokens remain the light owner; display.css owns semantic dark/vision overrides. Header Paparan remains available across chooser, instruments, Game and Pro.
+
+Six simultaneous workers implemented bounded model/audio/arranger/mixer/project/shell modules; coordinator owned legacy integration and display preferences. Subsequent independent reviews fixed route visibility, primary-text contrast, hidden import feedback and sustained recorder mute/solo carries. The candidate remains ui only with accepted VERSION v1.04.0. See docs/handoffs/ui/STUDIO_PRO.md for actual verification and source identity.
+
 ## BM/BI presentation — 4 November 2026
 
 The inline `studio-i18n` owner precedes the instrument controllers. Its exact phrase pairs and anchored parameter templates cover the chooser, eight studios, Game, dialogs, help, validation and accessible attributes. A bounded cache and changed-subtree observer avoid whole-document work on each clock update. Language refresh changes text nodes and display attributes only; it calls no transport/navigation/render action. The separate `e-instru-language` preference defaults to `ms` and accepts `ms`/`en`, with storage-denial and cross-tab fallback handling.

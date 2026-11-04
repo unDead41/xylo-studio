@@ -1,0 +1,57 @@
+{
+  "base_commit": "27df2fadadf66cee3f2be26aeafff765e33e515e",
+  "branch": "ui",
+  "accepted_version": "v1.04.0",
+  "commands": [
+    {
+      "command": "node scripts/embed-studio-pro.cjs --check",
+      "exit_code": 0
+    },
+    {
+      "command": "node --test tests/*.test.cjs",
+      "exit_code": 0,
+      "passed": 332,
+      "failed": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "sha256": {
+    "index.html": "ce98ab98c33cb661ba28dc7bd2da412f703e0db46eb1b9272b79d947a26c79a9",
+    "studio-pro/arranger.css": "d4ff62c7288314266275e81ab14854bbf4b53b577b8fecd7e790c3fc9998f8ea",
+    "studio-pro/arranger.js": "d0b77111ddb7fd4e023cc6edae0855a818f18aa4780475b02dcc017abee52a18",
+    "studio-pro/audio.js": "e1305a151a0e1f5f7df9d48d8486c6ef956d7f5178429468451235db6ddb5f06",
+    "studio-pro/core.js": "2eb9e439eec23bc24e41229ec7d143df95214c75a1eb80c47d15db35bbab9894",
+    "studio-pro/display.css": "4f4c98e400d391fdd672adc11c4b53cccdd90d515abc215162739a962a2a65dd",
+    "studio-pro/display.html": "19aa85d12e65dca388d23951bb3656c771fb136296990e6e51036abc37f2cb5c",
+    "studio-pro/display.js": "b61a18b77841235071718ccbd082bc34192f9b9190e9b3da7191e38b56b0405c",
+    "studio-pro/i18n.json": "7943d669edd430e83f232bc000a7252b2294de117ed9ee363f0aca2a9e39f661",
+    "studio-pro/mixer.css": "70446983257c5ae1dbcccb372aef526a1a2ce6219233ae6551fa0dea2cd35c28",
+    "studio-pro/mixer.js": "c274eaa47122df774b5cdd7cd4db32ace099a7d892ed3b3398ca2164fc7883ab",
+    "studio-pro/projects.css": "07dd949127a4527cc5d6ee76604e36b51353c138c17cb8ebcf410257858231d1",
+    "studio-pro/projects.js": "74f08015f04301c4e8b08d56075143e823ec585b2d837e64e42f1f9703787054",
+    "studio-pro/shell.css": "3705c53d391e98ddb35111452a0b90e113286e0c27cc2c790dc16dbf53078838",
+    "studio-pro/shell.html": "725afa0a9f17abb7edb8c5249ea4054dce33f34c34b118fc28a990a6fe70bf61",
+    "studio-pro/shell.js": "4002ddbee23faedbc0fb0b95a703853c0c07b8ae38a3ec1e9d8079e30ff30fc8"
+  },
+  "strict_static_audit": {
+    "baseline_errors": 106,
+    "candidate_errors": 140,
+    "unresolved_owners": 0,
+    "rules": [
+      "affordance.actionless-button",
+      "form.textarea-resize-missing"
+    ],
+    "classification": "Known scanner limitations; native runtime bindings and existing global resize:none owner. Not a clean strict audit."
+  },
+  "concurrent_ui_commit": "71e7b09a9b10e26cbc39138c298fb1ad8ad8ca8c",
+  "local_pro_commit": "3327473",
+  "localization": {
+    "exact_phrase_pairs": 1394,
+    "anchored_templates": 137,
+    "extension_entries": 399,
+    "extension_templates": 48
+  }
+}
