@@ -10,7 +10,7 @@ Mengubah fail dalam repositori sahaja tidak menerbitkan templat ke projek Supaba
 
 Projek baharu **e-Instru Studio** (`ahvyieyojqciohdogsqc`, Singapore) telah diwujudkan. Pengesahan e-mel, secure email change, secure password change dan keperluan kata laluan semasa telah disimpan; panjang minimum ialah lapan aksara. Ketujuh-tujuh suis notifikasi keselamatan telah diaktifkan dan disimpan pada Dashboard.
 
-SMTP tersuai masih belum dikonfigurasi. Dashboard memaparkan “Set up custom SMTP to edit templates”, maka 13 HTML berjenama dalam repositori belum diterbitkan; hos masih menggunakan templat lalai. Tiada e-mel sebenar dihantar atau disahkan sampai dalam tugasan ini. Status ini berbeza daripada kejayaan ujian kod dan pengaktifan suis notifikasi.
+SMTP tersuai kini dikesan aktif dan telah disimpan pada projek. Semua 13 subjek serta HTML berjenama telah disimpan melalui Dashboard; setiap kandungan HTML dibaca semula selepas halaman dimuatkan semula dan dipadankan tepat dengan fail sumber. Sesetengah ruangan subjek dilindungi dalam paparan automasi, maka subjek direkod sebagai ditaip/disimpan, bukan semuanya dibaca semula secara verbatim. Tiada kelayakan SMTP dibaca atau dimasukkan dalam repositori. Tiada e-mel sebenar dihantar atau disahkan sampai dalam tugasan ini; pengesahan kandungan hos berbeza daripada penghantaran ke peti masuk.
 
 Site URL ialah `https://undead41.github.io/xylo-studio/`. Enam redirect URL tepat telah ditambah: Site URL, URL `index.html`, serta Site URL dengan `?auth_flow=signup`, `?auth_flow=recovery`, `?auth_flow=magiclink` dan `?auth_flow=email_change`. Tiada wildcard hos lain dibenarkan. Aplikasi mengendalikan callback pada akar laman dan membuang kelayakan callback daripada sejarah URL.
 
