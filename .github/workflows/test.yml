@@ -10,4 +10,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/*.test.cjs
+      - run: node scripts/build-auth.mjs --check
+      - run: node supabase/templates/build-config.mjs --check
+      - run: node --test tests/*.test.cjs tests/auth/*.test.cjs tests/auth-providers/*.test.cjs

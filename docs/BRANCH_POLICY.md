@@ -15,6 +15,8 @@ Keputusan Ijamm pada 2 November 2026. Nama branch tepat ialah nama dalam jadual.
 | `instrument-kompang` | e-instru studio - instrument-kompang | Studio Kompang menggunakan asas Tamborin sebenar; permintaan terkini 4 November 2026 membenarkan integrasi hasil diuji ke main repositori digital ini. |
 | `instrument-tamborin` | e-instru studio - instrument-tamborin | Branch tambahan dibenarkan Ijamm pada 4 November 2026; Studio Tamborin dan asas perkusi. Asas ui terkini, push branch ini sahaja. |
 | `instrument-pancaragam` | e-instru studio - instrument-pancaragam | Susulan instrumen sekolah: Dram Sisi, Dram Bes, Simbal dan Segi Tiga; worktree sendiri daripada main. Kekalkan perubahan ui/layout serentak ketika integrasi. |
+| `auth-providers` | e-instru studio - auth-providers | Susulan Google/Gmail dan SMS OTP menggunakan sumber akaun sebenar; satu klien/projek Supabase, push branch pekerja ini sahaja. |
+| `auth-supabase` | e-instru studio - auth-supabase | Akaun Supabase, profil RLS dan 13 sumber templat e-mel; cabang khusus daripada main c0ba48bb9c35244354779cc227ecb7c999bff5dd. Perubahan tugasan ini terhad pada cabang ini. |
 
 `main` bukan chat pekerja. Setiap chat semak branch/ref, working tree, SHA asas, SOR dan handoff sebelum bekerja. Gunakan folder sendiri. Jangan menukar checkout chat lain.
 
@@ -26,4 +28,6 @@ Versi projek dalam `VERSION` menggunakan `vX.XX.X`, diselaraskan dengan changelo
 
 Semua branch lama dalam migrasi dipelihara sebagai parent sejarah main sebelum nama lamanya dihentikan. Fail sejarah ialah bukti lama, bukan keputusan semasa.
 
-Pengecualian tugasan Kompang (4 November 2026): arahan langsung terkini Ijamm membenarkan push hasil gabungan yang diuji ke `main` dalam `unDead41/xylo-studio`. Tiada branch `main-digitalized` dalam repositori ini. Branch ui, instrument-tamborin, share dan tutorial tidak ditulis oleh tugasan ini. Tiada perubahan tetapan Pages diperlukan.
+Pengecualian tugasan Kompang (4 November 2026): arahan langsung bagi tugasan instrumen tersebut membenarkan push hasil gabungannya yang diuji ke `main` dalam `unDead41/xylo-studio`. Kebenaran sejarah itu tidak meliputi push main bagi ciri baharu. Tiada branch `main-digitalized` dalam repositori ini. Branch ui, instrument-tamborin, share dan tutorial tidak ditulis oleh tugasan tersebut. Tiada perubahan tetapan Pages diperlukan.
+
+Pengecualian tugasan akaun/e-mel Supabase: gunakan `auth-supabase` daripada main SHA `c0ba48bb9c35244354779cc227ecb7c999bff5dd`, dengan folder kerja tersendiri. Projek Supabase khusus `ahvyieyojqciohdogsqc` membekalkan Auth dan profil RLS; Studio/Game tetamu dan rakaman tempatan dikekalkan. Kebenaran tugasan ini tidak meliputi push main, cabang pekerja lain, share atau tutorial. Promosi ke main memerlukan arahan langsung baharu selepas calon gabungan diuji. Versi diterima kekal `v1.04.0`; Pages kekal main/root. Sumber bagi semua 13 templat e-mel disemak berasingan daripada status aktivasi hos dan penghantaran sebenar; custom SMTP belum disediakan.

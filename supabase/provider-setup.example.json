@@ -1,0 +1,22 @@
+{
+  "site_url": "https://undead41.github.io/xylo-studio/",
+  "uri_allow_list": "https://undead41.github.io/xylo-studio/,https://undead41.github.io/xylo-studio/index.html",
+  "external_email_enabled": true,
+  "mailer_autoconfirm": false,
+  "external_google_enabled": false,
+  "external_google_client_id": "<GOOGLE_WEB_CLIENT_ID>",
+  "external_google_secret": "<GOOGLE_CLIENT_SECRET>",
+  "external_phone_enabled": false,
+  "sms_autoconfirm": false,
+  "sms_provider": "twilio",
+  "sms_twilio_account_sid": "<TWILIO_ACCOUNT_SID>",
+  "sms_twilio_auth_token": "<TWILIO_AUTH_TOKEN>",
+  "sms_twilio_message_service_sid": "<TWILIO_MESSAGE_SERVICE_SID>",
+  "sms_template": "RM 0.00 e-Instru Studio: Kod pengesahan anda ialah {{ .Code }}.",
+  "smtp_admin_email": "<VERIFIED_SENDER_EMAIL>",
+  "smtp_sender_name": "e-Instru Studio",
+  "smtp_host": "<SMTP_HOST>",
+  "smtp_port": "<SMTP_PORT>",
+  "smtp_user": "<SMTP_USERNAME>",
+  "smtp_pass": "<SMTP_PASSWORD>"
+}

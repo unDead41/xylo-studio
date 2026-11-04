@@ -2,7 +2,7 @@
 
 Version 1.0, approved branch workflow 2 November 2026. Owner: Ijamm.
 
-Self-contained BM digital instrument, recorder and four-lane rhythm game in index.html. No build, external assets, backend or companion runtime is required. Digital exports: JSON full data and CSV timing.
+Self-contained BM digital instrument, recorder and four-lane rhythm game in index.html. Guest Studio and Game need no build, external assets or backend connection. Optional Supabase accounts use a network service and a pinned vendored SDK bundled inline in the same HTML; there is no runtime CDN dependency. Digital exports: JSON full data and CSV timing.
 
 Ten arrangements have short (10–15s) and long versions; exact pitches/onsets/rests are retained. Video-title provenance is labelled, with unverified note/timestamp transcription clearly stated. Eight manual keys A S D F G H J K; game lanes A S D F. Score limits: 512 events and 180s. MIDI 0 means rest.
 
@@ -33,3 +33,23 @@ Percussion JSON schema e-instru-percussion-take/v1 and per-instrument e-instru-p
 The same unpitched core and Studio factory now support `snare` (hit/rim), `bass_drum` (hit/soft), `cymbals` (crash/soft) and `triangle` (open/muted). `school-band-ui` constructs these four thin configuration adapters once. Each supplies its own SVG, labels, patterns, synthesis function and storage identity. `instrument-navigation` incorporates the resulting route descriptors; the pitched registry and Game remain unchanged.
 
 The shared factory accepts `voiceTailMs`, defaulting to the previous 650ms behavior. The school instruments use 1000ms so the final long cymbal/triangle strike can decay before normal completion. Stop and lifecycle cancellation remain immediate. Muted triangle is an independent short strike, not a global damping command. See `docs/handoffs/instrument-pancaragam/LATEST.md` for source identity and actual checks.
+
+## Optional Supabase account extension — auth-supabase
+
+The dedicated task branch starts at main `c0ba48bb9c35244354779cc227ecb7c999bff5dd`. It adds email/password registration, sign in/out, email confirmation, forgot password and password change while retaining guest/offline access to all eight instruments, ten songs and Game. Authentication state does not alter the existing recording schemas, local storage identities, raw evidence, export-password gate or Game rules. It does not introduce cloud recording synchronization. Accepted VERSION remains `v1.04.0`.
+
+The new Supabase project is `ahvyieyojqciohdogsqc`, Singapore, organization Norhizam. Database scope is a user-owned `profiles` table protected by Row Level Security; passwords and sessions are managed by Supabase Auth. No new table stores takes, scores, Game results or audio. The browser uses only the project URL and public key. Never ship or log service-role keys, SMTP passwords, management tokens or callback credentials.
+
+Runtime delivery remains one self-contained `index.html`. The vendored `supabase-js` SDK is pinned to `2.118.0` and bundled inline, retaining its provenance and license. Account operations require network access and HTTPS hosting. Verification/recovery callbacks use the allowed root `https://undead41.github.io/xylo-studio/`; file downloads remain usable as guest instruments but are not the account callback destination. Callback handling validates the session, explains invalid/expired links and removes credentials from the URL.
+
+Thirteen Malay email templates and their field/subject manifest are source-controlled under `supabase/templates`: six authentication templates and seven security notifications. Source validation and a generated configuration payload do not prove hosted activation or delivery. Custom SMTP has not been provided for this project's public email delivery or custom-template activation. Report that setup gap explicitly until completed and verified. Notification templates for phone, identity and MFA events do not expand the implemented UI beyond email/password accounts.
+
+Test the actual inline account source, callback and session handling, profile isolation and offline guest behavior. Keep provider/network fixtures distinct from live hosted tests and inbox delivery evidence. The task may update `auth-supabase`; promotion to main requires a new explicit user request. Share/tutorial and the current Pages settings remain unchanged.
+
+## Google and SMS provider extension — auth-providers
+
+The existing account dialog now hosts Google OAuth and phone SMS OTP alongside email/password. All methods share the same Supabase client and `e-instru-auth-v1` session storage; the base account service remains the only callback-exchange owner. Public `/auth/v1/settings` flags gate provider availability, with disabled methods on missing/failed configuration. Runtime settings checks use only the publishable key and the dedicated project above.
+
+An independent provider service owns normalized phone/challenge state, six-digit OTP verification, persistent resend cooldown and cancellation of stale UI responses. It does not retain tokens or clear music data. A verified SDK session must exist before the interface reports success. Bootstrap and dialog share busy state so email, OAuth and OTP operations cannot overlap. Phone-only accounts display their phone identity and confirmation state; they are not automatically merged with unrelated email/Google accounts.
+
+Google OAuth credentials, SMTP and SMS-provider credentials remain hosted setup requirements. The provider worker branch preserves the actual concurrent email source and records its source snapshot plus combined verification in `docs/handoffs/auth-providers/LATEST.md`. Main promotion requires a direct request; no new release number or Pages change is implied.

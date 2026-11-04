@@ -31,7 +31,7 @@ omitted:
 
 e-Instru Studio is a BM digital instrument and rhythm game for mouse, keyboard and touch. The reference is the existing raised, rainbow xylophone: a tangible classroom instrument at the center of a calm studio. Preserve the light layout, clear tempo controls, synchronized event table/timeline and separate Studio/Game navigation. The new first screen selects an instrument; it is a functional entry to the same studio.
 
-The runtime stays in one downloadable index.html with no external fonts/assets/libraries. Inline core, game rules, Studio UI and game UI remain separately identifiable for tests. Keep raw input evidence distinct from edited score. Audio and microphone access follow a user gesture; optional microphone processing remains local and xylophone-only.
+The runtime stays in one downloadable index.html with local fonts, inline assets and no runtime CDN requests. The optional account feature bundles the pinned vendored `supabase-js` 2.118.0 SDK inline; only account operations require the Supabase network service. Guest Studio and Game remain available offline. Inline core, game rules, Studio UI and game UI remain separately identifiable for tests. Keep raw input evidence distinct from edited score. Audio and microphone access follow a user gesture; optional microphone processing remains local and xylophone-only.
 
 Source of requirements: Ijamm's digital Studio/game requests, the 4 November recorder/rebrand request and the approved branch workflow. Architecture decisions match docs/SOR.md. index.html is shared across worker roles; the reviewed ui implementation is promoted to main as v1.04.0 under Ijamm's explicit instruction.
 
@@ -86,3 +86,13 @@ Reuse the same canonical shell as the other three studios, with the percussion p
 Dram Sisi uses a teal cylindrical shell, steel rim, tension rods and two drumsticks. Dram Bes has a broad upright skin, deep shell, steel rods and a padded mallet. Simbal shows two grooved brass plates with leather handles. Segi Tiga shows a suspended open steel frame and beater. Chooser previews reuse these actual vector materials with separate paint IDs; there are no external assets.
 
 The new studios use the existing Studio heading and main/inspector arrangement, plus the shared percussion transport, settings, trace and table. Two focusable SVG regions and F/J buttons distinguish the actions using text, outline and color. Button labels wrap on narrow screens; reduced motion disables the brief strike translation. Long metal decays are bounded and cancelled by Stop/navigation. No continuous decorative animation is added.
+
+## Optional account extension
+
+Account controls use the existing teal palette, local fonts, rounded native controls and focus treatment. Keep the instrument chooser directly usable by guests. Account forms cover sign up, sign in, email confirmation, password recovery and password change without replacing the studio workspace or its recording inspector. A pending network action has a clear status; errors remain readable beside the relevant form. Password fields use appropriate autocomplete and do not display credentials in status text.
+
+Account dialogs must respect existing shortcut and audio lifecycle boundaries: typing cannot play notes, opening or closing a form cannot manufacture captured events, and account transitions cannot erase local takes or Game records. Account/profile state has its own owner; it does not reuse the local export-password gate. On narrow screens, the account controls and forms fit the document width and preserve native keyboard focus and dismissal.
+
+Email templates in `supabase/templates` reuse the e-Instru name, teal action color and Malay wording in email-compatible HTML. There are thirteen source templates, covering six authentication messages and seven security notifications. Their presence in Git does not establish hosted activation or delivery: custom SMTP remains unconfigured for the new project. The application must not present SMTP setup or template-source validation as a delivered email.
+
+The provider follow-up keeps one account control and native dialog. A full-width Google action and a bordered phone disclosure sit before the email form on Log masuk/Daftar views. They reuse the teal/navy palette, local fonts and existing focus treatment. OTP inputs use 16px text, 44px controls, clear labels and live status/error copy. The account form remains available below; account management and recovery hide the provider section.

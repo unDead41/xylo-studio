@@ -1,0 +1,20 @@
+{
+  "projectRef": "ahvyieyojqciohdogsqc",
+  "appUrl": "https://undead41.github.io/xylo-studio/",
+  "checkedAt": "2026-11-04T05:41:13.933Z",
+  "providers": {
+    "email": true,
+    "google": false,
+    "phone": false
+  },
+  "emailConfirmationRequired": true,
+  "phoneConfirmationRequired": true,
+  "signupsEnabled": true,
+  "verification": {
+    "publicSettingsRead": true,
+    "emailDelivery": "untested",
+    "smsDelivery": "untested",
+    "googleSignIn": "untested",
+    "endToEndVerified": false
+  }
+}

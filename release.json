@@ -2,22 +2,22 @@
   "version": "v1.04.0",
   "repository": "unDead41/xylo-studio",
   "date": "2026-11-04",
-  "status": "digital_release",
+  "status": "worker_auth_providers",
   "publishing": {
     "branch": "main",
     "directory": "/"
   },
-  "index_sha256": "14b40fd23038ae64008755fee015e64740cb0c8945f551e4d5541503963cda7b",
+  "index_sha256": "6c76869293ff63d0cd6c8c1a91decb46c812425c06fa197d252653bc6253e718",
   "software_tests": {
-    "command": "node --test tests/*.test.cjs",
-    "passed": 180,
+    "command": "node --test tests/*.test.cjs tests/auth/*.test.cjs tests/auth-providers/*.test.cjs",
+    "passed": 281,
     "failed": 0
   },
-  "source_base": "e84a0ca767858582d3faf240c62376b6e2574419",
+  "source_base": "c0ba48bb9c35244354779cc227ecb7c999bff5dd",
   "integrated_ui_sha": "115e54d87b10804ae6f94ff0efe895099d035e20",
   "integrated_tamborin_sha": "7cf77b7e275b94717748cb80aed73f6680daa59e",
   "previous_release_audit": "docs/audits/main/LATEST.md",
-  "integration_handoff": "docs/handoffs/instrument-pancaragam/LATEST.md",
+  "integration_handoff": "docs/handoffs/auth-providers/LATEST.md",
   "previous_browser_verification": {
     "commands": [
       "node tests/browser-layout.cjs",
@@ -42,10 +42,18 @@
     "triangle"
   ],
   "browser_tests": {
-    "method": "CUA cloud Chromium through managed Sites preview; manual UI workflows",
-    "evidence": "docs/handoffs/instrument-pancaragam/browser-verification.json",
-    "scope": "All four new instrument routes and two-action captures, SVG pointer hit testing, examples without capture, tempo/raw-time separation, Reset, reload retention, Game return and 390/320px iframe layout checks. No physical device or acoustic listening measurement."
+    "status": "not_run_for_auth_providers",
+    "scope": "Connected extension and cloud browsers could not reach the primary-runtime localhost preview. Historical instrument/browser evidence remains valid only for its recorded source.",
+    "previous_evidence": "docs/handoffs/instrument-pancaragam/browser-verification.json"
   },
   "previous_integration_handoff": "docs/handoffs/ui/LATEST.md",
-  "integrated_ui_layout_sha": "e84a0ca767858582d3faf240c62376b6e2574419"
+  "integrated_ui_layout_sha": "e84a0ca767858582d3faf240c62376b6e2574419",
+  "authentication": {
+    "project_ref": "ahvyieyojqciohdogsqc",
+    "email_enabled": true,
+    "google_enabled": false,
+    "phone_enabled": false,
+    "custom_smtp_configured": false,
+    "provider_e2e_verified": false
+  }
 }
