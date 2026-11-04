@@ -1,58 +1,60 @@
-# ui handoff — e-Instru Studio / Rekoder Soprano
+# UI handoff — shared four-instrument studio layout
 
-Date: 4 November 2026 (Malaysia). Status: implemented and software-verified; ui candidate only.
+Date: 4 November 2026 (Malaysia). Status: implemented and verified for main under Ijamm's direct-main instruction. Accepted VERSION remains v1.04.0.
 
-## Source identity
+## Source identity and branch review
 
 - Repository: https://github.com/unDead41/xylo-studio
-- Work branch: ui; isolated worktree: /workspace/scratch/977575ac93c3/e-instru-ui.
-- Base SHA / original origin/ui and origin/main: 46338fe646408c758232eec9ba7b5f876ff1f9e4.
-- Implementation HEAD SHA: 41d0d211b40311a3cbdb69406eef299e7befca2c.
-- Implementation tree SHA: 23301897e8998ee1cb615f50d2fa1101af35eab6.
-- Tested index.html SHA-256: ce822a38ff6cad0254497e4107068e018b28ca70ac6c09d2fa308574cb451d84.
-- This handoff and the completed plan are carried by the following documentation-only delivery commit. Resolve the delivery wrapper with git rev-parse origin/ui; its parent is the implementation SHA above. Product code/test/screenshot bytes are identical to the implementation commit.
-- Working tree was clean at base. Fresh remote branch inspection and fetch showed architecture/audit/gameplay/main/music/tutorial/ui still at the base SHA before delivery; share remained dddd0765b8b11fa83967d3d4428ffb61297a4141. No other branch's index.html changes were waiting to integrate.
-- VERSION remains v1.03.2 because branch policy increments only accepted releases. Changelog and release.json label this candidate Unreleased; no new tag was created.
+- Isolated worktree: /workspace/scratch/977575ac93c3/e-instru-layout, created clean and detached from freshly fetched origin/main.
+- Base SHA: 3a2bc106c8885b81334e1dd34ce5810f05dfad8e.
+- Implementation HEAD SHA: 65df0f295dabb8155c623d49eb1d24178376042d.
+- Implementation tree SHA: 8d6b123e572d8fe43dcf831596b4dab8a22a05e2.
+- Tested index.html SHA-256: 9fa02ee7cbd6b5a73b9ae6c5bb1129da184c211631ec5fd749d49f5f5b67e6c3.
+- This handoff is a documentation-only delivery wrapper whose parent is the implementation HEAD above. Resolve its final SHA with git rev-parse origin/main. Runtime, tests, verification report and screenshots are identical to the implementation commit.
+- Remote main and instrument-kompang were at the base; instrument-tamborin was 7cf77b7e275b94717748cb80aed73f6680daa59e; ui was 115e54d87b10804ae6f94ff0efe895099d035e20. Existing independent worktrees were left intact. The latest main source already included both percussion studios and the accepted recorder fixes; these changes were read before editing shared index.html.
+- AGENTS.md, docs/SOR.md, docs/BRANCH_POLICY.md, README.md, DESIGN.md, UX-CONTRACT.md, VERSION, release.json, relevant handoffs and actual source/tests were reviewed. No other worker branch, share/tutorial snapshot or Pages setting is written by this task. Main updates use a fast-forward with the expected base SHA; no force push.
 
-## Implemented behavior
+## Result
 
-- Active branding is e-Instru Studio, preserving repository name, URL and compatibility API/schema/storage identifiers.
-- Every load starts at Pilih instrumen anda. Both choices open a real instrument. Tukar instrumen safely stops transport and preserves independent takes, lastCustom and in-session undo history; reload retains takes/edits.
-- Recorder uses a sculpted inline SVG with separate rear T and front 1–7 holes, paired holes 6/7, labelled open/closed/vented states, and raised playable pads. Desktop has eight pads in a row; phone has two rows of four. The shared Studio grid now constrains its main column so long timelines cannot widen the phone page.
-- Basic labels C–C′ sound C5–C6, MIDI 72–84. Baroque data is transcribed from Yamaha's primary chart; physical soprano range is converted from AULOS's manufacturer register. See ../../RECORDER.md for source links and complete mapping.
-- Recorder timbre uses fundamental plus second/third harmonics, held sustain and release envelope. All pointer/key/focus/visibility/view/audio-stop boundaries cancel held/pending voices. The existing scheduler handles recorder gate duration and live tempo retiming.
-- The 10 songs, long/short versions, metronome, recording, editing, timeline and exports share the original owners. Original_midi/provenance remain intact; loading recorder catalog arrangements explicitly shows +12-semitone transposition. In-range extension pitches get extra pads. Long Are You Sleeping? retains below-range G4 and blocks recorder playback with an explanation; audition also explains the unsupported note.
-- Recorder captures instrument_id, gate_tick, raw_duration_ms and release_ms additively. Raw onset/release evidence is not rewritten by editing, quantization or tempo. Legacy takes without instrument metadata read as xylophone. JSON/CSV carry the new fields.
-- Xylophone synthesis and game rules/audio remain unchanged. The optional local microphone detector is explicitly xylophone-only and disabled for recorder.
+Tamborin and Kompang now use the same studio heading, Tukar instrumen control, workspace grid, instrument panel, transport, status strip, settings row and inspector components as Xylophone/Recorder. Their raised action pads sit with the actual playable SVG in a pale inset stage. The original SVGs, disjoint Kompang hit regions and shortcuts are retained.
+
+Rakam, Main rakaman and Henti are together below the playing surface. Tempo, metronome and Reset follow them. Main contoh belongs to the pattern panel. Jejak rentak and a visible Data ketukan table follow the patterns, without an extra disclosure step for editing. The inspector contains take name, counts/duration/BPM, capture guidance, stacked JSON/CSV exports and optional import. Technique and digital-synthesis guidance remain accessible in a native disclosure below the pads. On phones, the inspector follows the main area.
+
+The ten inline runtime scripts and both physical instrument SVGs are byte-identical to the base. There are no changes to capture, raw timestamps, schemas, storage keys, audio, scheduler, catalog or game rules. The update retires the separate percussion layout CSS owners instead of duplicating the studio controller.
 
 ## Changed files
 
-| Area | Files |
-| --- | --- |
-| Runtime | index.html |
-| Version/candidate status | CHANGELOG.md, release.json (VERSION unchanged) |
-| Active branding/context | AGENTS.md, README.md, SETUP.md, DESIGN.md, UX-CONTRACT.md, docs/SOR.md, docs/BRANCH_POLICY.md, docs/BRANCHES.json |
-| Instrument evidence | docs/RECORDER.md |
-| Regression/browser checks | tests/recorder.test.cjs, tests/browser-recorder.cjs, tests/helpers/studio.cjs |
-| Ownership/config/plan | premium-ui.json, docs/superpowers/plans/2026-11-04-recorder.md |
-| Verification evidence | docs/handoffs/ui/node-tests.txt, static-audit.json, STATIC_REVIEW.md, screenshots/browser-results.json |
-| Actual-code screenshots | screenshots/chooser-desktop.png, chooser-phone.png, recorder-desktop.png, recorder-phone.png, recorder-phone-full.png, xylophone-desktop.png |
-| Delivery handoff | docs/handoffs/ui/LATEST.md |
+- index.html — both percussion view structures and surface styles; canonical classes own shared layout.
+- tests/browser-layout.cjs — real-browser comparison of four studios and six viewport widths, plus keyboard/touch/guide/reduced-motion checks.
+- tests/browser-kompang.cjs and tests/browser-tamborin.cjs — edit the now-visible data table directly.
+- tests/kompang-markup.test.cjs — expect the concise Kompang instrument heading.
+- DESIGN.md, UX-CONTRACT.md, docs/SOR.md and README.md — shared layout and interaction contract.
+- CHANGELOG.md and release.json — accepted version unchanged; current source/test evidence.
+- docs/handoffs/ui-layout/browser-verification.json — all actual browser results, geometry, source hashes, earlier attempt notes and limits.
+- docs/handoffs/ui-layout/screenshots/{tamborin,kompang}-{desktop,phone}-full.png — four real screenshots.
+- docs/handoffs/ui/LATEST.md — this handoff.
 
-## Actual validation
+## Actual verification
 
-- Baseline: node --test tests/*.test.cjs — 64/64 passed before changes.
-- New recorder tests first failed for missing registry, metadata, duration evidence, range handling and chooser; then passed. The overlapping-held-gate score-end regression also failed before its fix.
-- Final: node --test tests/*.test.cjs — **74 passed, 0 failed**, including unchanged xylophone/catalog/game tests. Full host output: node-tests.txt.
-- Real browser: node tests/browser-recorder.cjs with Playwright and Chromium 133.0.6943.0 — **15 workflow groups passed**, 0 page errors. Runs its own temporary localhost HTTP server and an offline file:// check. Browser prerequisites are test-only; production remains one HTML file.
-- Browser coverage: chooser/branding/gesture-only startup; actual Web Audio RMS while holding >1.2s and silence after release; keyboard recording; pitch/gate editing; live tempo/metronome; JSON/CSV and downloaded CSV; switching/reload; Bb5 extension and G4 refusal; both catalog lengths; synchronized F fingering; pointer cancellation; window blur; game return; legacy v1 raw timing; touch hold/release in a 390px phone context; reduced motion; offline standalone file.
-- Screenshots: desktop 1440×1000; phone viewport 390×844 plus full-page captures. They are rendered from the tested source, not image mockups.
-- DESIGN.md lint: npx --yes -p @google/design.md designmd lint DESIGN.md — **0 errors, 0 warnings**.
-- git diff --check — passed.
-- Static premium audit: completed with **exit 1**, 36 actionless-button flags, 0 unresolved ownership findings. The scanner does not infer the existing inline addEventListener bindings; reviewed false positives and their runtime evidence are documented in STATIC_REVIEW.md. Do not describe this static audit as passing.
+- node --test tests/*.test.cjs: 154 passed, 0 failed, 0 skipped on final source.
+- node tests/browser-layout.cjs: 8 groups passed. All four studios compared at 1440, 1050, 850, 540, 390 and 320px. Matching header type, main/inspector width and grid breakpoints; aligned desktop panels; stacked phone inspector; no horizontal page overflow. Percussion transport order, visible data table, native focus, Enter feedback, touch disclosure and reduced motion verified.
+- node tests/browser-kompang.cjs: 13 groups passed. Actual center/edge pointer and emulated touch hit regions, F/J, native Space/Enter, held-key dedup, recording/editing/tempo/Reset, immutable raw evidence, playback/patterns/metronome, signal differences, JSON/CSV downloads, reload, independent workspaces, all four routes and Game roundtrip.
+- node tests/browser-recorder.cjs: 17 groups passed. Hold/release, keyboard capture, gate/raw evidence, editing, tempo/metronome, exports, preserved workspaces, range handling, catalog variants, Baroque guide, cancel/blur, Game, old takes, empty/malformed envelope recovery, sustained audition cancellation, phone input, reduced motion and offline HTML.
+- node tests/browser-tamborin.cjs: 8 groups passed. Both textures, mouse/keyboard/touch input, capture, raw evidence, editing/tempo/Reset, replay/example/Stop, exports and navigation.
+- Total: 46 browser groups passed, no uncaught page errors. Playwright test harnesses served the final HTML locally and used Chromium 133.0.6943.0. Functional suites ran serially. Test-only environment used BROWSER_EXECUTABLE=/workspace/scratch/977575ac93c3/browser-runtime/chromium, LD_LIBRARY_PATH and TMPDIR pointing to that runtime; BROWSER_OUTPUT pointed to independent layout-browser evidence folders.
+- All uploaded blobs and the implementation tree were checked against local Git hashes. git diff --check passed.
 
-## Limits and continuation
+An earlier concurrent browser attempt on the pre-final title/whitespace revision hit a Kompang screenshot timeout and a Recorder phone-release RMS assertion. The final serial runs passed all functional checks. The new layout harness corrected whitespace normalization and used keyboard navigation to establish :focus-visible modality; these were test assertions, not product changes.
 
-Web Audio signal generation and release were measured in headless Chromium. Speaker listening quality, acoustic tuning, physical recorder behavior, real phone audio latency, Safari/Firefox and assistive-technology testing are not established by these checks. Touch checks use Chromium mobile emulation/CDP, not a physical phone. No microphone capture was used during tests; recorder microphone detection is not implemented. Current guide data covers the eight pads and catalog extensions, with other missing fingering rows explicitly labelled.
+[Detailed verification](../ui-layout/browser-verification.json)
 
-Audit can review the ui diff against the recorded base, rerun Node/browser checks and listen on actual desktop/phone speakers before accepting a release. Integrate/publish only when Ijamm requests it. No main merge/push, share/tutorial update or Pages publication is part of this delivery.
+| Studio | Desktop 1440px | Phone 390px |
+| --- | --- | --- |
+| Tamborin | [Screenshot](../ui-layout/screenshots/tamborin-desktop-full.png) | [Screenshot](../ui-layout/screenshots/tamborin-phone-full.png) |
+| Kompang | [Screenshot](../ui-layout/screenshots/kompang-desktop-full.png) | [Screenshot](../ui-layout/screenshots/kompang-phone-full.png) |
+
+## Verification limits and continuation
+
+Audio verification measures headless Web Audio/OfflineAudioContext signals. It does not establish speaker listening quality, acoustic fidelity, physical phone latency, Safari/Firefox behavior or screen-reader usability. No new acoustic or microphone support is claimed.
+
+After the delivery fast-forward, verify the final main ref and CI result, then compare the served index.html SHA-256 with the tested hash above when the existing deployment completes. No additional Pages setting or manual publishing command is needed. Future instrument views should reuse these canonical layout classes while supplying their own physical stage and controller adapter. Re-run the browser layout suite when changing shared geometry and the relevant functional suite when changing an instrument's controls.
